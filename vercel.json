@@ -1,7 +1,7 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/claudeindex.html" },
-    { "source": "/index", "destination": "/claudeindex.html" },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/index", "destination": "/index.html" },
     { "source": "/intake", "destination": "/intake.html" },
     { "source": "/report", "destination": "/report.html" },
     { "source": "/modules", "destination": "/modules.html" },

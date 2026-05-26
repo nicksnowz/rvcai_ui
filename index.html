@@ -1,1691 +1,1039 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RVC Enterprise Value Diagnostic Platform</title>
-  <style>
-    :root {
-      --bg: #f0f6ff;
-      --paper: rgba(255, 255, 255, 0.74);
-      --paper-strong: rgba(255, 255, 255, 0.9);
-      --ink: #07132b;
-      --muted: #42526e;
-      --faint: #7b8aa4;
-      --blue: #0b6ffb;
-      --blue-deep: #004dd9;
-      --cyan: #23b7ff;
-      --line: rgba(11, 111, 251, 0.18);
-      --line-strong: rgba(11, 111, 251, 0.35);
-      --success: #16b364;
-      --warning: #f59e0b;
-      --danger: #f04438;
-      --shadow: 0 22px 70px rgba(28, 76, 150, 0.14);
-      --soft-shadow: 0 12px 36px rgba(38, 88, 160, 0.1);
-      --radius: 20px;
-      --nav-h: 82px;
-      font-family: Inter, "SF Pro Display", "SF Pro Text", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      background: var(--bg);
-      overflow-x: hidden;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: -20%;
-      z-index: -3;
-      pointer-events: none;
-    }
-
-    body::before {
-      background:
-        radial-gradient(circle at calc(20% + var(--mx, 0px)) calc(14% + var(--my, 0px)), rgba(35, 183, 255, 0.34), transparent 30%),
-        radial-gradient(circle at calc(82% - var(--mx, 0px)) calc(20% + var(--my, 0px)), rgba(11, 111, 251, 0.2), transparent 34%),
-        radial-gradient(circle at calc(58% + var(--mx, 0px)) calc(74% - var(--my, 0px)), rgba(255, 255, 255, 0.82), transparent 34%),
-        linear-gradient(135deg, #eef6ff 0%, #fbfdff 46%, #e8f3ff 100%);
-      animation: meshBreath 24s ease-in-out infinite alternate;
-    }
-
-    body::after {
-      opacity: .18;
-      z-index: -2;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
-    }
-
-    @keyframes meshBreath {
-      from { transform: translate3d(-1%, -1%, 0) scale(1); filter: saturate(1); }
-      to { transform: translate3d(1.5%, 1%, 0) scale(1.03); filter: saturate(1.08); }
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input, select { font: inherit; }
-    button { cursor: pointer; }
-
-    .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      display: grid;
-      grid-template-columns: 280px 1fr 220px;
-      align-items: center;
-      padding: 0 34px;
-      border-bottom: 1px solid rgba(11, 111, 251, .13);
-      background: rgba(255, 255, 255, .62);
-      backdrop-filter: blur(24px) saturate(150%);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .logo {
-      position: relative;
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-    }
-
-    .logo span {
-      color: var(--blue);
-      text-shadow: 0 9px 22px rgba(11, 111, 251, .22);
-    }
-
-    .brand-line {
-      width: 1px;
-      height: 34px;
-      background: rgba(7, 19, 43, .16);
-    }
-
-    .brand-text {
-      font-size: 13px;
-      line-height: 1.35;
-      font-weight: 650;
-      color: #17264a;
-    }
-
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-    }
-
-    .nav-link {
-      border: 1px solid transparent;
-      background: transparent;
-      color: #0f1d3a;
-      padding: 14px 18px;
-      border-radius: 14px;
-      font-weight: 560;
-      transition: border .2s ease, background .2s ease, transform .2s ease, color .2s ease;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--blue-deep);
-      border-color: rgba(11, 111, 251, .28);
-      background: rgba(255, 255, 255, .74);
-      box-shadow: 0 12px 30px rgba(11, 111, 251, .09), inset 0 1px 1px rgba(255,255,255,.8);
-      transform: translateY(-1px);
-    }
-
-    .nav-actions {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 18px;
-      font-size: 15px;
-      white-space: nowrap;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 99px;
-      background: var(--blue);
-      display: inline-block;
-      box-shadow: 0 0 14px rgba(11,111,251,.7);
-    }
-
-    .btn {
-      position: relative;
-      border: 1px solid rgba(11, 111, 251, .2);
-      border-radius: 16px;
-      padding: 13px 22px;
-      background: rgba(255, 255, 255, .72);
-      color: var(--blue-deep);
-      font-weight: 760;
-      box-shadow: var(--soft-shadow), inset 0 1px 1px rgba(255,255,255,.84);
-      overflow: hidden;
-      transform: translateY(0);
-      transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-
-    .btn::after,
-    .engine-core::after {
-      content: "";
-      position: absolute;
-      inset: -60% -20%;
-      transform: translateX(-130%) rotate(18deg);
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.68), transparent);
-      animation: shine 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .btn.primary {
-      color: #fff;
-      border-color: rgba(11,111,251,.18);
-      background: linear-gradient(135deg, #0b6ffb 0%, #005bea 55%, #23b7ff 100%);
-      box-shadow: 0 18px 42px rgba(11,111,251,.3), inset 0 1px 1px rgba(255,255,255,.45);
-    }
-
-    .btn:hover {
-      border-color: rgba(11,111,251,.38);
-      box-shadow: 0 18px 44px rgba(11,111,251,.16);
-    }
-
-    @keyframes shine {
-      0%, 45% { transform: translateX(-130%) rotate(18deg); }
-      70%, 100% { transform: translateX(130%) rotate(18deg); }
-    }
-
-    main { min-height: calc(100vh - var(--nav-h)); }
-    .page { display: none; padding: 26px 34px 42px; }
-    .page.active { display: block; animation: pageIn .45s cubic-bezier(.22,1,.36,1); }
-
-    @keyframes pageIn {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .home { padding-top: 22px; }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(420px, 42%) 1fr;
-      gap: 34px;
-      align-items: stretch;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-    .kicker {
-      color: var(--blue);
-      font-weight: 800;
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(48px, 5vw, 82px);
-      line-height: 1.04;
-      letter-spacing: 0;
-      margin-bottom: 24px;
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: 22px;
-      line-height: 1.72;
-      margin-bottom: 32px;
-    }
-
-    .hero-actions { display: flex; gap: 18px; align-items: center; margin-bottom: 28px; }
-    .feature-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .glass {
-      position: relative;
-      border: 1px solid rgba(11, 111, 251, .16);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,255,255,.58)),
-        rgba(255,255,255,.72);
-      box-shadow: var(--soft-shadow), inset 0 1px 1px rgba(255,255,255,.8);
-      backdrop-filter: blur(22px) saturate(145%);
-      overflow: hidden;
-    }
-
-    .glass::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      background: linear-gradient(135deg, rgba(255,255,255,.62), transparent 34%, rgba(11,111,251,.08));
-      opacity: .82;
-    }
-
-    .chip {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .icon-bubble {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      color: var(--blue);
-      background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(230,242,255,.85));
-      border: 1px solid rgba(11,111,251,.13);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,.86), 0 12px 26px rgba(11,111,251,.12);
-    }
-
-    .chip strong, .metric strong { display: block; font-size: 17px; margin-bottom: 4px; }
-    .chip span, .metric span { color: var(--muted); font-size: 13px; line-height: 1.35; }
-
-    .engine-panel {
-      min-height: 430px;
-      padding: 26px 30px;
-      display: grid;
-      grid-template-columns: 210px 1fr 210px;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .engine-column { display: grid; gap: 14px; position: relative; z-index: 2; }
-    .engine-label {
-      font-weight: 850;
-      font-size: 14px;
-      color: #1c2b4a;
-      margin-bottom: 2px;
-    }
-
-    .node {
-      position: relative;
-      min-height: 56px;
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 13px;
-      border-radius: 14px;
-      border: 1px solid rgba(11,111,251,.14);
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 12px 26px rgba(28,76,150,.08);
-    }
-
-    .node::after {
-      content: "";
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      right: -8px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 1px solid rgba(11,111,251,.32);
-      animation: pulseRing 2.4s ease-in-out infinite;
-    }
-
-    .engine-column.right .node::after { left: -8px; right: auto; }
-
-    @keyframes pulseRing {
-      0% { box-shadow: 0 0 0 0 rgba(11,111,251,.35); background: rgba(11,111,251,.25); }
-      70% { box-shadow: 0 0 0 12px rgba(11,111,251,0); background: rgba(11,111,251,.06); }
-      100% { box-shadow: 0 0 0 0 rgba(11,111,251,0); }
-    }
-
-    .node b { font-size: 14px; }
-    .node small { color: var(--muted); font-size: 12px; }
-
-    .engine-stage {
-      position: relative;
-      min-height: 330px;
-      display: grid;
-      place-items: center;
-    }
-
-    .flow-svg {
-      position: absolute;
-      inset: -12px -28px;
-      width: calc(100% + 56px);
-      height: calc(100% + 24px);
-      pointer-events: none;
-      overflow: visible;
-    }
-
-    .flow-line {
-      fill: none;
-      stroke: rgba(11,111,251,.76);
-      stroke-width: 2.5;
-      stroke-dasharray: 7 9;
-      animation: flowDash 18s linear infinite;
-      filter: drop-shadow(0 0 6px rgba(11,111,251,.32));
-    }
-
-    .flow-dot {
-      fill: var(--cyan);
-      filter: drop-shadow(0 0 9px rgba(35,183,255,.9));
-    }
-
-    @keyframes flowDash { to { stroke-dashoffset: -260; } }
-
-    .engine-core {
-      position: relative;
-      width: 220px;
-      height: 168px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      border-radius: 28px;
-      border: 1px solid rgba(11,111,251,.3);
-      background: linear-gradient(145deg, rgba(255,255,255,.85), rgba(227,242,255,.62));
-      box-shadow:
-        0 30px 58px rgba(11,111,251,.16),
-        inset 0 2px 2px rgba(255,255,255,.9),
-        inset 0 -18px 40px rgba(11,111,251,.08);
-      animation: floatCore 6s ease-in-out infinite;
-      overflow: hidden;
-    }
-
-    @keyframes floatCore {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .engine-core b { display: block; font-size: 32px; letter-spacing: .5px; }
-    .engine-core span { color: var(--muted); line-height: 1.5; }
-
-    .process-strip {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-      margin: 22px 0;
-      padding: 16px 22px;
-    }
-
-    .process-step {
-      display: grid;
-      grid-template-columns: 58px 1fr 24px;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .process-step:last-child { grid-template-columns: 58px 1fr; }
-    .process-step .num { color: var(--blue); font-weight: 850; }
-
-    .bento {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr 1fr;
-      gap: 18px;
-      perspective: 1200px;
-    }
-
-    .service-card {
-      --angle: 0deg;
-      min-height: 176px;
-      padding: 24px;
-      transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-
-    .service-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      padding: 1px;
-      border-radius: inherit;
-      background: conic-gradient(from var(--angle), rgba(11,111,251,.12), rgba(35,183,255,.66), rgba(255,255,255,.9), rgba(11,111,251,.14));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      animation: none;
-      pointer-events: none;
-    }
-
-    .service-card:hover { box-shadow: 0 24px 54px rgba(11,111,251,.15); transform: translateY(-4px); }
-    .service-card.featured { grid-column: span 2; min-height: 218px; }
-
-    @property --angle {
-      syntax: "<angle>";
-      initial-value: 0deg;
-      inherits: false;
-    }
-
-    @keyframes spinBorder { to { --angle: 360deg; } }
-
-    .service-card h3 { margin: 16px 0 8px; font-size: 24px; }
-    .service-card p { color: var(--muted); line-height: 1.65; }
-    .link { color: var(--blue); font-weight: 820; }
-
-    .metrics-strip {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
-      margin-top: 22px;
-    }
-
-    .metrics-strip.six { grid-template-columns: repeat(6, 1fr); }
-
-    .metric {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .metric strong {
-      font-size: 30px;
-      letter-spacing: 0;
-    }
-
-    .collab-strip {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: -8px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .collab-card {
-      min-height: 62px;
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 10px;
-      align-items: center;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(11,111,251,.13);
-      background: rgba(255,255,255,.66);
-    }
-
-    .app-grid {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 22px;
-      min-height: calc(100vh - 138px);
-    }
-
-    .sidebar {
-      padding: 22px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .side-title { padding: 6px 10px 18px; }
-    .side-title strong { font-size: 19px; display: block; margin-bottom: 5px; }
-    .side-title span { color: var(--muted); font-size: 14px; }
-
-    .side-item,
-    .step-item {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid transparent;
-      background: transparent;
-      text-align: left;
-      color: #13203c;
-    }
-
-    .side-item.active,
-    .side-item:hover,
-    .step-item.active,
-    .step-item:hover {
-      background: rgba(255,255,255,.72);
-      border-color: rgba(11,111,251,.2);
-      color: var(--blue-deep);
-      box-shadow: 0 12px 30px rgba(11,111,251,.09);
-    }
-
-    .content-panel { padding: 26px; }
-    .page-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-
-    .page-head h2 { font-size: 34px; line-height: 1.1; margin-bottom: 8px; }
-    .page-head p { color: var(--muted); font-size: 17px; margin-bottom: 0; }
-    .actions { display: flex; align-items: center; gap: 14px; }
-
-    .report-layout {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr 330px;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .score-card { padding: 26px; min-height: 330px; }
-    .score-flex { display: grid; grid-template-columns: 210px 1fr; gap: 22px; align-items: center; }
-    .gauge { width: 210px; height: 210px; overflow: visible; }
-    .gauge .bg { fill: none; stroke: #e8f2ff; stroke-width: 18; stroke-linecap: round; }
-    .gauge .fg {
-      fill: none;
-      stroke: url(#gaugeGradient);
-      stroke-width: 18;
-      stroke-linecap: round;
-      stroke-dasharray: 339;
-      stroke-dashoffset: 339;
-      filter: drop-shadow(0 0 8px rgba(11,111,251,.38));
-      transition: stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1);
-    }
-
-    .score-number { font-size: 76px; color: var(--blue); font-weight: 900; line-height: .95; }
-    .score-number small { font-size: 32px; color: var(--muted); font-weight: 500; }
-    .score-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
-    .meta-box { padding: 13px; border-radius: 14px; border: 1px solid rgba(11,111,251,.13); background: rgba(255,255,255,.58); }
-    .meta-box b { display: block; margin-top: 5px; }
-
-    .radar-card { padding: 24px; min-height: 330px; }
-    .radar-wrap { position: relative; height: 272px; display: grid; place-items: center; }
-    .radar-svg { width: 100%; max-width: 340px; height: 272px; overflow: visible; transform: scale(.2); opacity: 0; transition: transform 1s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
-    .radar-card.is-visible .radar-svg { transform: scale(1); opacity: 1; }
-    .radar-area { fill: rgba(11,111,251,.13); stroke: var(--blue); stroke-width: 3; filter: drop-shadow(0 10px 18px rgba(11,111,251,.12)); }
-    .radar-median { fill: none; stroke: #86a7dc; stroke-width: 2; stroke-dasharray: 6 6; }
-    .radar-point { fill: var(--blue); stroke: white; stroke-width: 3; }
-    .tooltip {
-      position: fixed;
-      z-index: 999;
-      padding: 8px 10px;
-      border-radius: 10px;
-      background: rgba(7,19,43,.92);
-      color: white;
-      font-size: 12px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, -120%);
-      transition: opacity .12s ease;
-    }
-
-    .paths-card { padding: 22px; }
-    .path-list { display: grid; gap: 12px; }
-    .path-item {
-      display: grid;
-      grid-template-columns: 44px 1fr 18px;
-      gap: 12px;
-      align-items: center;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(11,111,251,.14);
-      background: rgba(255,255,255,.62);
-      transition: transform .2s ease, border .2s ease, background .2s ease;
-    }
-
-    .path-item:hover { transform: translateX(4px); border-color: rgba(11,111,251,.34); background: white; }
-
-    .summary-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 18px;
-    }
-
-    .summary-card { padding: 22px; }
-    .summary-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.7; }
-
-    .timeline-card { margin-top: 18px; padding: 26px; }
-    .timeline {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding-top: 34px;
-    }
-
-    .timeline::before,
-    .timeline::after {
-      content: "";
-      position: absolute;
-      left: 40px;
-      right: 40px;
-      top: 56px;
-      height: 3px;
-      border-radius: 99px;
-      background: #dceaff;
-    }
-
-    .timeline::after {
-      right: auto;
-      width: 0;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      box-shadow: 0 0 16px rgba(11,111,251,.4);
-      transition: width 1.6s cubic-bezier(.22,1,.36,1);
-    }
-
-    .timeline-card.is-visible .timeline::after { width: calc(100% - 80px); }
-    .time-node { position: relative; z-index: 2; }
-    .time-dot {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--blue);
-      margin: 0 auto 16px;
-      background: white;
-      border: 3px solid rgba(11,111,251,.42);
-      box-shadow: 0 12px 30px rgba(11,111,251,.16);
-    }
-
-    .time-content {
-      padding: 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(11,111,251,.14);
-      background: rgba(255,255,255,.62);
-      transition: transform .2s ease, background .2s ease;
-    }
-
-    .time-content:hover { transform: translateY(-4px); background: white; }
-    .time-content ul { max-height: 0; overflow: hidden; margin: 8px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.65; transition: max-height .35s ease; }
-    .time-content:hover ul { max-height: 160px; }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 18px;
-    }
-
-    .modules-grid .service-card.featured { grid-column: auto; min-height: 260px; }
-
-    .priority-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .priority-filter {
-      padding: 18px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      border: 1px solid rgba(11,111,251,.16);
-      border-radius: 18px;
-      background: rgba(255,255,255,.68);
-    }
-
-    .module-card {
-      min-height: 260px;
-      padding: 24px;
-    }
-
-    .match-pill {
-      display: inline-flex;
-      padding: 4px 12px;
-      color: var(--blue);
-      border: 1px solid rgba(11,111,251,.3);
-      border-radius: 999px;
-      font-weight: 850;
-      background: rgba(232,242,255,.8);
-    }
-
-    .module-stats { display: grid; gap: 9px; margin: 18px 0; color: var(--muted); }
-    .module-stats div { display: flex; justify-content: space-between; }
-
-    .intake-layout {
-      display: grid;
-      grid-template-columns: 310px 1fr 330px;
-      gap: 20px;
-    }
-
-    .intake-center, .scan-panel { padding: 24px; }
-    .form-section {
-      border: 1px solid rgba(11,111,251,.13);
-      border-radius: 18px;
-      padding: 18px;
-      background: rgba(255,255,255,.48);
-      margin-top: 18px;
-    }
-
-    .form-section textarea {
-      width: 100%;
-      min-height: 104px;
-      resize: vertical;
-      border: 1px solid rgba(11,111,251,.16);
-      border-radius: 12px;
-      padding: 12px 14px;
-      background: rgba(255,255,255,.78);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 20px; }
-    .field label { display: block; font-size: 13px; font-weight: 760; margin-bottom: 8px; }
-    .field input, .field select {
-      width: 100%;
-      height: 46px;
-      border: 1px solid rgba(11,111,251,.16);
-      border-radius: 12px;
-      padding: 0 14px;
-      background: rgba(255,255,255,.78);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .field input:focus, .field select:focus { border-color: rgba(11,111,251,.55); box-shadow: 0 0 0 4px rgba(11,111,251,.08); }
-    .form-actions { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; margin-top: 20px; }
-
-    .upload-zone {
-      min-height: 172px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      border: 1.5px dashed rgba(11,111,251,.32);
-      border-radius: 18px;
-      background: rgba(232,242,255,.42);
-      color: var(--muted);
-    }
-
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .choice {
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(11,111,251,.15);
-      background: rgba(255,255,255,.62);
-    }
-
-    .choice input { margin-right: 8px; }
-
-    .progress-ring {
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: conic-gradient(var(--blue) var(--p), #e9f2ff 0);
-      margin: 10px auto;
-    }
-
-    .progress-ring > div {
-      width: 82px;
-      height: 82px;
-      border-radius: 50%;
-      background: white;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      font-weight: 900;
-      font-size: 24px;
-    }
-
-    .signal-list { display: grid; gap: 12px; margin-top: 18px; }
-    .signal {
-      display: grid;
-      grid-template-columns: 42px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(11,111,251,.12);
-    }
-
-    .tag {
-      padding: 7px 10px;
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 850;
-      background: #e9f9f0;
-      color: #0d8b4a;
-    }
-    .tag.warn { background: #fff3df; color: #c16d00; }
-    .tag.danger { background: #ffeded; color: #d92d20; }
-    .tag.info { background: #e8f2ff; color: var(--blue); }
-
-    .ipo-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 22px;
-    }
-
-    .ipo-top {
-      display: grid;
-      grid-template-columns: 330px 1fr;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .ipo-path {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-      align-items: start;
-      position: relative;
-      padding: 22px 14px;
-    }
-
-    .ipo-path::before,
-    .ipo-path::after {
-      content: "";
-      position: absolute;
-      left: 60px;
-      right: 60px;
-      top: 51px;
-      height: 3px;
-      background: #dceaff;
-      border-radius: 99px;
-    }
-    .ipo-path::after {
-      right: auto;
-      width: 0;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      transition: width 1.4s cubic-bezier(.22,1,.36,1);
-    }
-    .ipo-path.is-visible::after { width: calc(100% - 120px); }
-
-    .ipo-step { position: relative; z-index: 2; text-align: center; }
-    .ipo-step .icon-bubble { margin: 0 auto 12px; border-radius: 50%; }
-
-    .ipo-main {
-      display: grid;
-      grid-template-columns: 1.45fr .9fr;
-      gap: 18px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    th, td {
-      padding: 14px 12px;
-      border-bottom: 1px solid rgba(11,111,251,.12);
-      text-align: left;
-      vertical-align: middle;
-    }
-    th { color: var(--muted); font-size: 13px; }
-    tr { transition: background .18s ease, box-shadow .18s ease; }
-    tbody tr:hover {
-      background: rgba(232,242,255,.66);
-      box-shadow: inset 4px 0 0 var(--blue);
-    }
-
-    .bar {
-      height: 8px;
-      min-width: 90px;
-      border-radius: 999px;
-      background: #e5efff;
-      overflow: hidden;
-    }
-    .bar span {
-      display: block;
-      width: 0;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      transition: width 1.2s cubic-bezier(.22,1,.36,1);
-    }
-    .is-visible .bar span,
-    .bar.is-visible span { width: var(--w); }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--blue);
-      font-weight: 760;
-    }
-    .status::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: currentColor;
-      animation: pulseStatus 1.8s ease-in-out infinite;
-    }
-    @keyframes pulseStatus {
-      0%, 100% { opacity: .45; box-shadow: 0 0 0 0 rgba(11,111,251,.35); }
-      50% { opacity: 1; box-shadow: 0 0 0 7px rgba(11,111,251,0); }
-    }
-
-    .risk-list { display: grid; gap: 14px; }
-    .risk {
-      display: grid;
-      grid-template-columns: 42px 1fr auto;
-      gap: 12px;
-      align-items: center;
-    }
-    .bottom-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
-
-    .advisor-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 44px);
-      gap: 12px;
-      margin: 16px 0;
-    }
-
-    .advisor-actions .icon-bubble { width: 44px; height: 44px; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
-      transition-delay: var(--delay, 0ms);
-    }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-    svg.icon { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
-
-    @media (max-width: 1180px) {
-      .top-nav { grid-template-columns: 250px 1fr 160px; padding: 0 18px; }
-      .nav-links { gap: 4px; }
-      .nav-link { padding: 12px 10px; }
-      .hero, .report-layout, .intake-layout, .ipo-top, .ipo-main { grid-template-columns: 1fr; }
-      .engine-panel { grid-template-columns: 1fr; }
-      .flow-svg { display: none; }
-      .metrics-strip, .process-strip, .summary-row, .priority-row { grid-template-columns: repeat(2, 1fr); }
-      .app-grid, .ipo-layout { grid-template-columns: 1fr; }
-      .sidebar { display: grid; grid-template-columns: repeat(2, 1fr); }
-      .modules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (min-width: 1181px) and (max-width: 1320px) {
-      .top-nav { grid-template-columns: 260px 1fr 190px; padding: 0 22px; }
-      .nav-links { gap: 6px; }
-      .nav-link { padding: 12px 11px; }
-      .hero { grid-template-columns: minmax(430px, 42%) minmax(0, 1fr); gap: 20px; }
-      .engine-panel { grid-template-columns: 188px minmax(180px, 1fr) 188px; padding: 22px; gap: 12px; }
-      .node { grid-template-columns: 36px 1fr; padding: 9px 10px; }
-      .icon-bubble { width: 40px; height: 40px; }
-      .collab-strip { gap: 10px; }
-      .collab-card { grid-template-columns: 36px 1fr; padding: 10px; }
-      .hero h1 { font-size: 48px; }
-      .lead { font-size: 18px; }
-      .app-grid { grid-template-columns: 250px minmax(0, 1fr); }
-      .report-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-      .paths-card { grid-column: 1 / -1; }
-      .score-flex { grid-template-columns: 170px minmax(0, 1fr); gap: 16px; }
-      .gauge { width: 170px; height: 170px; }
-      .score-number { font-size: 58px; }
-      .score-meta { grid-template-columns: repeat(2, 1fr); }
-      .radar-svg { max-width: 300px; }
-      .path-list { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 760px) {
-      .top-nav { position: relative; height: auto; grid-template-columns: 1fr; gap: 14px; padding: 16px; }
-      .brand { gap: 12px; }
-      .logo { font-size: 36px; }
-      .brand-text { font-size: 12px; }
-      .nav-links { overflow-x: auto; justify-content: flex-start; padding-bottom: 4px; }
-      .nav-link { flex: 0 0 auto; padding: 11px 13px; font-size: 14px; }
-      .nav-actions { justify-content: flex-start; }
-      .page { padding: 16px; }
-      .hero h1 { font-size: 38px; line-height: 1.12; }
-      .lead { font-size: 17px; }
-      .hero-actions, .actions { flex-direction: column; align-items: stretch; }
-      .feature-row, .bento, .metrics-strip, .process-strip, .summary-row, .priority-row, .form-grid, .bottom-actions, .modules-grid, .score-flex, .score-meta, .timeline, .ipo-path { grid-template-columns: 1fr; }
-      .metrics-strip.six, .collab-strip, .choice-grid { grid-template-columns: 1fr; }
-      .process-step { grid-template-columns: 58px 1fr; }
-      .process-step svg { display: none; }
-      .timeline::before, .timeline::after, .ipo-path::before, .ipo-path::after { display: none; }
-      .report-layout { grid-template-columns: 1fr; }
-      .sidebar { grid-template-columns: 1fr; }
-      .engine-panel { padding: 18px; }
-      .engine-core { width: 190px; height: 142px; }
-      .chip { grid-template-columns: 42px 1fr; }
-      .metric { grid-template-columns: 48px 1fr; }
-      .metric strong { font-size: 26px; }
-      .page-head { flex-direction: column; }
-      .page-head h2 { font-size: 28px; }
-      .content-panel { padding: 0; }
-      .intake-center, .scan-panel, .score-card, .radar-card, .paths-card, .timeline-card { padding: 18px; }
-      .intake-layout, .ipo-layout { gap: 16px; }
-      .sidebar { padding: 16px; }
-      .score-flex { text-align: center; }
-      .gauge { margin: 0 auto; }
-      .path-list { grid-template-columns: 1fr; }
-      .priority-filter { padding: 16px; }
-      .module-card { min-height: auto; }
-      .ipo-main { grid-template-columns: 1fr; }
-      table { min-width: 760px; }
-      .ipo-main .glass:first-child { overflow-x: auto; }
-      .risk { grid-template-columns: 40px 1fr auto; }
-      .actions { width: 100%; }
-      .actions .btn { width: 100%; }
-    }
-
-    @media (max-width: 430px) {
-      .hero h1 { font-size: 34px; }
-      .lead { font-size: 16px; line-height: 1.55; }
-      .btn { width: 100%; padding: 13px 16px; }
-      .engine-label { font-size: 13px; }
-      .node { grid-template-columns: 38px 1fr; }
-      .score-number { font-size: 52px; }
-      .score-number small { font-size: 24px; }
-      .radar-wrap { height: 240px; }
-      .radar-svg { height: 240px; }
-      .choice-grid { gap: 10px; }
-      .form-actions { grid-template-columns: 1fr; }
-      .nav-actions .btn { width: auto; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC Capital — 企业价值智能诊断平台</title>
+<meta name="description" content="RVC智能诊断引擎扫描300+价值维度，72小时生成机构级洞察报告，加速您的IPO、并购与融资路径。">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RVC Capital — 企业价值智能诊断平台">
+<meta property="og:description" content="72小时精准解锁企业真实价值。AI驱动诊断引擎，覆盖300+维度，机构级洞察报告。">
+<meta property="og:image" content="/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RVC Capital — 企业价值智能诊断平台">
+<meta name="twitter:description" content="72小时精准解锁企业真实价值。AI驱动诊断引擎，覆盖300+维度。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rvc-base.css">
+<style>
+.hero{padding:80px 0 64px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);
+  opacity:0;transform:translateY(14px);
+  animation:fu .7s cubic-bezier(.22,1,.36,1) .05s forwards;
+}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 1.4s infinite;}
+.hero-h{
+  font-size:clamp(34px,4.4vw,56px);font-weight:800;color:var(--navy);
+  letter-spacing:-.035em;line-height:1.12;margin-bottom:20px;min-height:2.8em;
+}
+.hero-h .accent{
+  background:linear-gradient(135deg,#0B6FFB,#23B7FF 55%,#004DD9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* Typewriter cursor */
+.type-cursor{display:inline-block;color:var(--blue);-webkit-text-fill-color:var(--blue);font-weight:300;line-height:1;
+  animation:cur-blink .65s step-end infinite;vertical-align:baseline;}
+@keyframes cur-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-p{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:32px;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.6s forwards;}
+.hero-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.78s forwards;}
+.hero-trust{margin-top:32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.95s forwards;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t3);font-weight:500;}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--ok);}
+@keyframes fu{to{opacity:1;transform:none}}
+.engine-wrap{opacity:0;animation:fu 1s cubic-bezier(.22,1,.36,1) .4s forwards;}
+.engine-card{
+  background:rgba(245,249,255,0.82);border:1px solid rgba(255,255,255,0.75);
+  border-radius:24px;padding:8px;
+  box-shadow:0 24px 80px rgba(11,111,251,0.12),0 4px 16px rgba(11,111,251,0.06),0 0 0 1px rgba(255,255,255,0.6) inset;
+  backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);
+  position:relative;overflow:hidden;
+}
+.engine-card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent);
+  pointer-events:none;
+}
+.engine-card svg text{font-family:var(--font-sans);}
+.engine-card svg .svg-num{
+  font-family:var(--font-mono);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1,"zero" 1;
+  letter-spacing:-.05em;
+}
+.engine-card svg .svg-unit{
+  font-family:var(--font-sans);
+  font-weight:500;
+  letter-spacing:0;
+  opacity:.78;
+}
+.engine-card svg .svg-delta{
+  font-family:var(--font-mono);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1,"zero" 1;
+  letter-spacing:-.02em;
+}
+.engine-card svg .svg-title{
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.engine-card svg .svg-subtle{
+  font-weight:400;
+  opacity:.86;
+}
+
+/* Process */
+.process{padding:52px 0;border-top:1px solid var(--bl);border-bottom:1px solid var(--bl);}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bl);}
+.proc-item{background:var(--bg);padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:background .2s;}
+.proc-item:hover{background:var(--blue-s);}
+.proc-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.09em;}
+.proc-title{font-size:15px;font-weight:700;color:var(--navy);}
+.proc-desc{font-size:13px;color:var(--t2);line-height:1.6;}
+
+/* Services */
+.services{padding:88px 0;}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.b-card{
+  background:var(--card);border:1px solid var(--bl);border-radius:22px;padding:30px;
+  box-shadow:var(--sh);position:relative;overflow:hidden;
+  transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s;
+}
+.b-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(11,111,251,0.13);border-color:var(--bm);}
+.b-card-glow{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 12%,rgba(255,255,255,0.7),transparent 55%);}
+.b-card.wide{grid-column:span 2;}
+.b-card.accent{background:linear-gradient(145deg,#0B6FFB,#004DD9 55%,#1a7dff);border-color:transparent;}
+.b-card.accent .svc-title,.b-card.accent .svc-num{color:#fff;}
+.b-card.accent .svc-desc{color:rgba(255,255,255,0.76);}
+.b-card.accent .svc-tag{background:rgba(255,255,255,0.18);color:#fff;}
+.svc-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--t4);margin-bottom:14px;}
+.svc-ico{width:48px;height:48px;border-radius:13px;background:var(--blue-s);border:1px solid rgba(11,111,251,0.14);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:all .22s;}
+.svc-ico svg{width:23px;height:23px;stroke:var(--blue);fill:none;stroke-width:1.8;transition:stroke .22s;}
+.b-card:hover .svc-ico{background:var(--blue);border-color:transparent;}
+.b-card:hover .svc-ico svg{stroke:#fff;}
+.b-card.accent .svc-ico{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.3);}
+.b-card.accent .svc-ico svg{stroke:#fff;}
+.svc-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:-.02em;}
+.svc-desc{font-size:13px;color:var(--t2);line-height:1.65;}
+.svc-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:7px;background:var(--blue-s);color:var(--blue);margin-top:14px;letter-spacing:.03em;}
+
+/* KPI */
+.kpi-strip{padding:72px 0;background:linear-gradient(135deg,#07132B,#0a1f4e);}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.06);}
+.kpi-item{padding:38px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.06);background:rgba(7,19,43,0.4);}
+.kpi-item:last-child{border-right:none;}
+.kpi-val{font-family:var(--font-mono);font-size:46px;font-weight:800;letter-spacing:-.055em;line-height:1;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1,"zero" 1;
+  background:linear-gradient(135deg,#fff,#23B7FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.kpi-lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);margin-top:7px;letter-spacing:.04em;}
+.kpi-bar{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:14px;overflow:hidden;}
+.kpi-bfill{height:100%;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1);}
+
+/* ── Success Wall ── */
+.success-wall{padding:64px 0 60px;background:var(--bg);border-top:1px solid var(--bl);}
+.sw-head{text-align:center;margin-bottom:44px;}
+.sw-title{font-size:30px;font-weight:800;color:var(--navy);letter-spacing:-.04em;margin-bottom:0;}
+.sw-divider{width:44px;height:3px;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:2px;margin:12px auto 0;}
+.sw-row-label{display:block;text-align:center;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t4);margin-bottom:14px;}
+
+/* Marquee */
+.marquee-wrap{overflow:hidden;position:relative;padding:4px 0;}
+.marquee-wrap+.marquee-wrap{margin-top:14px;}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--bg) 10%,transparent);}
+.marquee-wrap::after{right:0;background:linear-gradient(270deg,var(--bg) 10%,transparent);}
+.marquee-track{display:flex;gap:12px;width:max-content;will-change:transform;}
+.marquee-track.go-left{animation:mq-left 42s linear infinite;}
+.marquee-track.go-right{animation:mq-right 54s linear infinite;}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+@keyframes mq-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mq-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* IPO brand cards (row 1) — logo-first layout */
+.ipo-card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  gap:10px;flex-shrink:0;
+  background:#fff;border:1px solid rgba(11,111,251,0.09);
+  border-radius:14px;padding:14px 20px 12px;min-width:170px;
+  box-shadow:0 2px 14px rgba(11,111,251,0.05);
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+  white-space:nowrap;cursor:default;
+}
+.ipo-card:hover{border-color:rgba(11,111,251,0.25);box-shadow:0 8px 28px rgba(11,111,251,0.10);transform:translateY(-2px);}
+.ipo-logo-area{height:38px;display:flex;align-items:center;}
+.ipo-logo-area svg{max-height:36px;max-width:150px;}
+.ipo-card-meta{display:flex;align-items:center;gap:6px;}
+.ipo-card-ticker{
+  font-size:9.5px;font-weight:700;letter-spacing:.07em;
+  background:rgba(11,111,251,0.08);color:var(--blue);
+  border-radius:5px;padding:2px 7px;
+}
+.ipo-card-exch{font-size:9.5px;color:var(--t4);font-weight:500;}
+
+/* Partner pills (row 2) — brand name in color */
+.partner-pill{
+  display:flex;align-items:center;gap:7px;flex-shrink:0;
+  background:#fff;border:1px solid rgba(11,111,251,0.08);
+  border-radius:10px;padding:9px 16px;
+  box-shadow:0 1px 8px rgba(15,45,90,0.04);
+  white-space:nowrap;transition:border-color .18s,transform .18s;
+  cursor:default;
+}
+.partner-pill:hover{border-color:rgba(11,111,251,0.2);transform:translateY(-1px);}
+.pp-logo{height:22px;display:flex;align-items:center;}
+.pp-logo svg{max-height:22px;max-width:100px;}
+
+@media(max-width:768px){
+  .hero{padding:44px 0 36px;}
+  .hero-grid{grid-template-columns:1fr;gap:36px;}
+  .engine-wrap{order:-1;}
+  .bento{grid-template-columns:1fr;}
+  .b-card.wide{grid-column:span 1;}
+  .proc-grid{grid-template-columns:1fr 1fr;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .kpi-item:nth-child(5){grid-column:span 2;border-right:none;}
+  .marquee-wrap::before,.marquee-wrap::after{width:60px;}
+}
+</style>
 </head>
 <body>
-  <header class="top-nav">
-    <a href="#home" class="brand nav-linker" data-page="home" aria-label="RVC Home">
-      <div class="logo">R<span>V</span>C</div>
-      <div class="brand-line"></div>
-      <div class="brand-text">ENTERPRISE VALUE<br>DIAGNOSTIC PLATFORM</div>
+<div class="bg-mesh"><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<header>
+  <div class="wrap hrow">
+    <a href="index.html" class="logo">
+      <img src="logo.svg" alt="RVC" width="72" height="27" style="display:block;border-radius:4px;">
+      <div class="logo-t">
+        <span class="logo-n">RVC Capital</span>
+        <span class="logo-s">企业价值诊断平台</span>
+      </div>
     </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <button class="nav-link active" data-page="home" data-active="home">Platform</button>
-      <button class="nav-link" data-page="intake" data-active="intake">Diagnostic</button>
-      <button class="nav-link" data-page="report" data-active="report">Reports</button>
-      <button class="nav-link" data-page="modules" data-active="modules">Modules</button>
-      <button class="nav-link" data-page="ipo" data-active="ipo">Advisors</button>
+    <nav>
+      <a href="index.html" class="active">概览</a>
+      <a href="intake.html">数据采集</a>
+      <a href="report.html">诊断报告</a>
+      <a href="modules.html">执行模块</a>
+      <a href="ipo.html">IPO就绪</a>
     </nav>
-    <div class="nav-actions">
-      <span class="status-dot"></span>
-      <span>登录</span>
-      <button class="btn magnetic" data-page="intake">预约演示</button>
+    <div class="hdr-acts">
+      <button class="btn-ghost">登录</button>
+      <button class="btn-primary" onclick="location.href='intake.html'">开始诊断 →</button>
     </div>
-  </header>
+    <button class="ham" id="ham" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mob-nav" id="mob-nav">
+  <a href="index.html" class="active">概览</a>
+  <a href="intake.html">数据采集</a>
+  <a href="report.html">诊断报告</a>
+  <a href="modules.html">执行模块</a>
+  <a href="ipo.html">IPO就绪</a>
+</div>
 
-  <main>
-    <section id="home" class="page home active">
-      <div class="hero">
-        <div class="hero-copy reveal">
-          <div class="kicker">AI-DRIVEN VALUE GROWTH</div>
-          <h1>AI 驱动企业价值增长</h1>
-          <p class="lead">从企业体检到资本路径执行，AI 与顾问协同推进价值提升<br>From Enterprise Diagnostic to Capital-Market Execution.</p>
-          <div class="hero-actions">
-            <button class="btn primary magnetic" data-page="intake">开始企业体检 →</button>
-            <button class="btn magnetic" data-page="report">查看报告样例 ✦</button>
+<div class="page">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>AI驱动 · 资本智能</div>
+          <h1 class="hero-h"></h1>
+          <p class="hero-p">RVC智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理，生成机构级洞察报告——加速您的资本路径，把握最优时机窗口。</p>
+          <div class="hero-btns">
+            <a href="intake.html" class="btn-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+              立即开始诊断
+            </a>
+            <a href="report.html" class="btn-outline">查看示例报告 →</a>
           </div>
-          <div class="feature-row">
-            <div class="glass chip reveal">
-              <div class="icon-bubble" data-icon="bars"></div><div><strong>全局诊断</strong><span>360° 企业健康评估</span></div>
-            </div>
-            <div class="glass chip reveal">
-              <div class="icon-bubble" data-icon="ai"></div><div><strong>AI 洞察</strong><span>多维度数据分析</span></div>
-            </div>
-            <div class="glass chip reveal">
-              <div class="icon-bubble" data-icon="target"></div><div><strong>路径落地</strong><span>从洞察到执行闭环</span></div>
-            </div>
+          <div class="hero-trust">
+            <div class="trust-item"><span class="trust-dot"></span>72小时交付</div>
+            <div class="trust-item"><span class="trust-dot"></span>300+价值维度</div>
+            <div class="trust-item"><span class="trust-dot"></span>机构级AI分析</div>
           </div>
         </div>
-
-        <div class="glass engine-panel reveal">
-          <div class="engine-column">
-            <div class="engine-label">数据输入 <span style="color:var(--muted);font-weight:600;">Data Inputs</span></div>
-            <div class="node"><div class="icon-bubble" data-icon="file"></div><div><b>财务数据</b><br><small>Financials</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="download"></div><div><b>运营数据</b><br><small>Operations</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="list"></div><div><b>治理与合规</b><br><small>Governance</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="cloud"></div><div><b>行业与市场</b><br><small>Industry &amp; Market</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="grid"></div><div><b>外部与宏观数据</b><br><small>External Data</small></div></div>
-          </div>
-          <div class="engine-stage">
-            <svg class="flow-svg" viewBox="0 0 420 330" aria-hidden="true">
+        <div class="engine-wrap">
+          <div class="engine-card">
+            <svg viewBox="0 0 670 520" width="100%" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <path id="p1" d="M5 46 C120 46 105 150 208 150" />
-                <path id="p2" d="M5 98 C125 98 105 162 208 162" />
-                <path id="p3" d="M5 150 C115 150 120 166 208 166" />
-                <path id="p4" d="M5 202 C125 202 105 170 208 170" />
-                <path id="p5" d="M5 254 C125 254 110 180 208 180" />
-                <path id="p6" d="M212 150 C300 150 300 46 415 46" />
-                <path id="p7" d="M212 162 C300 162 295 98 415 98" />
-                <path id="p8" d="M212 166 C300 166 310 150 415 150" />
-                <path id="p9" d="M212 170 C300 170 300 202 415 202" />
-                <path id="p10" d="M212 180 C300 180 292 254 415 254" />
+                <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#2563EB" stop-opacity="0.24"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="gs" x="-5%" y="-5%" width="110%" height="110%">
+                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="cardShadow" x="-5%" y="-5%" width="120%" height="130%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="rgba(11,111,251,0.07)"/>
+                </filter>
+                <linearGradient id="lightGlass" x1="0%" y1="0%" x2="60%" y2="100%">
+                  <stop offset="0%" stop-color="#EBF3FF"/><stop offset="100%" stop-color="#D4E8FF"/>
+                </linearGradient>
+                <linearGradient id="glassShimmer" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.72)"/>
+                  <stop offset="38%" stop-color="rgba(255,255,255,0.22)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+                </linearGradient>
               </defs>
-              <use href="#p1" class="flow-line"/><use href="#p2" class="flow-line"/><use href="#p3" class="flow-line"/><use href="#p4" class="flow-line"/><use href="#p5" class="flow-line"/>
-              <use href="#p6" class="flow-line"/><use href="#p7" class="flow-line"/><use href="#p8" class="flow-line"/><use href="#p9" class="flow-line"/><use href="#p10" class="flow-line"/>
+              <!-- Background -->
+	              <rect width="670" height="520" fill="#F4F7FF" rx="18"/>
+	              <g stroke="rgba(73,91,125,0.06)" stroke-width="1">
+                <line x1="140" y1="0" x2="140" y2="520"/><line x1="206" y1="0" x2="206" y2="520"/>
+                <line x1="354" y1="0" x2="354" y2="520"/><line x1="462" y1="0" x2="462" y2="520"/>
+              </g>
+
+              <!-- ══ INPUT NODES ══ -->
+              <!-- I1: 战略规划 — blue, midY=82 -->
+	              <rect x="14" y="50" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(37,99,235,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="50" width="3.5" height="64" rx="2" fill="#2563EB"/>
+              <line x1="17.5" y1="50" x2="140" y2="50" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,62)" fill="none" stroke="#2563EB" stroke-width="1.35" stroke-linecap="round">
+                <line x1="0" y1="12" x2="0" y2="7"/><line x1="4" y1="12" x2="4" y2="3"/>
+                <line x1="8" y1="12" x2="8" y2="9"/><line x1="12" y1="12" x2="12" y2="1"/>
+              </g>
+	              <text x="42" y="73" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">战略规划</text>
+	              <text x="42" y="88" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Strategy &amp; Growth</text>
+	              <text x="42" y="105" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">186+ 行业基准对标</text>
+
+              <!-- I2: 财务质量 — cyan, midY=194 -->
+	              <rect x="14" y="162" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(8,145,178,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="162" width="3.5" height="64" rx="2" fill="#0891B2"/>
+              <line x1="17.5" y1="162" x2="140" y2="162" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,174)" fill="none" stroke="#0891B2" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="0,6 3,6 5,1 7,11 9,4 11,6 13,6"/>
+              </g>
+	              <text x="42" y="185" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">财务质量</text>
+	              <text x="42" y="200" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Financial Health</text>
+	              <text x="42" y="217" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">EBITDA · 盈利能力</text>
+
+              <!-- I3: 运营卓越 — green, midY=306 -->
+	              <rect x="14" y="274" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(5,150,105,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="274" width="3.5" height="64" rx="2" fill="#059669"/>
+              <line x1="17.5" y1="274" x2="140" y2="274" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,286)" fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round">
+	                <circle cx="6" cy="6" r="5"/><circle cx="6" cy="6" r="2" fill="#059669" stroke="none"/>
+                <line x1="6" y1="0" x2="6" y2="-1.5"/><line x1="6" y1="12" x2="6" y2="13.5"/>
+                <line x1="12" y1="6" x2="13.5" y2="6"/><line x1="0" y1="6" x2="-1.5" y2="6"/>
+              </g>
+	              <text x="42" y="297" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">运营卓越</text>
+	              <text x="42" y="312" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Operational Excellence</text>
+	              <text x="42" y="329" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">效率 · 流程 · 人才</text>
+
+              <!-- I4: 公司治理 — amber, midY=418 -->
+	              <rect x="14" y="386" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(199,120,0,0.16)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="386" width="3.5" height="64" rx="2" fill="#C77800"/>
+              <line x1="17.5" y1="386" x2="140" y2="386" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,398)" fill="none" stroke="#C77800" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6,0 L12,2.5 L12,6 C12,9.5 9.5,11.5 6,13 C2.5,11.5 0,9.5 0,6 L0,2.5 Z"/>
+                <polyline points="3.5,6.5 5.5,8.5 9,4"/>
+              </g>
+	              <text x="42" y="409" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">公司治理</text>
+	              <text x="42" y="424" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Governance &amp; Compliance</text>
+	              <text x="42" y="441" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">合规 · 风控 · 信息披露</text>
+
+              <!-- ══ ORBITAL ENGINE ══ -->
+              <!-- Score glass card — above orbital -->
+              <rect x="220" y="132" width="120" height="44" rx="11" fill="rgba(255,255,255,0.88)" stroke="rgba(255,255,255,0.72)" stroke-width="1" filter="url(#gs)"/>
+              <line x1="238" y1="132" x2="322" y2="132" stroke="rgba(255,255,255,0.92)" stroke-width="1"/>
+              <text x="280" y="149" text-anchor="middle" fill="#7180A3" font-size="7.2" font-weight="600" font-family="Inter,sans-serif" letter-spacing=".1em">综合诊断评分</text>
+              <text x="265" y="171" text-anchor="middle" fill="#2563EB" font-size="26" font-weight="800" font-family="Inter,sans-serif" class="svg-num" id="svgScore">68</text>
+              <text x="290" y="169" fill="#A9B6CA" font-size="8" font-family="Inter,sans-serif" class="svg-unit">/100</text>
+
+              <!-- Light glass orbital card -->
+              <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#lightGlass)" stroke="rgba(37,99,235,0.16)" stroke-width="1.2"/>
+              <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#glassShimmer)" pointer-events="none"/>
+              <!-- Glass top highlight line -->
+              <line x1="226" y1="183.5" x2="334" y2="183.5" stroke="rgba(255,255,255,0.92)" stroke-width="1.5"/>
+              <!-- Ambient glow — softened for light bg -->
+              <circle cx="280" cy="261" r="64" fill="url(#coreGlow)" opacity="0.40"/>
+              <!-- Rings — stronger strokes for light bg -->
+              <circle cx="280" cy="261" r="56" fill="none" stroke="rgba(37,99,235,0.22)" stroke-width="1" stroke-dasharray="3 5">
+                <animateTransform attributeName="transform" type="rotate" from="360 280 261" to="0 280 261" dur="30s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="280" cy="261" r="40" fill="none" stroke="rgba(37,99,235,0.16)" stroke-width="1" stroke-dasharray="2 4">
+                <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="18s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="280" cy="261" r="24" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1" stroke-dasharray="2 3">
+                <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="10s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Orbit nodes ring 1, CW 14s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="14s" repeatCount="indefinite"/>
+                <circle cx="336" cy="261" r="5" fill="#2563EB" filter="url(#glow)" opacity="0.82"/>
+                <circle cx="224" cy="261" r="3.5" fill="#0891B2" opacity="0.68"/>
+              </g>
+              <!-- Orbit nodes ring 2, CCW 10s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="110 280 261" to="-250 280 261" dur="10s" repeatCount="indefinite"/>
+                <circle cx="320" cy="261" r="4" fill="#059669" filter="url(#glow)" opacity="0.78"/>
+                <circle cx="240" cy="261" r="3" fill="#C77800" opacity="0.72"/>
+              </g>
+              <!-- Orbit node ring 3, CW 6s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="55 280 261" to="415 280 261" dur="6s" repeatCount="indefinite"/>
+                <circle cx="304" cy="261" r="2.5" fill="#0891B2" filter="url(#glow)" opacity="0.72"/>
+              </g>
+              <!-- Scanning arc -->
+              <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="3.5s" repeatCount="indefinite"/>
+                <path d="M280,261 L336,261 A56,56 0 0,1 308,309.5 Z" fill="rgba(37,99,235,0.055)"/>
+                <line x1="280" y1="261" x2="336" y2="261" stroke="rgba(37,99,235,0.46)" stroke-width="1.4" stroke-linecap="round"/>
+              </g>
+              <!-- Core halo + pulse -->
+              <circle cx="280" cy="261" r="14" fill="rgba(37,99,235,0.13)" stroke="rgba(37,99,235,0.34)" stroke-width="1.5"/>
+              <circle cx="280" cy="261" r="8" fill="#2563EB">
+                <animate attributeName="r" values="8;10;8" dur="2.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.74;1" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+              <text x="280" y="206" text-anchor="middle" fill="rgba(37,99,235,0.42)" font-size="6.8" font-weight="700" font-family="Inter,sans-serif" letter-spacing=".13em">AI ENGINE · RVC CORE</text>
+              <!-- Live badge -->
+              <rect x="238" y="316" width="84" height="22" rx="7" fill="rgba(5,150,105,0.10)" stroke="rgba(5,150,105,0.25)" stroke-width="1"/>
+              <circle cx="251" cy="327" r="3" fill="#059669"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+              <text x="259" y="331" fill="#059669" font-size="8.2" font-weight="700" font-family="Inter,sans-serif">实时分析中</text>
+
+              <!-- ══ OUTPUT KPI NODES ══ -->
+              <!-- R1: IPO就绪度 — blue, midY=79 -->
+              <rect x="462" y="30" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(37,99,235,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="30" width="194" height="3" rx="1.5" fill="rgba(37,99,235,0.42)"/>
+              <line x1="480" y1="30" x2="638" y2="30" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,41)" fill="none" stroke="#2563EB" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="0,11 4,7 7,9 13,2"/><polyline points="9,2 13,2 13,6"/>
+              </g>
+              <text x="486" y="54" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">IPO就绪度评分</text>
+              <text x="468" y="67" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif">基准 38分 →</text>
+              <text x="468" y="89" fill="#2563EB" font-size="28" font-weight="800" font-family="Inter,sans-serif" font-variant-numeric="tabular-nums" class="svg-num" id="n1">91</text>
+              <text x="507" y="87" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif" class="svg-unit">分</text>
+              <rect x="504" y="74" width="42" height="14" rx="7" fill="#E6FAF3"/>
+              <text x="525" y="84" text-anchor="middle" fill="#059669" font-size="7.5" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">▲ 53 pts</text>
+              <line x1="468" y1="92" x2="647" y2="92" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="110" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">上市审核周期压缩</text>
+              <text x="652" y="110" text-anchor="end" fill="#2563EB" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">−6.2 月</text>
+
+              <!-- R2: 并购估值倍数 — cyan, midY=193 -->
+              <rect x="462" y="144" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(8,145,178,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="144" width="194" height="3" rx="1.5" fill="rgba(8,145,178,0.42)"/>
+              <line x1="480" y1="144" x2="638" y2="144" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,155)" fill="none" stroke="#0891B2" stroke-width="1.35" stroke-linecap="round">
+                <path d="M0,4.5 C5,4.5 8,0 13,0"/><path d="M0,7.5 C5,7.5 8,12 13,12"/>
+                <polyline points="10,0 13,0 13,3.5"/><polyline points="10,12 13,12 13,8.5"/>
+              </g>
+              <text x="486" y="168" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">并购估值倍数</text>
+              <text x="468" y="180" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif">7.2× →</text>
+              <text x="468" y="202" fill="#0891B2" font-size="28" font-weight="800" font-family="Inter,sans-serif" font-variant-numeric="tabular-nums" class="svg-num" id="n2">9.6</text>
+              <text x="518" y="200" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif" class="svg-unit">× EV/EBITDA</text>
+              <line x1="468" y1="207" x2="647" y2="207" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="225" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">尽调周期压缩</text>
+              <text x="652" y="225" text-anchor="end" fill="#0891B2" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">−38天 / −40%</text>
+
+              <!-- R3: 投资人转化率 — green, midY=307 -->
+              <rect x="462" y="258" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(5,150,105,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="258" width="194" height="3" rx="1.5" fill="rgba(5,150,105,0.42)"/>
+              <line x1="480" y1="258" x2="638" y2="258" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,269)" fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round">
+                <circle cx="4.5" cy="3.5" r="2.5"/><path d="M0,12 C0,9 9,9 9,12"/>
+                <circle cx="10.5" cy="3" r="2" stroke-width="1.3" opacity="0.65"/>
+                <path d="M8,12 C8.5,10 14,10 14,12" stroke-width="1.3" opacity="0.65"/>
+              </g>
+              <text x="486" y="282" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">投资人转化率</text>
+              <text x="468" y="306" fill="#059669" font-size="29" font-weight="800" font-family="Inter,sans-serif" class="svg-num">+<tspan id="n3">58</tspan><tspan dx="1" font-size="11" class="svg-unit">%</tspan></text>
+              <text x="468" y="320" fill="#7180A3" font-size="7.8" font-family="Inter,sans-serif">精准触达 → 意向确认</text>
+              <line x1="468" y1="330" x2="647" y2="330" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="346" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">融资效率倍增</text>
+              <text x="652" y="346" text-anchor="end" fill="#059669" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">3.2× 提速</text>
+
+              <!-- R4: 企业估值提升 — amber, midY=421 -->
+              <rect x="462" y="372" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(199,120,0,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="372" width="194" height="3" rx="1.5" fill="rgba(199,120,0,0.42)"/>
+              <line x1="480" y1="372" x2="638" y2="372" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,383)" fill="none" stroke="#C77800" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="7,0 14,5 7,13 0,5"/><line x1="0" y1="5" x2="14" y2="5"/>
+              </g>
+              <text x="486" y="396" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">企业估值提升</text>
+              <text x="468" y="420" fill="#C77800" font-size="29" font-weight="800" font-family="Inter,sans-serif" class="svg-num">+<tspan id="n4">34</tspan><tspan dx="1" font-size="11" class="svg-unit">%</tspan></text>
+              <text x="468" y="432" fill="#7180A3" font-size="7.8" font-family="Inter,sans-serif" class="svg-delta">$24.2M → $32.4M</text>
+              <line x1="468" y1="440" x2="647" y2="440" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="457" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">EBITDA 增量</text>
+              <text x="652" y="457" text-anchor="end" fill="#C77800" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">+$8.2M</text>
+
+              <!-- ══ FLOW PATHS ══ -->
+              <path id="p1" d="M 140,82 C 178,82 208,220 216,250" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p2" d="M 140,194 C 188,194 214,234 218,252" fill="none" stroke="rgba(8,145,178,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p3" d="M 140,306 C 188,306 214,278 218,268" fill="none" stroke="rgba(5,150,105,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p4" d="M 140,418 C 178,418 210,302 218,272" fill="none" stroke="rgba(199,120,0,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p5" d="M 342,250 C 390,202 420,79 462,79" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p6" d="M 342,252 C 392,240 420,193 462,193" fill="none" stroke="rgba(8,145,178,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p7" d="M 342,268 C 392,298 420,307 462,307" fill="none" stroke="rgba(5,150,105,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p8" d="M 342,272 C 390,372 420,421 462,421" fill="none" stroke="rgba(199,120,0,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+
+              <!-- ══ ANIMATED DOTS ══ -->
+              <circle r="4" fill="#2563EB" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+              <circle r="4" fill="#0891B2" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.8s"><mpath href="#p2"/></animateMotion></circle>
+              <circle r="4" fill="#059669" filter="url(#glow)" opacity=".82"><animateMotion dur="3.2s" repeatCount="indefinite" begin="1.4s"><mpath href="#p3"/></animateMotion></circle>
+              <circle r="4" fill="#C77800" filter="url(#glow)" opacity=".80"><animateMotion dur="3.8s" repeatCount="indefinite" begin="0.4s"><mpath href="#p4"/></animateMotion></circle>
+              <circle r="4" fill="#2563EB" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite" begin="1.5s"><mpath href="#p5"/></animateMotion></circle>
+              <circle r="4" fill="#0891B2" filter="url(#glow)" opacity=".82"><animateMotion dur="3.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#p6"/></animateMotion></circle>
+              <circle r="4" fill="#059669" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.9s"><mpath href="#p7"/></animateMotion></circle>
+              <circle r="4" fill="#C77800" filter="url(#glow)" opacity=".80"><animateMotion dur="3.2s" repeatCount="indefinite" begin="2s"><mpath href="#p8"/></animateMotion></circle>
             </svg>
-            <div class="engine-core"><div><b>RVC</b><span>价值诊断引擎<br>Value Diagnostic Engine</span></div></div>
-          </div>
-          <div class="engine-column right">
-            <div class="engine-label">智能输出 <span style="color:var(--muted);font-weight:600;">Smart Outputs</span></div>
-            <div class="node"><div class="icon-bubble" data-icon="check"></div><div><b>健康评分</b><br><small>Health Score</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="trend"></div><div><b>关键洞察</b><br><small>Key Insights</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="alert"></div><div><b>风险预警</b><br><small>Risk Alerts</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="target"></div><div><b>价值机会</b><br><small>Value Opportunities</small></div></div>
-            <div class="node"><div class="icon-bubble" data-icon="doc"></div><div><b>执行建议</b><br><small>Execution Plan</small></div></div>
-          </div>
-          <div class="collab-strip">
-            <div class="collab-card"><div class="icon-bubble" data-icon="users"></div><div><b>专家网络</b><br><small>Expert Network</small></div></div>
-            <div class="collab-card"><div class="icon-bubble" data-icon="users"></div><div><b>协作工作区</b><br><small>Workspaces</small></div></div>
-            <div class="collab-card"><div class="icon-bubble" data-icon="grid"></div><div><b>任务追踪</b><br><small>Task Tracking</small></div></div>
-            <div class="collab-card"><div class="icon-bubble" data-icon="database"></div><div><b>知识库</b><br><small>Knowledge Base</small></div></div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="glass process-strip reveal">
-        <div class="process-step"><div class="icon-bubble" data-icon="upload"></div><div><span class="num">01</span><br><b>企业信息上传</b><br><small>安全上传，自动校验</small></div><svg class="icon"><path d="M9 18l6-6-6-6"/></svg></div>
-        <div class="process-step"><div class="icon-bubble" data-icon="ai"></div><div><span class="num">02</span><br><b>AI 分析</b><br><small>多维度深度分析</small></div><svg class="icon"><path d="M9 18l6-6-6-6"/></svg></div>
-        <div class="process-step"><div class="icon-bubble" data-icon="doc"></div><div><span class="num">03</span><br><b>体检报告</b><br><small>结构化报告输出</small></div><svg class="icon"><path d="M9 18l6-6-6-6"/></svg></div>
-        <div class="process-step"><div class="icon-bubble" data-icon="grid"></div><div><span class="num">04</span><br><b>执行模块</b><br><small>方案落地与任务管理</small></div><svg class="icon"><path d="M9 18l6-6-6-6"/></svg></div>
-        <div class="process-step"><div class="icon-bubble" data-icon="users"></div><div><span class="num">05</span><br><b>顾问协作</b><br><small>专家协同推进执行</small></div></div>
+  <section class="process">
+    <div class="wrap">
+      <div class="proc-grid">
+        <div class="proc-item reveal">
+          <div class="proc-num">01 — 数据采集</div>
+          <div class="proc-title">企业全维建档</div>
+          <div class="proc-desc">结构化七步采集框架，覆盖300+数据节点，精准捕获价值驱动因子。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">02 — AI 分析</div>
+          <div class="proc-title">深度智能诊断</div>
+          <div class="proc-desc">多模型AI引擎并行处理财务、运营与战略信号，揭示隐性价值漏洞与机会。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">03 — 价值标定</div>
+          <div class="proc-title">机构级基准对标</div>
+          <div class="proc-desc">对标186+行业数据库，量化各维度差距，生成可信度超90%的估值区间。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">04 — 路径执行</div>
+          <div class="proc-title">资本路径落地</div>
+          <div class="proc-desc">30/60/90/180天行动路线图，精准匹配320+机构顾问与专项执行模块。</div>
+        </div>
       </div>
+    </div>
+  </section>
 
+  <section class="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-ey">核心能力体系</div>
+        <h2 class="sec-ttl">企业价值的六大支柱</h2>
+        <p class="sec-sub">全方位诊断覆盖，精准识别每一个影响机构级价值实现的关键变量。</p>
+      </div>
       <div class="bento">
-        <article class="glass service-card featured reveal" data-page="ipo">
-          <div class="icon-bubble" data-icon="landmark"></div><h3>IPO 业务</h3><p>上市合规与法律顾问服务，提升资本市场效率</p><span class="link">进入模块 →</span>
-        </article>
-        <article class="glass service-card reveal" data-page="modules">
-          <div class="icon-bubble" data-icon="pie"></div><h3>财务审计</h3><p>财务健康度评估与审计建议，增强投资人信心</p><span class="link">进入模块 →</span>
-        </article>
-        <article class="glass service-card reveal" data-page="modules">
-          <div class="icon-bubble" data-icon="handshake"></div><h3>M&amp;A 战略</h3><p>并购机会识别与交易执行支持，创造协同价值</p><span class="link">进入模块 →</span>
-        </article>
-        <article class="glass service-card reveal" data-page="modules">
-          <div class="icon-bubble" data-icon="trend"></div><h3>AI 效率提升</h3><p>流程优化与智能化提升方案，提高组织效能</p><span class="link">进入模块 →</span>
-        </article>
-      </div>
-
-      <div class="metrics-strip">
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="database"></div><div><strong><span class="counter" data-count="2486">0</span>+</strong><span>企业已完成体检<br>Enterprises Diagnosed</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="trend"></div><div><strong><span class="counter" data-count="186">0</span>+</strong><span>行业覆盖<br>Industries Covered</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="user"></div><div><strong><span class="counter" data-count="320">0</span>+</strong><span>认证顾问<br>Certified Advisors</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="target"></div><div><strong><span class="counter" data-count="68">0</span>%</strong><span>项目落地率<br>Project Success Rate</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="bars"></div><div><strong>$<span class="counter" data-count="42">0</span>B+</strong><span>累计预估价值增长<br>Value Created</span></div></div>
-      </div>
-    </section>
-
-    <section id="intake" class="page">
-      <div class="intake-layout">
-        <aside class="glass sidebar reveal">
-          <div class="side-title"><span>ENTERPRISE INTAKE CONSOLE</span><strong>企业价值诊断 · 信息采集</strong><span>Enterprise Intake Console</span></div>
-          <button class="step-item active" data-step="1"><div class="icon-bubble">01</div><div><b>企业基本信息</b><br><small>Basic Information</small></div></button>
-          <button class="step-item" data-step="2"><div class="icon-bubble">02</div><div><b>业务与收入模型</b><br><small>Business &amp; Revenue Model</small></div></button>
-          <button class="step-item" data-step="3"><div class="icon-bubble">03</div><div><b>财务与审计资料</b><br><small>Financials &amp; Audit Data</small></div></button>
-          <button class="step-item" data-step="4"><div class="icon-bubble">04</div><div><b>股权与融资结构</b><br><small>Equity &amp; Financing</small></div></button>
-          <button class="step-item" data-step="5"><div class="icon-bubble">05</div><div><b>战略目标</b><br><small>Strategic Objectives</small></div></button>
-          <button class="step-item" data-step="6"><div class="icon-bubble">06</div><div><b>文件上传</b><br><small>Document Upload</small></div></button>
-          <button class="step-item" data-step="7"><div class="icon-bubble">07</div><div><b>提交与生成报告</b><br><small>Submit &amp; Generate Report</small></div></button>
-          <div class="glass" style="padding:20px;margin-top:auto;"><span style="color:var(--muted)">预计完成时间</span><h2 style="margin:18px 0 2px;">18–25 <small style="font-size:14px;color:var(--muted)">分钟</small></h2></div>
-        </aside>
-
-        <div class="glass intake-center reveal">
-          <div class="page-head">
-            <div><h2><span id="stepNo">01</span> <span id="stepTitle">企业基本信息</span> <span class="tag info">必填</span></h2><p id="stepSubtitle">请填写企业基本信息，所有信息将受到严格保密保护。</p></div>
-            <div class="icon-bubble" data-icon="user" style="width:86px;height:86px;border-radius:24px;"></div>
-          </div>
-          <div id="dynamicForm"></div>
-          <div class="form-actions">
-            <button class="btn magnetic">保存草稿 Save Draft</button>
-            <button class="btn primary magnetic" id="nextStep">下一步：业务与收入模型 →</button>
-          </div>
+        <div class="b-card wide accent reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">01</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="svc-title">AI价值诊断引擎</div>
+          <div class="svc-desc">自主研发的多模型协同系统，系统评估300+企业价值驱动因子，生成机构级诊断评分与深度子维度分析，对标186+行业纵向数据，输出精准估值参考与行动优先级。</div>
+          <span class="svc-tag">核心引擎 · 300+ 维度</span>
         </div>
-
-        <aside class="glass scan-panel reveal">
-          <div class="page-head"><div><h2>AI 实时扫描</h2><p>AI Real-time Scan</p></div><div class="icon-bubble" data-icon="spark"></div></div>
-          <div class="progress-ring" style="--p:14%"><div><span id="scanPct">14%</span><small style="display:block;font-size:12px;color:var(--muted)">已完成</small></div></div>
-          <div class="glass" style="padding:16px;"><b>当前步骤进度</b><h3 id="scanStep" style="font-size:28px;margin:10px 0;">1/7</h3><div class="bar is-visible"><span style="--w:14%"></span></div></div>
-          <div class="signal-list">
-            <div class="signal"><div class="icon-bubble" data-icon="landmark"></div><div><b>企业治理健全性</b><br><small>已识别 6/10 项</small></div><span class="tag">良好</span></div>
-            <div class="signal"><div class="icon-bubble" data-icon="bars"></div><div><b>数据完整度</b><br><small>已达 35% 所需维度</small></div><span class="tag warn">中等</span></div>
-            <div class="signal"><div class="icon-bubble" data-icon="shield"></div><div><b>合规风险识别</b><br><small>未发现重大风险</small></div><span class="tag">低风险</span></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="report" class="page">
-      <div class="app-grid">
-        <aside class="glass sidebar reveal">
-          <button class="side-item active"><div class="icon-bubble" data-icon="grid"></div><b>报告概览</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="doc"></div><b>企业概况</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="target"></div><b>价值评估</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="users"></div><b>能力分析</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="bars"></div><b>财务健康度</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="cloud"></div><b>市场与竞争</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="alert"></div><b>风险评估</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="target"></div><b>机会分析</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="check"></div><b>建议与路径</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="file"></div><b>附录</b></button>
-          <button class="btn magnetic" style="margin-top:auto;">联系我们</button>
-        </aside>
-        <div class="content-panel">
-          <div class="page-head reveal">
-            <div><button class="btn magnetic" data-page="intake" style="padding:10px 14px;margin-bottom:14px;">← 返回信息采集</button><h2>企业价值诊断报告</h2><p>Enterprise Value Diagnostic Report</p></div>
-            <div class="actions"><button class="btn magnetic">下载报告</button><button class="btn magnetic">分享报告</button><span style="color:var(--muted)">报告日期：2025-05-20</span></div>
-          </div>
-          <div class="report-layout">
-            <div class="glass score-card reveal">
-              <h3>Enterprise Value Readiness Score</h3>
-              <div class="score-flex">
-                <svg class="gauge" viewBox="0 0 220 220" data-score="72">
-                  <defs><linearGradient id="gaugeGradient" x1="0" x2="1"><stop offset="0%" stop-color="#0b6ffb"/><stop offset="100%" stop-color="#23b7ff"/></linearGradient></defs>
-                  <path class="bg" d="M35 140 A80 80 0 1 1 185 140"/>
-                  <path class="fg" d="M35 140 A80 80 0 1 1 185 140"/>
-                  <circle class="gauge-dot" cx="35" cy="140" r="7" fill="#23b7ff"/>
-                </svg>
-                <div><div class="score-number"><span class="counter" data-count="72">0</span><small>/100</small></div><span class="tag">良好</span><p style="color:var(--muted);line-height:1.7;margin-top:18px;">您的企业已具备良好的价值提升基础，仍有关键领域可进一步优化。</p></div>
-              </div>
-              <div class="score-meta">
-                <div class="meta-box"><small>百分位排名</small><b>前 28%</b></div>
-                <div class="meta-box"><small>行业对标</small><b>领先</b></div>
-                <div class="meta-box"><small>评估维度</small><b>6 大维度</b></div>
-                <div class="meta-box"><small>数据源</small><b>28 项数据</b></div>
-              </div>
-            </div>
-            <div class="glass radar-card reveal">
-              <h3>能力雷达 / Capability Radar</h3>
-              <div class="radar-wrap"><svg class="radar-svg" viewBox="-170 -150 340 300" aria-label="Radar chart"></svg></div>
-            </div>
-            <div class="glass paths-card reveal">
-              <h3>推荐执行路径</h3>
-              <div class="path-list" id="reportPaths"></div>
-              <button class="btn magnetic" data-page="modules" style="margin-top:18px;width:100%;">查看全部解决方案 →</button>
-            </div>
-          </div>
-          <div class="summary-row">
-            <div class="glass summary-card reveal"><h3>AI + Advisor Summary</h3><ul><li>企业具备较强的增长潜力与转型动能</li><li>技术与数据能力处于行业领先水平</li><li>运营效率仍有进一步优化空间</li></ul></div>
-            <div class="glass summary-card reveal"><h3>关键机会</h3><ul><li>海外市场拓展潜力：+12–18%</li><li>产品组合优化：+8–12%</li><li>AI 驱动效率提升：+10–15%</li></ul></div>
-            <div class="glass summary-card reveal"><h3>主要风险</h3><ul><li>全球供应链波动：高影响</li><li>市场竞争加剧：中等影响</li><li>关键人才流失风险：中等影响</li></ul></div>
-          </div>
-          <div class="glass timeline-card reveal">
-            <h3>价值提升路线图（下一步行动建议）</h3>
-            <div class="timeline">
-              <div class="time-node"><div class="time-dot" data-icon="rocket"></div><div class="time-content"><b>30天<br>夯实基础</b><ul><li>完成财务健康度评估</li><li>梳理核心流程</li><li>建立短期 KPI</li></ul></div></div>
-              <div class="time-node"><div class="time-dot" data-icon="bars"></div><div class="time-content"><b>60天<br>优化提升</b><ul><li>优化关键业务流程</li><li>推进重点项目落地</li><li>启动 AI 应用试点</li></ul></div></div>
-              <div class="time-node"><div class="time-dot" data-icon="target"></div><div class="time-content"><b>90天<br>价值突破</b><ul><li>验证增长弹性</li><li>完善数据决策体系</li><li>构建差异化优势</li></ul></div></div>
-              <div class="time-node"><div class="time-dot" data-icon="trophy"></div><div class="time-content"><b>180天+<br>价值跃升</b><ul><li>提升市场认可度</li><li>建立可持续增长</li><li>准备融资与上市</li></ul></div></div>
-            </div>
-          </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">02</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="svc-title">IPO就绪控制台</div>
+          <div class="svc-desc">端到端IPO筹备管理，从合规差距分析到承销商遴选，系统化追踪每一个上市里程碑。</div>
+          <span class="svc-tag">资本市场</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">03</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="svc-title">财务健康审计</div>
+          <div class="svc-desc">深度财务建模与盈利质量分析，识别EBITDA提升路径，重建投资人信心基础。</div>
+          <span class="svc-tag">财务运营</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">04</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="svc-title">并购价值优化</div>
+          <div class="svc-desc">买方与卖方尽职调查加速，AI辅助生成价值桥接模型，量化协同效应，支撑交易决策。</div>
+          <span class="svc-tag">并购交易</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">05</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="svc-title">投资人精准匹配</div>
+          <div class="svc-desc">基于价值画像的AI智能匹配，对接320+机构顾问、PE基金与战略投资方，缩短融资周期。</div>
+          <span class="svc-tag">网络资源 · 320+ 顾问</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">06</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="svc-title">资本叙事构建</div>
+          <div class="svc-desc">以诊断数据为基础，打造高说服力的投资人故事，覆盖商业计划书、CIM与路演材料全链路输出。</div>
+          <span class="svc-tag">叙事策略</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="modules" class="page modules-page">
-      <div class="page-head reveal">
-        <div><h2>Recommended Execution Paths / 推荐执行路径</h2><p>基于企业诊断结果与价值增长目标，我们为您推荐最优执行路径与模块组合。</p></div>
-      </div>
-      <div class="priority-row reveal">
-        <button class="priority-filter active" data-filter="all"><div><b>全部路径</b><br><small>All Modules</small></div><span class="status-dot"></span></button>
-        <button class="priority-filter" data-filter="高"><div><b>高优先级</b><br><small>快速见效，强影响力</small></div><span class="status-dot"></span></button>
-        <button class="priority-filter" data-filter="中"><div><b>中优先级</b><br><small>价值显著，稳步推进</small></div><span class="status-dot"></span></button>
-        <button class="priority-filter" data-filter="低"><div><b>低优先级</b><br><small>长期价值，持续优化</small></div><span class="status-dot"></span></button>
-      </div>
-      <div class="modules-grid" id="moduleGrid"></div>
-      <div class="metrics-strip six">
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="cube"></div><div><strong>6</strong><span>推荐模块数<br>Total Modules</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="target"></div><div><strong><span class="counter" data-count="92">0</span>%</strong><span>平均路径匹配度</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="trend"></div><div><strong>8–16 周</strong><span>平均执行周期</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="shield"></div><div><strong>高</strong><span>整体执行优先级</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="users"></div><div><strong>3</strong><span>协同模块组合</span></div></div>
-        <div class="glass metric reveal"><div class="icon-bubble" data-icon="bars"></div><div><strong>$42B+</strong><span>预估价值提升<br>Est. Value Impact</span></div></div>
-      </div>
-    </section>
-
-    <section id="ipo" class="page">
-      <div class="ipo-layout">
-        <aside class="glass sidebar reveal">
-          <div class="side-title"><strong>IPO 读势服务</strong><span>IPO Readiness Console</span></div>
-          <button class="side-item active"><div class="icon-bubble" data-icon="bars"></div><b>IPO 总览</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="check"></div><b>IPO Checklist</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="grid"></div><b>风险矩阵</b></button>
-          <button class="side-item"><div class="icon-bubble" data-icon="trend"></div><b>上市路线图</b></button>
-          <div class="glass" style="padding:20px;margin-top:auto;">
-            <div class="icon-bubble" data-icon="user"></div>
-            <h3>您的专属顾问<br>王顾问</h3>
-            <p style="color:var(--muted)">资本市场与合规专家</p>
-            <div class="advisor-actions">
-              <button class="icon-bubble magnetic" aria-label="消息" data-icon="doc"></button>
-              <button class="icon-bubble magnetic" aria-label="电话" data-icon="clock"></button>
-              <button class="icon-bubble magnetic" aria-label="预约" data-icon="calendar"></button>
-            </div>
-            <button class="btn magnetic" style="width:100%">联系我们</button>
-          </div>
-        </aside>
-        <div class="content-panel">
-          <div class="page-head reveal"><div><p style="color:var(--blue);font-weight:850;margin-bottom:8px;">IPO 读势服务 / IPO Readiness Console</p><h2>IPO Readiness Console</h2><p>全面评估上市准备状态，识别风险与差距，找到最佳上市路径。</p></div></div>
-          <div class="ipo-top">
-            <div class="glass score-card reveal"><h3>IPO Readiness</h3><div class="score-number"><span class="counter" data-count="55">0</span><small>/100</small></div><div class="bar is-visible" style="margin:16px 0;"><span style="--w:55%"></span></div><p style="color:var(--muted);line-height:1.9;">准备状态：中等<br>预计上市时间：12–18 个月<br>最近更新：2025-05-20</p></div>
-            <div class="glass reveal" style="padding:24px;"><h3>IPO 路径总览</h3><div class="ipo-path reveal">
-              <div class="ipo-step"><div class="icon-bubble" data-icon="calendar"></div><b>1</b><br>锁定准备<br><span class="link">进行中</span></div>
-              <div class="ipo-step"><div class="icon-bubble" data-icon="doc"></div><b>2</b><br>审计启动<br><span>未开始</span></div>
-              <div class="ipo-step"><div class="icon-bubble" data-icon="shield"></div><b>3</b><br>提交 SEC<br><span>未开始</span></div>
-              <div class="ipo-step"><div class="icon-bubble" data-icon="landmark"></div><b>4</b><br>SEC 审核<br><span>未开始</span></div>
-              <div class="ipo-step"><div class="icon-bubble" data-icon="megaphone"></div><b>5</b><br>路演定价<br><span>未开始</span></div>
-              <div class="ipo-step"><div class="icon-bubble" data-icon="bars"></div><b>6</b><br>IPO 上市<br><span>未开始</span></div>
-            </div></div>
-          </div>
-          <div class="ipo-main">
-            <div class="glass reveal" style="padding:22px;"><h3>IPO 准备清单</h3><table><thead><tr><th>类别</th><th>任务</th><th>负责人</th><th>进度</th><th>状态</th><th>截止日期</th></tr></thead><tbody id="ipoRows"></tbody></table></div>
-            <div class="glass reveal" style="padding:22px;"><h3>主要风险</h3><div class="risk-list" id="riskList"></div></div>
-          </div>
-          <div class="bottom-actions">
-            <div class="glass chip reveal"><div class="icon-bubble" data-icon="spark"></div><div><strong>生成 IPO 清单</strong><span>基于企业数据自动生成定制化清单</span></div></div>
-            <div class="glass chip reveal"><div class="icon-bubble" data-icon="calendar"></div><div><strong>预约顾问会议</strong><span>与资本市场专家一对一咨询</span></div></div>
-            <div class="glass chip reveal"><div class="icon-bubble" data-icon="clock"></div><div><strong>查看时间表</strong><span>获取完整上市路径时间表</span></div></div>
-          </div>
+  <section class="kpi-strip">
+    <div class="wrap">
+      <div class="kpi-grid">
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="2486" data-suffix="+">0</div>
+          <div class="kpi-lbl">服务企业总数</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="88"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="186" data-suffix="+">0</div>
+          <div class="kpi-lbl">覆盖行业纵深</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="72"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="320" data-suffix="+">0</div>
+          <div class="kpi-lbl">机构顾问网络</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="80"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="68" data-suffix="%">0</div>
+          <div class="kpi-lbl">客户成功率</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="68"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-prefix="$" data-count="42" data-suffix="B+">0</div>
+          <div class="kpi-lbl">累计解锁价值</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="95"></div></div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <div class="tooltip" id="tooltip"></div>
+  <!-- ── Brand Cases / Success Wall ── -->
+  <section class="success-wall">
+    <div class="sw-head reveal">
+      <div class="sw-title">品牌案例</div>
+      <div class="sw-divider"></div>
+    </div>
 
-  <script>
-    const icons = {
-      bars: '<svg class="icon" viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20V8"/></svg>',
-      ai: '<svg class="icon" viewBox="0 0 24 24"><path d="M8 8h8v8H8z"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>',
-      target: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
-      file: '<svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
-      download: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
-      list: '<svg class="icon" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>',
-      cloud: '<svg class="icon" viewBox="0 0 24 24"><path d="M17.5 19H8a5 5 0 1 1 1.2-9.85A7 7 0 0 1 22 13a4 4 0 0 1-4.5 6z"/></svg>',
-      grid: '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
-      check: '<svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg>',
-      trend: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 17 9 11l4 4 8-8"/><path d="M14 7h7v7"/></svg>',
-      alert: '<svg class="icon" viewBox="0 0 24 24"><path d="m12 3 10 18H2z"/><path d="M12 9v4M12 17h.01"/></svg>',
-      doc: '<svg class="icon" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>',
-      upload: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M20 16.5a4.5 4.5 0 0 0-8.8-1.4A3.5 3.5 0 1 0 7.5 21H18"/></svg>',
-      users: '<svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-      landmark: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10h14v11"/><path d="M3 10h18L12 3z"/><path d="M8 14v3M12 14v3M16 14v3"/></svg>',
-      pie: '<svg class="icon" viewBox="0 0 24 24"><path d="M21 12A9 9 0 1 1 12 3v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>',
-      handshake: '<svg class="icon" viewBox="0 0 24 24"><path d="m8 12 3 3a3 3 0 0 0 4 0l1-1"/><path d="M3 12l5-5 4 4"/><path d="m21 12-5-5-4 4"/><path d="m7 17 2 2M17 17l-2 2"/></svg>',
-      database: '<svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>',
-      user: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22a8 8 0 0 1 16 0"/></svg>',
-      shield: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>',
-      spark: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>',
-      rocket: '<svg class="icon" viewBox="0 0 24 24"><path d="M5 19c1.5-5 5-12 14-14-2 9-9 12.5-14 14z"/><path d="M9 15l-4 4M15 9h.01"/></svg>',
-      trophy: '<svg class="icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 5H3v2a4 4 0 0 0 4 4M19 5h2v2a4 4 0 0 1-4 4"/></svg>',
-      cube: '<svg class="icon" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5z"/><path d="M3 7v10l9 5 9-5V7"/><path d="M12 12v10"/></svg>',
-      calendar: '<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
-      megaphone: '<svg class="icon" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13z"/><path d="M11 14v5a2 2 0 0 1-4 0v-6"/></svg>',
-      clock: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>'
-    };
+    <!-- Row 1: IPO 成功上市 → left -->
+    <div class="sw-row-label">成功上市 &nbsp;·&nbsp; NASDAQ / NYSE / A股</div>
+    <div class="marquee-wrap">
+      <div class="marquee-track go-left">
+        <!-- === set 1 === -->
+        <!-- ARMOGI BTOC -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 108 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <text x="1" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#0F172A" letter-spacing="-1">ARM</text>
+              <text x="60" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#2563EB" letter-spacing="-1">OGI</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BTOC</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- MASSIMO MAMO -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 138 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <polygon points="16,4 24,4 28,11 24,18 16,18 12,11" fill="#D97706"/>
+              <text x="20" y="15" font-family="'Arial Black',sans-serif" font-size="10" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="34" y="24" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#1a1a2e">MASSIMO</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MAMO</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- BAIYA BIYA -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 128 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <polygon points="14,32 22,32 18,20" fill="#0284C7"/>
+              <polygon points="10,32 14,32 18,20" fill="#60A5FA" opacity="0.6"/>
+              <text x="28" y="27" font-family="'Arial Black',sans-serif" font-size="22" font-weight="900" fill="#0F172A">BAIYA</text>
+              <line x1="28" y1="30" x2="118" y2="30" stroke="#CBD5E1" stroke-width="0.8"/>
+              <text x="28" y="36" font-family="Arial,sans-serif" font-size="7.5" fill="#64748B" letter-spacing="0.04em">Baiya International Group Inc.</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BIYA</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- Autozi AZI -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <text x="1" y="22" font-family="Georgia,'Times New Roman',serif" font-size="22" font-style="italic" font-weight="700" fill="#0369A1">Autozi.com</text>
+              <text x="2" y="34" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#F97316" font-style="italic">中驰车福</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">AZI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- MAISON SOLUTIONS MSS -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 168 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#1E40AF"/>
+              <text x="14" y="22" font-family="'Arial Black',sans-serif" font-size="17" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="36" y="18" font-family="'Arial Black',sans-serif" font-size="14" fill="#0F172A" font-weight="900">MAISON</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="10" fill="#475569" font-weight="600" letter-spacing="0.12em">SOLUTIONS</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MSS</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- WHITEFIBER WYFI -->
+        <div class="ipo-card" style="min-width:200px;">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 170 28" xmlns="http://www.w3.org/2000/svg" height="28">
+              <text x="0" y="22" font-family="'Arial Black',Impact,sans-serif" font-size="20" font-weight="900" fill="#0F172A" letter-spacing="0.5">WHITEFIBER</text>
+              <text x="166" y="22" font-family="'Arial Black',sans-serif" font-size="20" fill="#94A3B8">_</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">WYFI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- GigaCloud GCT -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 172 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="8" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="2" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="15" width="11" height="11" rx="2" fill="#14B8A6" opacity="0.7"/>
+              <text x="30" y="16" font-family="Arial,sans-serif" font-size="13" fill="#0F172A" font-weight="700">大健云仓</text>
+              <text x="30" y="28" font-family="Arial,sans-serif" font-size="8.5" fill="#0D9488" font-weight="600" letter-spacing="0.06em">GIGACLOUD TECHNOLOGY</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">GCT</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- 聚美优品 JMEI -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 30" xmlns="http://www.w3.org/2000/svg" height="30">
+              <text x="0" y="24" font-family="'Arial Black',sans-serif" font-size="24" font-weight="900" fill="#DB2777">聚美优品</text>
+              <text x="100" y="22" font-family="Arial,sans-serif" font-size="10" fill="#9CA3AF" font-weight="500" letter-spacing="0.03em">JUMEI.COM</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">JMEI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- 步长制药 ZBT -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 156 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#DC2626"/>
+              <text x="14" y="14" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">步长</text>
+              <text x="14" y="25" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">制药</text>
+              <text x="36" y="20" font-family="'Arial Black',sans-serif" font-size="16" fill="#0F172A" font-weight="900">Buchang</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="9" fill="#64748B" letter-spacing="0.06em">BUCHANG PHARMA</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">ZBT</span><span class="ipo-card-exch">A股</span></div>
+        </div>
+        <!-- === set 2 (duplicate for seamless loop) === -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 108 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <text x="1" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#0F172A" letter-spacing="-1">ARM</text>
+              <text x="60" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#2563EB" letter-spacing="-1">OGI</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BTOC</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 138 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <polygon points="16,4 24,4 28,11 24,18 16,18 12,11" fill="#D97706"/>
+              <text x="20" y="15" font-family="'Arial Black',sans-serif" font-size="10" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="34" y="24" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#1a1a2e">MASSIMO</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MAMO</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 128 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <polygon points="14,32 22,32 18,20" fill="#0284C7"/>
+              <polygon points="10,32 14,32 18,20" fill="#60A5FA" opacity="0.6"/>
+              <text x="28" y="27" font-family="'Arial Black',sans-serif" font-size="22" font-weight="900" fill="#0F172A">BAIYA</text>
+              <line x1="28" y1="30" x2="118" y2="30" stroke="#CBD5E1" stroke-width="0.8"/>
+              <text x="28" y="36" font-family="Arial,sans-serif" font-size="7.5" fill="#64748B" letter-spacing="0.04em">Baiya International Group Inc.</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BIYA</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <text x="1" y="22" font-family="Georgia,'Times New Roman',serif" font-size="22" font-style="italic" font-weight="700" fill="#0369A1">Autozi.com</text>
+              <text x="2" y="34" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#F97316" font-style="italic">中驰车福</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">AZI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 168 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#1E40AF"/>
+              <text x="14" y="22" font-family="'Arial Black',sans-serif" font-size="17" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="36" y="18" font-family="'Arial Black',sans-serif" font-size="14" fill="#0F172A" font-weight="900">MAISON</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="10" fill="#475569" font-weight="600" letter-spacing="0.12em">SOLUTIONS</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MSS</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card" style="min-width:200px;">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 170 28" xmlns="http://www.w3.org/2000/svg" height="28">
+              <text x="0" y="22" font-family="'Arial Black',Impact,sans-serif" font-size="20" font-weight="900" fill="#0F172A" letter-spacing="0.5">WHITEFIBER</text>
+              <text x="166" y="22" font-family="'Arial Black',sans-serif" font-size="20" fill="#94A3B8">_</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">WYFI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 172 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="8" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="2" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="15" width="11" height="11" rx="2" fill="#14B8A6" opacity="0.7"/>
+              <text x="30" y="16" font-family="Arial,sans-serif" font-size="13" fill="#0F172A" font-weight="700">大健云仓</text>
+              <text x="30" y="28" font-family="Arial,sans-serif" font-size="8.5" fill="#0D9488" font-weight="600" letter-spacing="0.06em">GIGACLOUD TECHNOLOGY</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">GCT</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 30" xmlns="http://www.w3.org/2000/svg" height="30">
+              <text x="0" y="24" font-family="'Arial Black',sans-serif" font-size="24" font-weight="900" fill="#DB2777">聚美优品</text>
+              <text x="100" y="22" font-family="Arial,sans-serif" font-size="10" fill="#9CA3AF" font-weight="500" letter-spacing="0.03em">JUMEI.COM</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">JMEI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 156 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#DC2626"/>
+              <text x="14" y="14" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">步长</text>
+              <text x="14" y="25" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">制药</text>
+              <text x="36" y="20" font-family="'Arial Black',sans-serif" font-size="16" fill="#0F172A" font-weight="900">Buchang</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="9" fill="#64748B" letter-spacing="0.06em">BUCHANG PHARMA</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">ZBT</span><span class="ipo-card-exch">A股</span></div>
+        </div>
+      </div>
+    </div>
 
-    const modules = [
-      ["IPO 法务", "IPO Legal", 96, "8–12 周", "高", "92%", "全面梳理上市合规路径，防范法务风险，提升信息披露质量。", "landmark"],
-      ["财务审计", "Financial Audit", 94, "6–10 周", "高", "89%", "优化财务治理与内控体系，提升审计效率与资本信心。", "pie"],
-      ["M&A 战略", "M&A Strategy", 91, "10–16 周", "中", "85%", "识别并评估并购机会，构建协同价值与整合落地路径。", "handshake"],
-      ["AI 效率提升", "AI Productivity", 89, "6–12 周", "中", "82%", "识别高价值自动化场景，提升运营效率与组织生产力。", "trend"],
-      ["资本市场叙事", "Capital Story", 87, "4–8 周", "中", "76%", "构建差异化资本市场故事，增强投资人沟通与估值认同。", "doc"],
-      ["投资人匹配", "Investor Matching", 84, "4–6 周", "低", "75%", "精准匹配潜在投资人，提升融资效率与合作有效性。", "user"]
-    ];
+    <!-- Row 2: 合作伙伴 → right -->
+    <div class="sw-row-label" style="margin-top:28px;">服务合作伙伴</div>
+    <div class="marquee-wrap">
+      <div class="marquee-track go-right">
+        <!-- === set 1 === -->
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 80 20" height="20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,18 16,18 13,10" fill="#16A34A"/><text x="19" y="16" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#DC2626">新东方</text><text x="60" y="14" font-family="Arial,sans-serif" font-size="8" fill="#6B7280">XDF.CN</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 120 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="13" font-weight="900" fill="#2563EB">intelliFusion</text><text x="82" y="15" font-family="Arial,sans-serif" font-size="9" fill="#64748B"> 云天励飞</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="none" stroke="#0B6FFB" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#0B6FFB"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F172A">格灵深瞳</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 100 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="5" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="1" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="11" width="8" height="8" rx="1.5" fill="#14B8A6" opacity="0.7"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#0F172A">拉卡拉</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 88 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',sans-serif" font-size="15" font-weight="900" fill="#F97316">一起作业</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#1E40AF">BaTeLab</text><text x="60" y="12" font-family="serif" font-size="11" fill="#3B82F6">β</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 96 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="15" font-weight="900" fill="#1E3A8A" letter-spacing="0.5">CONTROLSYS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 44 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#0369A1" letter-spacing="1">CFAR</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="3" width="14" height="14" rx="2" fill="#374151"/><text x="7" y="13" font-family="'Arial Black',sans-serif" font-size="8" fill="#fff" text-anchor="middle" font-weight="900">M</text><text x="18" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="600" fill="#374151">MICROOS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F766E">全盛科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 42 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#16A34A">Nums</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 82 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#111827">Vfine</text><text x="43" y="15" font-family="Arial,sans-serif" font-size="11" font-weight="600" fill="#374151"> MUSIC</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#B45309">帕皮科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 56 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" fill="#111827"/><text x="10" y="14" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">ETB</text><text x="24" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111827">com</text></svg></div>
+        </div>
+        <!-- === set 2 (duplicate) === -->
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 80 20" height="20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,18 16,18 13,10" fill="#16A34A"/><text x="19" y="16" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#DC2626">新东方</text><text x="60" y="14" font-family="Arial,sans-serif" font-size="8" fill="#6B7280">XDF.CN</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 120 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="13" font-weight="900" fill="#2563EB">intelliFusion</text><text x="82" y="15" font-family="Arial,sans-serif" font-size="9" fill="#64748B"> 云天励飞</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="none" stroke="#0B6FFB" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#0B6FFB"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F172A">格灵深瞳</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 100 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="5" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="1" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="11" width="8" height="8" rx="1.5" fill="#14B8A6" opacity="0.7"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#0F172A">拉卡拉</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 88 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',sans-serif" font-size="15" font-weight="900" fill="#F97316">一起作业</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#1E40AF">BaTeLab</text><text x="60" y="12" font-family="serif" font-size="11" fill="#3B82F6">β</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 96 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="15" font-weight="900" fill="#1E3A8A" letter-spacing="0.5">CONTROLSYS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 44 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#0369A1" letter-spacing="1">CFAR</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="3" width="14" height="14" rx="2" fill="#374151"/><text x="7" y="13" font-family="'Arial Black',sans-serif" font-size="8" fill="#fff" text-anchor="middle" font-weight="900">M</text><text x="18" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="600" fill="#374151">MICROOS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F766E">全盛科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 42 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#16A34A">Nums</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 82 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#111827">Vfine</text><text x="43" y="15" font-family="Arial,sans-serif" font-size="11" font-weight="600" fill="#374151"> MUSIC</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#B45309">帕皮科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 56 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" fill="#111827"/><text x="10" y="14" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">ETB</text><text x="24" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111827">com</text></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const radarData = [
-      ["战略与增长", 78, 68], ["财务健康", 72, 65], ["运营效率", 65, 62],
-      ["治理与合规", 70, 60], ["组织与人才", 68, 58], ["技术与数据", 75, 64]
-    ];
+  <footer style="background:var(--bg);">
+    <div class="wrap">
+      <div class="footer">
+        <div class="footer-l">© 2026 RVC Capital Partners · 企业价值智能诊断平台</div>
+        <div class="footer-r">专为机构级资本智能而生</div>
+      </div>
+    </div>
+  </footer>
+</div>
 
-    const checklist = [
-      ["财务与审计", "完成最近 3 年财务报表审计", "财务部", 75, "进行中", "2025-06-15"],
-      ["公司治理", "完善董事会治理架构与委员会", "法务部", 60, "进行中", "2025-06-30"],
-      ["合规与控股", "SOX 内控评估与差距整改", "内控部", 40, "进行中", "2025-07-15"],
-      ["信息披露", "更新公司章程及股东协议", "法务部", 80, "进行中", "2025-05-30"],
-      ["信息披露", "准备招股说明书初稿", "资本市场部", 30, "未开始", "2025-07-31"],
-      ["业务与运营", "关键业务流程与 KPI 梳理", "战略部", 50, "进行中", "2025-06-20"]
-    ];
+<script>
+const ham=document.getElementById('ham'),mn=document.getElementById('mob-nav');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mn.classList.toggle('open');});
+// Typewriter hero headline — prefix types once, then 真实价值 ↔ Real Value loop
+(function(){
+  const h1=document.querySelector('.hero-h');
+  if(!h1)return;
 
-    const risks = [
-      ["财务报告合规风险", "收入确认与费用分类存在不一致风险", "高", "danger"],
-      ["内控控制薄弱", "IT 一般控制与权限管理需加强", "中", "warn"],
-      ["关联交易披露不足", "关联方交易的披露完整性需提升", "中", "warn"],
-      ["知识产权风险", "部分专利文件尚未完成境外备案", "低", "info"],
-      ["数据隐私合规", "需完善全球数据隐私政策与披露", "低", "info"]
-    ];
+  // Fixed prefix (never deleted)
+  const prefix=[];
+  [['72小时内',false],['\n',false],['精准解锁',true],['\n',false],['企业',false]]
+    .forEach(([str,acc])=>[...str].forEach(c=>prefix.push({c,acc})));
 
-    document.querySelectorAll("[data-icon]").forEach(el => el.innerHTML = icons[el.dataset.icon] || "");
+  // Words that alternate — both rendered as blue accent
+  const words=['真实价值','Real Value'];
+  let wordIdx=0, typed=[];
 
-    let observer;
-    const moduleGrid = document.getElementById("moduleGrid");
-    const reportPaths = document.getElementById("reportPaths");
-    function renderModules(filter = "all") {
-      moduleGrid.innerHTML = modules.filter(m => filter === "all" || m[4] === filter).map((m, i) => `
-        <article class="glass service-card module-card reveal ${i === 0 ? "featured" : ""}" data-page="${i === 0 ? "ipo" : "modules"}" data-priority="${m[4]}">
-          <div class="icon-bubble">${icons[m[7]]}</div>
-          <h3>${m[0]}</h3>
-          <span class="match-pill">匹配度 <span class="counter" data-count="${m[2]}">0</span>%</span>
-          <p>${m[6]}</p>
-          <div class="module-stats"><div><span>周期</span><b>${m[3]}</b></div><div><span>优先级</span><b>${m[4]}</b></div><div><span>预期匹配度</span><b>${m[5]}</b></div></div>
-          <span class="link">查看路径 →</span>
-        </article>`).join("");
-      enhanceTilt();
-      observeNew();
-    }
-    renderModules();
-    reportPaths.innerHTML = modules.slice(0, 5).map((m, i) => `
-      <button class="path-item" data-page="${i === 0 ? "ipo" : "modules"}"><div class="icon-bubble">${icons[m[7]]}</div><div><b>${m[0]}</b><br><small>${m[6]}</small><br><span class="link">优先级：${m[4]}</span></div><span>›</span></button>`).join("");
-
-    document.getElementById("ipoRows").innerHTML = checklist.map(r => `<tr><td><span class="tag info">${r[0]}</span></td><td>${r[1]}</td><td>${r[2]}</td><td><div class="bar"><span style="--w:${r[3]}%"></span></div></td><td><span class="status">${r[4]}</span></td><td>${r[5]}</td></tr>`).join("");
-    document.getElementById("riskList").innerHTML = risks.map(r => `<div class="risk"><div class="icon-bubble">${icons.alert}</div><div><b>${r[0]}</b><br><small style="color:var(--muted)">${r[1]}</small></div><span class="tag ${r[3]}">${r[2]}</span></div>`).join("");
-
-    function switchPage(id) {
-      document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
-      document.querySelectorAll(".nav-link").forEach(n => n.classList.toggle("active", (n.dataset.active || n.dataset.page) === id));
-      history.replaceState(null, "", "#" + id);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => {
-        observeNew();
-        animateGauges();
-      }, 80);
-    }
-    document.addEventListener("click", e => {
-      const trigger = e.target.closest("[data-page]");
-      if (trigger) switchPage(trigger.dataset.page);
+  function buildHTML(){
+    let html='',inAcc=false;
+    typed.forEach(({c,acc})=>{
+      if(c==='\n'){if(inAcc){html+='</span>';inAcc=false;}html+='<br>';return;}
+      if(acc&&!inAcc){html+='<span class="accent">';inAcc=true;}
+      if(!acc&&inAcc){html+='</span>';inAcc=false;}
+      html+=c==='&'?'&amp;':c==='<'?'&lt;':c==='>'?'&gt;':c;
     });
+    if(inAcc)html+='</span>';
+    html+='<span class="type-cursor">|</span>';
+    return html;
+  }
 
-    document.querySelectorAll(".priority-filter").forEach(btn => btn.addEventListener("click", () => {
-      document.querySelectorAll(".priority-filter").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      renderModules(btn.dataset.filter);
-    }));
+  // ① Type the fixed prefix once
+  let pi=0;
+  function typePrefix(){
+    if(pi>=prefix.length){setTimeout(typeWord,380);return;}
+    typed.push(prefix[pi++]);
+    h1.innerHTML=buildHTML();
+    setTimeout(typePrefix,typed[typed.length-1].c==='\n'?140:65);
+  }
 
-    let currentStep = 1;
-    const titles = ["企业基本信息", "业务与收入模型", "财务与审计资料", "股权与融资结构", "战略目标", "文件上传", "提交与生成报告"];
-    const stepCopy = [
-      "请填写企业基本信息，所有信息将受到严格保密保护。",
-      "梳理收入来源、客户结构与增长模型，帮助 AI 建立业务画像。",
-      "上传或补充财务、审计和经营指标，形成资本市场视角的基础数据。",
-      "记录股权、融资、董事会和控制权结构，识别治理与合规风险。",
-      "明确增长、融资、上市、并购或效率提升目标，辅助路径推荐。",
-      "上传财务、法务、业务、股权等资料，系统将自动校验完整度。",
-      "确认所有数据后，生成企业价值诊断报告与推荐执行路径。"
-    ];
-    const stepForms = [
-      [
-        { title: "企业概况", sub: "Company Overview", fields: [["企业名称 / Company Name", "请输入企业全称 / Enter full legal name"], ["企业简称 / Company Short Name", "请输入企业简称 / Enter short name"], ["成立时间 / Founded Date", "date"], ["企业总部 / Headquarters", "select:中国|United States|Singapore|Hong Kong"], ["企业网站 / Website", "请输入网站地址（可选） / Enter website", "wide"]] },
-        { title: "企业性质", sub: "Company Details", fields: [["企业类型 / Company Type", "select:民营企业|拟上市企业|上市公司|外商投资企业"], ["行业分类 / Industry Classification", "select:AI / SaaS|先进制造|消费科技|医疗科技"], ["员工规模 / Employee Count", "select:100-500|500-2000|2000+"], ["年收入区间 / Annual Revenue Range", "select:¥1亿-¥5亿|¥5亿-¥20亿|¥20亿+"], ["主要市场 / Primary Markets", "select:中国大陆|北美|东南亚|全球", "wide"]] },
-        { title: "联系人信息", sub: "Contact Information", fields: [["联系人姓名 / Contact Name", "请输入联系人姓名"], ["职位 / Job Title", "请输入职位"], ["邮箱 / Email", "请输入邮箱"], ["手机号 / Phone Number", "+86 请输入手机号"]] }
-      ],
-      [
-        { title: "收入模型", sub: "Revenue Model", fields: [["主要收入来源 / Primary Revenue Source", "select:订阅收入|项目收入|交易佣金|硬件销售"], ["客户类型 / Customer Type", "select:企业客户 B2B|消费者 B2C|政府/公共部门|混合"], ["毛利率区间 / Gross Margin", "select:<30%|30%-50%|50%-70%|70%+"], ["收入集中度 / Revenue Concentration", "select:前五客户 <30%|前五客户 30%-60%|前五客户 >60%"]] },
-        { title: "增长质量", sub: "Growth Quality", textarea: "请描述过去 12 个月的增长驱动因素、关键客户、销售周期与复购情况。" },
-        { title: "业务结构", sub: "Business Structure", choices: ["经常性收入占比较高", "客户留存数据完整", "已建立核心 KPI 看板", "存在单一大客户依赖", "销售周期较长", "海外市场开始拓展"] }
-      ],
-      [
-        { title: "财务指标", sub: "Financial Metrics", fields: [["最近一年收入 / Revenue", "select:¥1亿以下|¥1亿-¥5亿|¥5亿-¥20亿|¥20亿+"], ["EBITDA 区间", "select:亏损|0%-10%|10%-25%|25%+"], ["现金流状态 / Cash Flow", "select:稳定为正|阶段性为正|波动|承压"], ["审计状态 / Audit Status", "select:已完成审计|审计进行中|未审计|计划启动"]] },
-        { title: "审计资料", sub: "Audit Data", choices: ["三年财务报表", "审计报告", "税务申报记录", "收入确认政策", "费用分类明细", "内控流程说明"] },
-        { title: "补充说明", sub: "Notes", textarea: "请填写财务异常、一次性收入、关联交易或待整改事项。" }
-      ],
-      [
-        { title: "股权与融资", sub: "Equity & Financing", fields: [["最新估值 / Latest Valuation", "select:未估值|¥5亿以下|¥5亿-¥20亿|¥20亿+"], ["融资阶段 / Funding Stage", "select:未融资|A轮前|A-C轮|Pre-IPO"], ["董事会结构 / Board Structure", "select:已建立|部分建立|未建立"], ["期权池 / ESOP", "select:已建立|计划建立|无"]] },
-        { title: "治理结构", sub: "Governance", choices: ["股权结构清晰", "创始人控制权稳定", "投资人权利已归档", "存在历史代持", "已建立董事会", "有境外架构"] },
-        { title: "融资目标", sub: "Capital Objective", textarea: "请描述未来 12-24 个月的融资、并购、上市或战略资本目标。" }
-      ],
-      [
-        { title: "战略目标", sub: "Strategic Objectives", choices: ["IPO 准备", "财务审计提升", "M&A 机会识别", "AI 效率提升", "资本市场叙事", "投资人匹配"] },
-        { title: "价值提升优先级", sub: "Value Priorities", fields: [["首要目标 / Primary Goal", "select:提升估值|降低风险|融资准备|上市准备"], ["目标周期 / Timeline", "select:30天|60天|90天|180天+"], ["顾问参与度 / Advisor Support", "select:轻量咨询|专项工作坊|深度执行|长期协作"], ["内部资源 / Internal Readiness", "select:充足|一般|不足"]] },
-        { title: "管理层说明", sub: "Management Notes", textarea: "请描述当前最重要的增长瓶颈、资本市场诉求或组织挑战。" }
-      ],
-      [
-        { title: "文件上传", sub: "Document Upload", upload: true },
-        { title: "建议上传清单", sub: "Recommended Files", choices: ["营业执照/注册文件", "财务报表", "审计报告", "股权结构表", "融资协议", "商业计划书", "核心 KPI 表", "组织架构图", "法务合规文件"] },
-        { title: "资料权限", sub: "Access Control", fields: [["保密等级 / Confidentiality", "select:标准保密|高级保密|仅顾问可见"], ["数据使用范围 / Usage Scope", "select:生成诊断报告|顾问评估|项目执行工作台"]] }
-      ],
-      [
-        { title: "提交前摘要", sub: "Submit Summary", summary: true },
-        { title: "AI 生成内容", sub: "Generated Outputs", choices: ["企业健康评分", "关键洞察摘要", "风险预警", "价值机会", "推荐执行路径", "30/60/90/180天路线图"] }
-      ]
-    ];
+  // ② Type current word char-by-char (accent blue), then pause
+  function typeWord(){
+    document.dispatchEvent(new CustomEvent('rvc:wordstart'));
+    const chars=[...words[wordIdx]].map(c=>({c,acc:true}));
+    let ci=0;
+    (function tick(){
+      if(ci>=chars.length){setTimeout(deleteWord,1900);return;}
+      typed.push(chars[ci++]);
+      h1.innerHTML=buildHTML();
+      setTimeout(tick,85);
+    })();
+  }
 
-    function renderField(field) {
-      const [label, type, wide] = field;
-      const style = wide === "wide" ? ' style="grid-column:1/-1"' : "";
-      if (type === "date") return `<div class="field"${style}><label>${label}</label><input type="date"></div>`;
-      if (type.startsWith("select:")) return `<div class="field"${style}><label>${label}</label><select><option>请选择 / Select</option>${type.slice(7).split("|").map(v => `<option>${v}</option>`).join("")}</select></div>`;
-      return `<div class="field"${style}><label>${label}</label><input placeholder="${type}"></div>`;
-    }
-
-    function renderStepForm(step) {
-      const blocks = stepForms[step - 1].map(block => {
-        let body = "";
-        if (block.fields) body = `<div class="form-grid">${block.fields.map(renderField).join("")}</div>`;
-        if (block.textarea) body = `<textarea placeholder="${block.textarea}"></textarea>`;
-        if (block.choices) body = `<div class="choice-grid">${block.choices.map((c, i) => `<label class="choice"><input type="checkbox" ${i < 3 ? "checked" : ""}>${c}</label>`).join("")}</div>`;
-        if (block.upload) body = `<div class="upload-zone"><div><div class="icon-bubble" data-icon="upload" style="margin:0 auto 12px;"></div><b>拖拽文件到这里或点击上传</b><br><span>支持 PDF、XLSX、DOCX、PNG，文件会进入加密资料库</span></div></div>`;
-        if (block.summary) body = `<div class="summary-row" style="grid-template-columns:repeat(3,1fr);margin-top:0;"><div class="meta-box"><small>完成步骤</small><b>7 / 7</b></div><div class="meta-box"><small>资料完整度</small><b>86%</b></div><div class="meta-box"><small>预计生成时间</small><b>45 秒</b></div></div>`;
-        return `<div class="form-section"><h3>${block.title} <small style="color:var(--muted)">${block.sub}</small></h3>${body}</div>`;
-      }).join("");
-      document.getElementById("dynamicForm").innerHTML = blocks;
-      document.querySelectorAll("#dynamicForm [data-icon]").forEach(el => el.innerHTML = icons[el.dataset.icon] || "");
-    }
-
-    function setStep(step) {
-      currentStep = step;
-      document.querySelectorAll(".step-item").forEach(s => s.classList.toggle("active", Number(s.dataset.step) === step));
-      document.getElementById("stepNo").textContent = String(step).padStart(2, "0");
-      document.getElementById("stepTitle").textContent = titles[step - 1];
-      document.getElementById("stepSubtitle").textContent = stepCopy[step - 1];
-      const pct = Math.round(step / 7 * 100);
-      document.querySelector(".progress-ring").style.setProperty("--p", pct + "%");
-      document.getElementById("scanPct").textContent = pct + "%";
-      document.getElementById("scanStep").textContent = step + "/7";
-      document.querySelector(".scan-panel .bar span").style.setProperty("--w", pct + "%");
-      document.getElementById("nextStep").textContent = step === 7 ? "提交并生成报告 →" : `下一步：${titles[step]} →`;
-      renderStepForm(step);
-      if (step === 7) document.getElementById("nextStep").onclick = () => switchPage("report");
-      else document.getElementById("nextStep").onclick = () => setStep(Math.min(7, currentStep + 1));
-    }
-    document.querySelectorAll(".step-item").forEach(btn => btn.addEventListener("click", () => setStep(Number(btn.dataset.step))));
-    document.getElementById("nextStep").onclick = () => setStep(Math.min(7, currentStep + 1));
-    renderStepForm(1);
-
-    function drawRadar() {
-      const svg = document.querySelector(".radar-svg");
-      const levels = [20, 40, 60, 80, 100];
-      const angle = Math.PI * 2 / radarData.length;
-      const point = (value, i) => {
-        const r = value / 100 * 120;
-        const a = -Math.PI / 2 + i * angle;
-        return [Math.cos(a) * r, Math.sin(a) * r];
-      };
-      let html = "";
-      levels.forEach(l => {
-        const pts = radarData.map((_, i) => point(l, i).join(",")).join(" ");
-        html += `<polygon points="${pts}" fill="none" stroke="rgba(11,111,251,.14)" stroke-width="1"/>`;
-      });
-      radarData.forEach((d, i) => {
-        const [x, y] = point(108, i);
-        html += `<line x1="0" y1="0" x2="${x}" y2="${y}" stroke="rgba(11,111,251,.12)"/><text x="${x * 1.12}" y="${y * 1.08}" text-anchor="middle" dominant-baseline="middle" fill="#0b6ffb" font-size="13" font-weight="760">${d[0]} ${d[1]}</text>`;
-      });
-      html += `<polygon class="radar-median" points="${radarData.map((d, i) => point(d[2], i).join(",")).join(" ")}"/>`;
-      html += `<polygon class="radar-area" points="${radarData.map((d, i) => point(d[1], i).join(",")).join(" ")}"/>`;
-      radarData.forEach((d, i) => {
-        const [x, y] = point(d[1], i);
-        html += `<circle class="radar-point" cx="${x}" cy="${y}" r="5" data-tip="${d[0]}：${d[1]} / 行业中位数 ${d[2]}"/>`;
-      });
-      svg.innerHTML = html;
-    }
-    drawRadar();
-
-    const tooltip = document.getElementById("tooltip");
-    document.addEventListener("mousemove", e => {
-      tooltip.style.left = e.clientX + "px";
-      tooltip.style.top = e.clientY + "px";
-    });
-
-    document.addEventListener("mouseover", e => {
-      if (e.target.classList.contains("radar-point")) { tooltip.textContent = e.target.dataset.tip; tooltip.style.opacity = 1; }
-    });
-    document.addEventListener("mouseout", e => {
-      if (e.target.classList.contains("radar-point")) tooltip.style.opacity = 0;
-    });
-
-    function enhanceTilt() {
+  // ③ Delete back to prefix length, then switch word
+  function deleteWord(){
+    if(typed.length<=prefix.length){
+      wordIdx=(wordIdx+1)%words.length;
+      setTimeout(typeWord,340);
       return;
     }
+    typed.pop();
+    h1.innerHTML=buildHTML();
+    setTimeout(deleteWord,46);
+  }
 
-    function animateCounter(el) {
-      if (el.dataset.done) return;
-      el.dataset.done = "1";
-      const target = Number(el.dataset.count);
-      const start = performance.now();
-      const duration = 1350;
-      function tick(now) {
-        const p = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - p, 4);
-        el.textContent = Math.round(target * eased).toLocaleString("en-US");
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    function animateGauges() {
-      document.querySelectorAll(".gauge").forEach(svg => {
-        const score = Number(svg.dataset.score || 72);
-        const fg = svg.querySelector(".fg");
-        const dot = svg.querySelector(".gauge-dot");
-        const total = 339;
-        fg.style.strokeDashoffset = total - total * score / 100;
-        const angle = Math.PI - Math.PI * score / 100;
-        const x = 110 + Math.cos(angle) * 80;
-        const y = 140 - Math.sin(angle) * 80;
-        dot.setAttribute("cx", x);
-        dot.setAttribute("cy", y);
-      });
-    }
-
-    observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          if (entry.target.classList.contains("counter")) animateCounter(entry.target);
-          entry.target.querySelectorAll?.(".counter").forEach(animateCounter);
-          if (entry.target.classList.contains("score-card")) animateGauges();
-        }
-      });
-    }, { threshold: .16 });
-
-    function observeNew() {
-      if (!observer) return;
-      document.querySelectorAll(".reveal,.counter,.score-card,.radar-card,.timeline-card,.ipo-path,.bar").forEach((el, i) => {
-        if (el.classList.contains("reveal")) el.style.setProperty("--delay", Math.min(i % 8, 7) * 80 + "ms");
-        observer.observe(el);
-      });
-    }
-    observeNew();
-    animateGauges();
-
-    const initial = location.hash.replace("#", "");
-    if (initial && document.getElementById(initial)) switchPage(initial);
-  </script>
+  h1.innerHTML='<span class="type-cursor">|</span>';
+  setTimeout(typePrefix,320);
+})();
+const ro=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ro.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function animCount(el){
+  const t=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=1600,s=performance.now();
+  if(isNaN(t))return;
+  function step(n){const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(t*e).toLocaleString()+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+const ko=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animCount(e.target);const b=e.target.closest('.kpi-item')?.querySelector('.kpi-bfill');if(b)setTimeout(()=>b.style.width=b.dataset.w+'%',200);ko.unobserve(e.target);}});},{threshold:0.5});
+document.querySelectorAll('.kpi-val[data-count]').forEach(el=>ko.observe(el));
+// SVG engine counter animation — synced to typewriter via rvc:wordstart event
+(function(){
+  function ease(p){return 1-Math.pow(1-p,4);}
+  var counters=[
+    {id:'n1',      from:38,  to:91,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'n2',      from:7.2, to:9.6, dur:1400, fmt:function(v){return v.toFixed(1);}},
+    {id:'n3',      from:0,   to:58,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'n4',      from:0,   to:34,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'svgScore',from:0,   to:68,  dur:1600, fmt:function(v){return Math.round(v);}}
+  ];
+  // Show "before" baseline values before any animation fires
+  counters.forEach(function(c){
+    var el=document.getElementById(c.id);
+    if(el) el.textContent=c.fmt(c.from);
+  });
+  function runOne(c){
+    var el=document.getElementById(c.id);if(!el)return;
+    var t0=performance.now();
+    (function tick(now){
+      var p=Math.min((now-t0)/c.dur,1),v=c.from+(c.to-c.from)*ease(p);
+      el.textContent=c.fmt(v);
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  }
+  function runAll(){counters.forEach(runOne);}
+  // Fire in lockstep with the typewriter word-start event
+  document.addEventListener('rvc:wordstart',runAll);
+})();
+</script>
 </body>
 </html>
