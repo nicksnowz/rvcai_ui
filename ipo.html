@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC — IPO就绪评估</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rvc-base.css">
+<style>
+/* ── IPO Page ── */
+.ipo-page{padding:36px 0 80px;}
+.ipo-wrap{max-width:1280px;margin:0 auto;padding:0 56px;}
+
+/* Page top */
+.ipo-top{
+  background:linear-gradient(135deg,#07132B,#0a1f4e);
+  border-radius:24px;padding:32px 36px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+}
+.ipo-top::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 50%,rgba(11,111,251,0.35),transparent 55%),
+             radial-gradient(ellipse at 20% 80%,rgba(35,183,255,0.15),transparent 50%);
+}
+.ipo-top-left{position:relative;}
+.ipo-ey{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;}
+.ipo-company{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:4px;}
+.ipo-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.ipo-meta-item{font-size:12px;color:rgba(255,255,255,0.5);}
+.ipo-meta-sep{color:rgba(255,255,255,0.2);}
+
+.ipo-score-area{position:relative;display:flex;align-items:center;gap:24px;}
+.ipo-score-ring{position:relative;width:110px;height:110px;}
+.ipo-score-ring svg{width:100%;height:100%;}
+.ipo-score-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;
+}
+.ipo-score-num{font-size:28px;font-weight:800;color:#fff;line-height:1;}
+.ipo-score-label{font-size:9px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:.06em;margin-top:3px;}
+.ipo-score-badge{font-size:11px;font-weight:700;color:#F59E0B;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);padding:5px 14px;border-radius:8px;margin-top:8px;text-align:center;}
+
+.ipo-top-actions{position:relative;display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.ipo-stat-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.ipo-pill{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:10px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  font-size:12px;color:rgba(255,255,255,0.75);font-weight:500;
+}
+.ipo-pill-dot{width:5px;height:5px;border-radius:50%;}
+
+/* Main cols */
+.ipo-cols{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start;}
+
+/* Sidebar */
+.ipo-sidebar{
+  position:sticky;top:92px;
+  background:var(--card);border:1px solid var(--bl);
+  border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;
+}
+.isb-head{
+  padding:16px;
+  background:linear-gradient(135deg,rgba(11,111,251,0.06),rgba(35,183,255,0.03));
+  border-bottom:1px solid var(--bl);
+}
+.isb-head-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;}
+.isb-advisor{display:flex;align-items:center;gap:10px;}
+.isb-av{
+  width:44px;height:44px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,#0B6FFB,#23B7FF);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:#fff;
+}
+.isb-av-name{font-size:13px;font-weight:700;color:var(--navy);}
+.isb-av-title{font-size:11px;color:var(--t3);margin-top:2px;}
+.isb-av-exp{font-size:10px;color:var(--blue);font-weight:600;margin-top:3px;}
+
+.isb-nav{padding:12px;}
+.isb-link{
+  display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:10px;
+  font-size:12.5px;font-weight:500;color:var(--t2);transition:all .18s;
+  cursor:pointer;border:none;background:none;width:100%;text-align:left;margin-bottom:2px;
+}
+.isb-link:hover{color:var(--blue);background:var(--blue-s);}
+.isb-link.active{color:var(--blue);background:rgba(11,111,251,0.08);font-weight:700;}
+.isb-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+.isb-link-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--blue-s);color:var(--blue);}
+.isb-link-badge.warn{background:rgba(245,158,11,0.1);color:#D97706;}
+.isb-link-badge.ok{background:rgba(22,179,100,0.1);color:var(--ok);}
+
+.isb-deadline{
+  margin:0 12px 12px;
+  background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);
+  border-radius:12px;padding:12px;
+}
+.isb-dl-title{font-size:10px;font-weight:700;color:#D97706;letter-spacing:.05em;margin-bottom:6px;}
+.isb-dl-item{display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--t2);padding:4px 0;border-bottom:1px solid rgba(245,158,11,0.1);}
+.isb-dl-item:last-child{border-bottom:none;}
+.isb-dl-date{font-weight:600;color:var(--navy);}
+
+/* Content area */
+.ipo-content{display:flex;flex-direction:column;gap:20px;}
+
+/* Section card base */
+.sec-card{background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
+.sec-card-head{padding:18px 22px;border-bottom:1px solid var(--bl);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.sch-title{font-size:15px;font-weight:700;color:var(--navy);letter-spacing:-.02em;}
+.sch-sub{font-size:12px;color:var(--t3);margin-top:2px;}
+.sec-card-body{padding:22px;}
+
+/* Timeline */
+.ipo-timeline{display:flex;align-items:flex-start;gap:0;position:relative;overflow-x:auto;padding-bottom:8px;}
+.ipo-timeline::before{
+  content:'';position:absolute;top:22px;left:40px;right:40px;height:2px;
+  background:linear-gradient(90deg,rgba(11,111,251,0.2),rgba(11,111,251,0.6),rgba(35,183,255,0.4),rgba(11,111,251,0.2),rgba(154,166,184,0.2),rgba(154,166,184,0.15));
+}
+.tl-step{
+  flex:1;min-width:110px;display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:1;padding:0 8px;
+}
+.tl-dot{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;margin-bottom:12px;
+  flex-shrink:0;
+}
+.tl-dot.done{background:var(--ok);box-shadow:0 4px 14px rgba(22,179,100,0.28);}
+.tl-dot.done svg{stroke:#fff;}
+.tl-dot.active{background:var(--blue);box-shadow:0 4px 14px rgba(11,111,251,0.32);}
+.tl-dot.active svg{stroke:#fff;}
+.tl-dot.pending{background:#fff;border:2px solid var(--bl);}
+.tl-dot.pending svg{stroke:var(--t4);}
+.tl-dot svg{width:18px;height:18px;fill:none;stroke-width:2;}
+.tl-phase{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;text-align:center;}
+.tl-phase.pending{color:var(--t4);}
+.tl-title{font-size:12px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:4px;}
+.tl-date{font-size:10.5px;color:var(--t3);text-align:center;}
+.tl-status{
+  margin-top:6px;font-size:9px;font-weight:700;padding:3px 9px;border-radius:6px;
+  text-align:center;
+}
+.tl-status.done{background:rgba(22,179,100,0.1);color:var(--ok);}
+.tl-status.active{background:rgba(11,111,251,0.1);color:var(--blue);}
+.tl-status.pending{background:rgba(154,166,184,0.12);color:var(--t4);}
+
+/* Checklist table */
+.ck-table{width:100%;border-collapse:collapse;}
+.ck-table th{
+  text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--t3);padding:8px 14px;border-bottom:2px solid var(--bl);
+}
+.ck-table td{padding:12px 14px;border-bottom:1px solid rgba(11,111,251,0.05);vertical-align:middle;}
+.ck-table tr:last-child td{border-bottom:none;}
+.ck-table tr:hover td{background:rgba(11,111,251,0.02);}
+
+.ck-check{
+  width:20px;height:20px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.ck-check.done{background:var(--ok);}
+.ck-check.done svg{stroke:#fff;}
+.ck-check.prog{background:rgba(11,111,251,0.1);border:1.5px solid var(--blue);}
+.ck-check.prog svg{stroke:var(--blue);}
+.ck-check.pending{background:rgba(154,166,184,0.1);border:1.5px solid var(--bl);}
+.ck-check.pending svg{stroke:var(--t4);}
+.ck-check svg{width:11px;height:11px;fill:none;stroke-width:2.5;}
+
+.ck-item-name{font-size:13px;font-weight:600;color:var(--t1);}
+.ck-item-sub{font-size:11px;color:var(--t3);margin-top:2px;}
+.ck-owner{font-size:12px;color:var(--t2);}
+.ck-due{font-size:12px;font-weight:600;color:var(--t2);}
+
+/* Progress summary */
+.prog-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.ps-box{
+  background:rgba(11,111,251,0.03);border:1px solid var(--bl);
+  border-radius:14px;padding:16px;text-align:center;
+}
+.ps-val{font-size:26px;font-weight:800;letter-spacing:-.04em;}
+.ps-lbl{font-size:11px;font-weight:600;color:var(--t3);margin-top:4px;}
+
+/* Category bars */
+.cat-bars{display:flex;flex-direction:column;gap:14px;}
+.cat-bar{display:flex;flex-direction:column;gap:6px;}
+.cat-bar-row{display:flex;justify-content:space-between;align-items:center;}
+.cat-bar-name{font-size:12.5px;font-weight:600;color:var(--t2);}
+.cat-bar-stats{font-size:11px;color:var(--t3);}
+.cat-bar-track{height:6px;background:rgba(11,111,251,0.09);border-radius:4px;overflow:hidden;}
+.cat-bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.22,1,.36,1);}
+
+/* Risk panel */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.risk-card{
+  border-radius:14px;padding:16px;border:1px solid;
+}
+.risk-card.high{background:rgba(240,68,56,0.04);border-color:rgba(240,68,56,0.2);}
+.risk-card.medium{background:rgba(245,158,11,0.04);border-color:rgba(245,158,11,0.2);}
+.risk-card.low{background:rgba(22,179,100,0.04);border-color:rgba(22,179,100,0.2);}
+.rc-severity{font-size:9px;font-weight:700;letter-spacing:.08em;margin-bottom:8px;}
+.rc-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.rc-desc{font-size:11.5px;color:var(--t2);line-height:1.55;margin-bottom:10px;}
+.rc-action{font-size:11px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:4px;}
+.rc-action svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Action cards */
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.action-card{
+  background:var(--card);border:1px solid var(--bl);
+  border-radius:16px;padding:20px;
+  box-shadow:0 4px 16px rgba(15,45,90,0.06);
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s,border-color .22s;
+  cursor:pointer;
+}
+.action-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(11,111,251,0.10);border-color:var(--bm);}
+.ac-ico{
+  width:40px;height:40px;border-radius:12px;background:var(--blue-s);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+.ac-ico svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:2;}
+.ac-title{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.ac-desc{font-size:11.5px;color:var(--t3);line-height:1.55;}
+.ac-link{font-size:11.5px;font-weight:700;color:var(--blue);margin-top:10px;display:flex;align-items:center;gap:4px;}
+.ac-link svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;}
+
+@media(max-width:900px){
+  .ipo-cols{grid-template-columns:1fr;}
+  .ipo-sidebar{position:static;}
+  .risk-grid{grid-template-columns:1fr;}
+  .action-grid{grid-template-columns:1fr 1fr;}
+  .prog-summary{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .ipo-wrap{padding:0 20px;}
+  .ipo-top{flex-direction:column;padding:24px 20px;}
+  .ipo-timeline::before{display:none;}
+  .ipo-timeline{flex-direction:column;gap:12px;}
+  .tl-step{flex-direction:row;align-items:flex-start;gap:14px;min-width:unset;padding:0;}
+  .tl-dot{margin-bottom:0;flex-shrink:0;}
+  .tl-step>div:last-child{text-align:left;}
+  .tl-phase,.tl-title,.tl-date{text-align:left;}
+  .action-grid{grid-template-columns:1fr;}
+  .prog-summary{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+<div class="bg-mesh"><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<header>
+  <div class="wrap hrow">
+    <a href="claudeindex.html" class="logo">
+      <img src="logo.svg" alt="RVC" width="72" height="27" style="display:block;border-radius:4px;">
+      <div class="logo-t">
+        <span class="logo-n">RVC Capital</span>
+        <span class="logo-s">企业价值诊断平台</span>
+      </div>
+    </a>
+    <nav>
+      <a href="claudeindex.html">概览</a>
+      <a href="intake.html">数据采集</a>
+      <a href="report.html">诊断报告</a>
+      <a href="modules.html">执行模块</a>
+      <a href="ipo.html" class="active">IPO就绪</a>
+    </nav>
+    <div class="hdr-acts">
+      <button class="btn-ghost">下载报告</button>
+      <button class="btn-primary">预约顾问 →</button>
+    </div>
+    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mob-nav" id="mob-nav">
+  <a href="claudeindex.html">概览</a>
+  <a href="intake.html">数据采集</a>
+  <a href="report.html">诊断报告</a>
+  <a href="modules.html">执行模块</a>
+  <a href="ipo.html" class="active">IPO就绪</a>
+</div>
+
+<div class="page">
+  <div class="ipo-page">
+    <div class="ipo-wrap">
+      <!-- Top header -->
+      <div class="ipo-top reveal">
+        <div class="ipo-top-left">
+          <div class="ipo-ey">IPO就绪评估控制台 · 评估日期 2026年5月26日</div>
+          <div class="ipo-company">UC Auto（优车汇）</div>
+          <div class="ipo-meta">
+            <span class="ipo-meta-item">二手车交易平台 · B2B/B2C</span>
+            <span class="ipo-meta-sep">·</span>
+            <span class="ipo-meta-item">营收 $5,000万</span>
+            <span class="ipo-meta-sep">·</span>
+            <span class="ipo-meta-item">目标交易所：美股 / 港股</span>
+          </div>
+        </div>
+        <div class="ipo-score-area">
+          <div style="text-align:center;">
+            <div class="ipo-score-ring">
+              <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ipo-g" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#F59E0B"/>
+                    <stop offset="100%" stop-color="#23B7FF"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                <circle cx="55" cy="55" r="44" fill="none" stroke="url(#ipo-g)" stroke-width="8"
+                  stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="171.4"
+                  transform="rotate(-90 55 55)">
+                  <animate attributeName="stroke-dashoffset" from="276.5" to="171.4" dur="1.8s" fill="freeze"/>
+                </circle>
+              </svg>
+              <div class="ipo-score-center">
+                <div class="ipo-score-num">38</div>
+                <div class="ipo-score-label">/100</div>
+              </div>
+            </div>
+            <div class="ipo-score-badge">准备阶段</div>
+          </div>
+          <div class="ipo-stat-pills">
+            <div class="ipo-pill"><span class="ipo-pill-dot" style="background:#16B364"></span>3 项已完成</div>
+            <div class="ipo-pill"><span class="ipo-pill-dot" style="background:#F59E0B"></span>3 项进行中</div>
+            <div class="ipo-pill"><span class="ipo-pill-dot" style="background:rgba(154,166,184,0.5)"></span>9 项待启动</div>
+          </div>
+        </div>
+        <div class="ipo-top-actions">
+          <button class="btn-white" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:11px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;">导出 PDF</button>
+          <button class="btn-primary" style="font-size:13px;padding:10px 20px;">预约 IPO 顾问 →</button>
+        </div>
+      </div>
+
+      <!-- Main columns -->
+      <div class="ipo-cols">
+        <!-- Sidebar -->
+        <div class="ipo-sidebar reveal">
+          <div class="isb-head">
+            <div class="isb-head-title">首席 IPO 顾问</div>
+            <div class="isb-advisor">
+              <div class="isb-av">陈</div>
+              <div>
+                <div class="isb-av-name">陈伟博士</div>
+                <div class="isb-av-title">IPO专家 · 资本市场</div>
+                <div class="isb-av-exp">主导18起IPO · 累计募资 $62亿</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="isb-nav">
+            <button class="isb-link active" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              上市路径时间轴
+              <span class="isb-link-badge">6阶段</span>
+            </button>
+            <button class="isb-link" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              就绪检查清单
+              <span class="isb-link-badge warn">6/15</span>
+            </button>
+            <button class="isb-link" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+              风险评估
+              <span class="isb-link-badge warn">3项预警</span>
+            </button>
+            <button class="isb-link" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              财务规范化
+              <span class="isb-link-badge ok">60%</span>
+            </button>
+            <button class="isb-link" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              治理结构搭建
+              <span class="isb-link-badge warn">40%</span>
+            </button>
+            <button class="isb-link" onclick="setNav(this)">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+              招股书准备
+              <span class="isb-link-badge warn">0%</span>
+            </button>
+          </div>
+
+          <!-- Deadlines -->
+          <div class="isb-deadline">
+            <div class="isb-dl-title">⏰ 关键时间节点</div>
+            <div class="isb-dl-item">
+              <span>Big4 审计洽谈</span>
+              <span class="isb-dl-date">2026年9月</span>
+            </div>
+            <div class="isb-dl-item">
+              <span>审计委员会成立</span>
+              <span class="isb-dl-date">2026年10月</span>
+            </div>
+            <div class="isb-dl-item">
+              <span>独立董事增补</span>
+              <span class="isb-dl-date">2026年11月</span>
+            </div>
+            <div class="isb-dl-item">
+              <span>承销商遴选完成</span>
+              <span class="isb-dl-date">2027年3月</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="ipo-content">
+
+          <!-- Timeline -->
+          <div class="sec-card reveal">
+            <div class="sec-card-head">
+              <div>
+                <div class="sch-title">IPO上市路径时间轴</div>
+                <div class="sch-sub">六阶段执行路线图，通往资本市场</div>
+              </div>
+              <span class="tag tag-blue">目标：2028年Q2</span>
+            </div>
+            <div class="sec-card-body">
+              <div class="ipo-timeline">
+                <div class="tl-step">
+                  <div class="tl-dot done">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase">第一阶段</div>
+                    <div class="tl-title">企业诊断</div>
+                    <div class="tl-date">2026年Q1</div>
+                    <div class="tl-status done">已完成</div>
+                  </div>
+                </div>
+                <div class="tl-step">
+                  <div class="tl-dot done">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase">第二阶段</div>
+                    <div class="tl-title">差距分析</div>
+                    <div class="tl-date">2026年Q2</div>
+                    <div class="tl-status done">已完成</div>
+                  </div>
+                </div>
+                <div class="tl-step">
+                  <div class="tl-dot active">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase">第三阶段</div>
+                    <div class="tl-title">治理搭建</div>
+                    <div class="tl-date">2026年Q3–2027年Q1</div>
+                    <div class="tl-status active">进行中</div>
+                  </div>
+                </div>
+                <div class="tl-step">
+                  <div class="tl-dot pending">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase pending">第四阶段</div>
+                    <div class="tl-title">财务规范</div>
+                    <div class="tl-date">2027年</div>
+                    <div class="tl-status pending">待启动</div>
+                  </div>
+                </div>
+                <div class="tl-step">
+                  <div class="tl-dot pending">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase pending">第五阶段</div>
+                    <div class="tl-title">招股书起草</div>
+                    <div class="tl-date">2027年Q4–2028年Q1</div>
+                    <div class="tl-status pending">待启动</div>
+                  </div>
+                </div>
+                <div class="tl-step">
+                  <div class="tl-dot pending">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  </div>
+                  <div>
+                    <div class="tl-phase pending">第六阶段</div>
+                    <div class="tl-title">正式上市</div>
+                    <div class="tl-date">2028年Q2</div>
+                    <div class="tl-status pending">目标</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress by Category -->
+          <div class="sec-card reveal">
+            <div class="sec-card-head">
+              <div>
+                <div class="sch-title">分类就绪度评估</div>
+                <div class="sch-sub">15 个核心准备项目，覆盖5大关键领域</div>
+              </div>
+              <span class="tag tag-orange">整体完成 38%</span>
+            </div>
+            <div class="sec-card-body">
+              <div class="prog-summary">
+                <div class="ps-box">
+                  <div class="ps-val" style="color:var(--ok)">3</div>
+                  <div class="ps-lbl">已完成</div>
+                </div>
+                <div class="ps-box">
+                  <div class="ps-val" style="color:var(--blue)">3</div>
+                  <div class="ps-lbl">进行中</div>
+                </div>
+                <div class="ps-box">
+                  <div class="ps-val" style="color:var(--t4)">9</div>
+                  <div class="ps-lbl">待启动</div>
+                </div>
+              </div>
+              <div class="cat-bars">
+                <div class="cat-bar">
+                  <div class="cat-bar-row">
+                    <span class="cat-bar-name">业务运营</span>
+                    <span class="cat-bar-stats">5/5 项 · 100%</span>
+                  </div>
+                  <div class="cat-bar-track"><div class="cat-bar-fill" style="width:100%;background:linear-gradient(90deg,#16B364,#22C55E)"></div></div>
+                </div>
+                <div class="cat-bar">
+                  <div class="cat-bar-row">
+                    <span class="cat-bar-name">财务规范化</span>
+                    <span class="cat-bar-stats">3/5 项 · 60%</span>
+                  </div>
+                  <div class="cat-bar-track"><div class="cat-bar-fill" style="width:60%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div>
+                </div>
+                <div class="cat-bar">
+                  <div class="cat-bar-row">
+                    <span class="cat-bar-name">治理与合规</span>
+                    <span class="cat-bar-stats">2/5 项 · 40%</span>
+                  </div>
+                  <div class="cat-bar-track"><div class="cat-bar-fill" style="width:40%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div>
+                </div>
+                <div class="cat-bar">
+                  <div class="cat-bar-row">
+                    <span class="cat-bar-name">法律与监管</span>
+                    <span class="cat-bar-stats">1/3 项 · 33%</span>
+                  </div>
+                  <div class="cat-bar-track"><div class="cat-bar-fill" style="width:33%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div>
+                </div>
+                <div class="cat-bar">
+                  <div class="cat-bar-row">
+                    <span class="cat-bar-name">资本市场准备</span>
+                    <span class="cat-bar-stats">0/2 项 · 0%</span>
+                  </div>
+                  <div class="cat-bar-track"><div class="cat-bar-fill" style="width:3%;background:rgba(154,166,184,0.4)"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checklist -->
+          <div class="sec-card reveal">
+            <div class="sec-card-head">
+              <div>
+                <div class="sch-title">IPO就绪核查清单</div>
+                <div class="sch-sub">公开上市的关键里程碑与准入要求</div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <span class="tag tag-green">3项完成</span>
+                <span class="tag tag-orange">3项进行中</span>
+              </div>
+            </div>
+            <div class="sec-card-body" style="padding:0;">
+              <table class="ck-table">
+                <thead>
+                  <tr>
+                    <th style="width:36px;"></th>
+                    <th>准备要求</th>
+                    <th>负责方</th>
+                    <th>截止日期</th>
+                    <th>状态</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Done -->
+                  <tr>
+                    <td><div class="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></td>
+                    <td><div class="ck-item-name">企业价值诊断完成</div><div class="ck-item-sub">300项全维度诊断评估</div></td>
+                    <td class="ck-owner">RVC AI引擎</td>
+                    <td class="ck-due">2026年3月</td>
+                    <td><span class="tag tag-green">已完成</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></td>
+                    <td><div class="ck-item-name">收入确认会计政策规范</div><div class="ck-item-sub">收入确认规则文档化并实际执行</div></td>
+                    <td class="ck-owner">CFO办公室</td>
+                    <td class="ck-due">2026年4月</td>
+                    <td><span class="tag tag-green">已完成</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></td>
+                    <td><div class="ck-item-name">公司章程重组完成</div><div class="ck-item-sub">法律主体结构已符合IPO要求</div></td>
+                    <td class="ck-owner">法律顾问</td>
+                    <td class="ck-due">2026年5月</td>
+                    <td><span class="tag tag-green">已完成</span></td>
+                  </tr>
+                  <!-- In Progress -->
+                  <tr>
+                    <td><div class="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></td>
+                    <td><div class="ck-item-name">Big4 审计机构洽谈</div><div class="ck-item-sub">委托毕马威/普华永道/德勤/安永进行2年期审计</div></td>
+                    <td class="ck-owner">CFO + 董事会</td>
+                    <td class="ck-due" style="color:#F59E0B;">2026年9月</td>
+                    <td><span class="tag tag-orange">进行中</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></td>
+                    <td><div class="ck-item-name">审计委员会筹建</div><div class="ck-item-sub">至少需要3名独立董事，含审计专业背景</div></td>
+                    <td class="ck-owner">董事会 / CEO</td>
+                    <td class="ck-due" style="color:#F59E0B;">2026年10月</td>
+                    <td><span class="tag tag-orange">进行中</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></td>
+                    <td><div class="ck-item-name">PIPL合规与数据安全体系</div><div class="ck-item-sub">《个人信息保护法》合规架构建设</div></td>
+                    <td class="ck-owner">合规负责人</td>
+                    <td class="ck-due">2026年11月</td>
+                    <td><span class="tag tag-orange">进行中</span></td>
+                  </tr>
+                  <!-- Pending -->
+                  <tr>
+                    <td><div class="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div></td>
+                    <td><div class="ck-item-name">2年期审计财务报表</div><div class="ck-item-sub">FY2025+FY2026 Big4审计完成版</div></td>
+                    <td class="ck-owner">Big4 审计机构</td>
+                    <td class="ck-due">2027年6月</td>
+                    <td><span class="tag" style="background:rgba(154,166,184,0.1);color:var(--t4);">待启动</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div></td>
+                    <td><div class="ck-item-name">独立董事增补（2名）</div><div class="ck-item-sub">引入具有上市公司经验的独立董事</div></td>
+                    <td class="ck-owner">CFO + 董事会</td>
+                    <td class="ck-due">2026年11月</td>
+                    <td><span class="tag" style="background:rgba(154,166,184,0.1);color:var(--t4);">待启动</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div></td>
+                    <td><div class="ck-item-name">承销商遴选与委托</div><div class="ck-item-sub">主承销商及联合承销行确定</div></td>
+                    <td class="ck-owner">CFO + 董事会</td>
+                    <td class="ck-due">2027年Q1</td>
+                    <td><span class="tag" style="background:rgba(154,166,184,0.1);color:var(--t4);">待启动</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div></td>
+                    <td><div class="ck-item-name">招股书（F-1）起草</div><div class="ck-item-sub">SEC注册申报文件准备与法律审核</div></td>
+                    <td class="ck-owner">法律 + CFO + 承销商</td>
+                    <td class="ck-due">2027年Q4</td>
+                    <td><span class="tag" style="background:rgba(154,166,184,0.1);color:var(--t4);">待启动</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Risk Panel -->
+          <div class="sec-card reveal">
+            <div class="sec-card-head">
+              <div>
+                <div class="sch-title">IPO风险评估</div>
+                <div class="sch-sub">上市前必须完成整改的关键风险因素</div>
+              </div>
+              <span class="tag tag-orange">3项活跃预警</span>
+            </div>
+            <div class="sec-card-body">
+              <div class="risk-grid">
+                <div class="risk-card high">
+                  <div class="rc-severity" style="color:#F04438;">🔴 高风险</div>
+                  <div class="rc-title">Big4审计机构未到位</div>
+                  <div class="rc-desc">公开市场投资者要求至少2个完整财年的Big4审计报告，这是优车汇IPO的最大障碍，须立即启动洽谈。</div>
+                  <div class="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>立即启动 — 2026年9月截止</div>
+                </div>
+                <div class="risk-card high">
+                  <div class="rc-severity" style="color:#F04438;">🔴 高风险</div>
+                  <div class="rc-title">独立董事席位严重不足</div>
+                  <div class="rc-desc">SEC / 港交所均要求审计委员会由多数独立董事组成，目前董事会独立成员数量不满足监管要求。</div>
+                  <div class="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>2026年11月前增补2名独立董事</div>
+                </div>
+                <div class="risk-card medium">
+                  <div class="rc-severity" style="color:#D97706;">⚠ 中风险</div>
+                  <div class="rc-title">PIPL数据合规存在漏洞</div>
+                  <div class="rc-desc">平台积累车辆交易用户数据，《个人信息保护法》合规架构尚未完整建立，可能触发监管审查。</div>
+                  <div class="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>启动数据合规专项整改计划</div>
+                </div>
+                <div class="risk-card low">
+                  <div class="rc-severity" style="color:#16B364;">✓ 低风险</div>
+                  <div class="rc-title">营收增长强劲</div>
+                  <div class="rc-desc">同比增长38%，显著优于二手车行业中位数（12%），B端SaaS化转型带来可预期的经常性收入，有利于估值定价。</div>
+                  <div class="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>保持增长势头至上市窗口期</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Cards -->
+          <div class="sec-card reveal">
+            <div class="sec-card-head">
+              <div>
+                <div class="sch-title">建议优先行动</div>
+                <div class="sch-sub">对IPO就绪度影响最高的关键举措</div>
+              </div>
+            </div>
+            <div class="sec-card-body">
+              <div class="action-grid">
+                <div class="action-card">
+                  <div class="ac-ico" style="background:rgba(11,111,251,0.08);">
+                    <svg viewBox="0 0 24 24" style="stroke:#0B6FFB"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+                  </div>
+                  <div class="ac-title">对接 Big4 审计机构</div>
+                  <div class="ac-desc">RVC将为优车汇提供首席审计合作伙伴的热线引荐——IPO关键路径，建议本周启动。</div>
+                  <div class="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>预约引荐会议</div>
+                </div>
+                <div class="action-card">
+                  <div class="ac-ico" style="background:rgba(22,179,100,0.08);">
+                    <svg viewBox="0 0 24 24" style="stroke:#16B364"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                  </div>
+                  <div class="ac-title">独立董事招募计划</div>
+                  <div class="ac-desc">物色并引进2名具备上市公司经验的独立董事，需在2026年11月前完成，以满足监管要求。</div>
+                  <div class="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>查看候选人名单</div>
+                </div>
+                <div class="action-card">
+                  <div class="ac-ico" style="background:rgba(245,158,11,0.08);">
+                    <svg viewBox="0 0 24 24" style="stroke:#D97706"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  </div>
+                  <div class="ac-title">财务系统专业化升级</div>
+                  <div class="ac-desc">部署企业级财务管理系统（SAP / Oracle），建立完整审计轨迹，满足内部控制与SOX合规要求。</div>
+                  <div class="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>查看财务优化模块</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /ipo-content -->
+      </div><!-- /ipo-cols -->
+    </div>
+  </div>
+</div>
+
+<script>
+const ham = document.getElementById('ham');
+const mobNav = document.getElementById('mob-nav');
+ham.addEventListener('click', () => { ham.classList.toggle('open'); mobNav.classList.toggle('open'); });
+
+function setNav(el) {
+  document.querySelectorAll('.isb-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+}
+
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i * 80); ro.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC — 企业数据采集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rvc-base.css">
+<style>
+.intake-page{padding:32px 0 80px;}
+.intake-wrap{max-width:1300px;margin:0 auto;padding:0 48px;}
+
+.intake-top{margin-bottom:28px;}
+.intake-top h1{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.03em;}
+.intake-top p{font-size:13px;color:var(--t2);margin-top:4px;}
+
+.intake-cols{display:grid;grid-template-columns:210px 1fr 252px;gap:16px;align-items:start;}
+
+/* Step nav */
+.step-nav{position:sticky;top:88px;background:var(--card);border:1px solid var(--bl);border-radius:var(--r);padding:16px 10px;box-shadow:var(--sh);}
+.snav-title{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);padding:0 6px;margin-bottom:10px;}
+.step-item{display:flex;align-items:center;gap:8px;padding:9px 8px;border-radius:10px;cursor:pointer;transition:all .18s;margin-bottom:2px;border:1px solid transparent;}
+.step-item:hover{background:var(--blue-s);}
+.step-item.active{background:rgba(11,111,251,0.08);border-color:rgba(11,111,251,0.16);}
+.step-item.done .step-num{background:var(--ok);border-color:var(--ok);color:#fff;}
+.step-item.done .step-lbl{color:var(--ok);}
+.step-num{width:24px;height:24px;border-radius:7px;flex-shrink:0;border:1.5px solid var(--bl);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--t3);transition:all .2s;}
+.step-item.active .step-num{background:var(--blue);border-color:var(--blue);color:#fff;}
+.step-lbl{font-size:12px;font-weight:500;color:var(--t2);transition:color .2s;}
+.step-item.active .step-lbl{color:var(--blue);font-weight:700;}
+.sn-prog{margin-top:14px;padding:0 6px;}
+.sn-prog-row{font-size:10px;color:var(--t3);margin-bottom:5px;display:flex;justify-content:space-between;}
+.pbar{height:4px;background:rgba(11,111,251,0.10);border-radius:3px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:3px;transition:width .5s cubic-bezier(.22,1,.36,1);}
+
+/* Form panel */
+.form-panel{background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
+.form-head{padding:20px 24px 16px;border-bottom:1px solid var(--bl);display:flex;justify-content:space-between;align-items:flex-start;}
+.fh-step{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:3px;}
+.fh-title{font-size:17px;font-weight:700;color:var(--navy);letter-spacing:-.02em;}
+.fh-desc{font-size:12px;color:var(--t2);margin-top:3px;}
+.fh-save{font-size:10px;font-weight:700;padding:5px 11px;border-radius:7px;background:rgba(22,179,100,0.1);color:var(--ok);border:1px solid rgba(22,179,100,0.2);white-space:nowrap;}
+
+/* Step content panels */
+.step-content{display:none;padding:24px;}
+.step-content.active{display:block;}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.form-row.full{grid-template-columns:1fr;}
+.form-row.three{grid-template-columns:1fr 1fr 1fr;}
+.fld{display:flex;flex-direction:column;gap:5px;}
+.fld label{font-size:11.5px;font-weight:600;color:var(--t2);}
+.fld input,.fld select,.fld textarea{
+  padding:10px 13px;border-radius:10px;border:1.5px solid rgba(11,111,251,0.15);
+  background:rgba(248,252,255,0.9);font-size:13px;color:var(--t1);font-family:inherit;
+  transition:border-color .18s,box-shadow .18s;outline:none;
+}
+.fld input:focus,.fld select:focus,.fld textarea:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,111,251,0.09);background:#fff;}
+.fld textarea{min-height:80px;resize:vertical;}
+.fld .hint{font-size:10.5px;color:var(--t4);}
+.form-div{height:1px;background:var(--bl);margin:18px 0;}
+.form-sec{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+
+.range-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.range-opt{padding:7px 14px;border-radius:9px;border:1.5px solid var(--bl);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .18s;background:rgba(255,255,255,0.7);}
+.range-opt:hover{border-color:var(--blue);color:var(--blue);}
+.range-opt.sel{border-color:var(--blue);color:var(--blue);background:rgba(11,111,251,0.08);font-weight:700;}
+
+.tag-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.tag-opt{padding:6px 13px;border-radius:8px;border:1.5px solid var(--bl);font-size:11.5px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .18s;}
+.tag-opt:hover{border-color:var(--blue);color:var(--blue);}
+.tag-opt.sel{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+/* Checklist */
+.chk-list{display:flex;flex-direction:column;gap:8px;}
+.chk-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--bl);background:rgba(248,252,255,0.7);cursor:pointer;transition:all .18s;}
+.chk-item:hover{border-color:var(--blue);background:var(--blue-s);}
+.chk-item.checked{border-color:var(--ok);background:rgba(22,179,100,0.06);}
+.chk-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--bl);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.chk-item.checked .chk-box{background:var(--ok);border-color:var(--ok);}
+.chk-box svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;display:none;}
+.chk-item.checked .chk-box svg{display:block;}
+.chk-text{font-size:12.5px;font-weight:500;color:var(--t2);}
+.chk-item.checked .chk-text{color:var(--ok);}
+
+/* Slider */
+.slider-wrap{margin-bottom:16px;}
+.slider-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.slider-lbl{font-size:11.5px;font-weight:600;color:var(--t2);}
+.slider-val{font-size:13px;font-weight:700;color:var(--blue);}
+input[type=range]{width:100%;height:5px;border-radius:3px;background:linear-gradient(90deg,#0B6FFB var(--pct,50%),rgba(11,111,251,0.12) var(--pct,50%));outline:none;border:none;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#0B6FFB;border:2px solid #fff;box-shadow:0 2px 8px rgba(11,111,251,0.3);cursor:pointer;}
+
+/* Form footer */
+.form-foot{padding:16px 24px;border-top:1px solid var(--bl);display:flex;justify-content:space-between;align-items:center;}
+.form-foot-hint{font-size:11px;color:var(--t4);}
+
+/* AI Panel */
+.ai-panel{position:sticky;top:88px;background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
+.ai-head{padding:14px 14px 12px;background:linear-gradient(135deg,#07132B,#0a1f4e);}
+.ai-head-row{display:flex;align-items:center;justify-content:space-between;}
+.ai-head-t{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:.06em;}
+.ai-live{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:700;color:#16B364;}
+.ai-live-dot{width:5px;height:5px;border-radius:50%;background:#16B364;animation:blink 1.4s infinite;}
+.ai-body{padding:14px;}
+
+.ai-score-ring{display:flex;justify-content:center;padding:8px 0 12px;}
+
+.ai-dims{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.ai-dim{display:flex;flex-direction:column;gap:3px;}
+.ai-dim-row{display:flex;justify-content:space-between;}
+.ai-dim-name{font-size:10.5px;font-weight:600;color:var(--t2);}
+.ai-dim-val{font-size:10.5px;font-weight:700;color:var(--blue);}
+.ai-dim-bar{height:3px;background:rgba(11,111,251,0.09);border-radius:2px;overflow:hidden;}
+.ai-dim-fill{height:100%;border-radius:2px;}
+
+.ai-insight{background:rgba(11,111,251,0.04);border:1px solid rgba(11,111,251,0.12);border-radius:10px;padding:11px;margin-bottom:10px;}
+.ai-insight-t{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:5px;}
+.ai-insight-item{display:flex;align-items:flex-start;gap:5px;font-size:10.5px;color:var(--t2);margin-bottom:4px;line-height:1.5;}
+.ai-insight-item::before{content:'·';color:var(--blue);flex-shrink:0;}
+
+/* Dynamic AI content */
+.ai-step-content{display:none;}
+.ai-step-content.active{display:block;}
+
+@media(max-width:1024px){.intake-cols{grid-template-columns:1fr;}.step-nav,.ai-panel{position:static;}}
+@media(max-width:768px){.intake-wrap{padding:0 20px;}.form-row,.form-row.three{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="bg-mesh"><div class="orb o1"></div><div class="orb o2"></div></div>
+<header>
+  <div class="wrap hrow">
+    <a href="claudeindex.html" class="logo">
+      <img src="logo.svg" alt="RVC" width="72" height="27" style="display:block;border-radius:4px;">
+      <div class="logo-t"><span class="logo-n">RVC Capital</span><span class="logo-s">企业价值诊断平台</span></div>
+    </a>
+    <nav>
+      <a href="claudeindex.html">概览</a><a href="intake.html" class="active">数据采集</a>
+      <a href="report.html">诊断报告</a><a href="modules.html">执行模块</a><a href="ipo.html">IPO就绪</a>
+    </nav>
+    <div class="hdr-acts">
+      <button class="btn-ghost">暂存草稿</button>
+      <button class="btn-primary" id="submit-btn">提交采集 →</button>
+    </div>
+    <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mob-nav" id="mob-nav">
+  <a href="claudeindex.html">概览</a><a href="intake.html" class="active">数据采集</a>
+  <a href="report.html">诊断报告</a><a href="modules.html">执行模块</a><a href="ipo.html">IPO就绪</a>
+</div>
+
+<div class="page">
+<div class="intake-page">
+<div class="intake-wrap">
+  <div class="intake-top">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:5px;">企业数据采集控制台</div>
+    <h1>企业价值诊断信息采集</h1>
+    <p>完成全部7个采集模块，生成完整诊断报告。预计用时25–35分钟。</p>
+  </div>
+
+  <div class="intake-cols">
+    <!-- Step Nav -->
+    <div class="step-nav">
+      <div class="snav-title">诊断步骤</div>
+      <div class="step-item done" data-step="0"><div class="step-num">✓</div><div class="step-lbl">公司概况</div></div>
+      <div class="step-item active" data-step="1"><div class="step-num">2</div><div class="step-lbl">财务数据</div></div>
+      <div class="step-item" data-step="2"><div class="step-num">3</div><div class="step-lbl">运营状况</div></div>
+      <div class="step-item" data-step="3"><div class="step-num">4</div><div class="step-lbl">战略分析</div></div>
+      <div class="step-item" data-step="4"><div class="step-num">5</div><div class="step-lbl">治理合规</div></div>
+      <div class="step-item" data-step="5"><div class="step-num">6</div><div class="step-lbl">技术能力</div></div>
+      <div class="step-item" data-step="6"><div class="step-num">7</div><div class="step-lbl">资本目标</div></div>
+      <div class="sn-prog">
+        <div class="sn-prog-row"><span>完成进度</span><span id="prog-pct">29%</span></div>
+        <div class="pbar"><div class="pfill" id="prog-fill" style="width:29%"></div></div>
+      </div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="form-panel">
+      <div class="form-head">
+        <div>
+          <div class="fh-step" id="step-label">第 2 步，共 7 步</div>
+          <div class="fh-title" id="step-title">财务数据</div>
+          <div class="fh-desc" id="step-desc">核心财务指标，用于AI基准对标与分析建模</div>
+        </div>
+        <div class="fh-save">自动保存中</div>
+      </div>
+
+      <!-- STEP 1: 公司概况 -->
+      <div class="step-content" id="sc-0">
+        <div class="form-sec">基本信息</div>
+        <div class="form-row">
+          <div class="fld"><label>公司全称</label><input type="text" value="UC Auto（优车汇）"></div>
+          <div class="fld"><label>成立年份</label><input type="text" value="2018年"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>主营业务</label><input type="text" value="二手车交易平台"></div>
+          <div class="fld"><label>商业模式</label><select><option>B2B</option><option selected>B2B / B2C</option><option>B2C</option><option>SaaS</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>员工规模</label>
+            <div class="range-opts">
+              <div class="range-opt">1–20人</div><div class="range-opt sel">21–50人</div>
+              <div class="range-opt">51–200人</div><div class="range-opt">200+人</div>
+            </div>
+          </div>
+          <div class="fld"><label>公司注册地</label><input type="text" value="中国 · 上海"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">发展阶段与市场</div>
+        <div class="form-row">
+          <div class="fld"><label>融资阶段</label><select><option>天使轮</option><option>Pre-A</option><option selected>A轮</option><option>B轮</option><option>C轮+</option></select></div>
+          <div class="fld"><label>主要市场地区</label><select><option>华东</option><option selected>全国（线上+线下）</option><option>海外为主</option></select></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>核心竞争优势（简述）</label><textarea>专注二手车B端批发与C端零售的数字化撮合平台，依托自主开发的车辆评估AI系统，实现检测报告24小时内交付，交易效率较传统模式提升60%。</textarea></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: 财务数据 -->
+      <div class="step-content active" id="sc-1">
+        <div class="form-sec">营收与增长</div>
+        <div class="form-row">
+          <div class="fld"><label>年营收（美元）</label><input type="text" value="$50,000,000"></div>
+          <div class="fld"><label>同比增长率（YoY）</label><input type="text" value="38%"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>三年复合增长率（CAGR）</label><input type="text" value="31%"></div>
+          <div class="fld"><label>未来12个月预测营收</label><input type="text" value="$68,000,000"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">盈利能力</div>
+        <div class="form-row three">
+          <div class="fld"><label>EBITDA利润率</label><input type="text" value="14%"></div>
+          <div class="fld"><label>毛利率</label><input type="text" value="22%"></div>
+          <div class="fld"><label>净利润率</label><input type="text" value="7%"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>年EBITDA金额（美元）</label><input type="text" value="$7,000,000"></div>
+          <div class="fld"><label>月均现金消耗（如亏损期）</label><input type="text" placeholder="如盈利则填N/A" value="N/A"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">营收结构</div>
+        <div class="fld" style="margin-bottom:14px;">
+          <label>经常性收入占比</label>
+          <div class="range-opts">
+            <div class="range-opt">0–20%</div><div class="range-opt sel">20–40%</div>
+            <div class="range-opt">40–60%</div><div class="range-opt">60%+</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>前三大客户营收占比</label><input type="text" value="约28%"><span class="hint">客户集中度影响融资估值</span></div>
+          <div class="fld"><label>营收地区分布</label><select><option selected>主要境内（90%+）</option><option>境内为主（70–90%）</option><option>境内外混合</option></select></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">资本结构</div>
+        <div class="form-row">
+          <div class="fld"><label>负债总额（美元）</label><input type="text" value="$5,000,000"></div>
+          <div class="fld"><label>现金及等价物</label><input type="text" value="$12,000,000"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>上轮估值</label><input type="text" value="A轮 · 估值 $1.2亿美元"></div>
+          <div class="fld"><label>累计融资金额</label><input type="text" value="$1,800万美元"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>主要财务关注点（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt">现金流管理</div><div class="tag-opt sel">毛利率提升</div>
+              <div class="tag-opt">营运资本</div><div class="tag-opt sel">规模化边际成本</div>
+              <div class="tag-opt">客户集中度</div><div class="tag-opt">汇率敞口</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: 运营状况 -->
+      <div class="step-content" id="sc-2">
+        <div class="form-sec">核心运营指标</div>
+        <div class="form-row">
+          <div class="fld"><label>月活跃交易用户数</label><input type="text" value="约1,200家B端经销商"></div>
+          <div class="fld"><label>月均交易量（辆）</label><input type="text" value="约3,800辆/月"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>平均客单价（美元）</label><input type="text" value="B端约$13,000 / C端约$9,500"></div>
+          <div class="fld"><label>客户复购周期</label><input type="text" value="B端平均18天复购一次"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">流程效率</div>
+        <div class="form-row">
+          <div class="fld"><label>车辆检测交付周期</label><input type="text" value="平均22小时"></div>
+          <div class="fld"><label>交易平均完成周期</label><input type="text" value="B端3.2天 / C端5.8天"></div>
+        </div>
+        <div class="fld" style="margin-bottom:14px;">
+          <label>运营数字化程度</label>
+          <div class="slider-wrap">
+            <div class="slider-label-row"><span class="slider-lbl">核心业务数字化覆盖率</span><span class="slider-val" id="dig-val">72%</span></div>
+            <input type="range" min="0" max="100" value="72" id="dig-slider" style="--pct:72%">
+          </div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">供应链与库存</div>
+        <div class="form-row">
+          <div class="fld"><label>合作供货商数量</label><input type="text" value="约240家认证经销商"></div>
+          <div class="fld"><label>平均库存周转天数</label><input type="text" value="28天"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>运营效率短板（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">检测标准化程度</div><div class="tag-opt">物流协同效率</div>
+              <div class="tag-opt sel">售后服务体系</div><div class="tag-opt">跨城市扩张复制能力</div>
+              <div class="tag-opt">数据系统集成</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>补充说明</label><textarea placeholder="描述运营中的关键挑战或近期改进举措...">平台正在推进标准化服务包，计划Q3上线B端SaaS管理模块，进一步提升运营效率与可复制性。</textarea></div>
+        </div>
+      </div>
+
+      <!-- STEP 4: 战略分析 -->
+      <div class="step-content" id="sc-3">
+        <div class="form-sec">市场定位</div>
+        <div class="form-row">
+          <div class="fld"><label>目标市场规模（TAM，美元）</label><input type="text" value="中国二手车市场约$1,800亿/年"></div>
+          <div class="fld"><label>当前市场渗透率</label><input type="text" value="约0.03%（巨大增长空间）"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>核心竞争壁垒（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">AI检测技术专利</div><div class="tag-opt sel">B端经销商网络积累</div>
+              <div class="tag-opt">品牌认知度</div><div class="tag-opt sel">数据积累与算法迭代</div>
+              <div class="tag-opt">价格优势</div><div class="tag-opt">政府资质认证</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">增长战略</div>
+        <div class="form-row">
+          <div class="fld"><label>未来3年核心增长引擎</label><select><option>新市场地域扩张</option><option selected>产品线延伸（B端SaaS化）</option><option>国际化</option><option>并购整合</option></select></div>
+          <div class="fld"><label>品类扩张计划</label><input type="text" value="延伸至车后市场（维保、保险、金融）"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>主要竞争对手及差异化优势</label><textarea>主要竞争对手：优信、瓜子、大搜车。差异化：聚焦B端批发市场，AI辅助定价+24H检测报告，交易撮合效率显著高于行业均值，同时向C端渗透构建双侧网络效应。</textarea></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">战略成熟度自评</div>
+        <div class="chk-list">
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">已有清晰的3年战略规划文档</div></div>
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">战略目标与KPI体系已拆解至部门级</div></div>
+          <div class="chk-item"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">已完成竞品深度分析报告</div></div>
+          <div class="chk-item"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">国际化可行性研究已立项</div></div>
+        </div>
+      </div>
+
+      <!-- STEP 5: 治理合规 -->
+      <div class="step-content" id="sc-4">
+        <div class="form-sec">董事会结构</div>
+        <div class="form-row">
+          <div class="fld"><label>董事会成员人数</label><input type="text" value="5人"></div>
+          <div class="fld"><label>独立董事人数</label><input type="text" value="1人（需补充至3人）"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>审计委员会状态</label><select><option selected>尚未组建</option><option>已组建（无独立成员）</option><option>已组建（含独立成员）</option></select></div>
+          <div class="fld"><label>CFO/财务负责人</label><select><option selected>内部兼职CFO</option><option>全职CFO</option><option>Big4背景CFO</option></select></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">审计与合规</div>
+        <div class="form-row">
+          <div class="fld"><label>当前审计机构</label><select><option selected>国内中小所</option><option>国内大所</option><option>Big4（四大）</option></select></div>
+          <div class="fld"><label>已审计年度</label><input type="text" value="2023、2024年（非Big4）"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>合规完备情况（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">工商注册及资质齐全</div><div class="tag-opt sel">劳动合规</div>
+              <div class="tag-opt">数据安全合规（PIPL）</div><div class="tag-opt sel">税务合规</div>
+              <div class="tag-opt">反腐反商业贿赂政策</div><div class="tag-opt">ESG信息披露</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">股权结构</div>
+        <div class="form-row">
+          <div class="fld"><label>创始团队持股比例</label><input type="text" value="创始人合计持股约62%"></div>
+          <div class="fld"><label>是否存在股权纠纷</label><select><option selected>否</option><option>是（请说明）</option></select></div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>治理改善优先级（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">引入独立董事</div><div class="tag-opt sel">组建审计委员会</div>
+              <div class="tag-opt">Big4审计切换</div><div class="tag-opt sel">完善内控体系</div><div class="tag-opt">ESG框架建立</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: 技术能力 -->
+      <div class="step-content" id="sc-5">
+        <div class="form-sec">技术资产</div>
+        <div class="form-row">
+          <div class="fld"><label>自主研发核心系统</label><input type="text" value="AI检测评估引擎、交易撮合系统、ERP"></div>
+          <div class="fld"><label>技术团队规模</label><input type="text" value="约12人（含算法、产品、工程）"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>知识产权（专利/软著）</label><input type="text" value="3项发明专利 + 8项软件著作权"></div>
+          <div class="fld"><label>数据资产规模</label><input type="text" value="累计80万+车辆检测数据、200万+交易记录"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">数字化成熟度</div>
+        <div class="slider-wrap" style="margin-bottom:14px;">
+          <div class="slider-label-row"><span class="slider-lbl">AI/ML在核心业务的应用深度</span><span class="slider-val" id="ai-val">68%</span></div>
+          <input type="range" min="0" max="100" value="68" id="ai-slider" style="--pct:68%">
+        </div>
+        <div class="slider-wrap" style="margin-bottom:14px;">
+          <div class="slider-label-row"><span class="slider-lbl">数据治理与分析能力成熟度</span><span class="slider-val" id="data-val">55%</span></div>
+          <input type="range" min="0" max="100" value="55" id="data-slider" style="--pct:55%">
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">技术战略</div>
+        <div class="form-row full">
+          <div class="fld"><label>未来12个月技术重点投入（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">AI定价模型迭代</div><div class="tag-opt sel">B端SaaS产品化</div>
+              <div class="tag-opt">数据中台建设</div><div class="tag-opt sel">移动端体验优化</div>
+              <div class="tag-opt">国际化技术适配</div>
+            </div>
+          </div>
+        </div>
+        <div class="chk-list" style="margin-top:12px;">
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">核心技术系统已完成灾备与容灾部署</div></div>
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">已通过ISO 27001信息安全认证</div></div>
+          <div class="chk-item"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">技术路线图已对外披露（投资人可见）</div></div>
+        </div>
+      </div>
+
+      <!-- STEP 7: 资本目标 -->
+      <div class="step-content" id="sc-6">
+        <div class="form-sec">资本目标</div>
+        <div class="fld" style="margin-bottom:14px;">
+          <label>首要资本路径（单选）</label>
+          <div class="range-opts">
+            <div class="range-opt">A股上市</div><div class="range-opt">港股IPO</div>
+            <div class="range-opt sel">美股IPO</div><div class="range-opt">战略并购（卖方）</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>目标时间窗口</label><select><option>12个月内</option><option>12–24个月</option><option selected>24–36个月</option><option>36个月以上</option></select></div>
+          <div class="fld"><label>目标融资规模（美元）</label><input type="text" value="B轮 · $3,000–5,000万美元"></div>
+        </div>
+        <div class="form-row">
+          <div class="fld"><label>期望资金用途</label><select><option>市场扩张</option><option selected>技术研发 + 市场扩张</option><option>并购收购</option><option>运营资本补充</option></select></div>
+          <div class="fld"><label>目标估值区间（美元）</label><input type="text" value="$3亿–5亿美元"></div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">投资人偏好</div>
+        <div class="form-row full">
+          <div class="fld"><label>偏好投资人类型（多选）</label>
+            <div class="tag-opts">
+              <div class="tag-opt sel">战略型产业投资人</div><div class="tag-opt sel">专注新经济的PE/VC</div>
+              <div class="tag-opt">政府引导基金</div><div class="tag-opt sel">跨境资本（美元基金）</div>
+              <div class="tag-opt">上市公司战投</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="fld"><label>对顾问的具体期望</label>
+            <textarea>希望借助RVC顾问网络，重点对接海外机构投资人（美元基金），同时获得IPO前的财务规范化建议，以及车后市场赛道的并购标的资源推荐。</textarea>
+          </div>
+        </div>
+        <div class="form-div"></div>
+        <div class="form-sec">风险敞口评估</div>
+        <div class="chk-list">
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">已了解上市合规要求并做好初步准备</div></div>
+          <div class="chk-item"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">已与法律顾问就VIE架构进行咨询</div></div>
+          <div class="chk-item checked"><div class="chk-box"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div><div class="chk-text">管理团队愿意接受IPO锁定期安排</div></div>
+        </div>
+      </div>
+
+      <div class="form-foot">
+        <span class="form-foot-hint" id="foot-hint">第 2 步，共 7 步 · 所有数据加密存储</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-sm" id="prev-btn" onclick="changeStep(-1)">← 上一步</button>
+          <button class="btn-blue" style="padding:9px 22px;font-size:13px;" id="next-btn" onclick="changeStep(1)">保存并继续 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Panel -->
+    <div class="ai-panel">
+      <div class="ai-head">
+        <div class="ai-head-row">
+          <div class="ai-head-t">AI 实时分析引擎</div>
+          <div class="ai-live"><span class="ai-live-dot"></span>实时更新</div>
+        </div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;">随填写自动演算</div>
+      </div>
+      <div class="ai-body">
+        <!-- Score ring -->
+        <div class="ai-score-ring">
+          <svg viewBox="0 0 110 110" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(11,111,251,0.10)" stroke-width="8"/>
+            <circle cx="55" cy="55" r="44" fill="none" stroke="url(#sg)" stroke-width="8"
+              stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="84"
+              transform="rotate(-90 55 55)">
+              <animate attributeName="stroke-dashoffset" from="276.5" to="84" dur="1.5s" fill="freeze"/>
+            </circle>
+            <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0B6FFB"/><stop offset="100%" stop-color="#23B7FF"/>
+            </linearGradient></defs>
+            <text x="55" y="50" text-anchor="middle" fill="#07132B" font-size="22" font-weight="800" font-family="Inter,sans-serif" id="ai-score-num">68</text>
+            <text x="55" y="64" text-anchor="middle" fill="#6B7890" font-size="9.5" font-family="Inter,sans-serif">初步评分</text>
+            <text x="55" y="76" text-anchor="middle" fill="#0B6FFB" font-size="8.5" font-weight="700" font-family="Inter,sans-serif" id="ai-score-label">良好</text>
+          </svg>
+        </div>
+        <!-- Dims -->
+        <div class="ai-dims" id="ai-dims">
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">战略与增长</span><span class="ai-dim-val">74</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:74%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div></div>
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">财务健康</span><span class="ai-dim-val">70</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:70%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div></div>
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">运营效率</span><span class="ai-dim-val">63</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:63%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div></div>
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">治理合规</span><span class="ai-dim-val">58</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:58%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div></div>
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">组织与人才</span><span class="ai-dim-val">65</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:65%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div></div>
+          <div class="ai-dim"><div class="ai-dim-row"><span class="ai-dim-name">技术与数据</span><span class="ai-dim-val">71</span></div><div class="ai-dim-bar"><div class="ai-dim-fill" style="width:71%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div></div>
+        </div>
+        <!-- Dynamic insights per step -->
+        <div id="ai-insights-wrap">
+          <div class="ai-step-content" data-ai-step="0">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 公司概况分析</div>
+              <div class="ai-insight-item">二手车赛道2024年市场规模超$1,800亿，B2B/B2C双轮驱动具备显著网络效应潜力。</div>
+              <div class="ai-insight-item">50人精干团队对应$5,000万营收，人效比处于行业前25%分位。</div>
+              <div class="ai-insight-item">建议尽快建立清晰的组织架构图，为后续融资尽调做好准备。</div>
+            </div>
+          </div>
+          <div class="ai-step-content active" data-ai-step="1">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 财务健康洞察</div>
+              <div class="ai-insight-item">38%同比增速超越行业中位数（22%），增长质量评级为优良。</div>
+              <div class="ai-insight-item">22%毛利率处于二手车平台中等水平，SaaS化路径可大幅提升毛利至40%+。</div>
+              <div class="ai-insight-item">客户集中度28%低于30%警戒线，融资吸引力较强。</div>
+            </div>
+          </div>
+          <div class="ai-step-content" data-ai-step="2">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 运营效率洞察</div>
+              <div class="ai-insight-item">22小时检测交付已达行业领先水平，是核心差异化壁垒。</div>
+              <div class="ai-insight-item">28天库存周转建议优化至20天内，可释放约$200万运营资金。</div>
+              <div class="ai-insight-item">标准化程度提升空间大，SaaS化后可拉升估值倍数至8–12×ARR。</div>
+            </div>
+          </div>
+          <div class="ai-step-content" data-ai-step="3">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 战略定位洞察</div>
+              <div class="ai-insight-item">TAM $1,800亿+，当前渗透率极低，具备10倍增长空间叙事基础。</div>
+              <div class="ai-insight-item">AI定价+B端SaaS双引擎是高溢价路径，建议作为资本叙事核心。</div>
+              <div class="ai-insight-item">车后市场延伸预计可将LTV提升3–4倍，是关键价值放大器。</div>
+            </div>
+          </div>
+          <div class="ai-step-content" data-ai-step="4">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 治理风险预警</div>
+              <div class="ai-insight-item">独立董事不足是IPO最大单项障碍，建议Q3前完成补充。</div>
+              <div class="ai-insight-item">切换Big4审计需提前18个月启动，影响IPO时间线。</div>
+              <div class="ai-insight-item">数据安全合规（PIPL/GDPR）是海外融资的强制门槛。</div>
+            </div>
+          </div>
+          <div class="ai-step-content" data-ai-step="5">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 技术价值评估</div>
+              <div class="ai-insight-item">80万+检测数据资产是护城河，建议明确数据货币化路径。</div>
+              <div class="ai-insight-item">B端SaaS化可将估值逻辑从GMV型切换至ARR型，溢价空间达30–50%。</div>
+              <div class="ai-insight-item">技术路线图公开可提升机构投资人信任度，建议尽快整理。</div>
+            </div>
+          </div>
+          <div class="ai-step-content" data-ai-step="6">
+            <div class="ai-insight"><div class="ai-insight-t">⚡ 资本路径建议</div>
+              <div class="ai-insight-item">美股IPO目标合理，建议先完成B轮后于2026年启动上市筹备。</div>
+              <div class="ai-insight-item">$3–5亿估值目标需在2年内实现收入$1亿+及显著利润改善。</div>
+              <div class="ai-insight-item">RVC顾问网络可为您匹配3–5家专注新经济的一线美元基金。</div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-status" style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t3);padding:10px;border:1px solid var(--bl);border-radius:10px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--blue-s);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          </div>
+          <div><div style="font-size:11px;font-weight:600;color:var(--t2);" id="ai-remaining">还差 5 步完成完整报告</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:1px;">完成后可生成诊断报告</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+// Hamburger
+const ham=document.getElementById('ham'),mn=document.getElementById('mob-nav');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mn.classList.toggle('open');});
+
+// Step data
+const stepMeta=[
+  {label:'第 1 步，共 7 步',title:'公司概况',desc:'企业基础信息与核心业务定位'},
+  {label:'第 2 步，共 7 步',title:'财务数据',desc:'核心财务指标，用于AI基准对标与分析建模'},
+  {label:'第 3 步，共 7 步',title:'运营状况',desc:'业务运营数据与流程效率评估'},
+  {label:'第 4 步，共 7 步',title:'战略分析',desc:'市场定位、竞争优势与增长战略'},
+  {label:'第 5 步，共 7 步',title:'治理合规',desc:'公司治理结构与合规体系完备度'},
+  {label:'第 6 步，共 7 步',title:'技术能力',desc:'数字化资产与技术创新能力评估'},
+  {label:'第 7 步，共 7 步',title:'资本目标',desc:'融资目标、时间规划与投资人偏好'}
+];
+const remaining=['还差 6 步完成完整报告','还差 5 步完成完整报告','还差 4 步完成完整报告','还差 3 步完成完整报告','还差 2 步完成完整报告','还差 1 步完成完整报告','所有步骤已完成，生成报告'];
+
+let currentStep=1;
+
+function goToStep(idx){
+  const steps=document.querySelectorAll('.step-item');
+  const contents=document.querySelectorAll('.step-content');
+  const aiContents=document.querySelectorAll('.ai-step-content');
+
+  // Update step nav
+  steps.forEach((s,i)=>{
+    s.classList.remove('active');
+    if(i<idx) { s.classList.add('done'); s.querySelector('.step-num').textContent='✓'; }
+    else if(i===idx) { s.classList.add('active'); s.querySelector('.step-num').textContent=i+1; }
+    else { s.classList.remove('done'); s.querySelector('.step-num').textContent=i+1; }
+  });
+
+  // Update form content
+  contents.forEach((c,i)=>c.classList.toggle('active',i===idx));
+  aiContents.forEach((c,i)=>c.classList.toggle('active',+c.dataset.aiStep===idx));
+
+  // Update header
+  document.getElementById('step-label').textContent=stepMeta[idx].label;
+  document.getElementById('step-title').textContent=stepMeta[idx].title;
+  document.getElementById('step-desc').textContent=stepMeta[idx].desc;
+  document.getElementById('foot-hint').textContent=stepMeta[idx].label+' · 所有数据加密存储';
+  document.getElementById('ai-remaining').textContent=remaining[idx];
+
+  // Update progress
+  const pct=Math.round(((idx+1)/7)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+
+  // Prev/next buttons
+  document.getElementById('prev-btn').style.display=idx===0?'none':'';
+  document.getElementById('next-btn').textContent=idx===6?'提交诊断 →':'保存并继续 →';
+
+  currentStep=idx;
+}
+
+function changeStep(dir){
+  const next=currentStep+dir;
+  if(next>=0 && next<=6) goToStep(next);
+  else if(next===7) location.href='report.html';
+}
+
+// Step nav clicks
+document.querySelectorAll('.step-item').forEach((el,i)=>{
+  el.addEventListener('click',()=>goToStep(i));
+});
+
+// Slider updates
+function initSlider(id,valId){
+  const sl=document.getElementById(id),vl=document.getElementById(valId);
+  if(!sl||!vl) return;
+  sl.addEventListener('input',()=>{sl.style.setProperty('--pct',sl.value+'%');vl.textContent=sl.value+'%';});
+}
+initSlider('dig-slider','dig-val');
+initSlider('ai-slider','ai-val');
+initSlider('data-slider','data-val');
+
+// Tag toggles
+document.querySelectorAll('.tag-opt').forEach(opt=>opt.addEventListener('click',()=>opt.classList.toggle('sel')));
+document.querySelectorAll('.range-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    opt.closest('.range-opts').querySelectorAll('.range-opt').forEach(o=>o.classList.remove('sel'));
+    opt.classList.add('sel');
+  });
+});
+document.querySelectorAll('.chk-item').forEach(item=>{
+  item.addEventListener('click',()=>item.classList.toggle('checked'));
+});
+
+// Submit
+document.getElementById('submit-btn').addEventListener('click',()=>{
+  if(currentStep===6) location.href='report.html';
+  else goToStep(currentStep+1);
+});
+
+// Init
+goToStep(1);
+
+// Reveal
+const ro=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);ro.unobserve(e.target);}});},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

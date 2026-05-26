@@ -1,0 +1,10 @@
+.DS_Store
+.claude/
+.git/
+*.log
+.~*
+
+# Keep deployment lean: these are source/design references, not runtime assets.
+*.docx
+*.pdf
+image*

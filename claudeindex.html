@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC Capital — 企业价值智能诊断平台</title>
+<meta name="description" content="RVC智能诊断引擎扫描300+价值维度，72小时生成机构级洞察报告，加速您的IPO、并购与融资路径。">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RVC Capital — 企业价值智能诊断平台">
+<meta property="og:description" content="72小时精准解锁企业真实价值。AI驱动诊断引擎，覆盖300+维度，机构级洞察报告。">
+<meta property="og:image" content="/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RVC Capital — 企业价值智能诊断平台">
+<meta name="twitter:description" content="72小时精准解锁企业真实价值。AI驱动诊断引擎，覆盖300+维度。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rvc-base.css">
+<style>
+.hero{padding:80px 0 64px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);
+  opacity:0;transform:translateY(14px);
+  animation:fu .7s cubic-bezier(.22,1,.36,1) .05s forwards;
+}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 1.4s infinite;}
+.hero-h{
+  font-size:clamp(34px,4.4vw,56px);font-weight:800;color:var(--navy);
+  letter-spacing:-.035em;line-height:1.12;margin-bottom:20px;min-height:2.8em;
+}
+.hero-h .accent{
+  background:linear-gradient(135deg,#0B6FFB,#23B7FF 55%,#004DD9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* Typewriter cursor */
+.type-cursor{display:inline-block;color:var(--blue);-webkit-text-fill-color:var(--blue);font-weight:300;line-height:1;
+  animation:cur-blink .65s step-end infinite;vertical-align:baseline;}
+@keyframes cur-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-p{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:32px;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.6s forwards;}
+.hero-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.78s forwards;}
+.hero-trust{margin-top:32px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  opacity:0;animation:fu .8s cubic-bezier(.22,1,.36,1) 1.95s forwards;}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t3);font-weight:500;}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--ok);}
+@keyframes fu{to{opacity:1;transform:none}}
+.engine-wrap{opacity:0;animation:fu 1s cubic-bezier(.22,1,.36,1) .4s forwards;}
+.engine-card{
+  background:rgba(245,249,255,0.82);border:1px solid rgba(255,255,255,0.75);
+  border-radius:24px;padding:8px;
+  box-shadow:0 24px 80px rgba(11,111,251,0.12),0 4px 16px rgba(11,111,251,0.06),0 0 0 1px rgba(255,255,255,0.6) inset;
+  backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);
+  position:relative;overflow:hidden;
+}
+.engine-card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent);
+  pointer-events:none;
+}
+.engine-card svg text{font-family:var(--font-sans);}
+.engine-card svg .svg-num{
+  font-family:var(--font-mono);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1,"zero" 1;
+  letter-spacing:-.05em;
+}
+.engine-card svg .svg-unit{
+  font-family:var(--font-sans);
+  font-weight:500;
+  letter-spacing:0;
+  opacity:.78;
+}
+.engine-card svg .svg-delta{
+  font-family:var(--font-mono);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1,"zero" 1;
+  letter-spacing:-.02em;
+}
+.engine-card svg .svg-title{
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.engine-card svg .svg-subtle{
+  font-weight:400;
+  opacity:.86;
+}
+
+/* Process */
+.process{padding:52px 0;border-top:1px solid var(--bl);border-bottom:1px solid var(--bl);}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bl);}
+.proc-item{background:var(--bg);padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:background .2s;}
+.proc-item:hover{background:var(--blue-s);}
+.proc-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.09em;}
+.proc-title{font-size:15px;font-weight:700;color:var(--navy);}
+.proc-desc{font-size:13px;color:var(--t2);line-height:1.6;}
+
+/* Services */
+.services{padding:88px 0;}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.b-card{
+  background:var(--card);border:1px solid var(--bl);border-radius:22px;padding:30px;
+  box-shadow:var(--sh);position:relative;overflow:hidden;
+  transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s;
+}
+.b-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(11,111,251,0.13);border-color:var(--bm);}
+.b-card-glow{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 12%,rgba(255,255,255,0.7),transparent 55%);}
+.b-card.wide{grid-column:span 2;}
+.b-card.accent{background:linear-gradient(145deg,#0B6FFB,#004DD9 55%,#1a7dff);border-color:transparent;}
+.b-card.accent .svc-title,.b-card.accent .svc-num{color:#fff;}
+.b-card.accent .svc-desc{color:rgba(255,255,255,0.76);}
+.b-card.accent .svc-tag{background:rgba(255,255,255,0.18);color:#fff;}
+.svc-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--t4);margin-bottom:14px;}
+.svc-ico{width:48px;height:48px;border-radius:13px;background:var(--blue-s);border:1px solid rgba(11,111,251,0.14);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:all .22s;}
+.svc-ico svg{width:23px;height:23px;stroke:var(--blue);fill:none;stroke-width:1.8;transition:stroke .22s;}
+.b-card:hover .svc-ico{background:var(--blue);border-color:transparent;}
+.b-card:hover .svc-ico svg{stroke:#fff;}
+.b-card.accent .svc-ico{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.3);}
+.b-card.accent .svc-ico svg{stroke:#fff;}
+.svc-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:-.02em;}
+.svc-desc{font-size:13px;color:var(--t2);line-height:1.65;}
+.svc-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:7px;background:var(--blue-s);color:var(--blue);margin-top:14px;letter-spacing:.03em;}
+
+/* KPI */
+.kpi-strip{padding:72px 0;background:linear-gradient(135deg,#07132B,#0a1f4e);}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,0.06);}
+.kpi-item{padding:38px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.06);background:rgba(7,19,43,0.4);}
+.kpi-item:last-child{border-right:none;}
+.kpi-val{font-family:var(--font-mono);font-size:46px;font-weight:800;letter-spacing:-.055em;line-height:1;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1,"zero" 1;
+  background:linear-gradient(135deg,#fff,#23B7FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.kpi-lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);margin-top:7px;letter-spacing:.04em;}
+.kpi-bar{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:14px;overflow:hidden;}
+.kpi-bfill{height:100%;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:2px;width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1);}
+
+/* ── Success Wall ── */
+.success-wall{padding:64px 0 60px;background:var(--bg);border-top:1px solid var(--bl);}
+.sw-head{text-align:center;margin-bottom:44px;}
+.sw-title{font-size:30px;font-weight:800;color:var(--navy);letter-spacing:-.04em;margin-bottom:0;}
+.sw-divider{width:44px;height:3px;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:2px;margin:12px auto 0;}
+.sw-row-label{display:block;text-align:center;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t4);margin-bottom:14px;}
+
+/* Marquee */
+.marquee-wrap{overflow:hidden;position:relative;padding:4px 0;}
+.marquee-wrap+.marquee-wrap{margin-top:14px;}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--bg) 10%,transparent);}
+.marquee-wrap::after{right:0;background:linear-gradient(270deg,var(--bg) 10%,transparent);}
+.marquee-track{display:flex;gap:12px;width:max-content;will-change:transform;}
+.marquee-track.go-left{animation:mq-left 42s linear infinite;}
+.marquee-track.go-right{animation:mq-right 54s linear infinite;}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+@keyframes mq-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mq-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* IPO brand cards (row 1) — logo-first layout */
+.ipo-card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  gap:10px;flex-shrink:0;
+  background:#fff;border:1px solid rgba(11,111,251,0.09);
+  border-radius:14px;padding:14px 20px 12px;min-width:170px;
+  box-shadow:0 2px 14px rgba(11,111,251,0.05);
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+  white-space:nowrap;cursor:default;
+}
+.ipo-card:hover{border-color:rgba(11,111,251,0.25);box-shadow:0 8px 28px rgba(11,111,251,0.10);transform:translateY(-2px);}
+.ipo-logo-area{height:38px;display:flex;align-items:center;}
+.ipo-logo-area svg{max-height:36px;max-width:150px;}
+.ipo-card-meta{display:flex;align-items:center;gap:6px;}
+.ipo-card-ticker{
+  font-size:9.5px;font-weight:700;letter-spacing:.07em;
+  background:rgba(11,111,251,0.08);color:var(--blue);
+  border-radius:5px;padding:2px 7px;
+}
+.ipo-card-exch{font-size:9.5px;color:var(--t4);font-weight:500;}
+
+/* Partner pills (row 2) — brand name in color */
+.partner-pill{
+  display:flex;align-items:center;gap:7px;flex-shrink:0;
+  background:#fff;border:1px solid rgba(11,111,251,0.08);
+  border-radius:10px;padding:9px 16px;
+  box-shadow:0 1px 8px rgba(15,45,90,0.04);
+  white-space:nowrap;transition:border-color .18s,transform .18s;
+  cursor:default;
+}
+.partner-pill:hover{border-color:rgba(11,111,251,0.2);transform:translateY(-1px);}
+.pp-logo{height:22px;display:flex;align-items:center;}
+.pp-logo svg{max-height:22px;max-width:100px;}
+
+@media(max-width:768px){
+  .hero{padding:44px 0 36px;}
+  .hero-grid{grid-template-columns:1fr;gap:36px;}
+  .engine-wrap{order:-1;}
+  .bento{grid-template-columns:1fr;}
+  .b-card.wide{grid-column:span 1;}
+  .proc-grid{grid-template-columns:1fr 1fr;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .kpi-item:nth-child(5){grid-column:span 2;border-right:none;}
+  .marquee-wrap::before,.marquee-wrap::after{width:60px;}
+}
+</style>
+</head>
+<body>
+<div class="bg-mesh"><div class="orb o1"></div><div class="orb o2"></div></div>
+
+<header>
+  <div class="wrap hrow">
+    <a href="claudeindex.html" class="logo">
+      <img src="logo.svg" alt="RVC" width="72" height="27" style="display:block;border-radius:4px;">
+      <div class="logo-t">
+        <span class="logo-n">RVC Capital</span>
+        <span class="logo-s">企业价值诊断平台</span>
+      </div>
+    </a>
+    <nav>
+      <a href="claudeindex.html" class="active">概览</a>
+      <a href="intake.html">数据采集</a>
+      <a href="report.html">诊断报告</a>
+      <a href="modules.html">执行模块</a>
+      <a href="ipo.html">IPO就绪</a>
+    </nav>
+    <div class="hdr-acts">
+      <button class="btn-ghost">登录</button>
+      <button class="btn-primary" onclick="location.href='intake.html'">开始诊断 →</button>
+    </div>
+    <button class="ham" id="ham" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mob-nav" id="mob-nav">
+  <a href="claudeindex.html" class="active">概览</a>
+  <a href="intake.html">数据采集</a>
+  <a href="report.html">诊断报告</a>
+  <a href="modules.html">执行模块</a>
+  <a href="ipo.html">IPO就绪</a>
+</div>
+
+<div class="page">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>AI驱动 · 资本智能</div>
+          <h1 class="hero-h"></h1>
+          <p class="hero-p">RVC智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理，生成机构级洞察报告——加速您的资本路径，把握最优时机窗口。</p>
+          <div class="hero-btns">
+            <a href="intake.html" class="btn-blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+              立即开始诊断
+            </a>
+            <a href="report.html" class="btn-outline">查看示例报告 →</a>
+          </div>
+          <div class="hero-trust">
+            <div class="trust-item"><span class="trust-dot"></span>72小时交付</div>
+            <div class="trust-item"><span class="trust-dot"></span>300+价值维度</div>
+            <div class="trust-item"><span class="trust-dot"></span>机构级AI分析</div>
+          </div>
+        </div>
+        <div class="engine-wrap">
+          <div class="engine-card">
+            <svg viewBox="0 0 670 520" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#2563EB" stop-opacity="0.24"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="gs" x="-5%" y="-5%" width="110%" height="110%">
+                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="cardShadow" x="-5%" y="-5%" width="120%" height="130%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="rgba(11,111,251,0.07)"/>
+                </filter>
+                <linearGradient id="lightGlass" x1="0%" y1="0%" x2="60%" y2="100%">
+                  <stop offset="0%" stop-color="#EBF3FF"/><stop offset="100%" stop-color="#D4E8FF"/>
+                </linearGradient>
+                <linearGradient id="glassShimmer" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.72)"/>
+                  <stop offset="38%" stop-color="rgba(255,255,255,0.22)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+                </linearGradient>
+              </defs>
+              <!-- Background -->
+	              <rect width="670" height="520" fill="#F4F7FF" rx="18"/>
+	              <g stroke="rgba(73,91,125,0.06)" stroke-width="1">
+                <line x1="140" y1="0" x2="140" y2="520"/><line x1="206" y1="0" x2="206" y2="520"/>
+                <line x1="354" y1="0" x2="354" y2="520"/><line x1="462" y1="0" x2="462" y2="520"/>
+              </g>
+
+              <!-- ══ INPUT NODES ══ -->
+              <!-- I1: 战略规划 — blue, midY=82 -->
+	              <rect x="14" y="50" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(37,99,235,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="50" width="3.5" height="64" rx="2" fill="#2563EB"/>
+              <line x1="17.5" y1="50" x2="140" y2="50" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,62)" fill="none" stroke="#2563EB" stroke-width="1.35" stroke-linecap="round">
+                <line x1="0" y1="12" x2="0" y2="7"/><line x1="4" y1="12" x2="4" y2="3"/>
+                <line x1="8" y1="12" x2="8" y2="9"/><line x1="12" y1="12" x2="12" y2="1"/>
+              </g>
+	              <text x="42" y="73" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">战略规划</text>
+	              <text x="42" y="88" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Strategy &amp; Growth</text>
+	              <text x="42" y="105" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">186+ 行业基准对标</text>
+
+              <!-- I2: 财务质量 — cyan, midY=194 -->
+	              <rect x="14" y="162" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(8,145,178,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="162" width="3.5" height="64" rx="2" fill="#0891B2"/>
+              <line x1="17.5" y1="162" x2="140" y2="162" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,174)" fill="none" stroke="#0891B2" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="0,6 3,6 5,1 7,11 9,4 11,6 13,6"/>
+              </g>
+	              <text x="42" y="185" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">财务质量</text>
+	              <text x="42" y="200" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Financial Health</text>
+	              <text x="42" y="217" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">EBITDA · 盈利能力</text>
+
+              <!-- I3: 运营卓越 — green, midY=306 -->
+	              <rect x="14" y="274" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(5,150,105,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="274" width="3.5" height="64" rx="2" fill="#059669"/>
+              <line x1="17.5" y1="274" x2="140" y2="274" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,286)" fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round">
+	                <circle cx="6" cy="6" r="5"/><circle cx="6" cy="6" r="2" fill="#059669" stroke="none"/>
+                <line x1="6" y1="0" x2="6" y2="-1.5"/><line x1="6" y1="12" x2="6" y2="13.5"/>
+                <line x1="12" y1="6" x2="13.5" y2="6"/><line x1="0" y1="6" x2="-1.5" y2="6"/>
+              </g>
+	              <text x="42" y="297" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">运营卓越</text>
+	              <text x="42" y="312" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Operational Excellence</text>
+	              <text x="42" y="329" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">效率 · 流程 · 人才</text>
+
+              <!-- I4: 公司治理 — amber, midY=418 -->
+	              <rect x="14" y="386" width="126" height="64" rx="13" fill="rgba(255,255,255,0.90)" stroke="rgba(199,120,0,0.16)" stroke-width="1" filter="url(#cardShadow)"/>
+	              <rect x="14" y="386" width="3.5" height="64" rx="2" fill="#C77800"/>
+              <line x1="17.5" y1="386" x2="140" y2="386" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
+	              <g transform="translate(24,398)" fill="none" stroke="#C77800" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6,0 L12,2.5 L12,6 C12,9.5 9.5,11.5 6,13 C2.5,11.5 0,9.5 0,6 L0,2.5 Z"/>
+                <polyline points="3.5,6.5 5.5,8.5 9,4"/>
+              </g>
+	              <text x="42" y="409" fill="#07132B" font-size="11.2" font-weight="800" font-family="Inter,sans-serif" class="svg-title">公司治理</text>
+	              <text x="42" y="424" fill="#7180A3" font-size="8" font-family="Inter,sans-serif" class="svg-subtle">Governance &amp; Compliance</text>
+	              <text x="42" y="441" fill="#A9B6CA" font-size="7" font-family="Inter,sans-serif">合规 · 风控 · 信息披露</text>
+
+              <!-- ══ ORBITAL ENGINE ══ -->
+              <!-- Score glass card — above orbital -->
+              <rect x="220" y="132" width="120" height="44" rx="11" fill="rgba(255,255,255,0.88)" stroke="rgba(255,255,255,0.72)" stroke-width="1" filter="url(#gs)"/>
+              <line x1="238" y1="132" x2="322" y2="132" stroke="rgba(255,255,255,0.92)" stroke-width="1"/>
+              <text x="280" y="149" text-anchor="middle" fill="#7180A3" font-size="7.2" font-weight="600" font-family="Inter,sans-serif" letter-spacing=".1em">综合诊断评分</text>
+              <text x="265" y="171" text-anchor="middle" fill="#2563EB" font-size="26" font-weight="800" font-family="Inter,sans-serif" class="svg-num" id="svgScore">68</text>
+              <text x="290" y="169" fill="#A9B6CA" font-size="8" font-family="Inter,sans-serif" class="svg-unit">/100</text>
+
+              <!-- Light glass orbital card -->
+              <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#lightGlass)" stroke="rgba(37,99,235,0.16)" stroke-width="1.2"/>
+              <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#glassShimmer)" pointer-events="none"/>
+              <!-- Glass top highlight line -->
+              <line x1="226" y1="183.5" x2="334" y2="183.5" stroke="rgba(255,255,255,0.92)" stroke-width="1.5"/>
+              <!-- Ambient glow — softened for light bg -->
+              <circle cx="280" cy="261" r="64" fill="url(#coreGlow)" opacity="0.40"/>
+              <!-- Rings — stronger strokes for light bg -->
+              <circle cx="280" cy="261" r="56" fill="none" stroke="rgba(37,99,235,0.22)" stroke-width="1" stroke-dasharray="3 5">
+                <animateTransform attributeName="transform" type="rotate" from="360 280 261" to="0 280 261" dur="30s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="280" cy="261" r="40" fill="none" stroke="rgba(37,99,235,0.16)" stroke-width="1" stroke-dasharray="2 4">
+                <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="18s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="280" cy="261" r="24" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1" stroke-dasharray="2 3">
+                <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="10s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Orbit nodes ring 1, CW 14s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="14s" repeatCount="indefinite"/>
+                <circle cx="336" cy="261" r="5" fill="#2563EB" filter="url(#glow)" opacity="0.82"/>
+                <circle cx="224" cy="261" r="3.5" fill="#0891B2" opacity="0.68"/>
+              </g>
+              <!-- Orbit nodes ring 2, CCW 10s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="110 280 261" to="-250 280 261" dur="10s" repeatCount="indefinite"/>
+                <circle cx="320" cy="261" r="4" fill="#059669" filter="url(#glow)" opacity="0.78"/>
+                <circle cx="240" cy="261" r="3" fill="#C77800" opacity="0.72"/>
+              </g>
+              <!-- Orbit node ring 3, CW 6s -->
+              <g><animateTransform attributeName="transform" type="rotate" from="55 280 261" to="415 280 261" dur="6s" repeatCount="indefinite"/>
+                <circle cx="304" cy="261" r="2.5" fill="#0891B2" filter="url(#glow)" opacity="0.72"/>
+              </g>
+              <!-- Scanning arc -->
+              <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="3.5s" repeatCount="indefinite"/>
+                <path d="M280,261 L336,261 A56,56 0 0,1 308,309.5 Z" fill="rgba(37,99,235,0.055)"/>
+                <line x1="280" y1="261" x2="336" y2="261" stroke="rgba(37,99,235,0.46)" stroke-width="1.4" stroke-linecap="round"/>
+              </g>
+              <!-- Core halo + pulse -->
+              <circle cx="280" cy="261" r="14" fill="rgba(37,99,235,0.13)" stroke="rgba(37,99,235,0.34)" stroke-width="1.5"/>
+              <circle cx="280" cy="261" r="8" fill="#2563EB">
+                <animate attributeName="r" values="8;10;8" dur="2.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.74;1" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+              <text x="280" y="206" text-anchor="middle" fill="rgba(37,99,235,0.42)" font-size="6.8" font-weight="700" font-family="Inter,sans-serif" letter-spacing=".13em">AI ENGINE · RVC CORE</text>
+              <!-- Live badge -->
+              <rect x="238" y="316" width="84" height="22" rx="7" fill="rgba(5,150,105,0.10)" stroke="rgba(5,150,105,0.25)" stroke-width="1"/>
+              <circle cx="251" cy="327" r="3" fill="#059669"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+              <text x="259" y="331" fill="#059669" font-size="8.2" font-weight="700" font-family="Inter,sans-serif">实时分析中</text>
+
+              <!-- ══ OUTPUT KPI NODES ══ -->
+              <!-- R1: IPO就绪度 — blue, midY=79 -->
+              <rect x="462" y="30" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(37,99,235,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="30" width="194" height="3" rx="1.5" fill="rgba(37,99,235,0.42)"/>
+              <line x1="480" y1="30" x2="638" y2="30" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,41)" fill="none" stroke="#2563EB" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="0,11 4,7 7,9 13,2"/><polyline points="9,2 13,2 13,6"/>
+              </g>
+              <text x="486" y="54" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">IPO就绪度评分</text>
+              <text x="468" y="67" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif">基准 38分 →</text>
+              <text x="468" y="89" fill="#2563EB" font-size="28" font-weight="800" font-family="Inter,sans-serif" font-variant-numeric="tabular-nums" class="svg-num" id="n1">91</text>
+              <text x="507" y="87" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif" class="svg-unit">分</text>
+              <rect x="504" y="74" width="42" height="14" rx="7" fill="#E6FAF3"/>
+              <text x="525" y="84" text-anchor="middle" fill="#059669" font-size="7.5" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">▲ 53 pts</text>
+              <line x1="468" y1="92" x2="647" y2="92" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="110" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">上市审核周期压缩</text>
+              <text x="652" y="110" text-anchor="end" fill="#2563EB" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">−6.2 月</text>
+
+              <!-- R2: 并购估值倍数 — cyan, midY=193 -->
+              <rect x="462" y="144" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(8,145,178,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="144" width="194" height="3" rx="1.5" fill="rgba(8,145,178,0.42)"/>
+              <line x1="480" y1="144" x2="638" y2="144" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,155)" fill="none" stroke="#0891B2" stroke-width="1.35" stroke-linecap="round">
+                <path d="M0,4.5 C5,4.5 8,0 13,0"/><path d="M0,7.5 C5,7.5 8,12 13,12"/>
+                <polyline points="10,0 13,0 13,3.5"/><polyline points="10,12 13,12 13,8.5"/>
+              </g>
+              <text x="486" y="168" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">并购估值倍数</text>
+              <text x="468" y="180" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif">7.2× →</text>
+              <text x="468" y="202" fill="#0891B2" font-size="28" font-weight="800" font-family="Inter,sans-serif" font-variant-numeric="tabular-nums" class="svg-num" id="n2">9.6</text>
+              <text x="518" y="200" fill="#A9B6CA" font-size="7.2" font-family="Inter,sans-serif" class="svg-unit">× EV/EBITDA</text>
+              <line x1="468" y1="207" x2="647" y2="207" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="225" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">尽调周期压缩</text>
+              <text x="652" y="225" text-anchor="end" fill="#0891B2" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">−38天 / −40%</text>
+
+              <!-- R3: 投资人转化率 — green, midY=307 -->
+              <rect x="462" y="258" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(5,150,105,0.13)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="258" width="194" height="3" rx="1.5" fill="rgba(5,150,105,0.42)"/>
+              <line x1="480" y1="258" x2="638" y2="258" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,269)" fill="none" stroke="#059669" stroke-width="1.35" stroke-linecap="round">
+                <circle cx="4.5" cy="3.5" r="2.5"/><path d="M0,12 C0,9 9,9 9,12"/>
+                <circle cx="10.5" cy="3" r="2" stroke-width="1.3" opacity="0.65"/>
+                <path d="M8,12 C8.5,10 14,10 14,12" stroke-width="1.3" opacity="0.65"/>
+              </g>
+              <text x="486" y="282" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">投资人转化率</text>
+              <text x="468" y="306" fill="#059669" font-size="29" font-weight="800" font-family="Inter,sans-serif" class="svg-num">+<tspan id="n3">58</tspan><tspan dx="1" font-size="11" class="svg-unit">%</tspan></text>
+              <text x="468" y="320" fill="#7180A3" font-size="7.8" font-family="Inter,sans-serif">精准触达 → 意向确认</text>
+              <line x1="468" y1="330" x2="647" y2="330" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="346" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">融资效率倍增</text>
+              <text x="652" y="346" text-anchor="end" fill="#059669" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">3.2× 提速</text>
+
+              <!-- R4: 企业估值提升 — amber, midY=421 -->
+              <rect x="462" y="372" width="194" height="98" rx="13" fill="rgba(255,255,255,0.92)" stroke="rgba(199,120,0,0.14)" stroke-width="1" filter="url(#cardShadow)"/>
+              <rect x="462" y="372" width="194" height="3" rx="1.5" fill="rgba(199,120,0,0.42)"/>
+              <line x1="480" y1="372" x2="638" y2="372" stroke="rgba(255,255,255,0.88)" stroke-width="1"/>
+              <g transform="translate(468,383)" fill="none" stroke="#C77800" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="7,0 14,5 7,13 0,5"/><line x1="0" y1="5" x2="14" y2="5"/>
+              </g>
+              <text x="486" y="396" fill="#07132B" font-size="11.5" font-weight="800" font-family="Inter,sans-serif" class="svg-title">企业估值提升</text>
+              <text x="468" y="420" fill="#C77800" font-size="29" font-weight="800" font-family="Inter,sans-serif" class="svg-num">+<tspan id="n4">34</tspan><tspan dx="1" font-size="11" class="svg-unit">%</tspan></text>
+              <text x="468" y="432" fill="#7180A3" font-size="7.8" font-family="Inter,sans-serif" class="svg-delta">$24.2M → $32.4M</text>
+              <line x1="468" y1="440" x2="647" y2="440" stroke="rgba(73,91,125,0.08)" stroke-width="1"/>
+              <text x="468" y="457" fill="#7180A3" font-size="8.2" font-family="Inter,sans-serif">EBITDA 增量</text>
+              <text x="652" y="457" text-anchor="end" fill="#C77800" font-size="8.8" font-weight="700" font-family="Inter,sans-serif" class="svg-delta">+$8.2M</text>
+
+              <!-- ══ FLOW PATHS ══ -->
+              <path id="p1" d="M 140,82 C 178,82 208,220 216,250" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p2" d="M 140,194 C 188,194 214,234 218,252" fill="none" stroke="rgba(8,145,178,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p3" d="M 140,306 C 188,306 214,278 218,268" fill="none" stroke="rgba(5,150,105,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p4" d="M 140,418 C 178,418 210,302 218,272" fill="none" stroke="rgba(199,120,0,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p5" d="M 342,250 C 390,202 420,79 462,79" fill="none" stroke="rgba(37,99,235,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p6" d="M 342,252 C 392,240 420,193 462,193" fill="none" stroke="rgba(8,145,178,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p7" d="M 342,268 C 392,298 420,307 462,307" fill="none" stroke="rgba(5,150,105,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+              <path id="p8" d="M 342,272 C 390,372 420,421 462,421" fill="none" stroke="rgba(199,120,0,0.13)" stroke-width="1.35" stroke-dasharray="4 5"/>
+
+              <!-- ══ ANIMATED DOTS ══ -->
+              <circle r="4" fill="#2563EB" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+              <circle r="4" fill="#0891B2" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.8s"><mpath href="#p2"/></animateMotion></circle>
+              <circle r="4" fill="#059669" filter="url(#glow)" opacity=".82"><animateMotion dur="3.2s" repeatCount="indefinite" begin="1.4s"><mpath href="#p3"/></animateMotion></circle>
+              <circle r="4" fill="#C77800" filter="url(#glow)" opacity=".80"><animateMotion dur="3.8s" repeatCount="indefinite" begin="0.4s"><mpath href="#p4"/></animateMotion></circle>
+              <circle r="4" fill="#2563EB" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite" begin="1.5s"><mpath href="#p5"/></animateMotion></circle>
+              <circle r="4" fill="#0891B2" filter="url(#glow)" opacity=".82"><animateMotion dur="3.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#p6"/></animateMotion></circle>
+              <circle r="4" fill="#059669" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.9s"><mpath href="#p7"/></animateMotion></circle>
+              <circle r="4" fill="#C77800" filter="url(#glow)" opacity=".80"><animateMotion dur="3.2s" repeatCount="indefinite" begin="2s"><mpath href="#p8"/></animateMotion></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="wrap">
+      <div class="proc-grid">
+        <div class="proc-item reveal">
+          <div class="proc-num">01 — 数据采集</div>
+          <div class="proc-title">企业全维建档</div>
+          <div class="proc-desc">结构化七步采集框架，覆盖300+数据节点，精准捕获价值驱动因子。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">02 — AI 分析</div>
+          <div class="proc-title">深度智能诊断</div>
+          <div class="proc-desc">多模型AI引擎并行处理财务、运营与战略信号，揭示隐性价值漏洞与机会。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">03 — 价值标定</div>
+          <div class="proc-title">机构级基准对标</div>
+          <div class="proc-desc">对标186+行业数据库，量化各维度差距，生成可信度超90%的估值区间。</div>
+        </div>
+        <div class="proc-item reveal">
+          <div class="proc-num">04 — 路径执行</div>
+          <div class="proc-title">资本路径落地</div>
+          <div class="proc-desc">30/60/90/180天行动路线图，精准匹配320+机构顾问与专项执行模块。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-ey">核心能力体系</div>
+        <h2 class="sec-ttl">企业价值的六大支柱</h2>
+        <p class="sec-sub">全方位诊断覆盖，精准识别每一个影响机构级价值实现的关键变量。</p>
+      </div>
+      <div class="bento">
+        <div class="b-card wide accent reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">01</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="svc-title">AI价值诊断引擎</div>
+          <div class="svc-desc">自主研发的多模型协同系统，系统评估300+企业价值驱动因子，生成机构级诊断评分与深度子维度分析，对标186+行业纵向数据，输出精准估值参考与行动优先级。</div>
+          <span class="svc-tag">核心引擎 · 300+ 维度</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">02</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="svc-title">IPO就绪控制台</div>
+          <div class="svc-desc">端到端IPO筹备管理，从合规差距分析到承销商遴选，系统化追踪每一个上市里程碑。</div>
+          <span class="svc-tag">资本市场</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">03</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="svc-title">财务健康审计</div>
+          <div class="svc-desc">深度财务建模与盈利质量分析，识别EBITDA提升路径，重建投资人信心基础。</div>
+          <span class="svc-tag">财务运营</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">04</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="svc-title">并购价值优化</div>
+          <div class="svc-desc">买方与卖方尽职调查加速，AI辅助生成价值桥接模型，量化协同效应，支撑交易决策。</div>
+          <span class="svc-tag">并购交易</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">05</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="svc-title">投资人精准匹配</div>
+          <div class="svc-desc">基于价值画像的AI智能匹配，对接320+机构顾问、PE基金与战略投资方，缩短融资周期。</div>
+          <span class="svc-tag">网络资源 · 320+ 顾问</span>
+        </div>
+        <div class="b-card reveal">
+          <div class="b-card-glow"></div>
+          <div class="svc-num">06</div>
+          <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="svc-title">资本叙事构建</div>
+          <div class="svc-desc">以诊断数据为基础，打造高说服力的投资人故事，覆盖商业计划书、CIM与路演材料全链路输出。</div>
+          <span class="svc-tag">叙事策略</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kpi-strip">
+    <div class="wrap">
+      <div class="kpi-grid">
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="2486" data-suffix="+">0</div>
+          <div class="kpi-lbl">服务企业总数</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="88"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="186" data-suffix="+">0</div>
+          <div class="kpi-lbl">覆盖行业纵深</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="72"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="320" data-suffix="+">0</div>
+          <div class="kpi-lbl">机构顾问网络</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="80"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-count="68" data-suffix="%">0</div>
+          <div class="kpi-lbl">客户成功率</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="68"></div></div>
+        </div>
+        <div class="kpi-item reveal">
+          <div class="kpi-val" data-prefix="$" data-count="42" data-suffix="B+">0</div>
+          <div class="kpi-lbl">累计解锁价值</div>
+          <div class="kpi-bar"><div class="kpi-bfill" data-w="95"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Brand Cases / Success Wall ── -->
+  <section class="success-wall">
+    <div class="sw-head reveal">
+      <div class="sw-title">品牌案例</div>
+      <div class="sw-divider"></div>
+    </div>
+
+    <!-- Row 1: IPO 成功上市 → left -->
+    <div class="sw-row-label">成功上市 &nbsp;·&nbsp; NASDAQ / NYSE / A股</div>
+    <div class="marquee-wrap">
+      <div class="marquee-track go-left">
+        <!-- === set 1 === -->
+        <!-- ARMOGI BTOC -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 108 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <text x="1" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#0F172A" letter-spacing="-1">ARM</text>
+              <text x="60" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#2563EB" letter-spacing="-1">OGI</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BTOC</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- MASSIMO MAMO -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 138 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <polygon points="16,4 24,4 28,11 24,18 16,18 12,11" fill="#D97706"/>
+              <text x="20" y="15" font-family="'Arial Black',sans-serif" font-size="10" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="34" y="24" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#1a1a2e">MASSIMO</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MAMO</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- BAIYA BIYA -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 128 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <polygon points="14,32 22,32 18,20" fill="#0284C7"/>
+              <polygon points="10,32 14,32 18,20" fill="#60A5FA" opacity="0.6"/>
+              <text x="28" y="27" font-family="'Arial Black',sans-serif" font-size="22" font-weight="900" fill="#0F172A">BAIYA</text>
+              <line x1="28" y1="30" x2="118" y2="30" stroke="#CBD5E1" stroke-width="0.8"/>
+              <text x="28" y="36" font-family="Arial,sans-serif" font-size="7.5" fill="#64748B" letter-spacing="0.04em">Baiya International Group Inc.</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BIYA</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- Autozi AZI -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <text x="1" y="22" font-family="Georgia,'Times New Roman',serif" font-size="22" font-style="italic" font-weight="700" fill="#0369A1">Autozi.com</text>
+              <text x="2" y="34" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#F97316" font-style="italic">中驰车福</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">AZI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- MAISON SOLUTIONS MSS -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 168 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#1E40AF"/>
+              <text x="14" y="22" font-family="'Arial Black',sans-serif" font-size="17" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="36" y="18" font-family="'Arial Black',sans-serif" font-size="14" fill="#0F172A" font-weight="900">MAISON</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="10" fill="#475569" font-weight="600" letter-spacing="0.12em">SOLUTIONS</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MSS</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- WHITEFIBER WYFI -->
+        <div class="ipo-card" style="min-width:200px;">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 170 28" xmlns="http://www.w3.org/2000/svg" height="28">
+              <text x="0" y="22" font-family="'Arial Black',Impact,sans-serif" font-size="20" font-weight="900" fill="#0F172A" letter-spacing="0.5">WHITEFIBER</text>
+              <text x="166" y="22" font-family="'Arial Black',sans-serif" font-size="20" fill="#94A3B8">_</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">WYFI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- GigaCloud GCT -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 172 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="8" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="2" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="15" width="11" height="11" rx="2" fill="#14B8A6" opacity="0.7"/>
+              <text x="30" y="16" font-family="Arial,sans-serif" font-size="13" fill="#0F172A" font-weight="700">大健云仓</text>
+              <text x="30" y="28" font-family="Arial,sans-serif" font-size="8.5" fill="#0D9488" font-weight="600" letter-spacing="0.06em">GIGACLOUD TECHNOLOGY</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">GCT</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <!-- 聚美优品 JMEI -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 30" xmlns="http://www.w3.org/2000/svg" height="30">
+              <text x="0" y="24" font-family="'Arial Black',sans-serif" font-size="24" font-weight="900" fill="#DB2777">聚美优品</text>
+              <text x="100" y="22" font-family="Arial,sans-serif" font-size="10" fill="#9CA3AF" font-weight="500" letter-spacing="0.03em">JUMEI.COM</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">JMEI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <!-- 步长制药 ZBT -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 156 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#DC2626"/>
+              <text x="14" y="14" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">步长</text>
+              <text x="14" y="25" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">制药</text>
+              <text x="36" y="20" font-family="'Arial Black',sans-serif" font-size="16" fill="#0F172A" font-weight="900">Buchang</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="9" fill="#64748B" letter-spacing="0.06em">BUCHANG PHARMA</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">ZBT</span><span class="ipo-card-exch">A股</span></div>
+        </div>
+        <!-- === set 2 (duplicate for seamless loop) === -->
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 108 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <text x="1" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#0F172A" letter-spacing="-1">ARM</text>
+              <text x="60" y="26" font-family="'Arial Black',Impact,sans-serif" font-size="26" font-weight="900" fill="#2563EB" letter-spacing="-1">OGI</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BTOC</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 138 32" xmlns="http://www.w3.org/2000/svg" height="32">
+              <polygon points="16,4 24,4 28,11 24,18 16,18 12,11" fill="#D97706"/>
+              <text x="20" y="15" font-family="'Arial Black',sans-serif" font-size="10" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="34" y="24" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#1a1a2e">MASSIMO</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MAMO</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 128 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <polygon points="14,32 22,32 18,20" fill="#0284C7"/>
+              <polygon points="10,32 14,32 18,20" fill="#60A5FA" opacity="0.6"/>
+              <text x="28" y="27" font-family="'Arial Black',sans-serif" font-size="22" font-weight="900" fill="#0F172A">BAIYA</text>
+              <line x1="28" y1="30" x2="118" y2="30" stroke="#CBD5E1" stroke-width="0.8"/>
+              <text x="28" y="36" font-family="Arial,sans-serif" font-size="7.5" fill="#64748B" letter-spacing="0.04em">Baiya International Group Inc.</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">BIYA</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <text x="1" y="22" font-family="Georgia,'Times New Roman',serif" font-size="22" font-style="italic" font-weight="700" fill="#0369A1">Autozi.com</text>
+              <text x="2" y="34" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#F97316" font-style="italic">中驰车福</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">AZI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 168 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#1E40AF"/>
+              <text x="14" y="22" font-family="'Arial Black',sans-serif" font-size="17" fill="#fff" text-anchor="middle" dominant-baseline="middle" font-weight="900">M</text>
+              <text x="36" y="18" font-family="'Arial Black',sans-serif" font-size="14" fill="#0F172A" font-weight="900">MAISON</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="10" fill="#475569" font-weight="600" letter-spacing="0.12em">SOLUTIONS</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">MSS</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card" style="min-width:200px;">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 170 28" xmlns="http://www.w3.org/2000/svg" height="28">
+              <text x="0" y="22" font-family="'Arial Black',Impact,sans-serif" font-size="20" font-weight="900" fill="#0F172A" letter-spacing="0.5">WHITEFIBER</text>
+              <text x="166" y="22" font-family="'Arial Black',sans-serif" font-size="20" fill="#94A3B8">_</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">WYFI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 172 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="8" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="2" width="11" height="11" rx="2" fill="#0D9488"/>
+              <rect x="13" y="15" width="11" height="11" rx="2" fill="#14B8A6" opacity="0.7"/>
+              <text x="30" y="16" font-family="Arial,sans-serif" font-size="13" fill="#0F172A" font-weight="700">大健云仓</text>
+              <text x="30" y="28" font-family="Arial,sans-serif" font-size="8.5" fill="#0D9488" font-weight="600" letter-spacing="0.06em">GIGACLOUD TECHNOLOGY</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">GCT</span><span class="ipo-card-exch">NASDAQ</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 148 30" xmlns="http://www.w3.org/2000/svg" height="30">
+              <text x="0" y="24" font-family="'Arial Black',sans-serif" font-size="24" font-weight="900" fill="#DB2777">聚美优品</text>
+              <text x="100" y="22" font-family="Arial,sans-serif" font-size="10" fill="#9CA3AF" font-weight="500" letter-spacing="0.03em">JUMEI.COM</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">JMEI</span><span class="ipo-card-exch">NYSE</span></div>
+        </div>
+        <div class="ipo-card">
+          <div class="ipo-logo-area">
+            <svg viewBox="0 0 156 36" xmlns="http://www.w3.org/2000/svg" height="36">
+              <rect x="0" y="4" width="28" height="28" rx="5" fill="#DC2626"/>
+              <text x="14" y="14" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">步长</text>
+              <text x="14" y="25" font-family="'Arial Black',sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="900">制药</text>
+              <text x="36" y="20" font-family="'Arial Black',sans-serif" font-size="16" fill="#0F172A" font-weight="900">Buchang</text>
+              <text x="36" y="32" font-family="Arial,sans-serif" font-size="9" fill="#64748B" letter-spacing="0.06em">BUCHANG PHARMA</text>
+            </svg>
+          </div>
+          <div class="ipo-card-meta"><span class="ipo-card-ticker">ZBT</span><span class="ipo-card-exch">A股</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 合作伙伴 → right -->
+    <div class="sw-row-label" style="margin-top:28px;">服务合作伙伴</div>
+    <div class="marquee-wrap">
+      <div class="marquee-track go-right">
+        <!-- === set 1 === -->
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 80 20" height="20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,18 16,18 13,10" fill="#16A34A"/><text x="19" y="16" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#DC2626">新东方</text><text x="60" y="14" font-family="Arial,sans-serif" font-size="8" fill="#6B7280">XDF.CN</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 120 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="13" font-weight="900" fill="#2563EB">intelliFusion</text><text x="82" y="15" font-family="Arial,sans-serif" font-size="9" fill="#64748B"> 云天励飞</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="none" stroke="#0B6FFB" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#0B6FFB"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F172A">格灵深瞳</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 100 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="5" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="1" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="11" width="8" height="8" rx="1.5" fill="#14B8A6" opacity="0.7"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#0F172A">拉卡拉</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 88 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',sans-serif" font-size="15" font-weight="900" fill="#F97316">一起作业</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#1E40AF">BaTeLab</text><text x="60" y="12" font-family="serif" font-size="11" fill="#3B82F6">β</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 96 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="15" font-weight="900" fill="#1E3A8A" letter-spacing="0.5">CONTROLSYS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 44 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#0369A1" letter-spacing="1">CFAR</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="3" width="14" height="14" rx="2" fill="#374151"/><text x="7" y="13" font-family="'Arial Black',sans-serif" font-size="8" fill="#fff" text-anchor="middle" font-weight="900">M</text><text x="18" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="600" fill="#374151">MICROOS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F766E">全盛科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 42 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#16A34A">Nums</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 82 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#111827">Vfine</text><text x="43" y="15" font-family="Arial,sans-serif" font-size="11" font-weight="600" fill="#374151"> MUSIC</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#B45309">帕皮科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 56 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" fill="#111827"/><text x="10" y="14" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">ETB</text><text x="24" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111827">com</text></svg></div>
+        </div>
+        <!-- === set 2 (duplicate) === -->
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 80 20" height="20" xmlns="http://www.w3.org/2000/svg"><polygon points="10,18 16,18 13,10" fill="#16A34A"/><text x="19" y="16" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#DC2626">新东方</text><text x="60" y="14" font-family="Arial,sans-serif" font-size="8" fill="#6B7280">XDF.CN</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 120 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="13" font-weight="900" fill="#2563EB">intelliFusion</text><text x="82" y="15" font-family="Arial,sans-serif" font-size="9" fill="#64748B"> 云天励飞</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" fill="none" stroke="#0B6FFB" stroke-width="2"/><circle cx="10" cy="10" r="3" fill="#0B6FFB"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F172A">格灵深瞳</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 100 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="5" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="1" width="8" height="8" rx="1.5" fill="#0D9488"/><rect x="10" y="11" width="8" height="8" rx="1.5" fill="#14B8A6" opacity="0.7"/><text x="22" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#0F172A">拉卡拉</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 88 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',sans-serif" font-size="15" font-weight="900" fill="#F97316">一起作业</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial',sans-serif" font-size="13" font-weight="700" fill="#1E40AF">BaTeLab</text><text x="60" y="12" font-family="serif" font-size="11" fill="#3B82F6">β</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 96 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="15" font-weight="900" fill="#1E3A8A" letter-spacing="0.5">CONTROLSYS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 44 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#0369A1" letter-spacing="1">CFAR</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="3" width="14" height="14" rx="2" fill="#374151"/><text x="7" y="13" font-family="'Arial Black',sans-serif" font-size="8" fill="#fff" text-anchor="middle" font-weight="900">M</text><text x="18" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="600" fill="#374151">MICROOS</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 68 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#0F766E">全盛科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 42 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="'Arial Black',Impact,sans-serif" font-size="18" font-weight="900" fill="#16A34A">Nums</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 82 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="'Arial Black',sans-serif" font-size="14" font-weight="900" fill="#111827">Vfine</text><text x="43" y="15" font-family="Arial,sans-serif" font-size="11" font-weight="600" fill="#374151"> MUSIC</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 72 20" height="20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#B45309">帕皮科技</text></svg></div>
+        </div>
+        <div class="partner-pill">
+          <div class="pp-logo"><svg viewBox="0 0 56 20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" fill="#111827"/><text x="10" y="14" font-family="Arial,sans-serif" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">ETB</text><text x="24" y="15" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111827">com</text></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:var(--bg);">
+    <div class="wrap">
+      <div class="footer">
+        <div class="footer-l">© 2026 RVC Capital Partners · 企业价值智能诊断平台</div>
+        <div class="footer-r">专为机构级资本智能而生</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const ham=document.getElementById('ham'),mn=document.getElementById('mob-nav');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mn.classList.toggle('open');});
+// Typewriter hero headline — prefix types once, then 真实价值 ↔ Real Value loop
+(function(){
+  const h1=document.querySelector('.hero-h');
+  if(!h1)return;
+
+  // Fixed prefix (never deleted)
+  const prefix=[];
+  [['72小时内',false],['\n',false],['精准解锁',true],['\n',false],['企业',false]]
+    .forEach(([str,acc])=>[...str].forEach(c=>prefix.push({c,acc})));
+
+  // Words that alternate — both rendered as blue accent
+  const words=['真实价值','Real Value'];
+  let wordIdx=0, typed=[];
+
+  function buildHTML(){
+    let html='',inAcc=false;
+    typed.forEach(({c,acc})=>{
+      if(c==='\n'){if(inAcc){html+='</span>';inAcc=false;}html+='<br>';return;}
+      if(acc&&!inAcc){html+='<span class="accent">';inAcc=true;}
+      if(!acc&&inAcc){html+='</span>';inAcc=false;}
+      html+=c==='&'?'&amp;':c==='<'?'&lt;':c==='>'?'&gt;':c;
+    });
+    if(inAcc)html+='</span>';
+    html+='<span class="type-cursor">|</span>';
+    return html;
+  }
+
+  // ① Type the fixed prefix once
+  let pi=0;
+  function typePrefix(){
+    if(pi>=prefix.length){setTimeout(typeWord,380);return;}
+    typed.push(prefix[pi++]);
+    h1.innerHTML=buildHTML();
+    setTimeout(typePrefix,typed[typed.length-1].c==='\n'?140:65);
+  }
+
+  // ② Type current word char-by-char (accent blue), then pause
+  function typeWord(){
+    document.dispatchEvent(new CustomEvent('rvc:wordstart'));
+    const chars=[...words[wordIdx]].map(c=>({c,acc:true}));
+    let ci=0;
+    (function tick(){
+      if(ci>=chars.length){setTimeout(deleteWord,1900);return;}
+      typed.push(chars[ci++]);
+      h1.innerHTML=buildHTML();
+      setTimeout(tick,85);
+    })();
+  }
+
+  // ③ Delete back to prefix length, then switch word
+  function deleteWord(){
+    if(typed.length<=prefix.length){
+      wordIdx=(wordIdx+1)%words.length;
+      setTimeout(typeWord,340);
+      return;
+    }
+    typed.pop();
+    h1.innerHTML=buildHTML();
+    setTimeout(deleteWord,46);
+  }
+
+  h1.innerHTML='<span class="type-cursor">|</span>';
+  setTimeout(typePrefix,320);
+})();
+const ro=new IntersectionObserver((es)=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ro.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function animCount(el){
+  const t=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=1600,s=performance.now();
+  if(isNaN(t))return;
+  function step(n){const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(t*e).toLocaleString()+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+const ko=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){animCount(e.target);const b=e.target.closest('.kpi-item')?.querySelector('.kpi-bfill');if(b)setTimeout(()=>b.style.width=b.dataset.w+'%',200);ko.unobserve(e.target);}});},{threshold:0.5});
+document.querySelectorAll('.kpi-val[data-count]').forEach(el=>ko.observe(el));
+// SVG engine counter animation — synced to typewriter via rvc:wordstart event
+(function(){
+  function ease(p){return 1-Math.pow(1-p,4);}
+  var counters=[
+    {id:'n1',      from:38,  to:91,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'n2',      from:7.2, to:9.6, dur:1400, fmt:function(v){return v.toFixed(1);}},
+    {id:'n3',      from:0,   to:58,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'n4',      from:0,   to:34,  dur:1400, fmt:function(v){return Math.round(v);}},
+    {id:'svgScore',from:0,   to:68,  dur:1600, fmt:function(v){return Math.round(v);}}
+  ];
+  // Show "before" baseline values before any animation fires
+  counters.forEach(function(c){
+    var el=document.getElementById(c.id);
+    if(el) el.textContent=c.fmt(c.from);
+  });
+  function runOne(c){
+    var el=document.getElementById(c.id);if(!el)return;
+    var t0=performance.now();
+    (function tick(now){
+      var p=Math.min((now-t0)/c.dur,1),v=c.from+(c.to-c.from)*ease(p);
+      el.textContent=c.fmt(v);
+      if(p<1)requestAnimationFrame(tick);
+    })(t0);
+  }
+  function runAll(){counters.forEach(runOne);}
+  // Fire in lockstep with the typewriter word-start event
+  document.addEventListener('rvc:wordstart',runAll);
+})();
+</script>
+</body>
+</html>

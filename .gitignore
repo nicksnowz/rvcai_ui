@@ -1,0 +1,10 @@
+.DS_Store
+.claude/
+.vercel/
+*.log
+.~*
+
+# Design/source artifacts not needed for the static site runtime
+*.docx
+*.pdf
+image*
