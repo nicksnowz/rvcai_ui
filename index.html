@@ -90,6 +90,7 @@
   font-weight:400;
   opacity:.86;
 }
+.engine-card svg{max-width:100%;height:auto;}
 
 /* Process */
 .process{padding:52px 0;border-top:1px solid var(--bl);border-bottom:1px solid var(--bl);}
@@ -199,9 +200,15 @@
 .pp-logo svg{max-height:22px;max-width:100px;}
 
 @media(max-width:768px){
-  .hero{padding:44px 0 36px;}
-  .hero-grid{grid-template-columns:1fr;gap:36px;}
-  .engine-wrap{order:-1;}
+  .hero{padding:34px 0 36px;}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:30px;}
+  .hero-grid>*{min-width:0;}
+  .hero-h{font-size:40px;line-height:1.1;min-height:3.3em;margin-bottom:18px;}
+  .hero-p{font-size:15px;line-height:1.7;margin-bottom:24px;}
+  .hero-trust{margin-top:24px;gap:12px;}
+  .engine-wrap{order:0;min-width:0;width:calc(100vw - 40px);overflow:hidden;}
+  .engine-card{width:100%;max-width:100%;border-radius:20px;padding:6px;overflow:hidden;}
+  .engine-card svg{width:100% !important;height:auto !important;}
   .bento{grid-template-columns:1fr;}
   .b-card.wide{grid-column:span 1;}
   .proc-grid{grid-template-columns:1fr 1fr;}
