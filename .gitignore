@@ -1,6 +1,7 @@
 .DS_Store
 .claude/
 .vercel/
+demo-video/
 *.log
 .~*
 
