@@ -18,7 +18,7 @@
   margin-bottom:36px;
 }
 .mh-left{}
-.mh-ey{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.mh-ey{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-hot);margin-bottom:6px;}
 .mh-title{font-size:28px;font-weight:800;color:var(--navy);letter-spacing:-.03em;}
 .mh-sub{font-size:14px;color:var(--t2);margin-top:6px;}
 .mh-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
@@ -26,85 +26,95 @@
 /* Filter bar */
 .filter-bar{
   display:flex;align-items:center;gap:8px;
-  background:var(--card);border:1px solid var(--bl);
-  border-radius:14px;padding:8px;
+  background:var(--bg-elev);border:1px solid var(--line);
+  border-radius:2px;padding:8px;
   box-shadow:var(--sh);
   margin-bottom:28px;flex-wrap:wrap;
 }
 .filter-btn{
-  padding:8px 18px;border-radius:10px;border:none;
+  padding:8px 18px;border-radius:2px;
+  border:1px solid var(--line);
   font-size:12.5px;font-weight:600;cursor:pointer;
   transition:all .18s;color:var(--t2);background:transparent;
 }
-.filter-btn:hover{background:var(--blue-s);color:var(--blue);}
-.filter-btn.active{background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(11,111,251,0.25);}
-.filter-sep{width:1px;height:20px;background:var(--bl);}
+.filter-btn:hover{background:var(--bg-elev-2);color:#e8edf5;border-color:var(--accent-border);}
+.filter-btn.active{background:var(--bg-elev-2);color:#e8edf5;border:1px solid var(--accent-border);box-shadow:none;}
+.filter-sep{width:1px;height:20px;background:var(--line);}
 .filter-search{
   display:flex;align-items:center;gap:8px;
-  padding:8px 14px;border-radius:10px;background:rgba(11,111,251,0.04);
-  border:1px solid var(--bl);flex:1;min-width:160px;
+  padding:8px 14px;border-radius:2px;background:var(--bg-elev);
+  border:1px solid var(--line);flex:1;min-width:160px;
 }
-.filter-search svg{width:14px;height:14px;stroke:var(--t4);fill:none;stroke-width:2;flex-shrink:0;}
+.filter-search svg{width:14px;height:14px;stroke:var(--t3);fill:none;stroke-width:2;flex-shrink:0;}
 .filter-search input{border:none;background:transparent;font-size:13px;color:var(--t1);font-family:inherit;outline:none;width:100%;}
-.filter-search input::placeholder{color:var(--t4);}
+.filter-search input::placeholder{color:var(--t3);}
 
 /* Stats strip */
 .stats-strip{
   display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;
 }
 .stat-card{
-  background:var(--card);border:1px solid var(--bl);
-  border-radius:16px;padding:18px 20px;
-  box-shadow:0 4px 16px rgba(15,45,90,0.06);
+  background:var(--bg-elev);border:1px solid var(--line);
+  border-radius:2px;padding:18px 20px;
+  box-shadow:var(--sh);
   display:flex;align-items:center;gap:14px;
 }
 .stat-ico{
-  width:42px;height:42px;border-radius:12px;background:var(--blue-s);
+  width:42px;height:42px;border-radius:2px;background:var(--bg-elev-2);
+  border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.stat-ico svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.8;}
-.stat-val{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.03em;line-height:1;}
+.stat-ico svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;}
+.stat-val{font-family:var(--font-mono);font-size:22px;font-weight:600;color:var(--navy);letter-spacing:-.03em;line-height:1;}
 .stat-lbl{font-size:11px;color:var(--t3);margin-top:3px;}
 
 /* Module grid — 3 columns equal */
 .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 
-/* Module card */
+/* Module card — inverse-focus grid (signature interaction) */
 .mod-card{
-  background:var(--card);border:1px solid var(--bl);
-  border-radius:20px;padding:0;
+  background:var(--bg-elev);border:1px solid var(--line);
+  border-radius:2px;padding:0;
   box-shadow:var(--sh);overflow:hidden;
-  transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s,border-color .28s;
   cursor:pointer;
+  opacity:.55;filter:saturate(.65);
+  transition:opacity .48s ease,filter .48s ease,transform .48s ease,box-shadow .48s ease;
 }
-.mod-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(11,111,251,0.13);border-color:var(--bm);}
+.mod-card:hover{
+  opacity:1;filter:saturate(1);transform:translateY(-3px);
+  box-shadow:0 1px 2px rgba(0,0,0,.35),0 8px 22px -12px rgba(0,0,0,.5),
+    0 28px 56px -32px rgba(0,0,0,.55),0 36px 72px -40px rgba(43,98,227,.14);
+}
+.module-grid:hover .mod-card:not(:hover){opacity:.32;filter:saturate(.5);}
+/* Keep the module code/eyebrow legible at rest as the anchor element */
+.mod-card .mod-num{opacity:1;}
 .mod-card.featured{
-  border-color:rgba(11,111,251,0.28);
-  box-shadow:0 8px 32px rgba(11,111,251,0.10);
+  border-color:var(--accent-border);
 }
 
-/* Card top bar with gradient */
+/* Card top bar */
 .mod-card-top{
   padding:20px 20px 16px;
-  background:linear-gradient(135deg,rgba(11,111,251,0.04),rgba(35,183,255,0.02));
-  border-bottom:1px solid var(--bl);
+  background:rgba(43,98,227,0.04);
+  border-bottom:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:flex-start;
 }
-.mod-card.top-ipo .mod-card-top{background:linear-gradient(135deg,rgba(11,111,251,0.08),rgba(35,183,255,0.04));}
-.mod-card.top-fin .mod-card-top{background:linear-gradient(135deg,rgba(22,179,100,0.06),rgba(22,179,100,0.02));}
-.mod-card.top-ma .mod-card-top{background:linear-gradient(135deg,rgba(35,183,255,0.08),rgba(11,111,251,0.04));}
-.mod-card.top-ai .mod-card-top{background:linear-gradient(135deg,rgba(138,43,226,0.06),rgba(11,111,251,0.04));}
-.mod-card.top-cap .mod-card-top{background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));}
-.mod-card.top-inv .mod-card-top{background:linear-gradient(135deg,rgba(240,68,56,0.05),rgba(245,158,11,0.03));}
+.mod-card.top-ipo .mod-card-top{background:rgba(43,98,227,0.07);}
+.mod-card.top-fin .mod-card-top{background:rgba(43,98,227,0.04);}
+.mod-card.top-ma .mod-card-top{background:rgba(43,98,227,0.06);}
+.mod-card.top-ai .mod-card-top{background:rgba(43,98,227,0.05);}
+.mod-card.top-cap .mod-card-top{background:rgba(43,98,227,0.04);}
+.mod-card.top-inv .mod-card-top{background:rgba(43,98,227,0.04);}
 
 .mod-ico-wrap{display:flex;flex-direction:column;gap:10px;}
 .mod-ico{
-  width:46px;height:46px;border-radius:13px;
+  width:46px;height:46px;border-radius:2px;
+  border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
   transition:all .22s;
 }
 .mod-ico svg{width:22px;height:22px;fill:none;stroke-width:1.8;transition:stroke .22s;}
-.mod-card:hover .mod-ico{box-shadow:0 6px 20px rgba(11,111,251,0.25);}
+.mod-card:hover .mod-ico{border-color:var(--accent-border);}
 
 .mod-tag-wrap{display:flex;gap:5px;flex-wrap:wrap;}
 
@@ -115,87 +125,88 @@
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   text-align:center;
 }
-.prog-pct{font-size:13px;font-weight:800;color:var(--navy);line-height:1;}
-.prog-label{font-size:7px;font-weight:600;color:var(--t4);letter-spacing:.04em;}
+.prog-pct{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--navy);line-height:1;}
+.prog-label{font-size:7px;font-weight:600;color:var(--t3);letter-spacing:.04em;}
 
 /* Card body */
 .mod-card-body{padding:18px 20px;}
-.mod-num{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:6px;}
+.mod-num{font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-hot);margin-bottom:6px;}
 .mod-title{font-size:16px;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin-bottom:8px;}
 .mod-desc{font-size:12.5px;color:var(--t2);line-height:1.6;margin-bottom:14px;}
 
 .mod-features{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 .mod-feat{display:flex;align-items:flex-start;gap:7px;font-size:11.5px;color:var(--t2);}
-.mod-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px;}
+.mod-feat-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px;}
 
 /* Card footer */
 .mod-card-foot{
-  padding:14px 20px;border-top:1px solid var(--bl);
+  padding:14px 20px;border-top:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;
 }
-.mod-foot-meta{font-size:11px;color:var(--t4);}
+.mod-foot-meta{font-size:11px;color:var(--t3);}
 .mod-foot-meta strong{color:var(--t2);font-weight:600;}
 
 /* Launch button */
 .mod-launch{
   display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:700;color:var(--blue);
-  padding:6px 14px;border-radius:8px;
-  background:rgba(11,111,251,0.06);border:1px solid rgba(11,111,251,0.15);
+  font-size:12px;font-weight:700;color:var(--accent);
+  padding:6px 14px;border-radius:2px;
+  background:transparent;border:1px solid var(--accent-border);
   transition:all .18s;
 }
-.mod-launch:hover{background:var(--blue);color:#fff;border-color:transparent;}
+.mod-launch:hover{background:var(--accent-soft);color:#e8edf5;border-color:var(--accent-border);}
 
 /* Module detail panel (slide-in) */
 .mod-detail{
   position:fixed;top:0;right:-480px;bottom:0;width:460px;
-  background:var(--card);border-left:1px solid var(--bl);
-  box-shadow:-24px 0 80px rgba(11,111,251,0.10);
+  background:var(--bg-elev);border-left:1px solid var(--line);
+  border-radius:2px 0 0 2px;
+  box-shadow:-24px 0 80px rgba(0,0,0,0.5);
   z-index:300;transition:right .38s cubic-bezier(.22,1,.36,1);
   overflow-y:auto;
 }
 .mod-detail.open{right:0;}
 .mod-detail-overlay{
-  position:fixed;inset:0;background:rgba(7,19,43,0.25);
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
   z-index:299;opacity:0;pointer-events:none;transition:opacity .3s;
 }
 .mod-detail-overlay.open{opacity:1;pointer-events:auto;}
 
 .mod-detail-head{
-  padding:24px;border-bottom:1px solid var(--bl);
-  background:linear-gradient(135deg,#07132B,#0a1f4e);
+  padding:24px;border-bottom:1px solid var(--line);
+  background:var(--bg-elev-2);
   position:sticky;top:0;z-index:10;
 }
 .mdh-close{
   display:flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);
+  font-size:11px;font-weight:600;color:var(--t2);
   cursor:pointer;background:none;border:none;margin-bottom:12px;
   transition:color .18s;
 }
-.mdh-close:hover{color:#fff;}
+.mdh-close:hover{color:#e8edf5;}
 .mdh-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
-.mdh-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.02em;}
-.mdh-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;}
+.mdh-title{font-size:20px;font-weight:800;color:#e8edf5;letter-spacing:-.02em;}
+.mdh-sub{font-family:var(--font-mono);font-size:13px;color:var(--t2);margin-top:4px;}
 
 .mod-detail-body{padding:24px;}
 .md-section{margin-bottom:24px;}
-.md-section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.md-section-title{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-hot);margin-bottom:12px;}
 .md-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
 .md-kpi{
-  background:rgba(11,111,251,0.04);border:1px solid var(--bl);
-  border-radius:12px;padding:12px;text-align:center;
+  background:var(--bg-elev-2);border:1px solid var(--line);
+  border-radius:2px;padding:12px;text-align:center;
 }
-.md-kpi-val{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.03em;}
+.md-kpi-val{font-family:var(--font-mono);font-size:20px;font-weight:600;color:var(--navy);letter-spacing:-.03em;}
 .md-kpi-lbl{font-size:10px;color:var(--t3);margin-top:3px;}
 .md-item{
   display:flex;align-items:flex-start;gap:10px;
-  padding:10px 0;border-bottom:1px solid rgba(11,111,251,0.06);
+  padding:10px 0;border-bottom:1px solid var(--line-soft);
   font-size:13px;color:var(--t2);
 }
 .md-item:last-child{border-bottom:none;}
-.md-item-ico{width:20px;height:20px;border-radius:6px;background:var(--blue-s);
+.md-item-ico{width:20px;height:20px;border-radius:2px;background:var(--accent-soft);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.md-item-ico svg{width:11px;height:11px;stroke:var(--blue);fill:none;stroke-width:2;}
+.md-item-ico svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2;}
 
 @media(max-width:1024px){.module-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:768px){
@@ -300,8 +311,8 @@
         <div class="mod-card top-ipo featured reveal" data-category="capital" onclick="openDetail('ipo')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(11,111,251,0.10);">
-                <svg viewBox="0 0 24 24" style="stroke:#0B6FFB"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="22 20 2 20"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><polyline points="22 20 2 20"/></svg>
               </div>
               <div class="mod-tag-wrap">
                 <span class="tag tag-blue">资本市场</span>
@@ -310,12 +321,12 @@
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(11,111,251,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#0B6FFB" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="8.3"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#0B6FFB">96%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">96%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -339,8 +350,8 @@
         <div class="mod-card top-fin reveal" data-category="financial" onclick="openDetail('fin')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(22,179,100,0.10);">
-                <svg viewBox="0 0 24 24" style="stroke:#16B364"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               </div>
               <div class="mod-tag-wrap">
                 <span class="tag tag-green">财务优化</span>
@@ -348,12 +359,12 @@
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(22,179,100,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#16B364" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="8.3"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#16B364">94%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">94%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -361,10 +372,10 @@
             <div class="mod-title">财务健康深度审计</div>
             <div class="mod-desc">机构级财务建模、盈利质量分析与EBITDA优化，全面提升优车汇财务可信度与投资人吸引力。</div>
             <div class="mod-features">
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#16B364"></div>盈利质量（QoE）深度评估</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#16B364"></div>营运资本优化与核心财务KPI体系</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#16B364"></div>收入确认规范化与GAAP/IFRS对齐</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#16B364"></div>三表联动财务模型构建</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>盈利质量（QoE）深度评估</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>营运资本优化与核心财务KPI体系</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>收入确认规范化与GAAP/IFRS对齐</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>三表联动财务模型构建</div>
             </div>
           </div>
           <div class="mod-card-foot">
@@ -377,21 +388,21 @@
         <div class="mod-card top-ma reveal" data-category="strategy" onclick="openDetail('ma')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(35,183,255,0.10);">
-                <svg viewBox="0 0 24 24" style="stroke:#23B7FF"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <div class="mod-tag-wrap">
-                <span class="tag" style="background:rgba(35,183,255,0.1);color:#0B6FFB;">战略并购</span>
+                <span class="tag" style="background:rgba(43,98,227,0.15);color:#5b8aee;">战略并购</span>
               </div>
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(35,183,255,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#23B7FF" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="12.5"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#23B7FF">91%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">91%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -399,10 +410,10 @@
             <div class="mod-title">战略并购优化</div>
             <div class="mod-desc">AI辅助尽调、价值桥接分析与交易结构设计，加速优车汇的买方/卖方并购进程。</div>
             <div class="mod-features">
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#23B7FF"></div>标的筛选与交易机会识别</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#23B7FF"></div>AI尽调自动化与风险红旗检测</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#23B7FF"></div>价值桥接分析与协同效应量化</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#23B7FF"></div>整合规划与百日执行路线图</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>标的筛选与交易机会识别</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>AI尽调自动化与风险红旗检测</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>价值桥接分析与协同效应量化</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>整合规划与百日执行路线图</div>
             </div>
           </div>
           <div class="mod-card-foot">
@@ -415,21 +426,21 @@
         <div class="mod-card top-ai reveal" data-category="technology" onclick="openDetail('ai')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(138,43,226,0.08);">
-                <svg viewBox="0 0 24 24" style="stroke:#7C3AED"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
               <div class="mod-tag-wrap">
-                <span class="tag" style="background:rgba(124,58,237,0.1);color:#7C3AED;">科技赋能</span>
+                <span class="tag" style="background:rgba(43,98,227,0.15);color:#5b8aee;">科技赋能</span>
               </div>
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(124,58,237,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#7C3AED" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="15.2"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#7C3AED">89%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">89%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -437,10 +448,10 @@
             <div class="mod-title">AI智能化转型</div>
             <div class="mod-desc">针对二手车交易场景的AI战略规划与落地路线图，构建数据驱动的竞争护城河，重塑投资叙事。</div>
             <div class="mod-features">
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#7C3AED"></div>AI应用场景识别与ROI量化分析</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#7C3AED"></div>车辆定价引擎与库存智能调度升级</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#7C3AED"></div>车辆数据资产化与商业变现路径</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#7C3AED"></div>AI技术叙事融入投资人 Deck</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>AI应用场景识别与ROI量化分析</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>车辆定价引擎与库存智能调度升级</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>车辆数据资产化与商业变现路径</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>AI技术叙事融入投资人 Deck</div>
             </div>
           </div>
           <div class="mod-card-foot">
@@ -453,8 +464,8 @@
         <div class="mod-card top-cap reveal" data-category="capital" onclick="openDetail('cap')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(245,158,11,0.10);">
-                <svg viewBox="0 0 24 24" style="stroke:#D97706"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
               </div>
               <div class="mod-tag-wrap">
                 <span class="tag tag-orange">资本市场</span>
@@ -462,12 +473,12 @@
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(245,158,11,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#F59E0B" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="18"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#D97706">87%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">87%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -475,10 +486,10 @@
             <div class="mod-title">资本叙事构建</div>
             <div class="mod-desc">基于诊断数据，构建机构级投资叙事——从保密信息备忘录（CIM）到路演材料，完整呈现优车汇价值。</div>
             <div class="mod-features">
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#D97706"></div>投资逻辑梳理与差异化定位</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#D97706"></div>保密信息备忘录（CIM）全套输出</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#D97706"></div>投资路演 Deck 与配套问答材料</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#D97706"></div>可比公司分析与估值定价基准</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>投资逻辑梳理与差异化定位</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>保密信息备忘录（CIM）全套输出</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>投资路演 Deck 与配套问答材料</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>可比公司分析与估值定价基准</div>
             </div>
           </div>
           <div class="mod-card-foot">
@@ -491,8 +502,8 @@
         <div class="mod-card top-inv reveal" data-category="capital" onclick="openDetail('inv')">
           <div class="mod-card-top">
             <div class="mod-ico-wrap">
-              <div class="mod-ico" style="background:rgba(240,68,56,0.06);">
-                <svg viewBox="0 0 24 24" style="stroke:#F04438"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div class="mod-ico" style="background:rgba(43,98,227,0.10);">
+                <svg viewBox="0 0 24 24" style="stroke:#2b62e3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <div class="mod-tag-wrap">
                 <span class="tag tag-red">机构网络</span>
@@ -500,12 +511,12 @@
             </div>
             <div class="prog-ring">
               <svg viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(240,68,56,0.1)" stroke-width="5"/>
-                <circle cx="28" cy="28" r="22" fill="none" stroke="#F04438" stroke-width="5"
+                <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(43,98,227,0.1)" stroke-width="5"/>
+                <circle cx="28" cy="28" r="22" fill="none" stroke="#2b62e3" stroke-width="5"
                   stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="21.7"
                   transform="rotate(-90 28 28)"/>
               </svg>
-              <div class="prog-ring-center"><div class="prog-pct" style="color:#F04438">84%</div><div class="prog-label">匹配</div></div>
+              <div class="prog-ring-center"><div class="prog-pct" style="color:#2b62e3">84%</div><div class="prog-label">匹配</div></div>
             </div>
           </div>
           <div class="mod-card-body">
@@ -513,10 +524,10 @@
             <div class="mod-title">精准投资人匹配</div>
             <div class="mod-desc">AI精选机构投资人、PE基金与战略合作方，精准匹配优车汇企业画像与融资目标，缩短寻资周期。</div>
             <div class="mod-features">
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#F04438"></div>320+ 机构顾问网络专属接入</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#F04438"></div>AI匹配PE/VC基金，精准引荐</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#F04438"></div>战略收购方识别与背景分析</div>
-              <div class="mod-feat"><div class="mod-feat-dot" style="background:#F04438"></div>关系维护与热线引荐跟进</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>320+ 机构顾问网络专属接入</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>AI匹配PE/VC基金，精准引荐</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>战略收购方识别与背景分析</div>
+              <div class="mod-feat"><div class="mod-feat-dot" style="background:#2b62e3"></div>关系维护与热线引荐跟进</div>
             </div>
           </div>
           <div class="mod-card-foot">
