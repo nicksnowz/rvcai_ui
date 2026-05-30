@@ -19,32 +19,32 @@
 
 /* Header card */
 .report-head-card{
-  background:linear-gradient(135deg,#07132B,#0a1f4e);
+  background:var(--bg-elev);border:1px solid var(--line);
   border-radius:22px;padding:28px 32px;margin-bottom:20px;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
   position:relative;overflow:hidden;
 }
 .report-head-card::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 50%,rgba(11,111,251,0.32),transparent 55%);}
+  background:radial-gradient(ellipse at 80% 50%,rgba(43,98,227,0.12),transparent 55%);}
 .rhc-left{position:relative;}
-.rhc-ey{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;}
-.rhc-co{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:5px;}
+.rhc-ey{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:6px;}
+.rhc-co{font-size:22px;font-weight:800;color:var(--t1);letter-spacing:-.03em;margin-bottom:5px;}
 .rhc-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-.rhc-mi{font-size:11.5px;color:rgba(255,255,255,0.5);}
-.rhc-sep{color:rgba(255,255,255,0.2);}
+.rhc-mi{font-size:11.5px;color:var(--t2);}
+.rhc-sep{color:var(--t4);}
 
 .score-ring-wrap{position:relative;width:110px;height:110px;}
 .score-ring-wrap svg{width:100%;height:100%;}
 .score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
-.score-num{font-size:28px;font-weight:800;color:#fff;line-height:1;}
-.score-denom{font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px;}
-.score-badge{font-size:11px;font-weight:700;color:#23B7FF;background:rgba(35,183,255,0.15);border:1px solid rgba(35,183,255,0.3);padding:5px 14px;border-radius:8px;text-align:center;margin-top:7px;}
+.score-num{font-size:28px;font-weight:800;color:var(--t1);line-height:1;font-family:var(--font-mono);}
+.score-denom{font-size:11px;color:var(--t3);margin-top:1px;}
+.score-badge{font-size:11px;font-weight:700;color:var(--accent-hot);background:rgba(43,98,227,0.15);border:1px solid rgba(43,98,227,0.3);padding:5px 14px;border-radius:8px;text-align:center;margin-top:7px;}
 
 .rhc-acts{position:relative;display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
-.btn-wh{font-size:12.5px;font-weight:700;color:var(--navy);padding:9px 20px;border-radius:10px;border:none;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.15);cursor:pointer;transition:transform .2s,box-shadow .2s;}
-.btn-wh:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.2);}
-.btn-wh-ghost{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.65);padding:9px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:transparent;cursor:pointer;transition:all .2s;}
-.btn-wh-ghost:hover{background:rgba(255,255,255,0.1);color:#fff;}
+.btn-wh{font-size:12.5px;font-weight:700;color:var(--accent);padding:9px 20px;border-radius:10px;border:1px solid var(--accent-border);background:var(--bg-elev-2);box-shadow:0 4px 14px rgba(0,0,0,0.35);cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,color .2s;}
+.btn-wh:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.5);background:var(--accent-soft);color:#e8edf5;}
+.btn-wh-ghost{font-size:12.5px;font-weight:600;color:var(--t2);padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:all .2s;}
+.btn-wh-ghost:hover{background:var(--bg-elev-2);color:#e8edf5;}
 
 /* 2-col layout */
 .report-cols{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start;}
@@ -54,22 +54,22 @@
 .rsb-title{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);padding:0 5px;margin-bottom:7px;}
 .rsb-link{display:flex;align-items:center;gap:7px;padding:8px 8px;border-radius:9px;font-size:12px;font-weight:500;color:var(--t2);transition:all .18s;cursor:pointer;border:none;background:none;width:100%;text-align:left;margin-bottom:1px;}
 .rsb-link:hover{color:var(--blue);background:var(--blue-s);}
-.rsb-link.active{color:var(--blue);background:rgba(11,111,251,0.08);font-weight:700;}
+.rsb-link.active{color:#e8edf5;background:var(--bg-elev-2);font-weight:700;box-shadow:inset 2px 0 0 var(--accent);}
 .rsb-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
 
-.rsb-scores{background:rgba(11,111,251,0.03);border:1px solid var(--bl);border-radius:11px;padding:12px;margin-bottom:12px;}
+.rsb-scores{background:rgba(43,98,227,0.03);border:1px solid var(--bl);border-radius:11px;padding:12px;margin-bottom:12px;}
 .rsb-sr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .rsb-sn{font-size:10.5px;font-weight:600;color:var(--t2);}
 .rsb-sv{font-size:10.5px;font-weight:700;}
-.rsb-sb{height:3px;background:rgba(11,111,251,0.08);border-radius:2px;overflow:hidden;margin-bottom:5px;}
+.rsb-sb{height:3px;background:rgba(43,98,227,0.08);border-radius:2px;overflow:hidden;margin-bottom:5px;}
 .rsb-sf{height:100%;border-radius:2px;}
 
-.rsb-advisor{background:linear-gradient(135deg,rgba(11,111,251,0.06),rgba(35,183,255,0.03));border:1px solid rgba(11,111,251,0.12);border-radius:11px;padding:12px;margin-top:12px;}
-.rsb-av-avatar{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0B6FFB,#23B7FF);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-bottom:7px;}
+.rsb-advisor{background:rgba(43,98,227,0.06);border:1px solid rgba(43,98,227,0.12);border-radius:11px;padding:12px;margin-top:12px;}
+.rsb-av-avatar{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#e8edf5;margin-bottom:7px;}
 .rsb-av-name{font-size:12px;font-weight:700;color:var(--navy);}
 .rsb-av-title{font-size:10.5px;color:var(--t3);margin-top:1px;}
-.rsb-av-btn{margin-top:9px;width:100%;padding:7px;border-radius:8px;font-size:11.5px;font-weight:600;color:var(--blue);border:1px solid rgba(11,111,251,0.2);background:rgba(11,111,251,0.06);cursor:pointer;transition:all .18s;}
-.rsb-av-btn:hover{background:var(--blue);color:#fff;border-color:transparent;}
+.rsb-av-btn{margin-top:9px;width:100%;padding:7px;border-radius:8px;font-size:11.5px;font-weight:600;color:var(--blue);border:1px solid rgba(43,98,227,0.2);background:rgba(43,98,227,0.06);cursor:pointer;transition:all .18s;}
+.rsb-av-btn:hover{background:var(--blue);color:#e8edf5;border-color:transparent;}
 
 /* Content */
 .report-content{display:flex;flex-direction:column;gap:18px;}
@@ -81,7 +81,7 @@
 
 /* Score boxes */
 .score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.sb{background:rgba(11,111,251,0.03);border:1px solid var(--bl);border-radius:13px;padding:15px;text-align:center;}
+.sb{background:rgba(43,98,227,0.03);border:1px solid var(--bl);border-radius:13px;padding:15px;text-align:center;}
 .sb-val{font-size:26px;font-weight:800;letter-spacing:-.04em;}
 .sb-name{font-size:10.5px;font-weight:600;color:var(--t3);margin-top:3px;}
 .sb-trend{font-size:10px;margin-top:3px;}
@@ -93,14 +93,14 @@
 .rl-row{display:flex;justify-content:space-between;align-items:center;}
 .rl-name{font-size:12px;font-weight:600;color:var(--t2);}
 .rl-val{font-size:12.5px;font-weight:700;color:var(--navy);}
-.rl-bar{height:4px;background:rgba(11,111,251,0.09);border-radius:3px;overflow:hidden;}
-.rl-fill{height:100%;background:linear-gradient(90deg,#0B6FFB,#23B7FF);border-radius:3px;}
+.rl-bar{height:4px;background:rgba(43,98,227,0.09);border-radius:3px;overflow:hidden;}
+.rl-fill{height:100%;background:var(--accent);border-radius:3px;}
 
 /* Paths */
 .path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.path-card{border-radius:13px;padding:16px;cursor:pointer;border:1.5px solid var(--bl);background:rgba(255,255,255,0.7);transition:all .2s;}
-.path-card:hover{border-color:var(--bm);transform:translateY(-2px);box-shadow:0 8px 22px rgba(11,111,251,0.09);}
-.path-card.rec{background:linear-gradient(135deg,rgba(11,111,251,0.06),rgba(35,183,255,0.04));border-color:rgba(11,111,251,0.22);}
+.path-card{border-radius:13px;padding:16px;cursor:pointer;border:1.5px solid var(--bl);background:var(--bg-elev-2);transition:all .2s;}
+.path-card:hover{border-color:var(--bm);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,0.4);}
+.path-card.rec{background:rgba(43,98,227,0.06);border-color:rgba(43,98,227,0.22);}
 .pc-badge{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;display:inline-block;padding:3px 9px;border-radius:5px;}
 .pc-title{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:5px;}
 .pc-desc{font-size:11.5px;color:var(--t2);line-height:1.55;}
@@ -109,16 +109,16 @@
 /* Tables */
 .opp-table{width:100%;border-collapse:collapse;}
 .opp-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);padding:8px 12px;border-bottom:2px solid var(--bl);}
-.opp-table td{padding:11px 12px;font-size:12.5px;color:var(--t2);border-bottom:1px solid rgba(11,111,251,0.05);}
+.opp-table td{padding:11px 12px;font-size:12.5px;color:var(--t2);border-bottom:1px solid rgba(43,98,227,0.08);}
 .opp-table tr:last-child td{border-bottom:none;}
-.opp-table tr:hover td{background:rgba(11,111,251,0.02);}
+.opp-table tr:hover td{background:rgba(43,98,227,0.04);}
 .imp-b{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;}
 
 /* Roadmap */
 .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
-.roadmap::before{content:'';position:absolute;top:22px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,#0B6FFB,#23B7FF);z-index:0;}
+.roadmap::before{content:'';position:absolute;top:22px;left:12.5%;right:12.5%;height:2px;background:var(--accent);z-index:0;}
 .rm-phase{text-align:center;position:relative;z-index:1;padding:0 6px;}
-.rm-dot{width:44px;height:44px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#0B6FFB,#23B7FF);box-shadow:0 4px 14px rgba(11,111,251,0.28);}
+.rm-dot{width:44px;height:44px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#e8edf5;background:var(--accent);box-shadow:0 4px 14px rgba(43,98,227,0.28);}
 .rm-phase-label{font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.06em;margin-bottom:5px;}
 .rm-phase-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:7px;}
 .rm-actions{display:flex;flex-direction:column;gap:4px;}
@@ -177,9 +177,9 @@
       <div class="score-ring-wrap">
         <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
           <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#23B7FF"/><stop offset="100%" stop-color="#0B6FFB"/>
+            <stop offset="0%" stop-color="#2b62e3"/><stop offset="100%" stop-color="#2b62e3"/>
           </linearGradient></defs>
-          <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+          <circle cx="55" cy="55" r="44" fill="none" stroke="#1c2230" stroke-width="8"/>
           <circle cx="55" cy="55" r="44" fill="none" stroke="url(#rg)" stroke-width="8"
             stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="91"
             transform="rotate(-90 55 55)">
@@ -201,18 +201,18 @@
     <div class="rsb reveal">
       <div class="rsb-title">维度评分</div>
       <div class="rsb-scores">
-        <div class="rsb-sr"><span class="rsb-sn">战略与增长</span><span class="rsb-sv" style="color:#0B6FFB">74</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:74%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div>
-        <div class="rsb-sr"><span class="rsb-sn">财务健康</span><span class="rsb-sv" style="color:#0B6FFB">70</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:70%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div>
-        <div class="rsb-sr"><span class="rsb-sn">运营效率</span><span class="rsb-sv" style="color:#F59E0B">63</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:63%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div>
-        <div class="rsb-sr"><span class="rsb-sn">治理合规</span><span class="rsb-sv" style="color:#F59E0B">58</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:58%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div>
-        <div class="rsb-sr"><span class="rsb-sn">组织人才</span><span class="rsb-sv" style="color:#0B6FFB">65</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:65%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div>
-        <div class="rsb-sr"><span class="rsb-sn">技术数据</span><span class="rsb-sv" style="color:#0B6FFB">71</span></div>
-        <div class="rsb-sb"><div class="rsb-sf" style="width:71%;background:linear-gradient(90deg,#0B6FFB,#23B7FF)"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">战略与增长</span><span class="rsb-sv" style="color:#2b62e3">74</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:74%;background:#2b62e3"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">财务健康</span><span class="rsb-sv" style="color:#2b62e3">70</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:70%;background:#2b62e3"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">运营效率</span><span class="rsb-sv" style="color:#f59e0b">63</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:63%;background:#f59e0b"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">治理合规</span><span class="rsb-sv" style="color:#f59e0b">58</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:58%;background:#f59e0b"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">组织人才</span><span class="rsb-sv" style="color:#2b62e3">65</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:65%;background:#2b62e3"></div></div>
+        <div class="rsb-sr"><span class="rsb-sn">技术数据</span><span class="rsb-sv" style="color:#2b62e3">71</span></div>
+        <div class="rsb-sb"><div class="rsb-sf" style="width:71%;background:#2b62e3"></div></div>
       </div>
       <div class="rsb-title">报告导航</div>
       <button class="rsb-link active"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>综合评分</button>
@@ -240,9 +240,9 @@
         </div>
         <div class="sec-card-body">
           <div class="score-grid">
-            <div class="sb"><div class="sb-val" style="color:#0B6FFB">68</div><div class="sb-name">综合评分</div><div class="sb-trend" style="color:#16B364">↑ 较初测提升 +6</div></div>
-            <div class="sb"><div class="sb-val" style="color:#42526E">59</div><div class="sb-name">行业中位数</div><div class="sb-trend" style="color:#6B7890">汽车后市场 · A轮</div></div>
-            <div class="sb"><div class="sb-val" style="color:#16B364">+9</div><div class="sb-name">超越同类</div><div class="sb-trend" style="color:#16B364">前28%分位</div></div>
+            <div class="sb"><div class="sb-val" style="color:#2b62e3">68</div><div class="sb-name">综合评分</div><div class="sb-trend" style="color:#4ade80">↑ 较初测提升 +6</div></div>
+            <div class="sb"><div class="sb-val" style="color:#8b95ab">59</div><div class="sb-name">行业中位数</div><div class="sb-trend" style="color:#5b667d">汽车后市场 · A轮</div></div>
+            <div class="sb"><div class="sb-val" style="color:#4ade80">+9</div><div class="sb-name">超越同类</div><div class="sb-trend" style="color:#4ade80">前28%分位</div></div>
           </div>
         </div>
       </div>
@@ -257,21 +257,21 @@
             <div>
               <svg viewBox="0 0 300 300" width="250" height="250" xmlns="http://www.w3.org/2000/svg">
                 <defs><linearGradient id="rag" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0B6FFB" stop-opacity=".28"/><stop offset="100%" stop-color="#23B7FF" stop-opacity=".14"/>
+                  <stop offset="0%" stop-color="#2b62e3" stop-opacity=".18"/><stop offset="100%" stop-color="#2b62e3" stop-opacity=".18"/>
                 </linearGradient></defs>
-                <polygon points="150,30 246,90 246,210 150,270 54,210 54,90" fill="none" stroke="rgba(11,111,251,0.08)" stroke-width="1"/>
-                <polygon points="150,60 222,105 222,195 150,240 78,195 78,105" fill="none" stroke="rgba(11,111,251,0.08)" stroke-width="1"/>
-                <polygon points="150,90 198,120 198,180 150,210 102,180 102,120" fill="none" stroke="rgba(11,111,251,0.08)" stroke-width="1"/>
-                <polygon points="150,120 174,135 174,165 150,180 126,165 126,135" fill="none" stroke="rgba(11,111,251,0.08)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="150" y2="30" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="246" y2="90" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="246" y2="210" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="150" y2="270" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="54" y2="210" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
-                <line x1="150" y1="150" x2="54" y2="90" stroke="rgba(11,111,251,0.1)" stroke-width="1"/>
+                <polygon points="150,30 246,90 246,210 150,270 54,210 54,90" fill="none" stroke="#1c2230" stroke-width="1"/>
+                <polygon points="150,60 222,105 222,195 150,240 78,195 78,105" fill="none" stroke="#1c2230" stroke-width="1"/>
+                <polygon points="150,90 198,120 198,180 150,210 102,180 102,120" fill="none" stroke="#1c2230" stroke-width="1"/>
+                <polygon points="150,120 174,135 174,165 150,180 126,165 126,135" fill="none" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="150" y2="30" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="246" y2="90" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="246" y2="210" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="150" y2="270" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="54" y2="210" stroke="#1c2230" stroke-width="1"/>
+                <line x1="150" y1="150" x2="54" y2="90" stroke="#1c2230" stroke-width="1"/>
                 <!-- Benchmark 59% -->
                 <polygon points="150,79.2 215.4,116.4 215.4,183.6 150,220.8 84.6,183.6 84.6,116.4"
-                  fill="none" stroke="rgba(11,111,251,0.16)" stroke-width="1.5" stroke-dasharray="4 3" opacity=".6"/>
+                  fill="none" stroke="rgba(43,98,227,0.16)" stroke-width="1.5" stroke-dasharray="4 3" opacity=".6"/>
                 <!-- Data [74,70,63,58,65,71] on r=120 -->
                 <!-- 战略(top): 74% → r=88.8 → (150, 150-88.8)=(150,61.2) -->
                 <!-- 财务(tr): 70% → r=84 → (150+84*sin60, 150-84*cos60)=(222.7,108) -->
@@ -280,31 +280,31 @@
                 <!-- 人才(bl): 65% → r=78 → (150-78*sin60, 150+78*cos60)=(82.4,189) -->
                 <!-- 技术(tl): 71% → r=85.2 → (150-85.2*sin60, 150-85.2*cos60)=(76.2,107.4) -->
                 <polygon points="150,61.2 222.7,108 215.5,187.8 150,219.6 82.4,189 76.2,107.4"
-                  fill="url(#rag)" stroke="#0B6FFB" stroke-width="2" opacity=".9"/>
-                <circle cx="150" cy="61.2" r="4" fill="#0B6FFB" stroke="white" stroke-width="1.5"/>
-                <circle cx="222.7" cy="108" r="4" fill="#0B6FFB" stroke="white" stroke-width="1.5"/>
-                <circle cx="215.5" cy="187.8" r="4" fill="#F59E0B" stroke="white" stroke-width="1.5"/>
-                <circle cx="150" cy="219.6" r="4" fill="#F59E0B" stroke="white" stroke-width="1.5"/>
-                <circle cx="82.4" cy="189" r="4" fill="#0B6FFB" stroke="white" stroke-width="1.5"/>
-                <circle cx="76.2" cy="107.4" r="4" fill="#0B6FFB" stroke="white" stroke-width="1.5"/>
-                <text x="150" y="22" text-anchor="middle" fill="#07132B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">战略与增长</text>
-                <text x="256" y="94" text-anchor="start" fill="#07132B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">财务健康</text>
-                <text x="256" y="210" text-anchor="start" fill="#F59E0B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">运营效率</text>
-                <text x="150" y="285" text-anchor="middle" fill="#F59E0B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">治理合规</text>
-                <text x="42" y="210" text-anchor="end" fill="#07132B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">组织人才</text>
-                <text x="42" y="94" text-anchor="end" fill="#07132B" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">技术数据</text>
+                  fill="url(#rag)" stroke="#2b62e3" stroke-width="2" opacity=".9"/>
+                <circle cx="150" cy="61.2" r="4" fill="#2b62e3" stroke="#0f1219" stroke-width="1.5"/>
+                <circle cx="222.7" cy="108" r="4" fill="#2b62e3" stroke="#0f1219" stroke-width="1.5"/>
+                <circle cx="215.5" cy="187.8" r="4" fill="#f59e0b" stroke="#0f1219" stroke-width="1.5"/>
+                <circle cx="150" cy="219.6" r="4" fill="#f59e0b" stroke="#0f1219" stroke-width="1.5"/>
+                <circle cx="82.4" cy="189" r="4" fill="#2b62e3" stroke="#0f1219" stroke-width="1.5"/>
+                <circle cx="76.2" cy="107.4" r="4" fill="#2b62e3" stroke="#0f1219" stroke-width="1.5"/>
+                <text x="150" y="22" text-anchor="middle" fill="#8b95ab" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">战略与增长</text>
+                <text x="256" y="94" text-anchor="start" fill="#8b95ab" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">财务健康</text>
+                <text x="256" y="210" text-anchor="start" fill="#f59e0b" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">运营效率</text>
+                <text x="150" y="285" text-anchor="middle" fill="#f59e0b" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">治理合规</text>
+                <text x="42" y="210" text-anchor="end" fill="#8b95ab" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">组织人才</text>
+                <text x="42" y="94" text-anchor="end" fill="#8b95ab" font-size="9.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif">技术数据</text>
               </svg>
             </div>
             <div class="radar-legend">
               <div class="rl-item"><div class="rl-row"><span class="rl-name">战略与增长</span><span class="rl-val">74</span></div><div class="rl-bar"><div class="rl-fill" style="width:74%"></div></div></div>
               <div class="rl-item"><div class="rl-row"><span class="rl-name">财务健康</span><span class="rl-val">70</span></div><div class="rl-bar"><div class="rl-fill" style="width:70%"></div></div></div>
-              <div class="rl-item"><div class="rl-row"><span class="rl-name">运营效率</span><span class="rl-val" style="color:#F59E0B">63</span></div><div class="rl-bar"><div class="rl-fill" style="width:63%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div></div>
-              <div class="rl-item"><div class="rl-row"><span class="rl-name">治理合规</span><span class="rl-val" style="color:#F59E0B">58</span></div><div class="rl-bar"><div class="rl-fill" style="width:58%;background:linear-gradient(90deg,#F59E0B,#FBBF24)"></div></div></div>
+              <div class="rl-item"><div class="rl-row"><span class="rl-name">运营效率</span><span class="rl-val" style="color:#f59e0b">63</span></div><div class="rl-bar"><div class="rl-fill" style="width:63%;background:#f59e0b"></div></div></div>
+              <div class="rl-item"><div class="rl-row"><span class="rl-name">治理合规</span><span class="rl-val" style="color:#f59e0b">58</span></div><div class="rl-bar"><div class="rl-fill" style="width:58%;background:#f59e0b"></div></div></div>
               <div class="rl-item"><div class="rl-row"><span class="rl-name">组织人才</span><span class="rl-val">65</span></div><div class="rl-bar"><div class="rl-fill" style="width:65%"></div></div></div>
               <div class="rl-item"><div class="rl-row"><span class="rl-name">技术数据</span><span class="rl-val">71</span></div><div class="rl-bar"><div class="rl-fill" style="width:71%"></div></div></div>
               <div style="margin-top:6px;display:flex;gap:12px;font-size:10px;color:var(--t4);">
-                <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:#0B6FFB;display:inline-block;"></span>优车汇</span>
-                <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(11,111,251,0.3);border-top:2px dashed rgba(11,111,251,0.4);display:inline-block;"></span>行业中位</span>
+                <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:#2b62e3;display:inline-block;"></span>优车汇</span>
+                <span style="display:flex;align-items:center;gap:4px;"><span style="width:14px;height:2px;background:rgba(43,98,227,0.3);border-top:2px dashed rgba(43,98,227,0.4);display:inline-block;"></span>行业中位</span>
               </div>
             </div>
           </div>
@@ -319,19 +319,19 @@
         <div class="sec-card-body">
           <div class="path-grid">
             <div class="path-card rec">
-              <div class="pc-badge" style="color:#0B6FFB;background:rgba(11,111,251,0.08);">⭐ 首要推荐</div>
+              <div class="pc-badge" style="color:#2b62e3;background:rgba(43,98,227,0.08);">⭐ 首要推荐</div>
               <div class="pc-title">B轮融资 + 赴美上市筹备</div>
               <div class="pc-desc">完成B轮（$3,000–5,000万）后启动美股IPO筹备，利用增长势能打开海外机构市场。</div>
               <div class="pc-timeline">目标时间：24–36个月 · 目标估值 $3–5亿</div>
             </div>
             <div class="path-card">
-              <div class="pc-badge" style="color:#16B364;background:rgba(22,179,100,0.08);">替代方案</div>
+              <div class="pc-badge" style="color:#2b62e3;background:rgba(43,98,227,0.08);">替代方案</div>
               <div class="pc-title">战略并购（卖方）</div>
               <div class="pc-desc">现有技术资产与B端网络对汽车集团、互联网平台具备强并购吸引力，EV估值约5–8×ARR。</div>
               <div class="pc-timeline">目标：12–18个月 · 估值区间 $2.5–4亿</div>
             </div>
             <div class="path-card">
-              <div class="pc-badge" style="color:#9AA6B8;background:rgba(154,166,184,0.1);">选择项</div>
+              <div class="pc-badge" style="color:#454f63;background:rgba(69,79,99,0.18);">选择项</div>
               <div class="pc-title">港股IPO</div>
               <div class="pc-desc">港股对汽车后市场赛道估值修复中，适合在国内监管环境更确定后择机启动。</div>
               <div class="pc-timeline">目标：36个月以上 · 需先完善治理体系</div>
@@ -350,12 +350,12 @@
           <table class="opp-table">
             <thead><tr><th>价值机会</th><th>维度</th><th>预估影响</th><th>实施难度</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:600;color:var(--t1);">B端SaaS化——经销商管理系统订阅化</td><td><span class="tag tag-blue">战略增长</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">+$600万ARR</span></td><td style="color:var(--t3);">中 · 9个月</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">库存周转优化（28天→20天）</td><td><span class="tag tag-orange">运营效率</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">释放$200万资金</span></td><td style="color:var(--t3);">低 · 3个月</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">切换Big4审计——上市前置合规</td><td><span class="tag tag-blue">治理合规</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">解锁IPO路径</span></td><td style="color:var(--t3);">高 · 18个月</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">车后服务延伸（维保/保险/金融）</td><td><span class="tag tag-blue">战略增长</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">LTV提升3–4倍</span></td><td style="color:var(--t3);">高 · 18个月</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">补充独立董事——完善治理结构</td><td><span class="tag tag-blue">治理合规</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">评分+14分</span></td><td style="color:var(--t3);">低 · 2个月</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">数据资产商业化——AI定价SaaS输出</td><td><span class="tag tag-blue">技术数据</span></td><td><span class="imp-b" style="background:rgba(22,179,100,0.1);color:#16B364;">估值倍数扩张</span></td><td style="color:var(--t3);">中 · 6个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">B端SaaS化——经销商管理系统订阅化</td><td><span class="tag tag-blue">战略增长</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">+$600万ARR</span></td><td style="color:var(--t3);">中 · 9个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">库存周转优化（28天→20天）</td><td><span class="tag tag-orange">运营效率</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">释放$200万资金</span></td><td style="color:var(--t3);">低 · 3个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">切换Big4审计——上市前置合规</td><td><span class="tag tag-blue">治理合规</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">解锁IPO路径</span></td><td style="color:var(--t3);">高 · 18个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">车后服务延伸（维保/保险/金融）</td><td><span class="tag tag-blue">战略增长</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">LTV提升3–4倍</span></td><td style="color:var(--t3);">高 · 18个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">补充独立董事——完善治理结构</td><td><span class="tag tag-blue">治理合规</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">评分+14分</span></td><td style="color:var(--t3);">低 · 2个月</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">数据资产商业化——AI定价SaaS输出</td><td><span class="tag tag-blue">技术数据</span></td><td><span class="imp-b" style="background:rgba(74,222,128,0.1);color:#4ade80;">估值倍数扩张</span></td><td style="color:var(--t3);">中 · 6个月</td></tr>
             </tbody>
           </table>
         </div>
@@ -371,9 +371,9 @@
           <table class="opp-table">
             <thead><tr><th>风险因素</th><th>等级</th><th>建议对策</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:600;color:var(--t1);">无Big4审计——IPO强制要求未达标</td><td><span class="imp-b" style="background:rgba(240,68,56,0.1);color:#F04438;">🔴 高</span></td><td style="font-size:12px;color:var(--t2);">立即启动Big4接触，最晚Q3签约</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">治理结构薄弱——独立董事不足</td><td><span class="imp-b" style="background:rgba(245,158,11,0.1);color:#D97706;">⚠ 中</span></td><td style="font-size:12px;color:var(--t2);">Q2前完成独立董事补充与审计委员会筹建</td></tr>
-              <tr><td style="font-weight:600;color:var(--t1);">数据安全合规缺口（PIPL/GDPR）</td><td><span class="imp-b" style="background:rgba(245,158,11,0.1);color:#D97706;">⚠ 中</span></td><td style="font-size:12px;color:var(--t2);">海外融资强制门槛，建议Q2启动合规体系建设</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">无Big4审计——IPO强制要求未达标</td><td><span class="imp-b" style="background:rgba(255,94,94,0.1);color:#ff5e5e;">🔴 高</span></td><td style="font-size:12px;color:var(--t2);">立即启动Big4接触，最晚Q3签约</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">治理结构薄弱——独立董事不足</td><td><span class="imp-b" style="background:rgba(245,158,11,0.1);color:#f59e0b;">⚠ 中</span></td><td style="font-size:12px;color:var(--t2);">Q2前完成独立董事补充与审计委员会筹建</td></tr>
+              <tr><td style="font-weight:600;color:var(--t1);">数据安全合规缺口（PIPL/GDPR）</td><td><span class="imp-b" style="background:rgba(245,158,11,0.1);color:#f59e0b;">⚠ 中</span></td><td style="font-size:12px;color:var(--t2);">海外融资强制门槛，建议Q2启动合规体系建设</td></tr>
             </tbody>
           </table>
         </div>
