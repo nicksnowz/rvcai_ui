@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
 .step-item.active .step-lbl{color:var(--blue);font-weight:700;}
 .sn-prog{margin-top:14px;padding:0 6px;}
 .sn-prog-row{font-size:10px;color:var(--t3);margin-bottom:5px;display:flex;justify-content:space-between;}
-#prog-pct{font-family:var(--font-mono);color:#e8edf5;}
+#prog-pct{font-family:var(--font-mono);color:var(--t1);}
 .pbar{height:4px;background:var(--line);border-radius:3px;overflow:hidden;}
 .pfill{height:100%;background:var(--accent);border-radius:3px;transition:width .5s cubic-bezier(.22,1,.36,1);}
 
@@ -67,13 +67,13 @@
 
 .range-opts{display:flex;gap:7px;flex-wrap:wrap;}
 .range-opt{padding:7px 14px;border-radius:2px;border:1px solid var(--line);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .18s;background:var(--bg-elev);}
-.range-opt:hover{border-color:var(--accent-border);color:#e8edf5;}
-.range-opt.sel{border:1px solid var(--accent-border);color:#e8edf5;background:var(--accent-soft);font-weight:700;}
+.range-opt:hover{border-color:var(--accent-border);color:var(--t1);}
+.range-opt.sel{border:1px solid var(--accent-border);color:var(--t1);background:var(--accent-soft);font-weight:700;}
 
 .tag-opts{display:flex;gap:7px;flex-wrap:wrap;}
 .tag-opt{padding:6px 13px;border-radius:2px;border:1px solid var(--line);font-size:11.5px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .18s;background:var(--bg-elev);}
-.tag-opt:hover{border-color:var(--accent-border);color:#e8edf5;}
-.tag-opt.sel{background:var(--accent-soft);border:1px solid var(--accent-border);color:#e8edf5;}
+.tag-opt:hover{border-color:var(--accent-border);color:var(--t1);}
+.tag-opt.sel{background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--t1);}
 
 /* Checklist */
 .chk-list{display:flex;flex-direction:column;gap:8px;}
@@ -93,7 +93,7 @@
 .slider-lbl{font-size:11.5px;font-weight:600;color:var(--t2);}
 .slider-val{font-size:13px;font-weight:700;color:var(--accent-hot);font-family:var(--font-mono);}
 input[type=range]{width:100%;height:5px;border-radius:3px;background:linear-gradient(90deg,#2b62e3 var(--pct,50%),var(--line) var(--pct,50%));outline:none;border:none;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#2b62e3;border:2px solid #0f1219;box-shadow:0 2px 8px rgba(43,98,227,0.3);cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#2b62e3;border:2px solid var(--card);box-shadow:0 2px 8px rgba(43,98,227,0.3);cursor:pointer;}
 
 /* Form footer */
 .form-foot{padding:16px 24px;border-top:1px solid var(--bl);display:flex;justify-content:space-between;align-items:center;}
@@ -103,7 +103,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .ai-panel{position:sticky;top:88px;background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
 .ai-head{padding:14px 14px 12px;background:var(--bg-elev-2);border-bottom:1px solid var(--line);}
 .ai-head-row{display:flex;align-items:center;justify-content:space-between;}
-.ai-head-t{font-size:10.5px;font-weight:700;color:#e8edf5;letter-spacing:.06em;}
+.ai-head-t{font-size:10.5px;font-weight:700;color:var(--t1);letter-spacing:.06em;}
 .ai-live{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:700;color:var(--ok);}
 .ai-live-dot{width:5px;height:5px;border-radius:50%;background:var(--ok);animation:blink 1.4s infinite;}
 .ai-body{padding:14px;}
@@ -513,7 +513,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
             <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#2b62e3"/><stop offset="100%" stop-color="#2b62e3"/>
             </linearGradient></defs>
-            <text x="55" y="50" text-anchor="middle" fill="#e8edf5" font-size="22" font-weight="800" font-family="'IBM Plex Mono',monospace" id="ai-score-num">68</text>
+            <text x="55" y="50" text-anchor="middle" fill="currentColor" font-size="22" font-weight="800" font-family="'IBM Plex Mono',monospace" id="ai-score-num">68</text>
             <text x="55" y="64" text-anchor="middle" fill="#8b95ab" font-size="9.5" font-family="'IBM Plex Sans',sans-serif">初步评分</text>
             <text x="55" y="76" text-anchor="middle" fill="#2b62e3" font-size="8.5" font-weight="700" font-family="'IBM Plex Sans',sans-serif" id="ai-score-label">良好</text>
           </svg>
