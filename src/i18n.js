@@ -4,8 +4,8 @@ import zh from './locales/zh.json';
 import en from './locales/en.json';
 
 const savedLang = typeof localStorage !== 'undefined'
-  ? localStorage.getItem('rvc-lang') || 'zh'
-  : 'zh';
+  ? localStorage.getItem('rvc-lang') || 'en'
+  : 'en';
 
 i18n
   .use(initReactI18next)
