@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html id="html-root">
+    <html id="html-root" lang="en">
       <body>
         <ClientProviders>
           <NavWrapper />
