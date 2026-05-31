@@ -19,5 +19,23 @@
     "trust2": "300+ Value Dimensions",
     "trust3": "Institutional-Grade AI",
     "footerTagline": "Built for institutional-grade capital intelligence"
+  },
+  "intake": {
+    "eyebrow": "Enterprise Data Intake Console",
+    "title": "Enterprise Value Diagnostic Intake",
+    "subtitle": "Complete all 7 intake modules to generate the full diagnostic report. Estimated time: 25–35 minutes.",
+    "stepNavTitle": "Diagnostic Steps",
+    "progress": "Completion",
+    "autosave": "Autosaving",
+    "encrypted": "All data encrypted at rest",
+    "prev": "Previous",
+    "saveContinue": "Save & Continue →",
+    "submit": "Submit Diagnosis →",
+    "aiTitle": "AI Real-Time Analysis Engine",
+    "aiLive": "Live",
+    "aiSub": "Recalculates as you type",
+    "aiScoreLabel": "Initial Score",
+    "aiScoreGrade": "Good",
+    "aiCompleteHint": "Diagnostic report unlocks at completion"
   }
 }

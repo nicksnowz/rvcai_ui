@@ -19,5 +19,23 @@
     "trust2": "300+价值维度",
     "trust3": "机构级AI分析",
     "footerTagline": "专为机构级资本智能而生"
+  },
+  "intake": {
+    "eyebrow": "企业数据采集控制台",
+    "title": "企业价值诊断信息采集",
+    "subtitle": "完成全部7个采集模块，生成完整诊断报告。预计用时25–35分钟。",
+    "stepNavTitle": "诊断步骤",
+    "progress": "完成进度",
+    "autosave": "自动保存中",
+    "encrypted": "所有数据加密存储",
+    "prev": "上一步",
+    "saveContinue": "保存并继续 →",
+    "submit": "提交诊断 →",
+    "aiTitle": "AI 实时分析引擎",
+    "aiLive": "实时更新",
+    "aiSub": "随填写自动演算",
+    "aiScoreLabel": "初步评分",
+    "aiScoreGrade": "良好",
+    "aiCompleteHint": "完成后可生成诊断报告"
   }
 }
