@@ -81,5 +81,31 @@
     "roadmapTitle": "30/60/90/180天执行路线图",
     "roadmapSub": "价值创造与资本路径的优先行动清单",
     "viewIpoConsole": "查看IPO就绪控制台 →"
+  },
+  "modules": {
+    "eyebrow": "资本执行模块",
+    "title": "智能执行套件",
+    "subtitle": "AI精准匹配，基于优车汇诊断档案推荐的专属执行模块——可单独激活，亦可组合部署。",
+    "readyTag": "6 个模块已就绪",
+    "viewPricing": "查看套餐报价",
+    "stat1Lbl": "可用模块",
+    "stat2Lbl": "平均匹配度",
+    "stat3Lbl": "平均执行周期",
+    "stat4Lbl": "累计价值释放",
+    "filterAll": "全部模块",
+    "filterCapital": "资本市场",
+    "filterFinancial": "财务优化",
+    "filterStrategy": "战略并购",
+    "filterTechnology": "科技赋能",
+    "searchPlaceholder": "搜索模块...",
+    "launch": "启动 →",
+    "backToList": "返回模块列表",
+    "detailKpiTitle": "核心绩效指标",
+    "detailKpi1": "匹配度",
+    "detailKpi2": "累计创造价值",
+    "detailKpi3": "专业顾问",
+    "detailIncludes": "模块包含内容",
+    "openIpoConsole": "打开 IPO 控制台 →",
+    "bookAdvisor": "预约顾问"
   }
 }

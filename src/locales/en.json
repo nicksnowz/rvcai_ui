@@ -81,5 +81,31 @@
     "roadmapTitle": "30/60/90/180-Day Execution Roadmap",
     "roadmapSub": "Prioritized actions for value creation and capital path",
     "viewIpoConsole": "View IPO Console →"
+  },
+  "modules": {
+    "eyebrow": "Capital Execution Modules",
+    "title": "Intelligent Execution Suite",
+    "subtitle": "AI-matched execution modules recommended from your diagnostic profile — activate individually or deploy as a portfolio.",
+    "readyTag": "6 Modules Ready",
+    "viewPricing": "View Pricing",
+    "stat1Lbl": "Available Modules",
+    "stat2Lbl": "Avg Match Score",
+    "stat3Lbl": "Avg Execution Cycle",
+    "stat4Lbl": "Cumulative Value Unlocked",
+    "filterAll": "All Modules",
+    "filterCapital": "Capital Markets",
+    "filterFinancial": "Financial Optimization",
+    "filterStrategy": "Strategic M&A",
+    "filterTechnology": "Tech Enablement",
+    "searchPlaceholder": "Search modules...",
+    "launch": "Launch →",
+    "backToList": "Back to module list",
+    "detailKpiTitle": "Core Performance Metrics",
+    "detailKpi1": "Match",
+    "detailKpi2": "Value Created",
+    "detailKpi3": "Advisors",
+    "detailIncludes": "Module Includes",
+    "openIpoConsole": "Open IPO Console →",
+    "bookAdvisor": "Book Advisor"
   }
 }
