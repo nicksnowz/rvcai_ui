@@ -1,13 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-const NAV_LINKS = [
-  { to: '/', key: 'nav.overview' },
-  { to: '/intake', key: 'nav.intake' },
-  { to: '/report', key: 'nav.report' },
-  { to: '/modules', key: 'nav.modules' },
-  { to: '/ipo', key: 'nav.ipo' },
-];
+import { NAV_LINKS } from '../config/nav';
 
 export default function Header({ mobileNavOpen, onHamburgerClick }) {
   const { t, i18n } = useTranslation();
