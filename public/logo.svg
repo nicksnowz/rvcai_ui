@@ -1,0 +1,19 @@
+<svg viewBox="0 0 90 34" xmlns="http://www.w3.org/2000/svg" width="90" height="34">
+  <rect width="90" height="34" rx="6" fill="#5C5C6B"/>
+  <!-- R: stem + bowl + leg, white -->
+  <rect x="4" y="4" width="5" height="26" fill="white"/>
+  <rect x="9" y="4" width="9" height="5" fill="white"/>
+  <rect x="18" y="9" width="5" height="5" fill="white"/>
+  <rect x="18" y="14" width="5" height="4" fill="white"/>
+  <rect x="9" y="14" width="9" height="4" fill="white"/>
+  <!-- R diagonal leg white -->
+  <polygon points="9,18 14,18 22,30 17,30" fill="white"/>
+  <!-- Blue diagonal cut through R leg -->
+  <polygon points="11,18 14,18 18,30 15,30" fill="#3D82F5"/>
+  <!-- V: blue -->
+  <polygon points="28,4 35,4 43,24 51,4 58,4 47,30 39,30" fill="#3D82F5"/>
+  <!-- C: white -->
+  <rect x="63" y="4" width="22" height="5" fill="white"/>
+  <rect x="63" y="25" width="22" height="5" fill="white"/>
+  <rect x="63" y="9" width="5" height="16" fill="white"/>
+</svg>
