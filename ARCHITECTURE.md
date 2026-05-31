@@ -119,7 +119,7 @@ All routes use Next.js App Router file-based routing. Each route is an `app/*/pa
 | Component    | File                        | Notes                                         |
 | ------------ | --------------------------- | --------------------------------------------- |
 | `Header`     | `components/Header.jsx`     | Sticky; active route highlighted via `usePathname` from next/navigation |
-| `MobileNav`  | `components/MobileNav.jsx`  | Drawer; controlled by `mobileOpen` in `App`   |
+| `MobileNav`  | `components/MobileNav.jsx`  | Drawer; controlled by `mobileOpen` in `NavWrapper` |
 
 ### Page components
 
@@ -178,4 +178,4 @@ Global search for these values before changing any one occurrence.
 - Config: `vercel.json` sets `buildCommand: next build` and `outputDirectory: .next`; no rewrites needed
 - Assets excluded from deploy: design PDFs, raw images — see `.vercelignore`
 - `logo.svg` is the only runtime image asset
-- `/og-cover.png` referenced in `Index.jsx` meta tag — file not yet included
+- `/og-cover.png` not yet included — add to `app/layout.jsx` metadata.openGraph when available

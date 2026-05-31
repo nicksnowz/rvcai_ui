@@ -10,6 +10,7 @@ import NavWrapper from './NavWrapper';
 export const metadata = {
   title: 'RVC Capital — Enterprise Value Diagnostic',
   description: 'AI-driven enterprise health check and capital-path execution platform.',
+  icons: { icon: '/favicon.png' },
 };
 
 export default function RootLayout({ children }) {
