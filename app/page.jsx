@@ -6,7 +6,7 @@ import HeroVideoLoop from '../src/components/HeroVideoLoop';
 
 export default function Index() {
   const { t, i18n } = useTranslation();
-  const heroRef = useRef(null);
+  const wordRef = useRef(null);
   const procWrapRef = useRef(null);
   const procLadderRef = useRef(null);
 
@@ -89,70 +89,42 @@ export default function Index() {
     return () => ko.disconnect();
   }, []);
 
-  // Typewriter hero headline
+  // Typewriter — word only
   useEffect(() => {
-    const h1 = heroRef.current;
-    if (!h1) return;
+    const span = wordRef.current;
+    if (!span) return;
     let cancelled = false;
 
-    const lines = t('index.heroPrefixLines', { returnObjects: true });
-    const prefixDef = [
-      [lines[0], false], ['\n', false], [lines[1], true], ['\n', false], [lines[2], false]
-    ];
     const words = t('index.heroWords', { returnObjects: true });
-    const prefix = [];
-    prefixDef.forEach(([str, acc]) => [...str].forEach(c => prefix.push({ c, acc })));
     let wordIdx = 0;
-    let typed = [];
-
-    function buildHTML() {
-      let html = '', inAcc = false;
-      typed.forEach(({ c, acc }) => {
-        if (c === '\n') { if (inAcc) { html += '</span>'; inAcc = false; } html += '<br>'; return; }
-        if (acc && !inAcc) { html += '<span class="accent">'; inAcc = true; }
-        if (!acc && inAcc) { html += '</span>'; inAcc = false; }
-        html += c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : c;
-      });
-      if (inAcc) html += '</span>';
-      html += '<span class="type-cursor">|</span>';
-      return html;
-    }
 
     let timer;
-    function typePrefix() {
-      if (cancelled) return;
-      if (typed.length >= prefix.length) { timer = setTimeout(typeWord, 380); return; }
-      typed.push(prefix[typed.length]);
-      h1.innerHTML = buildHTML();
-      timer = setTimeout(typePrefix, typed[typed.length - 1].c === '\n' ? 140 : 65);
-    }
     function typeWord() {
       if (cancelled) return;
       document.dispatchEvent(new CustomEvent('rvc:wordstart'));
-      const chars = [...words[wordIdx]].map(c => ({ c, acc: true }));
+      const chars = [...words[wordIdx]];
       let ci = 0;
+      span.textContent = '';
       (function tick() {
         if (cancelled) return;
         if (ci >= chars.length) { timer = setTimeout(deleteWord, 1900); return; }
-        typed.push(chars[ci++]);
-        h1.innerHTML = buildHTML();
+        span.textContent += chars[ci++];
         timer = setTimeout(tick, 85);
       })();
     }
     function deleteWord() {
       if (cancelled) return;
-      if (typed.length <= prefix.length) {
+      const text = span.textContent;
+      if (text.length === 0) {
         wordIdx = (wordIdx + 1) % words.length;
         timer = setTimeout(typeWord, 340);
         return;
       }
-      typed.pop();
-      h1.innerHTML = buildHTML();
+      span.textContent = text.slice(0, -1);
       timer = setTimeout(deleteWord, 46);
     }
 
-    h1.innerHTML = '<span class="type-cursor">|</span>';
-    timer = setTimeout(typePrefix, 320);
+    timer = setTimeout(typeWord, 320);
     return () => { cancelled = true; clearTimeout(timer); };
   }, [i18n.language]);
 
@@ -193,8 +165,10 @@ export default function Index() {
         <div className="wrap">
           <div className="hero-grid">
             <div>
-              <div className="eyebrow"><span className="eyebrow-dot"></span>{t('index.eyebrow')}</div>
-              <h1 className="hero-h" ref={heroRef}></h1>
+              <h1 className="hero-h">
+                {t('index.heroPrefixLine1')}<br/>
+                {t('index.heroPrefixLine2')}{' '}<span ref={wordRef} className="accent"></span><span className="type-cursor">|</span>
+              </h1>
               <p className="hero-p">{t('index.heroParagraph')}</p>
               <div className="hero-btns">
                 <Link href="/intake" className="btn-blue">
@@ -202,11 +176,6 @@ export default function Index() {
                   {t('index.heroBtn')}
                 </Link>
                 <Link href="/report" className="btn-outline">{t('index.heroBtn2')}</Link>
-              </div>
-              <div className="hero-trust">
-                <div className="trust-item"><span className="trust-dot"></span>{t('index.trust1')}</div>
-                <div className="trust-item"><span className="trust-dot"></span>{t('index.trust2')}</div>
-                <div className="trust-item"><span className="trust-dot"></span>{t('index.trust3')}</div>
               </div>
             </div>
           </div>
@@ -230,9 +199,8 @@ export default function Index() {
                 <div className="eng-panel-lbl">{t('index.engineInputs')}</div>
 
                 <div className="eng-in-card">
-                  <div className="eng-in-bar"></div>
-                  <div className="eng-in-ico eng-ico--blue">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2b62e3" strokeWidth="1.8" strokeLinecap="round">
+                  <div className="eng-in-ico">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                       <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
                     </svg>
                   </div>
@@ -244,9 +212,8 @@ export default function Index() {
                 </div>
 
                 <div className="eng-in-card">
-                  <div className="eng-in-bar eng-in-bar--hot"></div>
-                  <div className="eng-in-ico eng-ico--hot">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5b8aee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <div className="eng-in-ico">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
                   </div>
@@ -258,9 +225,8 @@ export default function Index() {
                 </div>
 
                 <div className="eng-in-card">
-                  <div className="eng-in-bar"></div>
-                  <div className="eng-in-ico eng-ico--blue">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2b62e3" strokeWidth="1.8" strokeLinecap="round">
+                  <div className="eng-in-ico">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                       <circle cx="12" cy="12" r="3"/>
                       <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
                     </svg>
@@ -273,9 +239,8 @@ export default function Index() {
                 </div>
 
                 <div className="eng-in-card">
-                  <div className="eng-in-bar eng-in-bar--hot"></div>
-                  <div className="eng-in-ico eng-ico--hot">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5b8aee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <div className="eng-in-ico">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
@@ -303,10 +268,6 @@ export default function Index() {
                     <div className="eng-orb-pulse"></div>
                   </div>
                 </div>
-                <div className="eng-live">
-                  <span className="eng-live-dot"></span>
-                  {t('index.svgLive')}
-                </div>
                 <div className="eng-dims">300+ {t('index.engineDims')}</div>
               </div>
 
@@ -315,7 +276,6 @@ export default function Index() {
                 <div className="eng-panel-lbl">{t('index.engineOutputs')}</div>
 
                 <div className="eng-out-card">
-                  <div className="eng-out-topbar"></div>
                   <div className="eng-out-head">
                     <span className="eng-out-title">{t('index.svgR1Title')}</span>
                     <span className="eng-delta eng-delta--pos">▲ 53 pts</span>
@@ -329,13 +289,12 @@ export default function Index() {
                 </div>
 
                 <div className="eng-out-card">
-                  <div className="eng-out-topbar eng-out-topbar--hot"></div>
                   <div className="eng-out-head">
                     <span className="eng-out-title">{t('index.svgR2Title')}</span>
-                    <span className="eng-delta">{t('index.svgR2Delta')}</span>
+                    <span className="eng-delta eng-delta--pos">{t('index.svgR2Delta')}</span>
                   </div>
                   <div className="eng-out-row">
-                    <span className="eng-out-val eng-out-val--hot" id="n2" suppressHydrationWarning>9.6</span>
+                    <span className="eng-out-val" id="n2" suppressHydrationWarning>9.6</span>
                     <span className="eng-out-unit"> × EV/EBITDA</span>
                   </div>
                   <div className="eng-out-base">{t('index.svgR2Base')}</div>
@@ -343,7 +302,6 @@ export default function Index() {
                 </div>
 
                 <div className="eng-out-card">
-                  <div className="eng-out-topbar"></div>
                   <div className="eng-out-head">
                     <span className="eng-out-title">{t('index.svgR3Title')}</span>
                     <span className="eng-delta eng-delta--pos">{t('index.svgR3Delta')}</span>
@@ -358,14 +316,13 @@ export default function Index() {
                 </div>
 
                 <div className="eng-out-card">
-                  <div className="eng-out-topbar eng-out-topbar--hot"></div>
                   <div className="eng-out-head">
                     <span className="eng-out-title">{t('index.svgR4Title')}</span>
                     <span className="eng-delta eng-delta--pos">+$8.2M</span>
                   </div>
                   <div className="eng-out-row">
-                    <span className="eng-out-pfx eng-out-pfx--hot">+</span>
-                    <span className="eng-out-val eng-out-val--hot" id="n4" suppressHydrationWarning>34</span>
+                    <span className="eng-out-pfx">+</span>
+                    <span className="eng-out-val" id="n4" suppressHydrationWarning>34</span>
                     <span className="eng-out-unit">%</span>
                   </div>
                   <div className="eng-out-base">$24.2M → $32.4M</div>
