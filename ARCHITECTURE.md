@@ -25,12 +25,12 @@ Register: institutional, capital-market-grade. Not a consumer product.
 | Layer         | Choice                                      |
 | ------------- | ------------------------------------------- |
 | UI framework  | React 19                                    |
-| Build tool    | Vite 8                                      |
-| Routing       | React Router 7 (`BrowserRouter`)            |
+| Build tool    | Next.js 16 (App Router)                     |
+| Routing       | Next.js App Router (file-based)             |
 | i18n          | i18next + react-i18next (zh default, en)    |
 | Styling       | Plain CSS — one base file + per-page files  |
 | Testing       | Vitest                                      |
-| Deployment    | Vercel (SPA — all routes → `index.html`)    |
+| Deployment    | Vercel (Next.js — App Router)               |
 
 No component library (shadcn, MUI, etc.).
 No TypeScript yet — `.jsx` throughout.
@@ -40,21 +40,26 @@ No TypeScript yet — `.jsx` throughout.
 ## 3 · Directory Structure
 
 ```
+app/
+  layout.jsx               # root layout: CSS imports, ClientProviders, NavWrapper, {children}
+  ClientProviders.jsx      # "use client" — i18n initialisation and I18nextProvider
+  NavWrapper.jsx           # "use client" — mobileOpen state, renders Header + MobileNav
+  page.jsx                 # / — landing (dark)
+  intake/
+    page.jsx               # /intake — enterprise intake console
+  report/
+    page.jsx               # /report — diagnostic report dashboard
+  modules/
+    page.jsx               # /modules — recommended execution paths
+  ipo/
+    page.jsx               # /ipo — IPO readiness console
 src/
-  App.jsx                  # router root; mounts Header + MobileNav + Routes
-  main.jsx                 # React entry, i18n import
   i18n.js                  # i18next init; persists lang to localStorage
   config/
     nav.js                 # shared nav link definitions (label keys + paths)
   components/
     Header.jsx             # sticky top nav; desktop links + hamburger
     MobileNav.jsx          # slide-in mobile drawer
-  pages/
-    Index.jsx              # / — landing (dark)
-    Intake.jsx             # /intake — enterprise intake console
-    Report.jsx             # /report — diagnostic report dashboard
-    Modules.jsx            # /modules — recommended execution paths
-    Ipo.jsx                # /ipo — IPO readiness console
   styles/
     rvc-base.css           # global tokens, resets, shared utilities
     index.css              # landing-page-specific styles
@@ -71,7 +76,7 @@ src/
 
 ## 4 · Routing
 
-All routes are client-side. Vercel rewrites `/*` → `index.html`.
+All routes use Next.js App Router file-based routing. Each route is an `app/*/page.jsx` file.
 
 | Path       | Component    | Description                        |
 | ---------- | ------------ | ---------------------------------- |
@@ -81,7 +86,7 @@ All routes are client-side. Vercel rewrites `/*` → `index.html`.
 | `/modules` | `Modules`    | Execution module cards + filters   |
 | `/ipo`     | `Ipo`        | IPO readiness console              |
 
-`Header` and `MobileNav` are rendered outside `<Routes>` and appear on every page.
+`Header` and `MobileNav` are rendered in `app/layout.jsx` via `NavWrapper` and appear on every page.
 
 ---
 
@@ -113,7 +118,7 @@ All routes are client-side. Vercel rewrites `/*` → `index.html`.
 
 | Component    | File                        | Notes                                         |
 | ------------ | --------------------------- | --------------------------------------------- |
-| `Header`     | `components/Header.jsx`     | Sticky; active route highlighted via `useLocation` |
+| `Header`     | `components/Header.jsx`     | Sticky; active route highlighted via `usePathname` from next/navigation |
 | `MobileNav`  | `components/MobileNav.jsx`  | Drawer; controlled by `mobileOpen` in `App`   |
 
 ### Page components
@@ -170,7 +175,7 @@ Global search for these values before changing any one occurrence.
 ## 11 · Deployment
 
 - Platform: Vercel
-- Config: `vercel.json` rewrites all routes to `/index.html` for SPA routing
+- Config: `vercel.json` sets `buildCommand: next build` and `outputDirectory: .next`; no rewrites needed
 - Assets excluded from deploy: design PDFs, raw images — see `.vercelignore`
 - `logo.svg` is the only runtime image asset
 - `/og-cover.png` referenced in `Index.jsx` meta tag — file not yet included
