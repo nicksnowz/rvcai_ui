@@ -2,6 +2,7 @@ import { Fragment, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../styles/index.css';
+import HeroVideoLoop from '../components/HeroVideoLoop';
 
 export default function Index() {
   const { t } = useTranslation();
@@ -151,6 +152,7 @@ export default function Index() {
   return (
     <div className="page">
       <section className="hero">
+        <HeroVideoLoop />
         <div className="wrap">
           <div className="hero-grid">
             <div>
@@ -170,6 +172,12 @@ export default function Index() {
                 <div className="trust-item"><span className="trust-dot"></span>{t('index.trust3')}</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="engine-section">
+        <div className="wrap">
             <div className="engine-wrap">
               <div className="engine-card">
                 <svg viewBox="0 0 670 520" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -383,7 +391,6 @@ export default function Index() {
                 </svg>
               </div>
             </div>
-          </div>
         </div>
       </section>
 
