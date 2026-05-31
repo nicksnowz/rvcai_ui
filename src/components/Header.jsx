@@ -17,7 +17,7 @@ export default function Header({ mobileNavOpen, onHamburgerClick }) {
     <header>
       <div className="wrap hrow">
         <Link href="/" className="logo">
-          <img src="/logo.png" alt="RVC" width="78" height="28" style={{ display: 'block' }} />
+          <img src="/logo.svg" alt="RVC" width="72" height="27" style={{ display: 'block', borderRadius: 4 }} />
           <div className="logo-t">
             <span className="logo-n">RVC Capital</span>
             <span className="logo-s">{t('nav.logoSub')}</span>
