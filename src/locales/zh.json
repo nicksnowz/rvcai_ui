@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "overview": "概览",
+    "intake": "数据采集",
+    "report": "诊断报告",
+    "modules": "执行模块",
+    "ipo": "IPO就绪",
+    "login": "登录",
+    "startDiagnosis": "开始诊断 →",
+    "logoSub": "企业价值诊断平台"
+  },
+  "langToggle": "EN"
+}

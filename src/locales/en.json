@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "intake": "Data Intake",
+    "report": "Report",
+    "modules": "Modules",
+    "ipo": "IPO Ready",
+    "login": "Login",
+    "startDiagnosis": "Start Diagnosis →",
+    "logoSub": "Enterprise Value Platform"
+  },
+  "langToggle": "中"
+}

@@ -1,0 +1,26 @@
+import i18n from './i18n';
+
+describe('i18n', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it('initialises with zh as default language', () => {
+    expect(i18n.language).toBe('zh');
+  });
+
+  it('changes language to en', async () => {
+    await i18n.changeLanguage('en');
+    expect(i18n.language).toBe('en');
+  });
+
+  it('translates a nav key in zh', async () => {
+    await i18n.changeLanguage('zh');
+    expect(i18n.t('nav.overview')).toBe('概览');
+  });
+
+  it('translates a nav key in en', async () => {
+    await i18n.changeLanguage('en');
+    expect(i18n.t('nav.overview')).toBe('Overview');
+  });
+});
