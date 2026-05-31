@@ -341,8 +341,32 @@ export default function Index() {
                 <div className="eng-panel-lbl">{t('index.engineCore')}</div>
                 <div className="eng-gauge">
                   <svg className="eng-gauge-svg" viewBox="0 0 200 200" aria-hidden>
-                    <circle className="eng-gauge-track" cx="100" cy="100" r="86" />
-                    <circle className="eng-gauge-arc" cx="100" cy="100" r="86" transform="rotate(-90 100 100)" />
+                    {/* Inner Track Ring */}
+                    <circle className="eng-radar-inner-ring" cx="100" cy="100" r="60" />
+                    
+                    {/* Precision Radar Ticks */}
+                    <circle className="eng-radar-ticks" cx="100" cy="100" r="72" />
+                    
+                    {/* Main Background Progress Track */}
+                    <circle className="eng-radar-track" cx="100" cy="100" r="80" />
+                    
+                    {/* Active Gradient/Progress Arc (68%) */}
+                    <circle 
+                      className="eng-radar-progress" 
+                      cx="100" 
+                      cy="100" 
+                      r="80" 
+                      strokeDasharray="502.6" 
+                      strokeDashoffset="160.8" 
+                    />
+                    
+                    {/* Animated Outer Scanning Dotted Ring */}
+                    <circle className="eng-radar-scan" cx="100" cy="100" r="92" />
+                    
+                    {/* High-Fidelity Diagnostic Target Nodes */}
+                    <circle className="eng-radar-node" cx="156.6" cy="43.4" r="4.5" />
+                    <circle className="eng-radar-node" cx="48" cy="76" r="3.5" style={{ opacity: 0.7 }} />
+                    <circle className="eng-radar-node" cx="144" cy="144" r="3" style={{ opacity: 0.5 }} />
                   </svg>
                   <div className="eng-gauge-center">
                     <span className="eng-gauge-num" id="svgScore" suppressHydrationWarning>68</span>

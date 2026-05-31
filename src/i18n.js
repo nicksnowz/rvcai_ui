@@ -20,9 +20,11 @@ i18n.on('languageChanged', (lng) => {
   if (typeof localStorage !== 'undefined') {
     localStorage.setItem('rvc-lang', lng);
   }
-  const htmlRoot = document.getElementById('html-root');
-  if (htmlRoot) {
-    htmlRoot.setAttribute('lang', lng === 'zh' ? 'zh-CN' : 'en');
+  if (typeof document !== 'undefined') {
+    const htmlRoot = document.getElementById('html-root');
+    if (htmlRoot) {
+      htmlRoot.setAttribute('lang', lng === 'zh' ? 'zh-CN' : 'en');
+    }
   }
 });
 

@@ -319,6 +319,25 @@ button:focus-visible{
   .btn-blue,.btn-outline{font-size:13px;padding:11px 20px;}
 }
 
+/* ══════════════════════════════════════════════
+   WIDE DESKTOP — ≥1600px / ≥2000px
+   Container + shared chrome grow with the viewport so
+   the layout fills large monitors instead of stranding
+   a 1360px column. Screens <1600px are unchanged.
+══════════════════════════════════════════════ */
+@media(min-width:1600px){
+  .wrap{max-width:1560px;padding:0 64px;}
+  .intake-wrap,.report-wrap,.ipo-wrap{max-width:1460px;}
+  .sec-ttl{font-size:32px;}
+  .sec-sub{font-size:16.5px;}
+}
+@media(min-width:2000px){
+  .wrap{max-width:1840px;padding:0 80px;}
+  .intake-wrap,.report-wrap,.ipo-wrap{max-width:1680px;}
+  .sec-ttl{font-size:36px;}
+  .sec-sub{font-size:18px;}
+}
+
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1 !important;transform:none !important;}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
