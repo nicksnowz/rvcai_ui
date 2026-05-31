@@ -5,8 +5,8 @@ describe('i18n', () => {
     localStorage.clear();
   });
 
-  it('initialises with zh as default language', () => {
-    expect(i18n.language).toBe('zh');
+  it('initialises with en as default language', () => {
+    expect(i18n.language).toBe('en');
   });
 
   it('changes language to en', async () => {
