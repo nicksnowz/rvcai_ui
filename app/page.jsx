@@ -7,6 +7,8 @@ import HeroVideoLoop from '../src/components/HeroVideoLoop';
 export default function Index() {
   const { t, i18n } = useTranslation();
   const heroRef = useRef(null);
+  const procWrapRef = useRef(null);
+  const procLadderRef = useRef(null);
 
   // Scroll reveal
   useEffect(() => {
@@ -20,6 +22,40 @@ export default function Index() {
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     return () => ro.disconnect();
+  }, []);
+
+  // Scroll-driven active step for the process ladder
+  useEffect(() => {
+    const wrap = procWrapRef.current;
+    const ladder = procLadderRef.current;
+    if (!wrap || !ladder) return;
+    const rungs = Array.from(ladder.children);
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const rect = wrap.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const p = Math.max(0, Math.min(1, (vh * 0.55 - rect.top) / rect.height));
+      const active = Math.min(rungs.length - 1, Math.floor(p * rungs.length));
+      rungs.forEach((rung, i) => {
+        const state = i < active ? 'past' : i === active ? 'active' : 'future';
+        if (rung.dataset.state !== state) rung.dataset.state = state;
+      });
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   // KPI counter animation
@@ -265,7 +301,7 @@ export default function Index() {
                   <rect x="220" y="132" width="120" height="44" rx="11" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#gs)"/>
                   <line x1="238" y1="132" x2="322" y2="132" stroke="rgba(43,98,227,0.22)" strokeWidth="1"/>
                   <text x="280" y="149" textAnchor="middle" fill="#5b667d" fontSize="7.2" fontWeight="600" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".1em">{t('index.svgScore')}</text>
-                  <text x="265" y="171" textAnchor="middle" fill="#2b62e3" fontSize="26" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num" id="svgScore">68</text>
+                  <text x="265" y="171" textAnchor="middle" fill="#2b62e3" fontSize="26" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num" id="svgScore" suppressHydrationWarning>68</text>
                   <text x="290" y="169" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Mono',monospace" className="svg-unit">/100</text>
 
                   {/* Light glass orbital card */}
@@ -316,7 +352,7 @@ export default function Index() {
                   </g>
                   <text x="486" y="54" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR1Title')}</text>
                   <text x="468" y="67" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR1Base')}</text>
-                  <text x="468" y="89" fill="#2b62e3" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" fontVariantNumeric="tabular-nums" className="svg-num" id="n1">91</text>
+                  <text x="468" y="89" fill="#2b62e3" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" style={{fontVariantNumeric:'tabular-nums'}} className="svg-num" id="n1" suppressHydrationWarning>91</text>
                   <text x="507" y="87" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">{t('index.svgR1Unit')}</text>
                   <rect x="504" y="74" width="42" height="14" rx="7" fill="rgba(74,222,128,0.12)"/>
                   <text x="525" y="84" textAnchor="middle" fill="#4ade80" fontSize="7.5" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">▲ 53 pts</text>
@@ -334,7 +370,7 @@ export default function Index() {
                   </g>
                   <text x="486" y="168" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR2Title')}</text>
                   <text x="468" y="180" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Base')}</text>
-                  <text x="468" y="202" fill="#5b8aee" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" fontVariantNumeric="tabular-nums" className="svg-num" id="n2">9.6</text>
+                  <text x="468" y="202" fill="#5b8aee" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" style={{fontVariantNumeric:'tabular-nums'}} className="svg-num" id="n2" suppressHydrationWarning>9.6</text>
                   <text x="518" y="200" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">× EV/EBITDA</text>
                   <line x1="468" y1="207" x2="647" y2="207" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
                   <text x="468" y="225" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Footer')}</text>
@@ -350,7 +386,7 @@ export default function Index() {
                     <path d="M8,12 C8.5,10 14,10 14,12" strokeWidth="1.3" opacity="0.65"/>
                   </g>
                   <text x="486" y="282" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR3Title')}</text>
-                  <text x="468" y="306" fill="#2b62e3" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n3">58</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
+                  <text x="468" y="306" fill="#2b62e3" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n3" suppressHydrationWarning>58</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
                   <text x="468" y="320" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Desc')}</text>
                   <line x1="468" y1="330" x2="647" y2="330" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
                   <text x="468" y="346" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Footer')}</text>
@@ -364,7 +400,7 @@ export default function Index() {
                     <polygon points="7,0 14,5 7,13 0,5"/><line x1="0" y1="5" x2="14" y2="5"/>
                   </g>
                   <text x="486" y="396" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR4Title')}</text>
-                  <text x="468" y="420" fill="#5b8aee" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n4">34</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
+                  <text x="468" y="420" fill="#5b8aee" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n4" suppressHydrationWarning>34</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
                   <text x="468" y="432" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">$24.2M → $32.4M</text>
                   <line x1="468" y1="440" x2="647" y2="440" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
                   <text x="468" y="457" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR4Footer')}</text>
@@ -397,14 +433,19 @@ export default function Index() {
 
       <section className="process">
         <div className="wrap">
-          <div className="proc-grid">
-            {(t('index.proc', { returnObjects: true })).map((p, i) => (
-              <div key={i} className="proc-item reveal">
-                <div className="proc-num">{p.num}</div>
-                <div className="proc-title">{p.title}</div>
-                <div className="proc-desc">{p.desc}</div>
-              </div>
-            ))}
+          <div ref={procWrapRef} className="proc-ladder-wrap">
+            <ol ref={procLadderRef} className="proc-ladder">
+              {(t('index.proc', { returnObjects: true })).map((p, i) => (
+                <li key={i} className="proc-rung" data-state="future">
+                  <span className="proc-rung-num">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="proc-rung-body">
+                    <span className="proc-rung-eyebrow">{p.num.replace(/^\s*\d+\s*[—–-]\s*/, '')}</span>
+                    <span className="proc-rung-title">{p.title}</span>
+                    <span className="proc-rung-desc">{p.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
