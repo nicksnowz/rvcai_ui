@@ -54,17 +54,17 @@
 /* 3-col stage */
 .eng-stage{
   display:grid;grid-template-columns:1fr 296px 1fr;
-  gap:0 32px;align-items:center;
+  gap:0 32px;align-items:stretch;
 }
 .eng-panel-lbl{
   font-family:var(--font-mono);font-size:9px;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--t4);
   margin-bottom:10px;
 }
-.eng-panel{display:flex;flex-direction:column;gap:10px;}
-
+.eng-panel{display:flex;flex-direction:column;gap:10px;height:100%;}
 /* Input cards */
 .eng-in-card{
+  flex:1;
   position:relative;display:flex;align-items:center;gap:12px;
   padding:13px 16px 13px 18px;
   background:var(--bg-elev);border:1px solid var(--bl);
@@ -101,7 +101,7 @@
 
 /* Center core */
 .eng-core{
-  display:flex;flex-direction:column;align-items:center;gap:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
   padding:28px 18px;
   background:linear-gradient(160deg,var(--bg-elev-2) 0%,var(--bg-elev) 100%);
   border:1px solid rgba(43,98,227,.18);border-radius:var(--r);
