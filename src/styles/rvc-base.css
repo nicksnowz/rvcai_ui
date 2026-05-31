@@ -69,7 +69,8 @@ svg{display:block;}
 
 /* Earmark recipe — every mono surface reads like telemetry */
 .kpi-val,.sec-ey,.tag,.sb-title,.logo-s,.footer-l,.footer-r,
-.btn-sm,.kpi-sub{
+.btn-sm,.kpi-sub,
+.eng-gauge-num,.eng-out-val,.eng-out-pfx,.eng-delta{
   font-variant-numeric:slashed-zero;
   font-feature-settings:"tnum" 1,"lnum" 1,"liga" 0,"zero" 1;
 }

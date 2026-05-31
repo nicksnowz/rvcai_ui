@@ -134,6 +134,7 @@
     "svgR2Delta": "−38天 / −40%",
     "engineInputs": "分析输入",
     "engineOutputs": "诊断输出",
+    "engineCore": "诊断核心",
     "engineDims": "个维度扫描"
   },
   "intake": {

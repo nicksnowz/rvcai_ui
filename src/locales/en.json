@@ -134,6 +134,7 @@
     "svgR2Delta": "−38 Days / −40%",
     "engineInputs": "Analysis Inputs",
     "engineOutputs": "Diagnostic Outputs",
+    "engineCore": "Diagnostic Core",
     "engineDims": "Dimensions Scanned"
   },
   "intake": {

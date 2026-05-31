@@ -179,38 +179,81 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Glassmorphism partner strip — bottom of hero */}
+        {/* Glassmorphism IPO brand strip — bottom of hero */}
         <div className="hero-partners">
           <div className="hp-track">
             {[0, 1].map(setIdx => (
               <Fragment key={setIdx}>
-                <span className="hp-logo" style={{ fontWeight: 900 }}>新东方</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ fontStyle: 'italic', letterSpacing: '-.01em' }}>intelliFusion</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">格灵深瞳</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">拉卡拉</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">一起作业</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ letterSpacing: '-.015em' }}>BaTeLab</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ letterSpacing: '.1em', fontSize: '11px' }}>CONTROLSYS</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ letterSpacing: '.14em', fontSize: '11px' }}>CFAR</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ letterSpacing: '.06em', fontSize: '11px' }}>MICROOS</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">全盛科技</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ fontWeight: 900, fontSize: '16px', letterSpacing: '-.02em' }}>Nums</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">Vfine Music</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo">帕皮科技</span>
-                <span className="hp-sep">·</span>
-                <span className="hp-logo" style={{ letterSpacing: '-.01em' }}>ETBcom</span>
+                {/* ARMOGI · BTOC */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 108 32" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <text x="1" y="26" fontFamily="'Arial Black',Impact,sans-serif" fontSize="26" fontWeight="900" fill="rgba(255,255,255,0.85)" letterSpacing="-1">ARMOGI</text>
+                  </svg>
+                </div>
+                {/* MASSIMO · MAMO */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 138 32" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="16,4 24,4 28,11 24,18 16,18 12,11" fill="rgba(255,255,255,0.18)"/>
+                    <text x="20" y="15" fontFamily="'Arial Black',sans-serif" fontSize="10" fill="rgba(255,255,255,0.9)" textAnchor="middle" dominantBaseline="middle" fontWeight="900">M</text>
+                    <text x="34" y="24" fontFamily="'Arial Black',Impact,sans-serif" fontSize="18" fontWeight="900" fill="rgba(255,255,255,0.85)">MASSIMO</text>
+                  </svg>
+                </div>
+                {/* BAIYA · BIYA */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 100 32" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="10,28 18,28 14,17" fill="rgba(255,255,255,0.35)"/>
+                    <polygon points="6,28 10,28 14,17" fill="rgba(255,255,255,0.15)"/>
+                    <text x="22" y="26" fontFamily="'Arial Black',sans-serif" fontSize="22" fontWeight="900" fill="rgba(255,255,255,0.85)">BAIYA</text>
+                  </svg>
+                </div>
+                {/* Autozi.com */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 148 28" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <text x="1" y="20" fontFamily="Georgia,'Times New Roman',serif" fontSize="20" fontStyle="italic" fontWeight="700" fill="rgba(255,255,255,0.85)">Autozi.com</text>
+                  </svg>
+                </div>
+                {/* MAISON SOLUTIONS · MSS */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 168 36" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="4" width="28" height="28" rx="5" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.22)" strokeWidth="1"/>
+                    <text x="14" y="22" fontFamily="'Arial Black',sans-serif" fontSize="17" fill="rgba(255,255,255,0.9)" textAnchor="middle" dominantBaseline="middle" fontWeight="900">M</text>
+                    <text x="36" y="18" fontFamily="'Arial Black',sans-serif" fontSize="14" fill="rgba(255,255,255,0.85)" fontWeight="900">MAISON</text>
+                    <text x="36" y="32" fontFamily="Arial,sans-serif" fontSize="10" fill="rgba(255,255,255,0.45)" fontWeight="600" letterSpacing="0.12em">SOLUTIONS</text>
+                  </svg>
+                </div>
+                {/* WHITEFIBER · WYFI */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 166 28" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="22" fontFamily="'Arial Black',Impact,sans-serif" fontSize="20" fontWeight="900" fill="rgba(255,255,255,0.85)" letterSpacing="0.5">WHITEFIBER</text>
+                  </svg>
+                </div>
+                {/* 大健云仓 GigaCloud · GCT */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 172 36" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="8" width="11" height="11" rx="2" fill="rgba(255,255,255,0.25)"/>
+                    <rect x="13" y="2" width="11" height="11" rx="2" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="13" y="15" width="11" height="11" rx="2" fill="rgba(255,255,255,0.15)"/>
+                    <text x="30" y="16" fontFamily="Arial,sans-serif" fontSize="13" fill="rgba(255,255,255,0.85)" fontWeight="700">大健云仓</text>
+                    <text x="30" y="28" fontFamily="Arial,sans-serif" fontSize="8.5" fill="rgba(255,255,255,0.4)" fontWeight="600" letterSpacing="0.06em">GIGACLOUD TECHNOLOGY</text>
+                  </svg>
+                </div>
+                {/* 聚美优品 JUMEI · JMEI */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 148 30" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="24" fontFamily="'Arial Black',sans-serif" fontSize="24" fontWeight="900" fill="rgba(255,255,255,0.85)">聚美优品</text>
+                    <text x="100" y="22" fontFamily="Arial,sans-serif" fontSize="10" fill="rgba(255,255,255,0.35)" fontWeight="500" letterSpacing="0.03em">JUMEI.COM</text>
+                  </svg>
+                </div>
+                {/* 步长制药 Buchang · ZBT */}
+                <div className="hp-brand">
+                  <svg viewBox="0 0 156 36" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="4" width="28" height="28" rx="5" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+                    <text x="14" y="14" fontFamily="'Arial Black',sans-serif" fontSize="9" fill="rgba(255,255,255,0.8)" textAnchor="middle" fontWeight="900">步长</text>
+                    <text x="14" y="25" fontFamily="'Arial Black',sans-serif" fontSize="9" fill="rgba(255,255,255,0.8)" textAnchor="middle" fontWeight="900">制药</text>
+                    <text x="36" y="20" fontFamily="'Arial Black',sans-serif" fontSize="16" fill="rgba(255,255,255,0.85)" fontWeight="900">Buchang</text>
+                    <text x="36" y="32" fontFamily="Arial,sans-serif" fontSize="9" fill="rgba(255,255,255,0.35)" letterSpacing="0.06em">BUCHANG PHARMA</text>
+                  </svg>
+                </div>
               </Fragment>
             ))}
           </div>
@@ -283,20 +326,28 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* ── Center: AI Engine Core ── */}
+              {/* ── Center: Diagnostic Core ── */}
               <div className="eng-core">
-                <div className="eng-core-eyebrow">AI ENGINE · RVC CORE</div>
-                <div className="eng-orb-wrap">
-                  <div className="eng-orb-ring eng-orb-ring--3"></div>
-                  <div className="eng-orb-ring eng-orb-ring--2"></div>
-                  <div className="eng-orb-ring eng-orb-ring--1"></div>
-                  <div className="eng-orb-nucleus">
-                    <div className="eng-orb-lbl">{t('index.svgScore')}</div>
-                    <div className="eng-orb-score">
-                      <span id="svgScore" suppressHydrationWarning>68</span>
-                      <span className="eng-orb-denom">/100</span>
-                    </div>
-                    <div className="eng-orb-pulse"></div>
+                <svg className="eng-flow eng-flow--in" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+                  <line x1="0" y1="14" x2="100" y2="50" /><line x1="0" y1="38" x2="100" y2="50" />
+                  <line x1="0" y1="62" x2="100" y2="50" /><line x1="0" y1="86" x2="100" y2="50" />
+                </svg>
+                <svg className="eng-flow eng-flow--out" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+                  <line x1="0" y1="50" x2="100" y2="14" /><line x1="0" y1="50" x2="100" y2="38" />
+                  <line x1="0" y1="50" x2="100" y2="62" /><line x1="0" y1="50" x2="100" y2="86" />
+                </svg>
+                <span className="eng-port eng-port--in" aria-hidden></span>
+                <span className="eng-port eng-port--out" aria-hidden></span>
+                <div className="eng-panel-lbl">{t('index.engineCore')}</div>
+                <div className="eng-gauge">
+                  <svg className="eng-gauge-svg" viewBox="0 0 200 200" aria-hidden>
+                    <circle className="eng-gauge-track" cx="100" cy="100" r="86" />
+                    <circle className="eng-gauge-arc" cx="100" cy="100" r="86" transform="rotate(-90 100 100)" />
+                  </svg>
+                  <div className="eng-gauge-center">
+                    <span className="eng-gauge-num" id="svgScore" suppressHydrationWarning>68</span>
+                    <span className="eng-gauge-denom">/ 100</span>
+                    <span className="eng-gauge-lbl">{t('index.svgScore')}</span>
                   </div>
                 </div>
                 <div className="eng-dims">300+ {t('index.engineDims')}</div>
