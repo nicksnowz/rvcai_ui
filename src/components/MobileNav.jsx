@@ -1,10 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { NAV_LINKS } from '../config/nav';
 
 export default function MobileNav({ open, onClose }) {
   const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  const pathname = usePathname();
 
   function toggleLang() {
     i18n.changeLanguage(i18n.language === 'zh' ? 'en' : 'zh');
@@ -16,7 +19,7 @@ export default function MobileNav({ open, onClose }) {
       {NAV_LINKS.map(({ to, key }) => (
         <Link
           key={to}
-          to={to}
+          href={to}
           className={pathname === to ? 'active' : undefined}
           onClick={onClose}
         >
