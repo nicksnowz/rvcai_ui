@@ -10,15 +10,124 @@
     "logoSub": "Enterprise Value Platform"
   },
   "langToggle": "中",
+  "aria": {
+    "langToggle": "Switch Language",
+    "hamburger": "Menu"
+  },
   "index": {
     "eyebrow": "AI-Powered · Capital Intelligence",
+    "heroPrefixLines": [
+      "In 72 Hours",
+      "Precisely Unlock",
+      "Enterprise"
+    ],
+    "heroWords": [
+      "Real Value"
+    ],
     "heroParagraph": "AI-driven enterprise capitalization lifecycle OS — intelligent diagnostic engine scans 300+ value dimensions across strategy, finance, operations, and governance to accelerate growth.",
     "heroBtn": "Start Diagnosis Now",
     "heroBtn2": "View Sample Report →",
     "trust1": "72-Hour Delivery",
     "trust2": "300+ Value Dimensions",
     "trust3": "Institutional-Grade AI",
-    "footerTagline": "Built for institutional-grade capital intelligence"
+    "footerTagline": "Built for institutional-grade capital intelligence",
+    "svgI1Title": "Strategy",
+    "svgI2Title": "Financials",
+    "svgI3Title": "Operations",
+    "svgI4Title": "Governance",
+    "svgScore": "Overall Score",
+    "svgLive": "Live Analysis",
+    "svgR1Title": "IPO Readiness Score",
+    "svgR1Base": "Base 38 pts →",
+    "svgR1Unit": "pts",
+    "svgR1Footer": "Listing Review Compressed",
+    "svgR2Title": "M&A Valuation Multiple",
+    "svgR2Base": "7.2× →",
+    "svgR2Footer": "Due Diligence Compressed",
+    "svgR3Title": "Investor Conversion Rate",
+    "svgR3Desc": "Targeted → Intent Confirmed",
+    "svgR3Footer": "Financing Efficiency 2×",
+    "svgR3Delta": "3.2× Faster",
+    "svgR4Title": "Valuation Uplift",
+    "svgR4Footer": "EBITDA Increment",
+    "proc": [
+      {
+        "num": "01 — Data Collection",
+        "title": "Full-Spectrum Profiling",
+        "desc": "Structured 7-step intake framework covers 300+ data nodes, precisely capturing value drivers."
+      },
+      {
+        "num": "02 — AI Analysis",
+        "title": "Deep Intelligent Diagnostics",
+        "desc": "Multi-model AI engines process financial, operational, and strategic signals to uncover hidden value gaps and opportunities."
+      },
+      {
+        "num": "03 — Value Calibration",
+        "title": "Institutional Benchmarking",
+        "desc": "Benchmarks against 186+ industry databases, quantifying gaps across all dimensions and generating valuations with 90%+ confidence."
+      },
+      {
+        "num": "04 — Path Execution",
+        "title": "Capital Path Execution",
+        "desc": "30/60/90/180-day action roadmap, precisely matched to 320+ institutional advisors and execution modules."
+      }
+    ],
+    "svcEy": "Core Capability Framework",
+    "svcTitle": "Six Pillars of Enterprise Value",
+    "svcSub": "Comprehensive diagnostic coverage, precisely identifying every key variable that drives institutional-grade value realization.",
+    "svcs": [
+      {
+        "title": "AI Value Diagnostic Engine",
+        "desc": "Proprietary multi-model system evaluates 300+ enterprise value drivers, generating institutional-grade diagnostic scores and deep sub-dimension analysis, benchmarked against 186+ industry verticals.",
+        "tag": "Core Engine · 300+ Dimensions"
+      },
+      {
+        "title": "IPO Readiness Console",
+        "desc": "End-to-end IPO preparation management, from compliance gap analysis to underwriter selection, systematically tracking every listing milestone.",
+        "tag": "Capital Markets"
+      },
+      {
+        "title": "Financial Health Audit",
+        "desc": "Deep financial modeling and profit quality analysis, identifying EBITDA improvement paths and rebuilding investor confidence.",
+        "tag": "Financial Operations"
+      },
+      {
+        "title": "M&A Value Optimization",
+        "desc": "Accelerated buy-side and sell-side due diligence, AI-assisted value bridge modeling, synergy quantification, and deal decision support.",
+        "tag": "M&A Transactions"
+      },
+      {
+        "title": "Precision Investor Matching",
+        "desc": "AI-driven matching based on value profile, connecting to 320+ institutional advisors, PE funds, and strategic investors to shorten fundraising cycles.",
+        "tag": "Network · 320+ Advisors"
+      },
+      {
+        "title": "Capital Narrative Building",
+        "desc": "Diagnostic data-driven, high-impact investor storytelling across business plans, CIM, and roadshow materials.",
+        "tag": "Narrative Strategy"
+      }
+    ],
+    "kpiLbls": [
+      "Enterprises Served",
+      "Industries Covered",
+      "Advisor Network",
+      "Client Success Rate",
+      "Cumulative Value Unlocked"
+    ],
+    "swTitle": "Client Portfolio",
+    "rowIpo": "IPO Listed · NASDAQ / NYSE / A-Share",
+    "rowPartner": "Service Partners",
+    "footerCopy": "© 2026 RVC Capital Partners · Enterprise Value Intelligence Platform",
+    "svgI1Sub": "Strategy & Growth",
+    "svgI1Data": "186+ Industry Benchmarks",
+    "svgI2Sub": "Financial Health",
+    "svgI2Data": "EBITDA · Profitability",
+    "svgI3Sub": "Operational Excellence",
+    "svgI3Data": "Efficiency · Process · Talent",
+    "svgI4Sub": "Governance & Compliance",
+    "svgI4Data": "Compliance · Risk · Disclosure",
+    "svgR1Delta": "−6.2 Months",
+    "svgR2Delta": "−38 Days / −40%"
   },
   "intake": {
     "eyebrow": "Enterprise Data Intake Console",
@@ -36,12 +145,370 @@
     "aiSub": "Recalculates as you type",
     "aiScoreLabel": "Initial Score",
     "aiScoreGrade": "Good",
-    "aiCompleteHint": "Diagnostic report unlocks at completion"
+    "aiCompleteHint": "Diagnostic report unlocks at completion",
+    "stepMeta": [
+      {
+        "label": "Step 1 of 7",
+        "title": "Company Overview",
+        "desc": "Basic company information and core business positioning"
+      },
+      {
+        "label": "Step 2 of 7",
+        "title": "Financial Data",
+        "desc": "Core financial metrics for AI benchmarking and modeling"
+      },
+      {
+        "label": "Step 3 of 7",
+        "title": "Operations",
+        "desc": "Business operations data and process efficiency assessment"
+      },
+      {
+        "label": "Step 4 of 7",
+        "title": "Strategic Analysis",
+        "desc": "Market positioning, competitive advantages, and growth strategy"
+      },
+      {
+        "label": "Step 5 of 7",
+        "title": "Governance & Compliance",
+        "desc": "Corporate governance structure and compliance completeness"
+      },
+      {
+        "label": "Step 6 of 7",
+        "title": "Technology Capabilities",
+        "desc": "Digital asset and technology innovation capability assessment"
+      },
+      {
+        "label": "Step 7 of 7",
+        "title": "Capital Goals",
+        "desc": "Fundraising targets, timeline planning, and investor preferences"
+      }
+    ],
+    "stepLabels": [
+      "Company Overview",
+      "Financial Data",
+      "Operations",
+      "Strategy",
+      "Governance",
+      "Technology",
+      "Capital Goals"
+    ],
+    "remaining": [
+      "6 more steps to complete the full report",
+      "5 more steps to complete the full report",
+      "4 more steps to complete the full report",
+      "3 more steps to complete the full report",
+      "2 more steps to complete the full report",
+      "1 more step to complete the full report",
+      "All steps complete — generating report"
+    ],
+    "secBasicInfo": "Basic Information",
+    "secGrowthStage": "Development Stage & Market",
+    "secRevGrowth": "Revenue & Growth",
+    "secProfitability": "Profitability",
+    "secRevStructure": "Revenue Structure",
+    "secCapStructure": "Capital Structure",
+    "secCoreOps": "Core Operating Metrics",
+    "secFlowEff": "Process Efficiency",
+    "secSupplyChain": "Supply Chain & Inventory",
+    "secMarketPos": "Market Positioning",
+    "secGrowthStrat": "Growth Strategy",
+    "secStratMaturity": "Strategic Maturity Self-Assessment",
+    "secBoardStruct": "Board Structure",
+    "secAuditComp": "Audit & Compliance",
+    "secEquityStruct": "Equity Structure",
+    "secTechAssets": "Technology Assets",
+    "secDigitMaturity": "Digital Maturity",
+    "secTechStrat": "Technology Strategy",
+    "secCapGoal": "Capital Goals",
+    "secInvestorPref": "Investor Preferences",
+    "secRiskExposure": "Risk Exposure Assessment",
+    "fldName": "Company Full Name",
+    "fldFoundedYear": "Year Founded",
+    "fldBusiness": "Core Business",
+    "fldBizModel": "Business Model",
+    "fldHeadcount": "Headcount",
+    "fldRegistration": "Registration Location",
+    "fldFundingRound": "Funding Round",
+    "fldMarketRegion": "Primary Market Region",
+    "fldCompetitiveEdge": "Core Competitive Advantage (brief)",
+    "fldRevenue": "Annual Revenue (USD)",
+    "fldYoY": "Year-over-Year Growth (YoY)",
+    "fldCAGR": "3-Year CAGR",
+    "fldForecastRev": "Next 12-Month Revenue Forecast",
+    "fldEbitdaMargin": "EBITDA Margin",
+    "fldGrossMargin": "Gross Margin",
+    "fldNetMargin": "Net Margin",
+    "fldEbitdaAmount": "Annual EBITDA (USD)",
+    "fldCashBurn": "Monthly Cash Burn (if loss-making)",
+    "phCashBurn": "Enter N/A if profitable",
+    "fldRecRev": "Recurring Revenue Share",
+    "fldTopCustomer": "Top 3 Customers' Revenue Share",
+    "hintCustomerConc": "Customer concentration affects funding valuation",
+    "fldRevDistribution": "Revenue Geographic Distribution",
+    "fldDebt": "Total Liabilities (USD)",
+    "fldCash": "Cash & Equivalents",
+    "fldLastValuation": "Last Round Valuation",
+    "fldTotalRaised": "Total Capital Raised",
+    "fldFinTags": "Key Financial Focus Areas (multi-select)",
+    "fldMonthlyActiveUsers": "Monthly Active Trading Users",
+    "fldMonthlyVolume": "Monthly Transaction Volume (units)",
+    "fldAvgOrderValue": "Average Order Value (USD)",
+    "fldRepurchaseCycle": "Customer Repurchase Cycle",
+    "fldDetectionCycle": "Vehicle Inspection Delivery Cycle",
+    "fldTxnCycle": "Average Transaction Completion Cycle",
+    "fldDigitization": "Operational Digitization Level",
+    "sliderDigitLabel": "Core Business Digitization Coverage",
+    "fldSupplierCount": "Number of Partner Suppliers",
+    "fldInventoryTurnover": "Average Inventory Turnover Days",
+    "fldOpTags": "Operational Efficiency Gaps (multi-select)",
+    "fldOpNotes": "Additional Notes",
+    "phOpNotes": "Describe key operational challenges or recent improvements...",
+    "fldTAM": "Total Addressable Market (TAM, USD)",
+    "fldMarketPenetration": "Current Market Penetration Rate",
+    "fldStratTags": "Core Competitive Moats (multi-select)",
+    "fldGrowthEngine": "Core Growth Engine for Next 3 Years",
+    "fldCategoryExpansion": "Category Expansion Plan",
+    "fldCompetitors": "Key Competitors & Differentiation",
+    "fldBoardSize": "Board Member Count",
+    "fldIndepDirectors": "Independent Director Count",
+    "fldAuditCommStatus": "Audit Committee Status",
+    "fldCFO": "CFO / Head of Finance",
+    "fldCurrentAuditor": "Current Audit Firm",
+    "fldAuditedYears": "Audited Fiscal Years",
+    "fldCompTags": "Compliance Completeness (multi-select)",
+    "fldFounderStake": "Founder Team Equity Stake",
+    "fldEquityDispute": "Any Equity Disputes?",
+    "fldGovTags": "Governance Improvement Priorities (multi-select)",
+    "fldCoreSystems": "Proprietary Core Systems",
+    "fldTechTeamSize": "Tech Team Size",
+    "fldIP": "Intellectual Property (Patents / Software Copyright)",
+    "fldDataAssets": "Data Asset Scale",
+    "sliderAimlLabel": "AI/ML Application Depth in Core Business",
+    "sliderDataGovLabel": "Data Governance & Analytics Maturity",
+    "fldTechTags": "Tech Investment Priorities Next 12 Months (multi-select)",
+    "fldCapitalRoute": "Primary Capital Path (single select)",
+    "fldTimeWindow": "Target Timeline",
+    "fldTargetRaising": "Target Raise (USD)",
+    "fldFundUse": "Intended Use of Funds",
+    "fldTargetValuation": "Target Valuation Range (USD)",
+    "fldInvestorTags": "Preferred Investor Types (multi-select)",
+    "fldAdvisorExpectations": "Specific Expectations from Advisors",
+    "optB2B": "B2B",
+    "optB2BB2C": "B2B / B2C",
+    "optB2C": "B2C",
+    "optSaaS": "SaaS",
+    "headOpts": [
+      "1–20 staff",
+      "21–50 staff",
+      "51–200 staff",
+      "200+ staff"
+    ],
+    "fundingOpts": [
+      "Angel",
+      "Pre-A",
+      "Series A",
+      "Series B",
+      "Series C+"
+    ],
+    "regionOpts": [
+      "East China",
+      "National (Online + Offline)",
+      "Primarily Overseas"
+    ],
+    "recRevOpts": [
+      "0–20%",
+      "20–40%",
+      "40–60%",
+      "60%+"
+    ],
+    "revDistOpts": [
+      "Primarily Domestic (90%+)",
+      "Mostly Domestic (70–90%)",
+      "Mixed Domestic/International"
+    ],
+    "finTagOpts": [
+      "Cash Flow Management",
+      "Gross Margin Improvement",
+      "Working Capital",
+      "Scalable Unit Economics",
+      "Customer Concentration",
+      "FX Exposure"
+    ],
+    "opTagOpts": [
+      "Inspection Standardization",
+      "Logistics Coordination",
+      "After-Sales Service",
+      "Multi-City Expansion Replicability",
+      "Data System Integration"
+    ],
+    "stratTagOpts": [
+      "AI Inspection Tech Patents",
+      "B2B Dealer Network",
+      "Brand Recognition",
+      "Data & Algorithm Iteration",
+      "Price Advantage",
+      "Government Certifications"
+    ],
+    "growthEngOpts": [
+      "New Geographic Markets",
+      "Product Line Extension (B2B SaaS)",
+      "International Expansion",
+      "M&A Consolidation"
+    ],
+    "stratChecks": [
+      "Clear 3-year strategic plan document exists",
+      "Strategic goals & KPIs cascaded to department level",
+      "In-depth competitive analysis report completed",
+      "International expansion feasibility study initiated"
+    ],
+    "auditCommOpts": [
+      "Not yet established",
+      "Established (no independent members)",
+      "Established (with independent members)"
+    ],
+    "cfoOpts": [
+      "Internal Part-time CFO",
+      "Full-time CFO",
+      "Big4-background CFO"
+    ],
+    "auditorOpts": [
+      "Domestic small/mid-size firm",
+      "Domestic large firm",
+      "Big 4"
+    ],
+    "compTagOpts": [
+      "Business registration & licenses complete",
+      "Labor compliance",
+      "Data security compliance (PIPL)",
+      "Tax compliance",
+      "Anti-corruption & anti-bribery policy",
+      "ESG disclosure"
+    ],
+    "equityDisputeOpts": [
+      "No",
+      "Yes (please specify)"
+    ],
+    "govTagOpts": [
+      "Appoint independent directors",
+      "Form audit committee",
+      "Switch to Big4 audit",
+      "Strengthen internal controls",
+      "Establish ESG framework"
+    ],
+    "techTagOpts": [
+      "AI Pricing Model Iteration",
+      "B2B SaaS Productization",
+      "Data Platform Build-out",
+      "Mobile UX Optimization",
+      "International Tech Adaptation"
+    ],
+    "techChecks": [
+      "Core systems have disaster recovery & failover deployed",
+      "ISO 27001 information security certification achieved",
+      "Technology roadmap disclosed to investors"
+    ],
+    "capRouteOpts": [
+      "A-Share IPO",
+      "HK IPO",
+      "US IPO",
+      "Strategic M&A (Sell-side)"
+    ],
+    "timeWindowOpts": [
+      "Within 12 months",
+      "12–24 months",
+      "24–36 months",
+      "36+ months"
+    ],
+    "fundUseOpts": [
+      "Market Expansion",
+      "R&D + Market Expansion",
+      "M&A / Acquisitions",
+      "Working Capital"
+    ],
+    "investorTagOpts": [
+      "Strategic Industry Investors",
+      "New Economy-focused PE/VC",
+      "Government Guidance Funds",
+      "Cross-border Capital (USD Funds)",
+      "Listed Company Strategic Investors"
+    ],
+    "riskChecks": [
+      "Understand listing compliance requirements and prepared",
+      "Consulted legal counsel on VIE structure",
+      "Management team willing to accept IPO lock-up arrangements"
+    ],
+    "aiDims": [
+      "Strategy & Growth",
+      "Financial Health",
+      "Operational Efficiency",
+      "Governance",
+      "Organization & Talent",
+      "Technology & Data"
+    ],
+    "aiInsights": [
+      {
+        "title": "⚡ Company Overview Analysis",
+        "items": [
+          "Used-car sector TAM exceeded $180B in 2024; B2B/B2C dual-engine model has significant network effect potential.",
+          "50-person lean team generating $50M revenue places headcount efficiency in the top 25th industry percentile.",
+          "Recommend establishing a clear org chart soon to facilitate due diligence in future fundraising."
+        ]
+      },
+      {
+        "title": "⚡ Financial Health Insights",
+        "items": [
+          "38% YoY growth outpaces the industry median (22%); growth quality rated Excellent.",
+          "22% gross margin is mid-range for used-car platforms; SaaS-ization can lift gross margin to 40%+.",
+          "Customer concentration at 28% is below the 30% caution threshold, increasing fundraising appeal."
+        ]
+      },
+      {
+        "title": "⚡ Operational Efficiency Insights",
+        "items": [
+          "22-hour inspection delivery is industry-leading and a core differentiator.",
+          "28-day inventory turnover: reducing to 20 days could unlock ~$2M in working capital.",
+          "Significant room to improve standardization; SaaS-ization can push valuation multiples to 8–12× ARR."
+        ]
+      },
+      {
+        "title": "⚡ Strategic Positioning Insights",
+        "items": [
+          "TAM $180B+, current penetration extremely low — strong narrative foundation for 10× growth story.",
+          "AI pricing + B2B SaaS dual engines are the high-premium path; recommend as the core capital narrative.",
+          "After-market service extension projected to triple or quadruple LTV — a key value multiplier."
+        ]
+      },
+      {
+        "title": "⚡ Governance Risk Alert",
+        "items": [
+          "Insufficient independent directors is the single biggest IPO barrier — complete by Q3.",
+          "Switching to Big4 audit requires an 18-month lead time; plan accordingly for the IPO timeline.",
+          "Data security compliance (PIPL/GDPR) is a mandatory threshold for overseas fundraising."
+        ]
+      },
+      {
+        "title": "⚡ Technology Value Assessment",
+        "items": [
+          "800K+ inspection data assets form a competitive moat — establish a clear data monetization path.",
+          "B2B SaaS-ization can shift valuation logic from GMV-based to ARR-based with a 30–50% premium uplift.",
+          "Publishing a technology roadmap increases institutional investor trust — recommend organizing promptly."
+        ]
+      },
+      {
+        "title": "⚡ Capital Path Recommendations",
+        "items": [
+          "US IPO target is well-founded; recommend completing Series B first then launching IPO prep in 2026.",
+          "$300–500M valuation target requires achieving $100M+ revenue and significant profit improvement within 2 years.",
+          "The RVC advisor network can match 3–5 top-tier USD funds focused on new economy sectors."
+        ]
+      }
+    ]
   },
   "report": {
     "breadcrumbHome": "Home",
     "breadcrumbCurrent": "Enterprise Diagnostic Report",
     "headEyebrow": "Enterprise Diagnostic Report · Generated May 26, 2025",
+    "companyName": "UC Auto",
     "reportId": "Report ID",
     "scoreBadge": "Steady Growth",
     "shareReport": "Share Report",
@@ -80,7 +547,182 @@
     "colMitigation": "Recommended Action",
     "roadmapTitle": "30/60/90/180-Day Execution Roadmap",
     "roadmapSub": "Prioritized actions for value creation and capital path",
-    "viewIpoConsole": "View IPO Console →"
+    "viewIpoConsole": "View IPO Console →",
+    "companyMeta1": "Used-Car Trading Platform · B2B/B2C",
+    "companyMeta2": "Revenue $50M",
+    "companyMeta3": "Series A · 50-person team",
+    "scoreTrend": "↑ +6 vs initial assessment",
+    "scoreContext": "Auto Aftermarket · Series A",
+    "scorePercentile": "Top 28th percentile",
+    "advisorInitial": "Yu",
+    "advisorName": "Dr. Yu Longwen",
+    "advisorRole": "Capital Markets · IPO Specialist",
+    "sidebarScores": [
+      {
+        "name": "Strategy & Growth"
+      },
+      {
+        "name": "Financial Health"
+      },
+      {
+        "name": "Operational Efficiency"
+      },
+      {
+        "name": "Governance"
+      },
+      {
+        "name": "Organization & Talent"
+      },
+      {
+        "name": "Technology & Data"
+      }
+    ],
+    "sidebarLinks": [
+      "Composite Score",
+      "Radar Analysis",
+      "Capital Pathways",
+      "Opportunities",
+      "Risk Flags",
+      "Action Roadmap"
+    ],
+    "radarLabels": [
+      "Strategy & Growth",
+      "Financial Health",
+      "Operational Efficiency",
+      "Governance",
+      "Org & Talent",
+      "Tech & Data"
+    ],
+    "pathways": [
+      {
+        "title": "Series B + US IPO Preparation",
+        "desc": "Complete Series B ($30–50M) then launch US IPO preparation, leveraging growth momentum to access overseas institutional markets.",
+        "timeline": "Target: 24–36 months · Target valuation $300–500M"
+      },
+      {
+        "title": "Strategic M&A (Sell-side)",
+        "desc": "Existing tech assets and B2B network offer strong M&A appeal to auto groups and internet platforms, with EV multiples of ~5–8× ARR.",
+        "timeline": "Target: 12–18 months · Valuation range $250–400M"
+      },
+      {
+        "title": "HK IPO",
+        "desc": "Hong Kong market valuations for auto aftermarket are recovering; suitable to initiate after domestic regulatory environment stabilizes.",
+        "timeline": "Target: 36+ months · Governance improvements required first"
+      }
+    ],
+    "opportunities": [
+      {
+        "name": "B2B SaaS-ization — Dealer Management Subscription",
+        "dim": "Strategy & Growth",
+        "dimTag": "tag-blue",
+        "impact": "+$6M ARR",
+        "diff": "Medium · 9 months"
+      },
+      {
+        "name": "Inventory Turnover Optimization (28→20 days)",
+        "dim": "Operations",
+        "dimTag": "tag-orange",
+        "impact": "Unlock $2M working capital",
+        "diff": "Low · 3 months"
+      },
+      {
+        "name": "Switch to Big4 Audit — Pre-IPO Compliance",
+        "dim": "Governance",
+        "dimTag": "tag-blue",
+        "impact": "Unlock IPO path",
+        "diff": "High · 18 months"
+      },
+      {
+        "name": "After-Market Service Extension (maintenance/insurance/finance)",
+        "dim": "Strategy & Growth",
+        "dimTag": "tag-blue",
+        "impact": "LTV +3–4×",
+        "diff": "High · 18 months"
+      },
+      {
+        "name": "Add Independent Directors — Complete Governance Structure",
+        "dim": "Governance",
+        "dimTag": "tag-blue",
+        "impact": "Score +14 pts",
+        "diff": "Low · 2 months"
+      },
+      {
+        "name": "Data Asset Monetization — AI Pricing SaaS Output",
+        "dim": "Technology & Data",
+        "dimTag": "tag-blue",
+        "impact": "Valuation multiple expansion",
+        "diff": "Medium · 6 months"
+      }
+    ],
+    "risks": [
+      {
+        "name": "No Big4 Audit — IPO Mandatory Requirement Not Met",
+        "levelBg": "rgba(240,68,56,0.1)",
+        "levelColor": "#F04438",
+        "level": "🔴 High",
+        "action": "Initiate Big4 outreach immediately, sign by Q3 at the latest"
+      },
+      {
+        "name": "Weak Governance — Insufficient Independent Directors",
+        "levelBg": "rgba(245,158,11,0.1)",
+        "levelColor": "#D97706",
+        "level": "⚠ Med",
+        "action": "Complete independent director additions and form audit committee by Q2"
+      },
+      {
+        "name": "Data Security Compliance Gap (PIPL/GDPR)",
+        "levelBg": "rgba(245,158,11,0.1)",
+        "levelColor": "#D97706",
+        "level": "⚠ Med",
+        "action": "Mandatory threshold for overseas fundraising — initiate compliance program by Q2"
+      }
+    ],
+    "roadmap": [
+      {
+        "days": "30 days",
+        "label": "Month 1 Foundation",
+        "title": "Compliance Launch",
+        "actions": [
+          "Engage 3 Big4 audit firms",
+          "Launch independent director search",
+          "Initiate inventory optimization",
+          "B2B SaaS prototype design"
+        ]
+      },
+      {
+        "days": "60 days",
+        "label": "Governance Build",
+        "title": "Structure Upgrade",
+        "actions": [
+          "Appoint independent director",
+          "Form audit committee",
+          "Build PIPL compliance framework",
+          "Prepare Series B roadshow materials"
+        ]
+      },
+      {
+        "days": "90 days",
+        "label": "Growth Acceleration",
+        "title": "Value Amplification",
+        "actions": [
+          "Sign Big4 audit engagement",
+          "B2B SaaS beta launch",
+          "After-market pilot kickoff",
+          "USD fund outreach begins"
+        ]
+      },
+      {
+        "days": "180 days",
+        "label": "Capital Ready",
+        "title": "Fundraising Sprint",
+        "actions": [
+          "Series B Term Sheet negotiation",
+          "IPO feasibility assessment report",
+          "FY2024 audit report completion",
+          "Valuation model refresh"
+        ]
+      }
+    ]
   },
   "modules": {
     "eyebrow": "Capital Execution Modules",
@@ -92,6 +734,7 @@
     "stat2Lbl": "Avg Match Score",
     "stat3Lbl": "Avg Execution Cycle",
     "stat4Lbl": "Cumulative Value Unlocked",
+    "stat3Val": "18 mo",
     "filterAll": "All Modules",
     "filterCapital": "Capital Markets",
     "filterFinancial": "Financial Optimization",
@@ -106,10 +749,216 @@
     "detailKpi3": "Advisors",
     "detailIncludes": "Module Includes",
     "openIpoConsole": "Open IPO Console →",
-    "bookAdvisor": "Book Advisor"
+    "bookAdvisor": "Book Advisor",
+    "matchLabel": "Match",
+    "mods": [
+      {
+        "num": "Module 01",
+        "title": "IPO Readiness Accelerator",
+        "desc": "Full-cycle US/HK listing management — from compliance gap assessment to underwriter selection, prospectus drafting, and roadshow preparation.",
+        "tags": [
+          {
+            "text": "Capital Markets"
+          },
+          {
+            "text": "Highly Recommended"
+          }
+        ],
+        "features": [
+          "Regulatory compliance gap analysis & remediation roadmap",
+          "Big4 audit engagement & financial statement standardization",
+          "Underwriter roadshow deck & investor Q&A preparation",
+          "Prospectus (S-1/F-1) milestone tracking & management"
+        ],
+        "footLabel": "Cycle: ",
+        "footStrong": "18–24 months",
+        "footExtra": " · 320+ advisors",
+        "detailSub": "Capital Markets · 96% Match",
+        "detailItems": [
+          "Regulatory compliance gap analysis & remediation roadmap",
+          "Financial statement standardization & Big4 audit engagement",
+          "Prospectus (F-1/S-1) drafting support & SEC review preparation",
+          "Underwriter selection & roadshow strategy",
+          "Investor roadshow preparation & mock Q&A training",
+          "Lock-up strategy & post-listing capital markets support"
+        ],
+        "kpis": [
+          "96%",
+          "$42B",
+          "320+"
+        ]
+      },
+      {
+        "num": "Module 02",
+        "title": "Financial Health Deep Audit",
+        "desc": "Institutional-grade financial modeling, profit quality analysis, and EBITDA optimization to strengthen financial credibility and investor appeal.",
+        "tags": [
+          {
+            "text": "Financial Optimization"
+          }
+        ],
+        "features": [
+          "Quality of Earnings (QoE) deep assessment",
+          "Working capital optimization & core financial KPI framework",
+          "Revenue recognition standardization & GAAP/IFRS alignment",
+          "Integrated 3-statement financial model"
+        ],
+        "footLabel": "Cycle: ",
+        "footStrong": "3–6 months",
+        "footExtra": " · Big4 partnership",
+        "detailSub": "Financial Optimization · 94% Match",
+        "detailItems": [
+          "Quality of Earnings (QoE) deep assessment report",
+          "Working capital optimization & financial KPI dashboard",
+          "Revenue recognition standardization & GAAP/IFRS alignment",
+          "Integrated 3-statement model with multi-scenario forecasts",
+          "Tax structure optimization & financial risk review",
+          "Financial data room construction"
+        ],
+        "kpis": [
+          "94%",
+          "$8.2B",
+          "Big4"
+        ]
+      },
+      {
+        "num": "Module 03",
+        "title": "Strategic M&A Optimization",
+        "desc": "AI-assisted due diligence, value bridge analysis, and deal structure design to accelerate buy-side/sell-side M&A processes.",
+        "tags": [
+          {
+            "text": "Strategic M&A"
+          }
+        ],
+        "features": [
+          "Target screening & deal opportunity identification",
+          "AI-automated due diligence & red-flag detection",
+          "Value bridge analysis & synergy quantification",
+          "Integration planning & 100-day execution roadmap"
+        ],
+        "footLabel": "Cycle: ",
+        "footStrong": "6–18 months",
+        "footExtra": " · $280M–430M range",
+        "detailSub": "Strategic M&A · 91% Match",
+        "detailItems": [
+          "Systematic M&A target screening & ranking",
+          "AI-driven due diligence automation & red-flag identification",
+          "Value bridge analysis & synergy quantification",
+          "Optimal deal structure design (equity/cash/hybrid)",
+          "Integration planning & 100-day execution roadmap",
+          "Sell-side CIM materials & data room construction"
+        ],
+        "kpis": [
+          "91%",
+          "$280M+",
+          "186+"
+        ]
+      },
+      {
+        "num": "Module 04",
+        "title": "AI Transformation",
+        "desc": "AI strategy planning and execution roadmap tailored to the used-car trading context, building a data-driven competitive moat and reshaping the investment narrative.",
+        "tags": [
+          {
+            "text": "Tech Enablement"
+          }
+        ],
+        "features": [
+          "AI use-case identification & ROI quantification",
+          "Vehicle pricing engine & intelligent inventory optimization",
+          "Vehicle data asset monetization pathway",
+          "AI narrative integration into investor deck"
+        ],
+        "footLabel": "Cycle: ",
+        "footStrong": "3–9 months",
+        "footExtra": " · Valuation multiple uplift",
+        "detailSub": "Tech Enablement · 89% Match",
+        "detailItems": [
+          "Used-car AI use-case identification & ROI quantification",
+          "Intelligent pricing engine & inventory scheduling upgrade",
+          "Vehicle data asset monetization pathway planning",
+          "Technology stack modernization roadmap",
+          "AI narrative integration into investor roadshow materials",
+          "Digital operations capability assessment & improvement"
+        ],
+        "kpis": [
+          "89%",
+          "3.2x",
+          "180 Days"
+        ]
+      },
+      {
+        "num": "Module 05",
+        "title": "Capital Narrative Building",
+        "desc": "Diagnostic data-driven institutional investment narrative — from Confidential Information Memorandum (CIM) to roadshow materials, comprehensively showcasing enterprise value.",
+        "tags": [
+          {
+            "text": "Capital Markets"
+          }
+        ],
+        "features": [
+          "Investment thesis refinement & differentiated positioning",
+          "Confidential Information Memorandum (CIM) full-suite output",
+          "Investor roadshow deck & supporting Q&A materials",
+          "Comparable company analysis & valuation benchmarking"
+        ],
+        "footLabel": "Cycle: ",
+        "footStrong": "4–8 weeks",
+        "footExtra": " · Data-driven",
+        "detailSub": "Capital Markets · 87% Match",
+        "detailItems": [
+          "Investment thesis refinement & differentiated positioning",
+          "Confidential Information Memorandum (CIM) full-suite output",
+          "Investor roadshow deck & supporting Q&A materials",
+          "Comparable company analysis & valuation benchmarking",
+          "Investor relations strategy planning",
+          "Multi-language fundraising materials support"
+        ],
+        "kpis": [
+          "87%",
+          "4–8 Wks",
+          "CIM+"
+        ]
+      },
+      {
+        "num": "Module 06",
+        "title": "Precision Investor Matching",
+        "desc": "AI-curated institutional investors, PE funds, and strategic partners, precisely matched to enterprise profile and fundraising goals to shorten the capital search cycle.",
+        "tags": [
+          {
+            "text": "Institutional Network"
+          }
+        ],
+        "features": [
+          "320+ institutional advisor network exclusive access",
+          "AI-matched PE/VC funds with targeted introductions",
+          "Strategic acquirer identification & profiling",
+          "Relationship management & warm introduction follow-up"
+        ],
+        "footLabel": "Network: ",
+        "footStrong": "320+ advisors",
+        "footExtra": " · 186+ sub-sectors",
+        "detailSub": "Institutional Network · 84% Match",
+        "detailItems": [
+          "AI-curated institutional investor shortlist",
+          "PE/VC fund exclusive introductions & background analysis",
+          "Strategic acquirer identification & approach strategy",
+          "Investor relationship management & progress tracking",
+          "Warm introductions & meeting scheduling support",
+          "Full-cycle advisor accompaniment throughout fundraising"
+        ],
+        "kpis": [
+          "84%",
+          "320+",
+          "186+"
+        ]
+      }
+    ]
   },
   "ipo": {
     "headerEyebrow": "IPO Readiness Console · Assessed May 26, 2026",
+    "companyName": "UC Auto",
+    "advisorInitial": "Yu",
     "metaBusiness": "Used-Car Trading Platform · B2B/B2C",
     "metaRevenue": "Revenue $50M",
     "metaTargetExchange": "Target Exchange: US / HK",
@@ -120,6 +969,9 @@
     "exportPdf": "Export PDF",
     "bookAdvisor": "Book IPO Advisor →",
     "advisorTitle": "Lead IPO Advisor",
+    "advisorName": "Dr. Yu Longwen",
+    "advisorRole": "IPO Expert · Capital Markets",
+    "advisorExp": "Led 18 IPOs · Total raised $6.2B",
     "navTimeline": "Listing Timeline",
     "navChecklist": "Readiness Checklist",
     "navRisk": "Risk Assessment",
@@ -129,25 +981,237 @@
     "badgePhases": "6 Phases",
     "badgeAlerts": "3 Alerts",
     "deadlinesTitle": "Key Milestones",
+    "deadlines": [
+      {
+        "label": "Big4 Audit Engagement",
+        "date": "Sep 2026"
+      },
+      {
+        "label": "Audit Committee Formation",
+        "date": "Oct 2026"
+      },
+      {
+        "label": "Independent Director Addition",
+        "date": "Nov 2026"
+      },
+      {
+        "label": "Underwriter Selection Complete",
+        "date": "Mar 2027"
+      }
+    ],
     "timelineTitle": "IPO Listing Timeline",
     "timelineSub": "Six-phase execution roadmap to capital markets",
     "timelineTarget": "Target: 2028 Q2",
+    "tlSteps": [
+      {
+        "phase": "Phase 1",
+        "title": "Enterprise Diagnostic",
+        "date": "2026 Q1",
+        "status": "Completed",
+        "statusClass": "done"
+      },
+      {
+        "phase": "Phase 2",
+        "title": "Gap Analysis",
+        "date": "2026 Q2",
+        "status": "Completed",
+        "statusClass": "done"
+      },
+      {
+        "phase": "Phase 3",
+        "title": "Governance Buildout",
+        "date": "2026 Q3 – 2027 Q1",
+        "status": "In Progress",
+        "statusClass": "active"
+      },
+      {
+        "phase": "Phase 4",
+        "title": "Financial Standardization",
+        "date": "2027",
+        "status": "Pending",
+        "statusClass": "pending"
+      },
+      {
+        "phase": "Phase 5",
+        "title": "Prospectus Drafting",
+        "date": "2027 Q4 – 2028 Q1",
+        "status": "Pending",
+        "statusClass": "pending"
+      },
+      {
+        "phase": "Phase 6",
+        "title": "Listing",
+        "date": "2028 Q2",
+        "status": "Target",
+        "statusClass": "pending"
+      }
+    ],
     "categoryTitle": "Readiness by Category",
     "categorySub": "15 core preparation items across 5 key domains",
     "categoryOverall": "Overall 38% Complete",
     "psDone": "Completed",
     "psProg": "In Progress",
     "psPending": "Pending",
+    "catBars": [
+      {
+        "name": "Business Operations",
+        "stats": "5/5 · 100%"
+      },
+      {
+        "name": "Financial Standardization",
+        "stats": "3/5 · 60%"
+      },
+      {
+        "name": "Governance & Compliance",
+        "stats": "2/5 · 40%"
+      },
+      {
+        "name": "Legal & Regulatory",
+        "stats": "1/3 · 33%"
+      },
+      {
+        "name": "Capital Market Readiness",
+        "stats": "0/2 · 0%"
+      }
+    ],
     "checklistTitle": "IPO Readiness Checklist",
     "checklistSub": "Key milestones and admission requirements for public listing",
+    "pillCheckDone": "3 Completed",
+    "pillCheckProg": "3 In Progress",
     "colRequirement": "Requirement",
     "colOwner": "Owner",
     "colDue": "Due Date",
     "colStatus": "Status",
+    "statusDone": "Completed",
+    "statusProg": "In Progress",
+    "statusPending": "Pending",
+    "checklistItems": [
+      {
+        "name": "Enterprise Value Diagnostic Complete",
+        "sub": "300-item full-spectrum diagnostic assessment",
+        "owner": "RVC AI Engine",
+        "due": "Mar 2026",
+        "status": "done"
+      },
+      {
+        "name": "Revenue Recognition Accounting Policy",
+        "sub": "Revenue recognition rules documented and implemented",
+        "owner": "CFO Office",
+        "due": "Apr 2026",
+        "status": "done"
+      },
+      {
+        "name": "Corporate Charter Restructuring Complete",
+        "sub": "Legal entity structure meets IPO requirements",
+        "owner": "Legal Counsel",
+        "due": "May 2026",
+        "status": "done"
+      },
+      {
+        "name": "Big4 Audit Firm Engagement",
+        "sub": "Engage KPMG/PwC/Deloitte/EY for 2-year audit",
+        "owner": "CFO + Board",
+        "due": "Sep 2026",
+        "status": "prog"
+      },
+      {
+        "name": "Audit Committee Formation",
+        "sub": "Requires at least 3 independent directors with audit background",
+        "owner": "Board / CEO",
+        "due": "Oct 2026",
+        "status": "prog"
+      },
+      {
+        "name": "PIPL Compliance & Data Security Framework",
+        "sub": "Personal Information Protection Law compliance architecture",
+        "owner": "Compliance Lead",
+        "due": "Nov 2026",
+        "status": "prog"
+      },
+      {
+        "name": "2-Year Audited Financial Statements",
+        "sub": "FY2025 + FY2026 Big4 audited financials",
+        "owner": "Big4 Audit Firm",
+        "due": "Jun 2027",
+        "status": "pending"
+      },
+      {
+        "name": "Independent Director Addition (2 seats)",
+        "sub": "Recruit directors with listed-company experience",
+        "owner": "CFO + Board",
+        "due": "Nov 2026",
+        "status": "pending"
+      },
+      {
+        "name": "Underwriter Selection & Engagement",
+        "sub": "Lead underwriter and co-underwriters confirmed",
+        "owner": "CFO + Board",
+        "due": "2027 Q1",
+        "status": "pending"
+      },
+      {
+        "name": "Prospectus (F-1) Drafting",
+        "sub": "SEC registration filing preparation and legal review",
+        "owner": "Legal + CFO + Underwriters",
+        "due": "2027 Q4",
+        "status": "pending"
+      }
+    ],
     "riskTitle": "IPO Risk Assessment",
     "riskSub": "Critical risk factors to resolve before listing",
     "riskCount": "3 Active Alerts",
+    "riskCards": [
+      {
+        "severityClass": "high",
+        "severityColor": "#F04438",
+        "severity": "🔴 High Risk",
+        "title": "Big4 Audit Firm Not in Place",
+        "desc": "Public market investors require at least 2 full fiscal years of Big4 audit reports — the single biggest IPO blocker for this company. Engagement must begin immediately.",
+        "action": "Start now — Sep 2026 deadline"
+      },
+      {
+        "severityClass": "high",
+        "severityColor": "#F04438",
+        "severity": "🔴 High Risk",
+        "title": "Critically Insufficient Independent Directors",
+        "desc": "SEC / HKEX both require audit committees with a majority of independent directors. Current board composition does not meet regulatory requirements.",
+        "action": "Add 2 independent directors by Nov 2026"
+      },
+      {
+        "severityClass": "medium",
+        "severityColor": "#D97706",
+        "severity": "⚠ Medium Risk",
+        "title": "PIPL Data Compliance Gaps",
+        "desc": "Platform has accumulated vehicle transaction user data; PIPL compliance architecture is not fully established and may trigger regulatory scrutiny.",
+        "action": "Launch dedicated data compliance remediation plan"
+      },
+      {
+        "severityClass": "low",
+        "severityColor": "#16B364",
+        "severity": "✓ Low Risk",
+        "title": "Revenue Growth Is Strong",
+        "desc": "38% YoY growth significantly outperforms the used-car industry median (12%). B2B SaaS transition brings predictable recurring revenue, supporting premium valuation.",
+        "action": "Sustain growth momentum through the listing window"
+      }
+    ],
     "actionsTitle": "Recommended Priority Actions",
-    "actionsSub": "Key initiatives with highest impact on IPO readiness"
+    "actionsSub": "Key initiatives with highest impact on IPO readiness",
+    "actionCards": [
+      {
+        "title": "Engage Big4 Audit Firm",
+        "desc": "RVC will provide a warm introduction to a premier audit partner — the critical path for IPO. Recommend initiating this week.",
+        "link": "Book Introduction Meeting"
+      },
+      {
+        "title": "Independent Director Recruitment Plan",
+        "desc": "Identify and onboard 2 independent directors with listed-company experience, to be completed by November 2026 to satisfy regulatory requirements.",
+        "link": "View Candidate Shortlist"
+      },
+      {
+        "title": "Financial System Upgrade",
+        "desc": "Deploy enterprise financial management system (SAP / Oracle), establish complete audit trail, and meet internal control and SOX compliance requirements.",
+        "link": "View Financial Optimization Module"
+      }
+    ]
   }
 }

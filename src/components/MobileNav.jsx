@@ -23,7 +23,7 @@ export default function MobileNav({ open, onClose }) {
           {t(key)}
         </Link>
       ))}
-      <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
+      <button className="lang-toggle" onClick={toggleLang} aria-label={t('aria.langToggle')}>
         {t('langToggle')}
       </button>
     </div>

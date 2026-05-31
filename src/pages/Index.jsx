@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import '../styles/index.css';
 
 export default function Index() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const heroRef = useRef(null);
 
   // Scroll reveal
@@ -58,10 +58,11 @@ export default function Index() {
     if (!h1) return;
     let cancelled = false;
 
+    const lines = t('index.heroPrefixLines', { returnObjects: true });
     const prefixDef = [
-      ['72小时内', false], ['\n', false], ['精准解锁', true], ['\n', false], ['企业', false]
+      [lines[0], false], ['\n', false], [lines[1], true], ['\n', false], [lines[2], false]
     ];
-    const words = ['真实价值', 'Real Value'];
+    const words = t('index.heroWords', { returnObjects: true });
     const prefix = [];
     prefixDef.forEach(([str, acc]) => [...str].forEach(c => prefix.push({ c, acc })));
     let wordIdx = 0;
@@ -116,7 +117,7 @@ export default function Index() {
     h1.innerHTML = '<span class="type-cursor">|</span>';
     timer = setTimeout(typePrefix, 320);
     return () => { cancelled = true; clearTimeout(timer); };
-  }, []);
+  }, [i18n.language]);
 
   // SVG engine counter
   useEffect(() => {
@@ -212,9 +213,9 @@ export default function Index() {
                     <line x1="0" y1="12" x2="0" y2="7"/><line x1="4" y1="12" x2="4" y2="3"/>
                     <line x1="8" y1="12" x2="8" y2="9"/><line x1="12" y1="12" x2="12" y2="1"/>
                   </g>
-                  <text x="42" y="73" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">战略规划</text>
-                  <text x="42" y="88" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">Strategy &amp; Growth</text>
-                  <text x="42" y="105" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">186+ 行业基准对标</text>
+                  <text x="42" y="73" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI1Title')}</text>
+                  <text x="42" y="88" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI1Sub')}</text>
+                  <text x="42" y="105" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI1Data')}</text>
 
                   {/* I2: 财务质量 */}
                   <rect x="14" y="162" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -223,9 +224,9 @@ export default function Index() {
                   <g transform="translate(24,174)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="0,6 3,6 5,1 7,11 9,4 11,6 13,6"/>
                   </g>
-                  <text x="42" y="185" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">财务质量</text>
-                  <text x="42" y="200" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">Financial Health</text>
-                  <text x="42" y="217" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">EBITDA · 盈利能力</text>
+                  <text x="42" y="185" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI2Title')}</text>
+                  <text x="42" y="200" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI2Sub')}</text>
+                  <text x="42" y="217" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI2Data')}</text>
 
                   {/* I3: 运营卓越 */}
                   <rect x="14" y="274" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -236,9 +237,9 @@ export default function Index() {
                     <line x1="6" y1="0" x2="6" y2="-1.5"/><line x1="6" y1="12" x2="6" y2="13.5"/>
                     <line x1="12" y1="6" x2="13.5" y2="6"/><line x1="0" y1="6" x2="-1.5" y2="6"/>
                   </g>
-                  <text x="42" y="297" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">运营卓越</text>
-                  <text x="42" y="312" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">Operational Excellence</text>
-                  <text x="42" y="329" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">效率 · 流程 · 人才</text>
+                  <text x="42" y="297" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI3Title')}</text>
+                  <text x="42" y="312" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI3Sub')}</text>
+                  <text x="42" y="329" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI3Data')}</text>
 
                   {/* I4: 公司治理 */}
                   <rect x="14" y="386" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -248,14 +249,14 @@ export default function Index() {
                     <path d="M6,0 L12,2.5 L12,6 C12,9.5 9.5,11.5 6,13 C2.5,11.5 0,9.5 0,6 L0,2.5 Z"/>
                     <polyline points="3.5,6.5 5.5,8.5 9,4"/>
                   </g>
-                  <text x="42" y="409" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">公司治理</text>
-                  <text x="42" y="424" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">Governance &amp; Compliance</text>
-                  <text x="42" y="441" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">合规 · 风控 · 信息披露</text>
+                  <text x="42" y="409" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI4Title')}</text>
+                  <text x="42" y="424" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI4Sub')}</text>
+                  <text x="42" y="441" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI4Data')}</text>
 
                   {/* Score glass card */}
                   <rect x="220" y="132" width="120" height="44" rx="11" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#gs)"/>
                   <line x1="238" y1="132" x2="322" y2="132" stroke="rgba(43,98,227,0.22)" strokeWidth="1"/>
-                  <text x="280" y="149" textAnchor="middle" fill="#5b667d" fontSize="7.2" fontWeight="600" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".1em">综合诊断评分</text>
+                  <text x="280" y="149" textAnchor="middle" fill="#5b667d" fontSize="7.2" fontWeight="600" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".1em">{t('index.svgScore')}</text>
                   <text x="265" y="171" textAnchor="middle" fill="#2b62e3" fontSize="26" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num" id="svgScore">68</text>
                   <text x="290" y="169" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Mono',monospace" className="svg-unit">/100</text>
 
@@ -296,7 +297,7 @@ export default function Index() {
                   <text x="280" y="206" textAnchor="middle" fill="rgba(43,98,227,0.55)" fontSize="6.8" fontWeight="700" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".13em">AI ENGINE · RVC CORE</text>
                   <rect x="238" y="316" width="84" height="22" rx="7" fill="rgba(74,222,128,0.10)" stroke="rgba(74,222,128,0.25)" strokeWidth="1"/>
                   <circle cx="251" cy="327" r="3" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
-                  <text x="259" y="331" fill="#4ade80" fontSize="8.2" fontWeight="700" fontFamily="'IBM Plex Sans',sans-serif">实时分析中</text>
+                  <text x="259" y="331" fill="#4ade80" fontSize="8.2" fontWeight="700" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgLive')}</text>
 
                   {/* R1: IPO就绪度 */}
                   <rect x="462" y="30" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -305,15 +306,15 @@ export default function Index() {
                   <g transform="translate(468,41)" fill="none" stroke="#2b62e3" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="0,11 4,7 7,9 13,2"/><polyline points="9,2 13,2 13,6"/>
                   </g>
-                  <text x="486" y="54" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">IPO就绪度评分</text>
-                  <text x="468" y="67" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">基准 38分 →</text>
+                  <text x="486" y="54" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR1Title')}</text>
+                  <text x="468" y="67" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR1Base')}</text>
                   <text x="468" y="89" fill="#2b62e3" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" fontVariantNumeric="tabular-nums" className="svg-num" id="n1">91</text>
-                  <text x="507" y="87" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">分</text>
+                  <text x="507" y="87" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">{t('index.svgR1Unit')}</text>
                   <rect x="504" y="74" width="42" height="14" rx="7" fill="rgba(74,222,128,0.12)"/>
                   <text x="525" y="84" textAnchor="middle" fill="#4ade80" fontSize="7.5" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">▲ 53 pts</text>
                   <line x1="468" y1="92" x2="647" y2="92" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="110" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">上市审核周期压缩</text>
-                  <text x="652" y="110" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">−6.2 月</text>
+                  <text x="468" y="110" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR1Footer')}</text>
+                  <text x="652" y="110" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR1Delta')}</text>
 
                   {/* R2: 并购估值倍数 */}
                   <rect x="462" y="144" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -323,13 +324,13 @@ export default function Index() {
                     <path d="M0,4.5 C5,4.5 8,0 13,0"/><path d="M0,7.5 C5,7.5 8,12 13,12"/>
                     <polyline points="10,0 13,0 13,3.5"/><polyline points="10,12 13,12 13,8.5"/>
                   </g>
-                  <text x="486" y="168" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">并购估值倍数</text>
-                  <text x="468" y="180" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">7.2× →</text>
+                  <text x="486" y="168" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR2Title')}</text>
+                  <text x="468" y="180" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Base')}</text>
                   <text x="468" y="202" fill="#5b8aee" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" fontVariantNumeric="tabular-nums" className="svg-num" id="n2">9.6</text>
                   <text x="518" y="200" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">× EV/EBITDA</text>
                   <line x1="468" y1="207" x2="647" y2="207" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="225" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">尽调周期压缩</text>
-                  <text x="652" y="225" textAnchor="end" fill="#5b8aee" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">−38天 / −40%</text>
+                  <text x="468" y="225" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Footer')}</text>
+                  <text x="652" y="225" textAnchor="end" fill="#5b8aee" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR2Delta')}</text>
 
                   {/* R3: 投资人转化率 */}
                   <rect x="462" y="258" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -340,12 +341,12 @@ export default function Index() {
                     <circle cx="10.5" cy="3" r="2" strokeWidth="1.3" opacity="0.65"/>
                     <path d="M8,12 C8.5,10 14,10 14,12" strokeWidth="1.3" opacity="0.65"/>
                   </g>
-                  <text x="486" y="282" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">投资人转化率</text>
+                  <text x="486" y="282" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR3Title')}</text>
                   <text x="468" y="306" fill="#2b62e3" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n3">58</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
-                  <text x="468" y="320" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Sans',sans-serif">精准触达 → 意向确认</text>
+                  <text x="468" y="320" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Desc')}</text>
                   <line x1="468" y1="330" x2="647" y2="330" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="346" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">融资效率倍增</text>
-                  <text x="652" y="346" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">3.2× 提速</text>
+                  <text x="468" y="346" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Footer')}</text>
+                  <text x="652" y="346" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR3Delta')}</text>
 
                   {/* R4: 企业估值提升 */}
                   <rect x="462" y="372" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
@@ -354,11 +355,11 @@ export default function Index() {
                   <g transform="translate(468,383)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="7,0 14,5 7,13 0,5"/><line x1="0" y1="5" x2="14" y2="5"/>
                   </g>
-                  <text x="486" y="396" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">企业估值提升</text>
+                  <text x="486" y="396" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR4Title')}</text>
                   <text x="468" y="420" fill="#5b8aee" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n4">34</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
                   <text x="468" y="432" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">$24.2M → $32.4M</text>
                   <line x1="468" y1="440" x2="647" y2="440" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="457" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">EBITDA 增量</text>
+                  <text x="468" y="457" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR4Footer')}</text>
                   <text x="652" y="457" textAnchor="end" fill="#5b8aee" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">+$8.2M</text>
 
                   {/* Flow paths */}
@@ -390,26 +391,13 @@ export default function Index() {
       <section className="process">
         <div className="wrap">
           <div className="proc-grid">
-            <div className="proc-item reveal">
-              <div className="proc-num">01 — 数据采集</div>
-              <div className="proc-title">企业全维建档</div>
-              <div className="proc-desc">结构化七步采集框架，覆盖300+数据节点，精准捕获价值驱动因子。</div>
-            </div>
-            <div className="proc-item reveal">
-              <div className="proc-num">02 — AI 分析</div>
-              <div className="proc-title">深度智能诊断</div>
-              <div className="proc-desc">多模型AI引擎并行处理财务、运营与战略信号，揭示隐性价值漏洞与机会。</div>
-            </div>
-            <div className="proc-item reveal">
-              <div className="proc-num">03 — 价值标定</div>
-              <div className="proc-title">机构级基准对标</div>
-              <div className="proc-desc">对标186+行业数据库，量化各维度差距，生成可信度超90%的估值区间。</div>
-            </div>
-            <div className="proc-item reveal">
-              <div className="proc-num">04 — 路径执行</div>
-              <div className="proc-title">资本路径落地</div>
-              <div className="proc-desc">30/60/90/180天行动路线图，精准匹配320+机构顾问与专项执行模块。</div>
-            </div>
+            {(t('index.proc', { returnObjects: true })).map((p, i) => (
+              <div key={i} className="proc-item reveal">
+                <div className="proc-num">{p.num}</div>
+                <div className="proc-title">{p.title}</div>
+                <div className="proc-desc">{p.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -417,58 +405,58 @@ export default function Index() {
       <section className="services">
         <div className="wrap">
           <div className="sec-head reveal">
-            <div className="sec-ey">核心能力体系</div>
-            <h2 className="sec-ttl">企业价值的六大支柱</h2>
-            <p className="sec-sub">全方位诊断覆盖，精准识别每一个影响机构级价值实现的关键变量。</p>
+            <div className="sec-ey">{t('index.svcEy')}</div>
+            <h2 className="sec-ttl">{t('index.svcTitle')}</h2>
+            <p className="sec-sub">{t('index.svcSub')}</p>
           </div>
           <div className="bento">
             <div className="b-card wide accent reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">01</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-              <div className="svc-title">AI价值诊断引擎</div>
-              <div className="svc-desc">自主研发的多模型协同系统，系统评估300+企业价值驱动因子，生成机构级诊断评分与深度子维度分析，对标186+行业纵向数据，输出精准估值参考与行动优先级。</div>
-              <span className="svc-tag">核心引擎 · 300+ 维度</span>
+              <div className="svc-title">{t('index.svcs.0.title')}</div>
+              <div className="svc-desc">{t('index.svcs.0.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.0.tag')}</span>
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">02</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-              <div className="svc-title">IPO就绪控制台</div>
-              <div className="svc-desc">端到端IPO筹备管理，从合规差距分析到承销商遴选，系统化追踪每一个上市里程碑。</div>
-              <span className="svc-tag">资本市场</span>
+              <div className="svc-title">{t('index.svcs.1.title')}</div>
+              <div className="svc-desc">{t('index.svcs.1.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.1.tag')}</span>
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">03</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <div className="svc-title">财务健康审计</div>
-              <div className="svc-desc">深度财务建模与盈利质量分析，识别EBITDA提升路径，重建投资人信心基础。</div>
-              <span className="svc-tag">财务运营</span>
+              <div className="svc-title">{t('index.svcs.2.title')}</div>
+              <div className="svc-desc">{t('index.svcs.2.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.2.tag')}</span>
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">04</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <div className="svc-title">并购价值优化</div>
-              <div className="svc-desc">买方与卖方尽职调查加速，AI辅助生成价值桥接模型，量化协同效应，支撑交易决策。</div>
-              <span className="svc-tag">并购交易</span>
+              <div className="svc-title">{t('index.svcs.3.title')}</div>
+              <div className="svc-desc">{t('index.svcs.3.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.3.tag')}</span>
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">05</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <div className="svc-title">投资人精准匹配</div>
-              <div className="svc-desc">基于价值画像的AI智能匹配，对接320+机构顾问、PE基金与战略投资方，缩短融资周期。</div>
-              <span className="svc-tag">网络资源 · 320+ 顾问</span>
+              <div className="svc-title">{t('index.svcs.4.title')}</div>
+              <div className="svc-desc">{t('index.svcs.4.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.4.tag')}</span>
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
               <div className="svc-num">06</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-              <div className="svc-title">资本叙事构建</div>
-              <div className="svc-desc">以诊断数据为基础，打造高说服力的投资人故事，覆盖商业计划书、CIM与路演材料全链路输出。</div>
-              <span className="svc-tag">叙事策略</span>
+              <div className="svc-title">{t('index.svcs.5.title')}</div>
+              <div className="svc-desc">{t('index.svcs.5.desc')}</div>
+              <span className="svc-tag">{t('index.svcs.5.tag')}</span>
             </div>
           </div>
         </div>
@@ -479,27 +467,27 @@ export default function Index() {
           <div className="kpi-grid">
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="2486" data-suffix="+">0</div>
-              <div className="kpi-lbl">服务企业总数</div>
+              <div className="kpi-lbl">{t('index.kpiLbls.0')}</div>
               <div className="kpi-bar"><div className="kpi-bfill" data-w="88"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="186" data-suffix="+">0</div>
-              <div className="kpi-lbl">覆盖行业纵深</div>
+              <div className="kpi-lbl">{t('index.kpiLbls.1')}</div>
               <div className="kpi-bar"><div className="kpi-bfill" data-w="72"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="320" data-suffix="+">0</div>
-              <div className="kpi-lbl">机构顾问网络</div>
+              <div className="kpi-lbl">{t('index.kpiLbls.2')}</div>
               <div className="kpi-bar"><div className="kpi-bfill" data-w="80"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="68" data-suffix="%">0</div>
-              <div className="kpi-lbl">客户成功率</div>
+              <div className="kpi-lbl">{t('index.kpiLbls.3')}</div>
               <div className="kpi-bar"><div className="kpi-bfill" data-w="68"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-prefix="$" data-count="42" data-suffix="B+">0</div>
-              <div className="kpi-lbl">累计解锁价值</div>
+              <div className="kpi-lbl">{t('index.kpiLbls.4')}</div>
               <div className="kpi-bar"><div className="kpi-bfill" data-w="95"></div></div>
             </div>
           </div>
@@ -509,12 +497,12 @@ export default function Index() {
       {/* Brand Cases / Success Wall */}
       <section className="success-wall">
         <div className="sw-head reveal">
-          <div className="sw-title">品牌案例</div>
+          <div className="sw-title">{t('index.swTitle')}</div>
           <div className="sw-divider"></div>
         </div>
 
         {/* Row 1: IPO 成功上市 */}
-        <div className="sw-row-label">成功上市 &nbsp;·&nbsp; NASDAQ / NYSE / A股</div>
+        <div className="sw-row-label">{t('index.rowIpo')}</div>
         <div className="marquee-wrap">
           <div className="marquee-track go-left">
             {[0, 1].map(setIdx => (
@@ -618,7 +606,7 @@ export default function Index() {
         </div>
 
         {/* Row 2: 合作伙伴 */}
-        <div className="sw-row-label" style={{ marginTop: '28px' }}>服务合作伙伴</div>
+        <div className="sw-row-label" style={{ marginTop: '28px' }}>{t('index.rowPartner')}</div>
         <div className="marquee-wrap">
           <div className="marquee-track go-right">
             {[0, 1].map(setIdx => (
@@ -674,7 +662,7 @@ export default function Index() {
       <footer style={{ background: 'var(--bg)' }}>
         <div className="wrap">
           <div className="footer">
-            <div className="footer-l">© 2026 RVC Capital Partners · 企业价值智能诊断平台</div>
+            <div className="footer-l">{t('index.footerCopy')}</div>
             <div className="footer-r">{t('index.footerTagline')}</div>
           </div>
         </div>

@@ -1,51 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../styles/report.css';
 
-const SIDEBAR_SCORES = [
-  { name: '战略与增长', val: 74, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
-  { name: '财务健康', val: 70, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
-  { name: '运营效率', val: 63, color: '#F59E0B', grad: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
-  { name: '治理合规', val: 58, color: '#F59E0B', grad: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
-  { name: '组织人才', val: 65, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
-  { name: '技术数据', val: 71, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
+const SCORE_STATICS = [
+  { val: 74, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
+  { val: 70, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
+  { val: 63, color: '#F59E0B', grad: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
+  { val: 58, color: '#F59E0B', grad: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
+  { val: 65, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
+  { val: 71, color: '#0B6FFB', grad: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
 ];
 
-const SIDEBAR_LINKS = [
-  { label: '综合评分', icon: (<><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>) },
-  { label: '雷达图分析', icon: (<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />) },
-  { label: '资本路径', icon: (<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></>) },
-  { label: '价值机会', icon: (<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />) },
-  { label: '风险标记', icon: (<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />) },
-  { label: '行动路线图', icon: (<><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></>) },
-];
-
-const OPPORTUNITIES = [
-  { name: 'B端SaaS化——经销商管理系统订阅化', dim: '战略增长', dimTag: 'tag-blue', impact: '+$600万ARR', diff: '中 · 9个月' },
-  { name: '库存周转优化（28天→20天）', dim: '运营效率', dimTag: 'tag-orange', impact: '释放$200万资金', diff: '低 · 3个月' },
-  { name: '切换Big4审计——上市前置合规', dim: '治理合规', dimTag: 'tag-blue', impact: '解锁IPO路径', diff: '高 · 18个月' },
-  { name: '车后服务延伸（维保/保险/金融）', dim: '战略增长', dimTag: 'tag-blue', impact: 'LTV提升3–4倍', diff: '高 · 18个月' },
-  { name: '补充独立董事——完善治理结构', dim: '治理合规', dimTag: 'tag-blue', impact: '评分+14分', diff: '低 · 2个月' },
-  { name: '数据资产商业化——AI定价SaaS输出', dim: '技术数据', dimTag: 'tag-blue', impact: '估值倍数扩张', diff: '中 · 6个月' },
-];
-
-const RISKS = [
-  { name: '无Big4审计——IPO强制要求未达标', levelBg: 'rgba(240,68,56,0.1)', levelColor: '#F04438', level: '🔴 高', action: '立即启动Big4接触，最晚Q3签约' },
-  { name: '治理结构薄弱——独立董事不足', levelBg: 'rgba(245,158,11,0.1)', levelColor: '#D97706', level: '⚠ 中', action: 'Q2前完成独立董事补充与审计委员会筹建' },
-  { name: '数据安全合规缺口（PIPL/GDPR）', levelBg: 'rgba(245,158,11,0.1)', levelColor: '#D97706', level: '⚠ 中', action: '海外融资强制门槛，建议Q2启动合规体系建设' },
-];
-
-const ROADMAP = [
-  { days: '30天', label: '首月基础', title: '合规启动', actions: ['接触3家Big4审计机构', '启动独立董事遴选', '库存周转优化启动', 'B端SaaS原型设计'] },
-  { days: '60天', label: '治理完善', title: '结构升级', actions: ['完成独立董事聘任', '组建审计委员会', 'PIPL合规体系搭建', 'B轮路演材料准备'] },
-  { days: '90天', label: '增长提速', title: '价值放大', actions: ['Big4审计正式签约', 'B端SaaS内测上线', '车后服务试点启动', '美元基金对接启动'] },
-  { days: '180天', label: '资本就绪', title: '融资攻坚', actions: ['B轮Term Sheet谈判', 'IPO可行性评估报告', '2024年审计报告完成', '估值模型更新迭代'] },
+const LINK_ICONS = [
+  (<><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>),
+  (<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />),
+  (<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></>),
+  (<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />),
+  (<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />),
+  (<><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></>),
 ];
 
 export default function Report() {
   const { t } = useTranslation();
   const [activeSidebarLink, setActiveSidebarLink] = useState(0);
+
+  const SIDEBAR_SCORES = useMemo(() => {
+    const names = t('report.sidebarScores', { returnObjects: true });
+    return SCORE_STATICS.map((s, i) => ({ ...s, name: names[i].name }));
+  }, [t]);
+
+  const SIDEBAR_LINKS = useMemo(() => {
+    const labels = t('report.sidebarLinks', { returnObjects: true });
+    return labels.map((label, i) => ({ label, icon: LINK_ICONS[i] }));
+  }, [t]);
+
+  const OPPORTUNITIES = useMemo(() => t('report.opportunities', { returnObjects: true }), [t]);
+  const RISKS = useMemo(() => t('report.risks', { returnObjects: true }), [t]);
+  const ROADMAP = useMemo(() => t('report.roadmap', { returnObjects: true }), [t]);
+  const RADAR_LABELS = useMemo(() => t('report.radarLabels', { returnObjects: true }), [t]);
+  const PATHWAYS = useMemo(() => t('report.pathways', { returnObjects: true }), [t]);
 
   useEffect(() => {
     const ro = new IntersectionObserver((entries) => {
@@ -61,7 +55,7 @@ export default function Report() {
   }, []);
 
   return (
-    <div className="page">
+    <div className="page light-theme">
       <div className="report-page">
         <div className="report-wrap">
           <div className="breadcrumb reveal">
@@ -74,11 +68,11 @@ export default function Report() {
           <div className="report-head-card reveal">
             <div className="rhc-left">
               <div className="rhc-ey">{t('report.headEyebrow')}</div>
-              <div className="rhc-co">UC Auto（优车汇）</div>
+              <div className="rhc-co">{t('report.companyName')}</div>
               <div className="rhc-meta">
-                <span className="rhc-mi">二手车交易平台 · B2B/B2C</span><span className="rhc-sep">·</span>
-                <span className="rhc-mi">营收 $5,000万</span><span className="rhc-sep">·</span>
-                <span className="rhc-mi">A轮 · 50人团队</span><span className="rhc-sep">·</span>
+                <span className="rhc-mi">{t('report.companyMeta1')}</span><span className="rhc-sep">·</span>
+                <span className="rhc-mi">{t('report.companyMeta2')}</span><span className="rhc-sep">·</span>
+                <span className="rhc-mi">{t('report.companyMeta3')}</span><span className="rhc-sep">·</span>
                 <span className="rhc-mi">{t('report.reportId')}：RVC-2025-09342</span>
               </div>
             </div>
@@ -143,9 +137,9 @@ export default function Report() {
               ))}
               <div className="rsb-title" style={{ marginTop: 12 }}>{t('report.advisorTitle')}</div>
               <div className="rsb-advisor">
-                <div className="rsb-av-avatar">余</div>
-                <div className="rsb-av-name">余龙文博士</div>
-                <div className="rsb-av-title">资本市场 · IPO专项顾问</div>
+                <div className="rsb-av-avatar">{t('report.advisorInitial')}</div>
+                <div className="rsb-av-name">{t('report.advisorName')}</div>
+                <div className="rsb-av-title">{t('report.advisorRole')}</div>
                 <button className="rsb-av-btn">{t('report.bookMeeting')}</button>
               </div>
             </div>
@@ -166,17 +160,17 @@ export default function Report() {
                     <div className="sb">
                       <div className="sb-val" style={{ color: '#0B6FFB' }}>68</div>
                       <div className="sb-name">{t('report.overallScore')}</div>
-                      <div className="sb-trend" style={{ color: '#16B364' }}>↑ 较初测提升 +6</div>
+                      <div className="sb-trend" style={{ color: '#16B364' }}>{t('report.scoreTrend')}</div>
                     </div>
                     <div className="sb">
                       <div className="sb-val" style={{ color: '#42526E' }}>59</div>
                       <div className="sb-name">{t('report.industryMedian')}</div>
-                      <div className="sb-trend" style={{ color: '#6B7890' }}>汽车后市场 · A轮</div>
+                      <div className="sb-trend" style={{ color: '#6B7890' }}>{t('report.scoreContext')}</div>
                     </div>
                     <div className="sb">
                       <div className="sb-val" style={{ color: '#16B364' }}>+9</div>
                       <div className="sb-name">{t('report.outperform')}</div>
-                      <div className="sb-trend" style={{ color: '#16B364' }}>前28%分位</div>
+                      <div className="sb-trend" style={{ color: '#16B364' }}>{t('report.scorePercentile')}</div>
                     </div>
                   </div>
                 </div>
@@ -224,12 +218,12 @@ export default function Report() {
                         <circle cx="150" cy="219.6" r="4" fill="#F59E0B" stroke="white" strokeWidth="1.5" />
                         <circle cx="82.4" cy="189" r="4" fill="#0B6FFB" stroke="white" strokeWidth="1.5" />
                         <circle cx="76.2" cy="107.4" r="4" fill="#0B6FFB" stroke="white" strokeWidth="1.5" />
-                        <text x="150" y="22" textAnchor="middle" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">战略与增长</text>
-                        <text x="256" y="94" textAnchor="start" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">财务健康</text>
-                        <text x="256" y="210" textAnchor="start" fill="#F59E0B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">运营效率</text>
-                        <text x="150" y="285" textAnchor="middle" fill="#F59E0B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">治理合规</text>
-                        <text x="42" y="210" textAnchor="end" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">组织人才</text>
-                        <text x="42" y="94" textAnchor="end" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">技术数据</text>
+                        <text x="150" y="22" textAnchor="middle" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[0]}</text>
+                        <text x="256" y="94" textAnchor="start" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[1]}</text>
+                        <text x="256" y="210" textAnchor="start" fill="#F59E0B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[2]}</text>
+                        <text x="150" y="285" textAnchor="middle" fill="#F59E0B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[3]}</text>
+                        <text x="42" y="210" textAnchor="end" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[4]}</text>
+                        <text x="42" y="94" textAnchor="end" fill="#07132B" fontSize="9.5" fontWeight="700" fontFamily="Inter,sans-serif">{RADAR_LABELS[5]}</text>
                       </svg>
                     </div>
                     <div className="radar-legend">
@@ -271,21 +265,21 @@ export default function Report() {
                   <div className="path-grid">
                     <div className="path-card rec">
                       <div className="pc-badge" style={{ color: '#0B6FFB', background: 'rgba(11,111,251,0.08)' }}>⭐ {t('report.pathPrimary')}</div>
-                      <div className="pc-title">B轮融资 + 赴美上市筹备</div>
-                      <div className="pc-desc">完成B轮（$3,000–5,000万）后启动美股IPO筹备，利用增长势能打开海外机构市场。</div>
-                      <div className="pc-timeline">目标时间：24–36个月 · 目标估值 $3–5亿</div>
+                      <div className="pc-title">{PATHWAYS[0].title}</div>
+                      <div className="pc-desc">{PATHWAYS[0].desc}</div>
+                      <div className="pc-timeline">{PATHWAYS[0].timeline}</div>
                     </div>
                     <div className="path-card">
                       <div className="pc-badge" style={{ color: '#16B364', background: 'rgba(22,179,100,0.08)' }}>{t('report.pathAlternative')}</div>
-                      <div className="pc-title">战略并购（卖方）</div>
-                      <div className="pc-desc">现有技术资产与B端网络对汽车集团、互联网平台具备强并购吸引力，EV估值约5–8×ARR。</div>
-                      <div className="pc-timeline">目标：12–18个月 · 估值区间 $2.5–4亿</div>
+                      <div className="pc-title">{PATHWAYS[1].title}</div>
+                      <div className="pc-desc">{PATHWAYS[1].desc}</div>
+                      <div className="pc-timeline">{PATHWAYS[1].timeline}</div>
                     </div>
                     <div className="path-card">
                       <div className="pc-badge" style={{ color: '#9AA6B8', background: 'rgba(154,166,184,0.1)' }}>{t('report.pathOption')}</div>
-                      <div className="pc-title">港股IPO</div>
-                      <div className="pc-desc">港股对汽车后市场赛道估值修复中，适合在国内监管环境更确定后择机启动。</div>
-                      <div className="pc-timeline">目标：36个月以上 · 需先完善治理体系</div>
+                      <div className="pc-title">{PATHWAYS[2].title}</div>
+                      <div className="pc-desc">{PATHWAYS[2].desc}</div>
+                      <div className="pc-timeline">{PATHWAYS[2].timeline}</div>
                     </div>
                   </div>
                 </div>
@@ -311,8 +305,8 @@ export default function Report() {
                       </tr>
                     </thead>
                     <tbody>
-                      {OPPORTUNITIES.map(o => (
-                        <tr key={o.name}>
+                      {OPPORTUNITIES.map((o, i) => (
+                        <tr key={i}>
                           <td style={{ fontWeight: 600, color: 'var(--t1)' }}>{o.name}</td>
                           <td><span className={`tag ${o.dimTag}`}>{o.dim}</span></td>
                           <td><span className="imp-b" style={{ background: 'rgba(22,179,100,0.1)', color: '#16B364' }}>{o.impact}</span></td>
@@ -343,8 +337,8 @@ export default function Report() {
                       </tr>
                     </thead>
                     <tbody>
-                      {RISKS.map(r => (
-                        <tr key={r.name}>
+                      {RISKS.map((r, i) => (
+                        <tr key={i}>
                           <td style={{ fontWeight: 600, color: 'var(--t1)' }}>{r.name}</td>
                           <td><span className="imp-b" style={{ background: r.levelBg, color: r.levelColor }}>{r.level}</span></td>
                           <td style={{ fontSize: 12, color: 'var(--t2)' }}>{r.action}</td>
@@ -366,14 +360,14 @@ export default function Report() {
                 </div>
                 <div className="sec-card-body">
                   <div className="roadmap">
-                    {ROADMAP.map(p => (
-                      <div key={p.days} className="rm-phase">
+                    {ROADMAP.map((p, i) => (
+                      <div key={i} className="rm-phase">
                         <div className="rm-dot">{p.days}</div>
                         <div className="rm-phase-label">{p.label}</div>
                         <div className="rm-phase-title">{p.title}</div>
                         <div className="rm-actions">
-                          {p.actions.map(a => (
-                            <div key={a} className="rm-action">{a}</div>
+                          {p.actions.map((a, j) => (
+                            <div key={j} className="rm-action">{a}</div>
                           ))}
                         </div>
                       </div>

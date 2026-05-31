@@ -33,7 +33,7 @@ export default function Header({ mobileNavOpen, onHamburgerClick }) {
           <button
             className="lang-toggle"
             onClick={toggleLang}
-            aria-label="Switch language"
+            aria-label={t('aria.langToggle')}
           >
             {t('langToggle')}
           </button>
@@ -41,7 +41,7 @@ export default function Header({ mobileNavOpen, onHamburgerClick }) {
         <button
           className={`ham${mobileNavOpen ? ' open' : ''}`}
           id="ham"
-          aria-label="菜单"
+          aria-label={t('aria.hamburger')}
           onClick={onHamburgerClick}
         >
           <span /><span /><span />

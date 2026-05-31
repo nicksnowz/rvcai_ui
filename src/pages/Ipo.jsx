@@ -1,10 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../styles/ipo.css';
 
 export default function Ipo() {
   const { t } = useTranslation();
   const [activeNav, setActiveNav] = useState(0);
+
+  const TL_STEPS = useMemo(() => t('ipo.tlSteps', { returnObjects: true }), [t]);
+  const CAT_BARS = useMemo(() => t('ipo.catBars', { returnObjects: true }), [t]);
+  const CHECKLIST_ITEMS = useMemo(() => t('ipo.checklistItems', { returnObjects: true }), [t]);
+  const RISK_CARDS = useMemo(() => t('ipo.riskCards', { returnObjects: true }), [t]);
+  const ACTION_CARDS = useMemo(() => t('ipo.actionCards', { returnObjects: true }), [t]);
+  const DEADLINES = useMemo(() => t('ipo.deadlines', { returnObjects: true }), [t]);
 
   // Scroll reveal
   useEffect(() => {
@@ -39,14 +46,14 @@ export default function Ipo() {
   ];
 
   return (
-    <div className="page">
+    <div className="page light-theme">
       <div className="ipo-page">
         <div className="ipo-wrap">
           {/* Top header */}
           <div className="ipo-top reveal">
             <div className="ipo-top-left">
               <div className="ipo-ey">{t('ipo.headerEyebrow')}</div>
-              <div className="ipo-company">UC Auto（优车汇）</div>
+              <div className="ipo-company">{t('ipo.companyName')}</div>
               <div className="ipo-meta">
                 <span className="ipo-meta-item">{t('ipo.metaBusiness')}</span>
                 <span className="ipo-meta-sep">·</span>
@@ -105,11 +112,11 @@ export default function Ipo() {
               <div className="isb-head">
                 <div className="isb-head-title">{t('ipo.advisorTitle')}</div>
                 <div className="isb-advisor">
-                  <div className="isb-av">余</div>
+                  <div className="isb-av">{t('ipo.advisorInitial')}</div>
                   <div>
-                    <div className="isb-av-name">余龙文博士</div>
-                    <div className="isb-av-title">IPO专家 · 资本市场</div>
-                    <div className="isb-av-exp">主导18起IPO · 累计募资 $62亿</div>
+                    <div className="isb-av-name">{t('ipo.advisorName')}</div>
+                    <div className="isb-av-title">{t('ipo.advisorRole')}</div>
+                    <div className="isb-av-exp">{t('ipo.advisorExp')}</div>
                   </div>
                 </div>
               </div>
@@ -131,22 +138,12 @@ export default function Ipo() {
               {/* Deadlines */}
               <div className="isb-deadline">
                 <div className="isb-dl-title">⏰ {t('ipo.deadlinesTitle')}</div>
-                <div className="isb-dl-item">
-                  <span>Big4 审计洽谈</span>
-                  <span className="isb-dl-date">2026年9月</span>
-                </div>
-                <div className="isb-dl-item">
-                  <span>审计委员会成立</span>
-                  <span className="isb-dl-date">2026年10月</span>
-                </div>
-                <div className="isb-dl-item">
-                  <span>独立董事增补</span>
-                  <span className="isb-dl-date">2026年11月</span>
-                </div>
-                <div className="isb-dl-item">
-                  <span>承销商遴选完成</span>
-                  <span className="isb-dl-date">2027年3月</span>
-                </div>
+                {DEADLINES.map((d, i) => (
+                  <div key={i} className="isb-dl-item">
+                    <span>{d.label}</span>
+                    <span className="isb-dl-date">{d.date}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -164,72 +161,28 @@ export default function Ipo() {
                 </div>
                 <div className="sec-card-body">
                   <div className="ipo-timeline">
-                    <div className="tl-step">
-                      <div className="tl-dot done">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase">第一阶段</div>
-                        <div className="tl-title">企业诊断</div>
-                        <div className="tl-date">2026年Q1</div>
-                        <div className="tl-status done">已完成</div>
-                      </div>
-                    </div>
-                    <div className="tl-step">
-                      <div className="tl-dot done">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase">第二阶段</div>
-                        <div className="tl-title">差距分析</div>
-                        <div className="tl-date">2026年Q2</div>
-                        <div className="tl-status done">已完成</div>
-                      </div>
-                    </div>
-                    <div className="tl-step">
-                      <div className="tl-dot active">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase">第三阶段</div>
-                        <div className="tl-title">治理搭建</div>
-                        <div className="tl-date">2026年Q3–2027年Q1</div>
-                        <div className="tl-status active">进行中</div>
-                      </div>
-                    </div>
-                    <div className="tl-step">
-                      <div className="tl-dot pending">
-                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase pending">第四阶段</div>
-                        <div className="tl-title">财务规范</div>
-                        <div className="tl-date">2027年</div>
-                        <div className="tl-status pending">待启动</div>
-                      </div>
-                    </div>
-                    <div className="tl-step">
-                      <div className="tl-dot pending">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase pending">第五阶段</div>
-                        <div className="tl-title">招股书起草</div>
-                        <div className="tl-date">2027年Q4–2028年Q1</div>
-                        <div className="tl-status pending">待启动</div>
-                      </div>
-                    </div>
-                    <div className="tl-step">
-                      <div className="tl-dot pending">
-                        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
-                      </div>
-                      <div>
-                        <div className="tl-phase pending">第六阶段</div>
-                        <div className="tl-title">正式上市</div>
-                        <div className="tl-date">2028年Q2</div>
-                        <div className="tl-status pending">目标</div>
-                      </div>
-                    </div>
+                    {TL_STEPS.map((step, i) => {
+                      const sc = step.statusClass;
+                      const icons = [
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>,
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>,
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>,
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" /></svg>,
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>,
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>,
+                      ];
+                      return (
+                        <div key={i} className="tl-step">
+                          <div className={`tl-dot ${sc}`}>{icons[i]}</div>
+                          <div>
+                            <div className={`tl-phase${sc === 'pending' ? ' pending' : ''}`}>{step.phase}</div>
+                            <div className="tl-title">{step.title}</div>
+                            <div className="tl-date">{step.date}</div>
+                            <div className={`tl-status ${sc}`}>{step.status}</div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -259,41 +212,24 @@ export default function Ipo() {
                     </div>
                   </div>
                   <div className="cat-bars">
-                    <div className="cat-bar">
-                      <div className="cat-bar-row">
-                        <span className="cat-bar-name">业务运营</span>
-                        <span className="cat-bar-stats">5/5 项 · 100%</span>
-                      </div>
-                      <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: '100%', background: 'linear-gradient(90deg,#16B364,#22C55E)' }}></div></div>
-                    </div>
-                    <div className="cat-bar">
-                      <div className="cat-bar-row">
-                        <span className="cat-bar-name">财务规范化</span>
-                        <span className="cat-bar-stats">3/5 项 · 60%</span>
-                      </div>
-                      <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: '60%', background: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' }}></div></div>
-                    </div>
-                    <div className="cat-bar">
-                      <div className="cat-bar-row">
-                        <span className="cat-bar-name">治理与合规</span>
-                        <span className="cat-bar-stats">2/5 项 · 40%</span>
-                      </div>
-                      <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: '40%', background: 'linear-gradient(90deg,#F59E0B,#FBBF24)' }}></div></div>
-                    </div>
-                    <div className="cat-bar">
-                      <div className="cat-bar-row">
-                        <span className="cat-bar-name">法律与监管</span>
-                        <span className="cat-bar-stats">1/3 项 · 33%</span>
-                      </div>
-                      <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: '33%', background: 'linear-gradient(90deg,#F59E0B,#FBBF24)' }}></div></div>
-                    </div>
-                    <div className="cat-bar">
-                      <div className="cat-bar-row">
-                        <span className="cat-bar-name">资本市场准备</span>
-                        <span className="cat-bar-stats">0/2 项 · 0%</span>
-                      </div>
-                      <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: '3%', background: 'rgba(154,166,184,0.4)' }}></div></div>
-                    </div>
+                    {CAT_BARS.map((bar, i) => {
+                      const fills = [
+                        { width: '100%', background: 'linear-gradient(90deg,#16B364,#22C55E)' },
+                        { width: '60%', background: 'linear-gradient(90deg,#0B6FFB,#23B7FF)' },
+                        { width: '40%', background: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
+                        { width: '33%', background: 'linear-gradient(90deg,#F59E0B,#FBBF24)' },
+                        { width: '3%', background: 'rgba(154,166,184,0.4)' },
+                      ];
+                      return (
+                        <div key={i} className="cat-bar">
+                          <div className="cat-bar-row">
+                            <span className="cat-bar-name">{bar.name}</span>
+                            <span className="cat-bar-stats">{bar.stats}</span>
+                          </div>
+                          <div className="cat-bar-track"><div className="cat-bar-fill" style={fills[i]}></div></div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -306,8 +242,8 @@ export default function Ipo() {
                     <div className="sch-sub">{t('ipo.checklistSub')}</div>
                   </div>
                   <div style={{ display: 'flex', gap: '8px' }}>
-                    <span className="tag tag-green">3项完成</span>
-                    <span className="tag tag-orange">3项进行中</span>
+                    <span className="tag tag-green">{t('ipo.pillCheckDone')}</span>
+                    <span className="tag tag-orange">{t('ipo.pillCheckProg')}</span>
                   </div>
                 </div>
                 <div className="sec-card-body" style={{ padding: 0 }}>
@@ -322,79 +258,30 @@ export default function Ipo() {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* Done */}
-                      <tr>
-                        <td><div className="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></div></td>
-                        <td><div className="ck-item-name">企业价值诊断完成</div><div className="ck-item-sub">300项全维度诊断评估</div></td>
-                        <td className="ck-owner">RVC AI引擎</td>
-                        <td className="ck-due">2026年3月</td>
-                        <td><span className="tag tag-green">已完成</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></div></td>
-                        <td><div className="ck-item-name">收入确认会计政策规范</div><div className="ck-item-sub">收入确认规则文档化并实际执行</div></td>
-                        <td className="ck-owner">CFO办公室</td>
-                        <td className="ck-due">2026年4月</td>
-                        <td><span className="tag tag-green">已完成</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></div></td>
-                        <td><div className="ck-item-name">公司章程重组完成</div><div className="ck-item-sub">法律主体结构已符合IPO要求</div></td>
-                        <td className="ck-owner">法律顾问</td>
-                        <td className="ck-due">2026年5月</td>
-                        <td><span className="tag tag-green">已完成</span></td>
-                      </tr>
-                      {/* In Progress */}
-                      <tr>
-                        <td><div className="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div></td>
-                        <td><div className="ck-item-name">Big4 审计机构洽谈</div><div className="ck-item-sub">委托毕马威/普华永道/德勤/安永进行2年期审计</div></td>
-                        <td className="ck-owner">CFO + 董事会</td>
-                        <td className="ck-due" style={{ color: '#F59E0B' }}>2026年9月</td>
-                        <td><span className="tag tag-orange">进行中</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div></td>
-                        <td><div className="ck-item-name">审计委员会筹建</div><div className="ck-item-sub">至少需要3名独立董事，含审计专业背景</div></td>
-                        <td className="ck-owner">董事会 / CEO</td>
-                        <td className="ck-due" style={{ color: '#F59E0B' }}>2026年10月</td>
-                        <td><span className="tag tag-orange">进行中</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check prog"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div></td>
-                        <td><div className="ck-item-name">PIPL合规与数据安全体系</div><div className="ck-item-sub">《个人信息保护法》合规架构建设</div></td>
-                        <td className="ck-owner">合规负责人</td>
-                        <td className="ck-due">2026年11月</td>
-                        <td><span className="tag tag-orange">进行中</span></td>
-                      </tr>
-                      {/* Pending */}
-                      <tr>
-                        <td><div className="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></div></td>
-                        <td><div className="ck-item-name">2年期审计财务报表</div><div className="ck-item-sub">FY2025+FY2026 Big4审计完成版</div></td>
-                        <td className="ck-owner">Big4 审计机构</td>
-                        <td className="ck-due">2027年6月</td>
-                        <td><span className="tag" style={{ background: 'rgba(154,166,184,0.1)', color: 'var(--t4)' }}>待启动</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></div></td>
-                        <td><div className="ck-item-name">独立董事增补（2名）</div><div className="ck-item-sub">引入具有上市公司经验的独立董事</div></td>
-                        <td className="ck-owner">CFO + 董事会</td>
-                        <td className="ck-due">2026年11月</td>
-                        <td><span className="tag" style={{ background: 'rgba(154,166,184,0.1)', color: 'var(--t4)' }}>待启动</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></div></td>
-                        <td><div className="ck-item-name">承销商遴选与委托</div><div className="ck-item-sub">主承销商及联合承销行确定</div></td>
-                        <td className="ck-owner">CFO + 董事会</td>
-                        <td className="ck-due">2027年Q1</td>
-                        <td><span className="tag" style={{ background: 'rgba(154,166,184,0.1)', color: 'var(--t4)' }}>待启动</span></td>
-                      </tr>
-                      <tr>
-                        <td><div className="ck-check pending"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg></div></td>
-                        <td><div className="ck-item-name">招股书（F-1）起草</div><div className="ck-item-sub">SEC注册申报文件准备与法律审核</div></td>
-                        <td className="ck-owner">法律 + CFO + 承销商</td>
-                        <td className="ck-due">2027年Q4</td>
-                        <td><span className="tag" style={{ background: 'rgba(154,166,184,0.1)', color: 'var(--t4)' }}>待启动</span></td>
-                      </tr>
+                      {CHECKLIST_ITEMS.map((item, i) => {
+                        const isDone = item.status === 'done';
+                        const isProg = item.status === 'prog';
+                        const ckClass = isDone ? 'done' : isProg ? 'prog' : 'pending';
+                        const ckIcon = isDone
+                          ? <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+                          : isProg
+                            ? <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                            : <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>;
+                        const statusTag = isDone
+                          ? <span className="tag tag-green">{t('ipo.statusDone')}</span>
+                          : isProg
+                            ? <span className="tag tag-orange">{t('ipo.statusProg')}</span>
+                            : <span className="tag" style={{ background: 'rgba(154,166,184,0.1)', color: 'var(--t4)' }}>{t('ipo.statusPending')}</span>;
+                        return (
+                          <tr key={i}>
+                            <td><div className={`ck-check ${ckClass}`}>{ckIcon}</div></td>
+                            <td><div className="ck-item-name">{item.name}</div><div className="ck-item-sub">{item.sub}</div></td>
+                            <td className="ck-owner">{item.owner}</td>
+                            <td className="ck-due" style={isProg ? { color: '#F59E0B' } : undefined}>{item.due}</td>
+                            <td>{statusTag}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -411,30 +298,14 @@ export default function Ipo() {
                 </div>
                 <div className="sec-card-body">
                   <div className="risk-grid">
-                    <div className="risk-card high">
-                      <div className="rc-severity" style={{ color: '#F04438' }}>🔴 高风险</div>
-                      <div className="rc-title">Big4审计机构未到位</div>
-                      <div className="rc-desc">公开市场投资者要求至少2个完整财年的Big4审计报告，这是优车汇IPO的最大障碍，须立即启动洽谈。</div>
-                      <div className="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>立即启动 — 2026年9月截止</div>
-                    </div>
-                    <div className="risk-card high">
-                      <div className="rc-severity" style={{ color: '#F04438' }}>🔴 高风险</div>
-                      <div className="rc-title">独立董事席位严重不足</div>
-                      <div className="rc-desc">SEC / 港交所均要求审计委员会由多数独立董事组成，目前董事会独立成员数量不满足监管要求。</div>
-                      <div className="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>2026年11月前增补2名独立董事</div>
-                    </div>
-                    <div className="risk-card medium">
-                      <div className="rc-severity" style={{ color: '#D97706' }}>⚠ 中风险</div>
-                      <div className="rc-title">PIPL数据合规存在漏洞</div>
-                      <div className="rc-desc">平台积累车辆交易用户数据，《个人信息保护法》合规架构尚未完整建立，可能触发监管审查。</div>
-                      <div className="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>启动数据合规专项整改计划</div>
-                    </div>
-                    <div className="risk-card low">
-                      <div className="rc-severity" style={{ color: '#16B364' }}>✓ 低风险</div>
-                      <div className="rc-title">营收增长强劲</div>
-                      <div className="rc-desc">同比增长38%，显著优于二手车行业中位数（12%），B端SaaS化转型带来可预期的经常性收入，有利于估值定价。</div>
-                      <div className="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>保持增长势头至上市窗口期</div>
-                    </div>
+                    {RISK_CARDS.map((rc, i) => (
+                      <div key={i} className={`risk-card ${rc.severityClass}`}>
+                        <div className="rc-severity" style={{ color: rc.severityColor }}>{rc.severity}</div>
+                        <div className="rc-title">{rc.title}</div>
+                        <div className="rc-desc">{rc.desc}</div>
+                        <div className="rc-action"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>{rc.action}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -449,30 +320,22 @@ export default function Ipo() {
                 </div>
                 <div className="sec-card-body">
                   <div className="action-grid">
-                    <div className="action-card">
-                      <div className="ac-ico" style={{ background: 'rgba(11,111,251,0.08)' }}>
-                        <svg viewBox="0 0 24 24" style={{ stroke: '#0B6FFB' }}><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /></svg>
-                      </div>
-                      <div className="ac-title">对接 Big4 审计机构</div>
-                      <div className="ac-desc">RVC将为优车汇提供首席审计合作伙伴的热线引荐——IPO关键路径，建议本周启动。</div>
-                      <div className="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>预约引荐会议</div>
-                    </div>
-                    <div className="action-card">
-                      <div className="ac-ico" style={{ background: 'rgba(22,179,100,0.08)' }}>
-                        <svg viewBox="0 0 24 24" style={{ stroke: '#16B364' }}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>
-                      </div>
-                      <div className="ac-title">独立董事招募计划</div>
-                      <div className="ac-desc">物色并引进2名具备上市公司经验的独立董事，需在2026年11月前完成，以满足监管要求。</div>
-                      <div className="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>查看候选人名单</div>
-                    </div>
-                    <div className="action-card">
-                      <div className="ac-ico" style={{ background: 'rgba(245,158,11,0.08)' }}>
-                        <svg viewBox="0 0 24 24" style={{ stroke: '#D97706' }}><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
-                      </div>
-                      <div className="ac-title">财务系统专业化升级</div>
-                      <div className="ac-desc">部署企业级财务管理系统（SAP / Oracle），建立完整审计轨迹，满足内部控制与SOX合规要求。</div>
-                      <div className="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>查看财务优化模块</div>
-                    </div>
+                    {ACTION_CARDS.map((ac, i) => {
+                      const icons = [
+                        <svg viewBox="0 0 24 24" style={{ stroke: '#0B6FFB' }}><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /></svg>,
+                        <svg viewBox="0 0 24 24" style={{ stroke: '#16B364' }}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>,
+                        <svg viewBox="0 0 24 24" style={{ stroke: '#D97706' }}><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>,
+                      ];
+                      const icoBgs = ['rgba(11,111,251,0.08)', 'rgba(22,179,100,0.08)', 'rgba(245,158,11,0.08)'];
+                      return (
+                        <div key={i} className="action-card">
+                          <div className="ac-ico" style={{ background: icoBgs[i] }}>{icons[i]}</div>
+                          <div className="ac-title">{ac.title}</div>
+                          <div className="ac-desc">{ac.desc}</div>
+                          <div className="ac-link"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>{ac.link}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

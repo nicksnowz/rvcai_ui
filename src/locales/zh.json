@@ -10,15 +10,124 @@
     "logoSub": "企业价值诊断平台"
   },
   "langToggle": "EN",
+  "aria": {
+    "langToggle": "切换语言",
+    "hamburger": "菜单"
+  },
   "index": {
     "eyebrow": "AI驱动 · 资本智能",
+    "heroPrefixLines": [
+      "72小时内",
+      "精准解锁",
+      "企业"
+    ],
+    "heroWords": [
+      "真实价值"
+    ],
     "heroParagraph": "AI 驱动的企业资本化生命周期操作系统 —— 智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理等，加速企业升级与价值增长。",
     "heroBtn": "立即开始诊断",
     "heroBtn2": "查看示例报告 →",
     "trust1": "72小时交付",
     "trust2": "300+价值维度",
     "trust3": "机构级AI分析",
-    "footerTagline": "专为机构级资本智能而生"
+    "footerTagline": "专为机构级资本智能而生",
+    "svgI1Title": "战略规划",
+    "svgI2Title": "财务质量",
+    "svgI3Title": "运营卓越",
+    "svgI4Title": "公司治理",
+    "svgScore": "综合诊断评分",
+    "svgLive": "实时分析中",
+    "svgR1Title": "IPO就绪度评分",
+    "svgR1Base": "基准 38分 →",
+    "svgR1Unit": "分",
+    "svgR1Footer": "上市审核周期压缩",
+    "svgR2Title": "并购估值倍数",
+    "svgR2Base": "7.2× →",
+    "svgR2Footer": "尽调周期压缩",
+    "svgR3Title": "投资人转化率",
+    "svgR3Desc": "精准触达 → 意向确认",
+    "svgR3Footer": "融资效率倍增",
+    "svgR3Delta": "3.2× 提速",
+    "svgR4Title": "企业估值提升",
+    "svgR4Footer": "EBITDA 增量",
+    "proc": [
+      {
+        "num": "01 — 数据采集",
+        "title": "企业全维建档",
+        "desc": "结构化七步采集框架，覆盖300+数据节点，精准捕获价值驱动因子。"
+      },
+      {
+        "num": "02 — AI 分析",
+        "title": "深度智能诊断",
+        "desc": "多模型AI引擎并行处理财务、运营与战略信号，揭示隐性价值漏洞与机会。"
+      },
+      {
+        "num": "03 — 价值标定",
+        "title": "机构级基准对标",
+        "desc": "对标186+行业数据库，量化各维度差距，生成可信度超90%的估值区间。"
+      },
+      {
+        "num": "04 — 路径执行",
+        "title": "资本路径落地",
+        "desc": "30/60/90/180天行动路线图，精准匹配320+机构顾问与专项执行模块。"
+      }
+    ],
+    "svcEy": "核心能力体系",
+    "svcTitle": "企业价值的六大支柱",
+    "svcSub": "全方位诊断覆盖，精准识别每一个影响机构级价值实现的关键变量。",
+    "svcs": [
+      {
+        "title": "AI价值诊断引擎",
+        "desc": "自主研发的多模型协同系统，系统评估300+企业价值驱动因子，生成机构级诊断评分与深度子维度分析，对标186+行业纵向数据，输出精准估值参考与行动优先级。",
+        "tag": "核心引擎 · 300+ 维度"
+      },
+      {
+        "title": "IPO就绪控制台",
+        "desc": "端到端IPO筹备管理，从合规差距分析到承销商遴选，系统化追踪每一个上市里程碑。",
+        "tag": "资本市场"
+      },
+      {
+        "title": "财务健康审计",
+        "desc": "深度财务建模与盈利质量分析，识别EBITDA提升路径，重建投资人信心基础。",
+        "tag": "财务运营"
+      },
+      {
+        "title": "并购价值优化",
+        "desc": "买方与卖方尽职调查加速，AI辅助生成价值桥接模型，量化协同效应，支撑交易决策。",
+        "tag": "并购交易"
+      },
+      {
+        "title": "投资人精准匹配",
+        "desc": "基于价值画像的AI智能匹配，对接320+机构顾问、PE基金与战略投资方，缩短融资周期。",
+        "tag": "网络资源 · 320+ 顾问"
+      },
+      {
+        "title": "资本叙事构建",
+        "desc": "以诊断数据为基础，打造高说服力的投资人故事，覆盖商业计划书、CIM与路演材料全链路输出。",
+        "tag": "叙事策略"
+      }
+    ],
+    "kpiLbls": [
+      "服务企业总数",
+      "覆盖行业纵深",
+      "机构顾问网络",
+      "客户成功率",
+      "累计解锁价值"
+    ],
+    "swTitle": "品牌案例",
+    "rowIpo": "成功上市 · NASDAQ / NYSE / A股",
+    "rowPartner": "服务合作伙伴",
+    "footerCopy": "© 2026 RVC Capital Partners · 企业价值智能诊断平台",
+    "svgI1Sub": "战略与增长",
+    "svgI1Data": "186+ 行业基准对标",
+    "svgI2Sub": "财务健康",
+    "svgI2Data": "EBITDA · 盈利能力",
+    "svgI3Sub": "运营卓越",
+    "svgI3Data": "效率 · 流程 · 人才",
+    "svgI4Sub": "治理与合规",
+    "svgI4Data": "合规 · 风控 · 信息披露",
+    "svgR1Delta": "−6.2 月",
+    "svgR2Delta": "−38天 / −40%"
   },
   "intake": {
     "eyebrow": "企业数据采集控制台",
@@ -36,12 +145,370 @@
     "aiSub": "随填写自动演算",
     "aiScoreLabel": "初步评分",
     "aiScoreGrade": "良好",
-    "aiCompleteHint": "完成后可生成诊断报告"
+    "aiCompleteHint": "完成后可生成诊断报告",
+    "stepMeta": [
+      {
+        "label": "第 1 步，共 7 步",
+        "title": "公司概况",
+        "desc": "企业基础信息与核心业务定位"
+      },
+      {
+        "label": "第 2 步，共 7 步",
+        "title": "财务数据",
+        "desc": "核心财务指标，用于AI基准对标与分析建模"
+      },
+      {
+        "label": "第 3 步，共 7 步",
+        "title": "运营状况",
+        "desc": "业务运营数据与流程效率评估"
+      },
+      {
+        "label": "第 4 步，共 7 步",
+        "title": "战略分析",
+        "desc": "市场定位、竞争优势与增长战略"
+      },
+      {
+        "label": "第 5 步，共 7 步",
+        "title": "治理合规",
+        "desc": "公司治理结构与合规体系完备度"
+      },
+      {
+        "label": "第 6 步，共 7 步",
+        "title": "技术能力",
+        "desc": "数字化资产与技术创新能力评估"
+      },
+      {
+        "label": "第 7 步，共 7 步",
+        "title": "资本目标",
+        "desc": "融资目标、时间规划与投资人偏好"
+      }
+    ],
+    "stepLabels": [
+      "公司概况",
+      "财务数据",
+      "运营状况",
+      "战略分析",
+      "治理合规",
+      "技术能力",
+      "资本目标"
+    ],
+    "remaining": [
+      "还差 6 步完成完整报告",
+      "还差 5 步完成完整报告",
+      "还差 4 步完成完整报告",
+      "还差 3 步完成完整报告",
+      "还差 2 步完成完整报告",
+      "还差 1 步完成完整报告",
+      "所有步骤已完成，生成报告"
+    ],
+    "secBasicInfo": "基本信息",
+    "secGrowthStage": "发展阶段与市场",
+    "secRevGrowth": "营收与增长",
+    "secProfitability": "盈利能力",
+    "secRevStructure": "营收结构",
+    "secCapStructure": "资本结构",
+    "secCoreOps": "核心运营指标",
+    "secFlowEff": "流程效率",
+    "secSupplyChain": "供应链与库存",
+    "secMarketPos": "市场定位",
+    "secGrowthStrat": "增长战略",
+    "secStratMaturity": "战略成熟度自评",
+    "secBoardStruct": "董事会结构",
+    "secAuditComp": "审计与合规",
+    "secEquityStruct": "股权结构",
+    "secTechAssets": "技术资产",
+    "secDigitMaturity": "数字化成熟度",
+    "secTechStrat": "技术战略",
+    "secCapGoal": "资本目标",
+    "secInvestorPref": "投资人偏好",
+    "secRiskExposure": "风险敞口评估",
+    "fldName": "公司全称",
+    "fldFoundedYear": "成立年份",
+    "fldBusiness": "主营业务",
+    "fldBizModel": "商业模式",
+    "fldHeadcount": "员工规模",
+    "fldRegistration": "公司注册地",
+    "fldFundingRound": "融资阶段",
+    "fldMarketRegion": "主要市场地区",
+    "fldCompetitiveEdge": "核心竞争优势（简述）",
+    "fldRevenue": "年营收（美元）",
+    "fldYoY": "同比增长率（YoY）",
+    "fldCAGR": "三年复合增长率（CAGR）",
+    "fldForecastRev": "未来12个月预测营收",
+    "fldEbitdaMargin": "EBITDA利润率",
+    "fldGrossMargin": "毛利率",
+    "fldNetMargin": "净利润率",
+    "fldEbitdaAmount": "年EBITDA金额（美元）",
+    "fldCashBurn": "月均现金消耗（如亏损期）",
+    "phCashBurn": "如盈利则填N/A",
+    "fldRecRev": "经常性收入占比",
+    "fldTopCustomer": "前三大客户营收占比",
+    "hintCustomerConc": "客户集中度影响融资估值",
+    "fldRevDistribution": "营收地区分布",
+    "fldDebt": "负债总额（美元）",
+    "fldCash": "现金及等价物",
+    "fldLastValuation": "上轮估值",
+    "fldTotalRaised": "累计融资金额",
+    "fldFinTags": "主要财务关注点（多选）",
+    "fldMonthlyActiveUsers": "月活跃交易用户数",
+    "fldMonthlyVolume": "月均交易量（辆）",
+    "fldAvgOrderValue": "平均客单价（美元）",
+    "fldRepurchaseCycle": "客户复购周期",
+    "fldDetectionCycle": "车辆检测交付周期",
+    "fldTxnCycle": "交易平均完成周期",
+    "fldDigitization": "运营数字化程度",
+    "sliderDigitLabel": "核心业务数字化覆盖率",
+    "fldSupplierCount": "合作供货商数量",
+    "fldInventoryTurnover": "平均库存周转天数",
+    "fldOpTags": "运营效率短板（多选）",
+    "fldOpNotes": "补充说明",
+    "phOpNotes": "描述运营中的关键挑战或近期改进举措...",
+    "fldTAM": "目标市场规模（TAM，美元）",
+    "fldMarketPenetration": "当前市场渗透率",
+    "fldStratTags": "核心竞争壁垒（多选）",
+    "fldGrowthEngine": "未来3年核心增长引擎",
+    "fldCategoryExpansion": "品类扩张计划",
+    "fldCompetitors": "主要竞争对手及差异化优势",
+    "fldBoardSize": "董事会成员人数",
+    "fldIndepDirectors": "独立董事人数",
+    "fldAuditCommStatus": "审计委员会状态",
+    "fldCFO": "CFO/财务负责人",
+    "fldCurrentAuditor": "当前审计机构",
+    "fldAuditedYears": "已审计年度",
+    "fldCompTags": "合规完备情况（多选）",
+    "fldFounderStake": "创始团队持股比例",
+    "fldEquityDispute": "是否存在股权纠纷",
+    "fldGovTags": "治理改善优先级（多选）",
+    "fldCoreSystems": "自主研发核心系统",
+    "fldTechTeamSize": "技术团队规模",
+    "fldIP": "知识产权（专利/软著）",
+    "fldDataAssets": "数据资产规模",
+    "sliderAimlLabel": "AI/ML在核心业务的应用深度",
+    "sliderDataGovLabel": "数据治理与分析能力成熟度",
+    "fldTechTags": "未来12个月技术重点投入（多选）",
+    "fldCapitalRoute": "首要资本路径（单选）",
+    "fldTimeWindow": "目标时间窗口",
+    "fldTargetRaising": "目标融资规模（美元）",
+    "fldFundUse": "期望资金用途",
+    "fldTargetValuation": "目标估值区间（美元）",
+    "fldInvestorTags": "偏好投资人类型（多选）",
+    "fldAdvisorExpectations": "对顾问的具体期望",
+    "optB2B": "B2B",
+    "optB2BB2C": "B2B / B2C",
+    "optB2C": "B2C",
+    "optSaaS": "SaaS",
+    "headOpts": [
+      "1–20人",
+      "21–50人",
+      "51–200人",
+      "200+人"
+    ],
+    "fundingOpts": [
+      "天使轮",
+      "Pre-A",
+      "A轮",
+      "B轮",
+      "C轮+"
+    ],
+    "regionOpts": [
+      "华东",
+      "全国（线上+线下）",
+      "海外为主"
+    ],
+    "recRevOpts": [
+      "0–20%",
+      "20–40%",
+      "40–60%",
+      "60%+"
+    ],
+    "revDistOpts": [
+      "主要境内（90%+）",
+      "境内为主（70–90%）",
+      "境内外混合"
+    ],
+    "finTagOpts": [
+      "现金流管理",
+      "毛利率提升",
+      "营运资本",
+      "规模化边际成本",
+      "客户集中度",
+      "汇率敞口"
+    ],
+    "opTagOpts": [
+      "检测标准化程度",
+      "物流协同效率",
+      "售后服务体系",
+      "跨城市扩张复制能力",
+      "数据系统集成"
+    ],
+    "stratTagOpts": [
+      "AI检测技术专利",
+      "B端经销商网络积累",
+      "品牌认知度",
+      "数据积累与算法迭代",
+      "价格优势",
+      "政府资质认证"
+    ],
+    "growthEngOpts": [
+      "新市场地域扩张",
+      "产品线延伸（B端SaaS化）",
+      "国际化",
+      "并购整合"
+    ],
+    "stratChecks": [
+      "已有清晰的3年战略规划文档",
+      "战略目标与KPI体系已拆解至部门级",
+      "已完成竞品深度分析报告",
+      "国际化可行性研究已立项"
+    ],
+    "auditCommOpts": [
+      "尚未组建",
+      "已组建（无独立成员）",
+      "已组建（含独立成员）"
+    ],
+    "cfoOpts": [
+      "内部兼职CFO",
+      "全职CFO",
+      "Big4背景CFO"
+    ],
+    "auditorOpts": [
+      "国内中小所",
+      "国内大所",
+      "Big4（四大）"
+    ],
+    "compTagOpts": [
+      "工商注册及资质齐全",
+      "劳动合规",
+      "数据安全合规（PIPL）",
+      "税务合规",
+      "反腐反商业贿赂政策",
+      "ESG信息披露"
+    ],
+    "equityDisputeOpts": [
+      "否",
+      "是（请说明）"
+    ],
+    "govTagOpts": [
+      "引入独立董事",
+      "组建审计委员会",
+      "Big4审计切换",
+      "完善内控体系",
+      "ESG框架建立"
+    ],
+    "techTagOpts": [
+      "AI定价模型迭代",
+      "B端SaaS产品化",
+      "数据中台建设",
+      "移动端体验优化",
+      "国际化技术适配"
+    ],
+    "techChecks": [
+      "核心技术系统已完成灾备与容灾部署",
+      "已通过ISO 27001信息安全认证",
+      "技术路线图已对外披露（投资人可见）"
+    ],
+    "capRouteOpts": [
+      "A股上市",
+      "港股IPO",
+      "美股IPO",
+      "战略并购（卖方）"
+    ],
+    "timeWindowOpts": [
+      "12个月内",
+      "12–24个月",
+      "24–36个月",
+      "36个月以上"
+    ],
+    "fundUseOpts": [
+      "市场扩张",
+      "技术研发 + 市场扩张",
+      "并购收购",
+      "运营资本补充"
+    ],
+    "investorTagOpts": [
+      "战略型产业投资人",
+      "专注新经济的PE/VC",
+      "政府引导基金",
+      "跨境资本（美元基金）",
+      "上市公司战投"
+    ],
+    "riskChecks": [
+      "已了解上市合规要求并做好初步准备",
+      "已与法律顾问就VIE架构进行咨询",
+      "管理团队愿意接受IPO锁定期安排"
+    ],
+    "aiDims": [
+      "战略与增长",
+      "财务健康",
+      "运营效率",
+      "治理合规",
+      "组织与人才",
+      "技术与数据"
+    ],
+    "aiInsights": [
+      {
+        "title": "⚡ 公司概况分析",
+        "items": [
+          "二手车赛道2024年市场规模超$1,800亿，B2B/B2C双轮驱动具备显著网络效应潜力。",
+          "50人精干团队对应$5,000万营收，人效比处于行业前25%分位。",
+          "建议尽快建立清晰的组织架构图，为后续融资尽调做好准备。"
+        ]
+      },
+      {
+        "title": "⚡ 财务健康洞察",
+        "items": [
+          "38%同比增速超越行业中位数（22%），增长质量评级为优良。",
+          "22%毛利率处于二手车平台中等水平，SaaS化路径可大幅提升毛利至40%+。",
+          "客户集中度28%低于30%警戒线，融资吸引力较强。"
+        ]
+      },
+      {
+        "title": "⚡ 运营效率洞察",
+        "items": [
+          "22小时检测交付已达行业领先水平，是核心差异化壁垒。",
+          "28天库存周转建议优化至20天内，可释放约$200万运营资金。",
+          "标准化程度提升空间大，SaaS化后可拉升估值倍数至8–12×ARR。"
+        ]
+      },
+      {
+        "title": "⚡ 战略定位洞察",
+        "items": [
+          "TAM $1,800亿+，当前渗透率极低，具备10倍增长空间叙事基础。",
+          "AI定价+B端SaaS双引擎是高溢价路径，建议作为资本叙事核心。",
+          "车后市场延伸预计可将LTV提升3–4倍，是关键价值放大器。"
+        ]
+      },
+      {
+        "title": "⚡ 治理风险预警",
+        "items": [
+          "独立董事不足是IPO最大单项障碍，建议Q3前完成补充。",
+          "切换Big4审计需提前18个月启动，影响IPO时间线。",
+          "数据安全合规（PIPL/GDPR）是海外融资的强制门槛。"
+        ]
+      },
+      {
+        "title": "⚡ 技术价值评估",
+        "items": [
+          "80万+检测数据资产是护城河，建议明确数据货币化路径。",
+          "B端SaaS化可将估值逻辑从GMV型切换至ARR型，溢价空间达30–50%。",
+          "技术路线图公开可提升机构投资人信任度，建议尽快整理。"
+        ]
+      },
+      {
+        "title": "⚡ 资本路径建议",
+        "items": [
+          "美股IPO目标合理，建议先完成B轮后于2026年启动上市筹备。",
+          "$3–5亿估值目标需在2年内实现收入$1亿+及显著利润改善。",
+          "RVC顾问网络可为您匹配3–5家专注新经济的一线美元基金。"
+        ]
+      }
+    ]
   },
   "report": {
     "breadcrumbHome": "首页",
     "breadcrumbCurrent": "企业诊断报告",
     "headEyebrow": "企业诊断报告 · 生成于 2025年5月26日",
+    "companyName": "UC Auto（优车汇）",
     "reportId": "报告编号",
     "scoreBadge": "稳健成长型",
     "shareReport": "分享报告",
@@ -80,7 +547,182 @@
     "colMitigation": "建议对策",
     "roadmapTitle": "30/60/90/180天执行路线图",
     "roadmapSub": "价值创造与资本路径的优先行动清单",
-    "viewIpoConsole": "查看IPO就绪控制台 →"
+    "viewIpoConsole": "查看IPO就绪控制台 →",
+    "companyMeta1": "二手车交易平台 · B2B/B2C",
+    "companyMeta2": "营收 $5,000万",
+    "companyMeta3": "A轮 · 50人团队",
+    "scoreTrend": "↑ 较初测提升 +6",
+    "scoreContext": "汽车后市场 · A轮",
+    "scorePercentile": "前28%分位",
+    "advisorInitial": "余",
+    "advisorName": "余龙文博士",
+    "advisorRole": "资本市场 · IPO专项顾问",
+    "sidebarScores": [
+      {
+        "name": "战略与增长"
+      },
+      {
+        "name": "财务健康"
+      },
+      {
+        "name": "运营效率"
+      },
+      {
+        "name": "治理合规"
+      },
+      {
+        "name": "组织人才"
+      },
+      {
+        "name": "技术数据"
+      }
+    ],
+    "sidebarLinks": [
+      "综合评分",
+      "雷达图分析",
+      "资本路径",
+      "价值机会",
+      "风险标记",
+      "行动路线图"
+    ],
+    "radarLabels": [
+      "战略与增长",
+      "财务健康",
+      "运营效率",
+      "治理合规",
+      "组织人才",
+      "技术数据"
+    ],
+    "pathways": [
+      {
+        "title": "B轮融资 + 赴美上市筹备",
+        "desc": "完成B轮（$3,000–5,000万）后启动美股IPO筹备，利用增长势能打开海外机构市场。",
+        "timeline": "目标时间：24–36个月 · 目标估值 $3–5亿"
+      },
+      {
+        "title": "战略并购（卖方）",
+        "desc": "现有技术资产与B端网络对汽车集团、互联网平台具备强并购吸引力，EV估值约5–8×ARR。",
+        "timeline": "目标：12–18个月 · 估值区间 $2.5–4亿"
+      },
+      {
+        "title": "港股IPO",
+        "desc": "港股对汽车后市场赛道估值修复中，适合在国内监管环境更确定后择机启动。",
+        "timeline": "目标：36个月以上 · 需先完善治理体系"
+      }
+    ],
+    "opportunities": [
+      {
+        "name": "B端SaaS化——经销商管理系统订阅化",
+        "dim": "战略增长",
+        "dimTag": "tag-blue",
+        "impact": "+$600万ARR",
+        "diff": "中 · 9个月"
+      },
+      {
+        "name": "库存周转优化（28天→20天）",
+        "dim": "运营效率",
+        "dimTag": "tag-orange",
+        "impact": "释放$200万资金",
+        "diff": "低 · 3个月"
+      },
+      {
+        "name": "切换Big4审计——上市前置合规",
+        "dim": "治理合规",
+        "dimTag": "tag-blue",
+        "impact": "解锁IPO路径",
+        "diff": "高 · 18个月"
+      },
+      {
+        "name": "车后服务延伸（维保/保险/金融）",
+        "dim": "战略增长",
+        "dimTag": "tag-blue",
+        "impact": "LTV提升3–4倍",
+        "diff": "高 · 18个月"
+      },
+      {
+        "name": "补充独立董事——完善治理结构",
+        "dim": "治理合规",
+        "dimTag": "tag-blue",
+        "impact": "评分+14分",
+        "diff": "低 · 2个月"
+      },
+      {
+        "name": "数据资产商业化——AI定价SaaS输出",
+        "dim": "技术数据",
+        "dimTag": "tag-blue",
+        "impact": "估值倍数扩张",
+        "diff": "中 · 6个月"
+      }
+    ],
+    "risks": [
+      {
+        "name": "无Big4审计——IPO强制要求未达标",
+        "levelBg": "rgba(240,68,56,0.1)",
+        "levelColor": "#F04438",
+        "level": "🔴 高",
+        "action": "立即启动Big4接触，最晚Q3签约"
+      },
+      {
+        "name": "治理结构薄弱——独立董事不足",
+        "levelBg": "rgba(245,158,11,0.1)",
+        "levelColor": "#D97706",
+        "level": "⚠ 中",
+        "action": "Q2前完成独立董事补充与审计委员会筹建"
+      },
+      {
+        "name": "数据安全合规缺口（PIPL/GDPR）",
+        "levelBg": "rgba(245,158,11,0.1)",
+        "levelColor": "#D97706",
+        "level": "⚠ 中",
+        "action": "海外融资强制门槛，建议Q2启动合规体系建设"
+      }
+    ],
+    "roadmap": [
+      {
+        "days": "30天",
+        "label": "首月基础",
+        "title": "合规启动",
+        "actions": [
+          "接触3家Big4审计机构",
+          "启动独立董事遴选",
+          "库存周转优化启动",
+          "B端SaaS原型设计"
+        ]
+      },
+      {
+        "days": "60天",
+        "label": "治理完善",
+        "title": "结构升级",
+        "actions": [
+          "完成独立董事聘任",
+          "组建审计委员会",
+          "PIPL合规体系搭建",
+          "B轮路演材料准备"
+        ]
+      },
+      {
+        "days": "90天",
+        "label": "增长提速",
+        "title": "价值放大",
+        "actions": [
+          "Big4审计正式签约",
+          "B端SaaS内测上线",
+          "车后服务试点启动",
+          "美元基金对接启动"
+        ]
+      },
+      {
+        "days": "180天",
+        "label": "资本就绪",
+        "title": "融资攻坚",
+        "actions": [
+          "B轮Term Sheet谈判",
+          "IPO可行性评估报告",
+          "2024年审计报告完成",
+          "估值模型更新迭代"
+        ]
+      }
+    ]
   },
   "modules": {
     "eyebrow": "资本执行模块",
@@ -92,6 +734,7 @@
     "stat2Lbl": "平均匹配度",
     "stat3Lbl": "平均执行周期",
     "stat4Lbl": "累计价值释放",
+    "stat3Val": "18月",
     "filterAll": "全部模块",
     "filterCapital": "资本市场",
     "filterFinancial": "财务优化",
@@ -106,10 +749,216 @@
     "detailKpi3": "专业顾问",
     "detailIncludes": "模块包含内容",
     "openIpoConsole": "打开 IPO 控制台 →",
-    "bookAdvisor": "预约顾问"
+    "bookAdvisor": "预约顾问",
+    "matchLabel": "匹配",
+    "mods": [
+      {
+        "num": "模块 01",
+        "title": "IPO就绪加速台",
+        "desc": "覆盖美股/港股上市全流程——从合规差距评估到承销商遴选、招股书起草与路演准备。",
+        "tags": [
+          {
+            "text": "资本市场"
+          },
+          {
+            "text": "强烈推荐"
+          }
+        ],
+        "features": [
+          "监管合规差距分析与整改路线图",
+          "Big4审计对接与财务报表规范化",
+          "承销商路演 Deck 与投资者问答准备",
+          "招股书（S-1/F-1）节点跟踪与里程碑管理"
+        ],
+        "footLabel": "周期：",
+        "footStrong": "18–24 个月",
+        "footExtra": " · 320+ 顾问",
+        "detailSub": "资本市场 · 匹配度 96%",
+        "detailItems": [
+          "监管合规差距分析与整改路线图",
+          "财务报表规范化与Big4审计对接",
+          "招股书（F-1/S-1）起草支持与SEC审核准备",
+          "承销商遴选与路演策略制定",
+          "投资者路演准备与模拟问答训练",
+          "锁定期策略与上市后资本市场支持"
+        ],
+        "kpis": [
+          "96%",
+          "$42B",
+          "320+"
+        ]
+      },
+      {
+        "num": "模块 02",
+        "title": "财务健康深度审计",
+        "desc": "机构级财务建模、盈利质量分析与EBITDA优化，全面提升优车汇财务可信度与投资人吸引力。",
+        "tags": [
+          {
+            "text": "财务优化"
+          }
+        ],
+        "features": [
+          "盈利质量（QoE）深度评估",
+          "营运资本优化与核心财务KPI体系",
+          "收入确认规范化与GAAP/IFRS对齐",
+          "三表联动财务模型构建"
+        ],
+        "footLabel": "周期：",
+        "footStrong": "3–6 个月",
+        "footExtra": " · Big4 合作",
+        "detailSub": "财务优化 · 匹配度 94%",
+        "detailItems": [
+          "盈利质量（QoE）深度评估报告",
+          "营运资本优化与财务KPI仪表板",
+          "收入确认规范化与GAAP/IFRS对齐",
+          "三表联动财务模型及多情景预测",
+          "税务结构优化与财务风险排查",
+          "财务数据室（Data Room）构建"
+        ],
+        "kpis": [
+          "94%",
+          "$8.2B",
+          "Big4"
+        ]
+      },
+      {
+        "num": "模块 03",
+        "title": "战略并购优化",
+        "desc": "AI辅助尽调、价值桥接分析与交易结构设计，加速优车汇的买方/卖方并购进程。",
+        "tags": [
+          {
+            "text": "战略并购"
+          }
+        ],
+        "features": [
+          "标的筛选与交易机会识别",
+          "AI尽调自动化与风险红旗检测",
+          "价值桥接分析与协同效应量化",
+          "整合规划与百日执行路线图"
+        ],
+        "footLabel": "周期：",
+        "footStrong": "6–18 个月",
+        "footExtra": " · $2.8亿–4.3亿区间",
+        "detailSub": "战略并购 · 匹配度 91%",
+        "detailItems": [
+          "并购标的系统化筛选与评级",
+          "AI驱动尽调自动化与红旗识别",
+          "价值桥接分析与协同效应量化",
+          "最优交易结构设计（股权/现金/混合）",
+          "整合规划与百日执行路线图",
+          "卖方CIM材料与数据室搭建"
+        ],
+        "kpis": [
+          "91%",
+          "$280M+",
+          "186+"
+        ]
+      },
+      {
+        "num": "模块 04",
+        "title": "AI智能化转型",
+        "desc": "针对二手车交易场景的AI战略规划与落地路线图，构建数据驱动的竞争护城河，重塑投资叙事。",
+        "tags": [
+          {
+            "text": "科技赋能"
+          }
+        ],
+        "features": [
+          "AI应用场景识别与ROI量化分析",
+          "车辆定价引擎与库存智能调度升级",
+          "车辆数据资产化与商业变现路径",
+          "AI技术叙事融入投资人 Deck"
+        ],
+        "footLabel": "周期：",
+        "footStrong": "3–9 个月",
+        "footExtra": " · 估值乘数提升",
+        "detailSub": "科技赋能 · 匹配度 89%",
+        "detailItems": [
+          "二手车AI应用场景识别与ROI量化",
+          "智能定价引擎与库存调度系统升级",
+          "车辆数据资产化与变现路径规划",
+          "技术栈现代化路线图",
+          "AI叙事融入投资人路演材料",
+          "数字化运营能力评估与提升"
+        ],
+        "kpis": [
+          "89%",
+          "3.2x",
+          "180天"
+        ]
+      },
+      {
+        "num": "模块 05",
+        "title": "资本叙事构建",
+        "desc": "基于诊断数据，构建机构级投资叙事——从保密信息备忘录（CIM）到路演材料，完整呈现优车汇价值。",
+        "tags": [
+          {
+            "text": "资本市场"
+          }
+        ],
+        "features": [
+          "投资逻辑梳理与差异化定位",
+          "保密信息备忘录（CIM）全套输出",
+          "投资路演 Deck 与配套问答材料",
+          "可比公司分析与估值定价基准"
+        ],
+        "footLabel": "周期：",
+        "footStrong": "4–8 周",
+        "footExtra": " · 数据驱动",
+        "detailSub": "资本市场 · 匹配度 87%",
+        "detailItems": [
+          "投资逻辑梳理与差异化定位",
+          "保密信息备忘录（CIM）全套输出",
+          "投资路演Deck与配套问答材料",
+          "可比公司分析与估值定价基准",
+          "投资人关系策略规划",
+          "融资材料多语言版本支持"
+        ],
+        "kpis": [
+          "87%",
+          "4–8周",
+          "CIM+"
+        ]
+      },
+      {
+        "num": "模块 06",
+        "title": "精准投资人匹配",
+        "desc": "AI精选机构投资人、PE基金与战略合作方，精准匹配优车汇企业画像与融资目标，缩短寻资周期。",
+        "tags": [
+          {
+            "text": "机构网络"
+          }
+        ],
+        "features": [
+          "320+ 机构顾问网络专属接入",
+          "AI匹配PE/VC基金，精准引荐",
+          "战略收购方识别与背景分析",
+          "关系维护与热线引荐跟进"
+        ],
+        "footLabel": "网络：",
+        "footStrong": "320+ 顾问",
+        "footExtra": " · 186+ 细分赛道",
+        "detailSub": "机构网络 · 匹配度 84%",
+        "detailItems": [
+          "AI精选匹配机构投资人名单",
+          "PE/VC基金专属引荐与背景分析",
+          "战略收购方识别与接触策略",
+          "投资人关系维护与进度追踪",
+          "热线引荐与会议安排支持",
+          "融资过程全程顾问陪跑"
+        ],
+        "kpis": [
+          "84%",
+          "320+",
+          "186+"
+        ]
+      }
+    ]
   },
   "ipo": {
     "headerEyebrow": "IPO就绪评估控制台 · 评估日期 2026年5月26日",
+    "companyName": "UC Auto（优车汇）",
+    "advisorInitial": "余",
     "metaBusiness": "二手车交易平台 · B2B/B2C",
     "metaRevenue": "营收 $5,000万",
     "metaTargetExchange": "目标交易所：美股 / 港股",
@@ -120,6 +969,9 @@
     "exportPdf": "导出 PDF",
     "bookAdvisor": "预约 IPO 顾问 →",
     "advisorTitle": "首席 IPO 顾问",
+    "advisorName": "余龙文博士",
+    "advisorRole": "IPO专家 · 资本市场",
+    "advisorExp": "主导18起IPO · 累计募资 $62亿",
     "navTimeline": "上市路径时间轴",
     "navChecklist": "就绪检查清单",
     "navRisk": "风险评估",
@@ -129,25 +981,237 @@
     "badgePhases": "6阶段",
     "badgeAlerts": "3项预警",
     "deadlinesTitle": "关键时间节点",
+    "deadlines": [
+      {
+        "label": "Big4 审计洽谈",
+        "date": "2026年9月"
+      },
+      {
+        "label": "审计委员会成立",
+        "date": "2026年10月"
+      },
+      {
+        "label": "独立董事增补",
+        "date": "2026年11月"
+      },
+      {
+        "label": "承销商遴选完成",
+        "date": "2027年3月"
+      }
+    ],
     "timelineTitle": "IPO上市路径时间轴",
     "timelineSub": "六阶段执行路线图，通往资本市场",
     "timelineTarget": "目标：2028年Q2",
+    "tlSteps": [
+      {
+        "phase": "第一阶段",
+        "title": "企业诊断",
+        "date": "2026年Q1",
+        "status": "已完成",
+        "statusClass": "done"
+      },
+      {
+        "phase": "第二阶段",
+        "title": "差距分析",
+        "date": "2026年Q2",
+        "status": "已完成",
+        "statusClass": "done"
+      },
+      {
+        "phase": "第三阶段",
+        "title": "治理搭建",
+        "date": "2026年Q3–2027年Q1",
+        "status": "进行中",
+        "statusClass": "active"
+      },
+      {
+        "phase": "第四阶段",
+        "title": "财务规范",
+        "date": "2027年",
+        "status": "待启动",
+        "statusClass": "pending"
+      },
+      {
+        "phase": "第五阶段",
+        "title": "招股书起草",
+        "date": "2027年Q4–2028年Q1",
+        "status": "待启动",
+        "statusClass": "pending"
+      },
+      {
+        "phase": "第六阶段",
+        "title": "正式上市",
+        "date": "2028年Q2",
+        "status": "目标",
+        "statusClass": "pending"
+      }
+    ],
     "categoryTitle": "分类就绪度评估",
     "categorySub": "15 个核心准备项目，覆盖5大关键领域",
     "categoryOverall": "整体完成 38%",
     "psDone": "已完成",
     "psProg": "进行中",
     "psPending": "待启动",
+    "catBars": [
+      {
+        "name": "业务运营",
+        "stats": "5/5 项 · 100%"
+      },
+      {
+        "name": "财务规范化",
+        "stats": "3/5 项 · 60%"
+      },
+      {
+        "name": "治理与合规",
+        "stats": "2/5 项 · 40%"
+      },
+      {
+        "name": "法律与监管",
+        "stats": "1/3 项 · 33%"
+      },
+      {
+        "name": "资本市场准备",
+        "stats": "0/2 项 · 0%"
+      }
+    ],
     "checklistTitle": "IPO就绪核查清单",
     "checklistSub": "公开上市的关键里程碑与准入要求",
+    "pillCheckDone": "3项完成",
+    "pillCheckProg": "3项进行中",
     "colRequirement": "准备要求",
     "colOwner": "负责方",
     "colDue": "截止日期",
     "colStatus": "状态",
+    "statusDone": "已完成",
+    "statusProg": "进行中",
+    "statusPending": "待启动",
+    "checklistItems": [
+      {
+        "name": "企业价值诊断完成",
+        "sub": "300项全维度诊断评估",
+        "owner": "RVC AI引擎",
+        "due": "2026年3月",
+        "status": "done"
+      },
+      {
+        "name": "收入确认会计政策规范",
+        "sub": "收入确认规则文档化并实际执行",
+        "owner": "CFO办公室",
+        "due": "2026年4月",
+        "status": "done"
+      },
+      {
+        "name": "公司章程重组完成",
+        "sub": "法律主体结构已符合IPO要求",
+        "owner": "法律顾问",
+        "due": "2026年5月",
+        "status": "done"
+      },
+      {
+        "name": "Big4 审计机构洽谈",
+        "sub": "委托毕马威/普华永道/德勤/安永进行2年期审计",
+        "owner": "CFO + 董事会",
+        "due": "2026年9月",
+        "status": "prog"
+      },
+      {
+        "name": "审计委员会筹建",
+        "sub": "至少需要3名独立董事，含审计专业背景",
+        "owner": "董事会 / CEO",
+        "due": "2026年10月",
+        "status": "prog"
+      },
+      {
+        "name": "PIPL合规与数据安全体系",
+        "sub": "《个人信息保护法》合规架构建设",
+        "owner": "合规负责人",
+        "due": "2026年11月",
+        "status": "prog"
+      },
+      {
+        "name": "2年期审计财务报表",
+        "sub": "FY2025+FY2026 Big4审计完成版",
+        "owner": "Big4 审计机构",
+        "due": "2027年6月",
+        "status": "pending"
+      },
+      {
+        "name": "独立董事增补（2名）",
+        "sub": "引入具有上市公司经验的独立董事",
+        "owner": "CFO + 董事会",
+        "due": "2026年11月",
+        "status": "pending"
+      },
+      {
+        "name": "承销商遴选与委托",
+        "sub": "主承销商及联合承销行确定",
+        "owner": "CFO + 董事会",
+        "due": "2027年Q1",
+        "status": "pending"
+      },
+      {
+        "name": "招股书（F-1）起草",
+        "sub": "SEC注册申报文件准备与法律审核",
+        "owner": "法律 + CFO + 承销商",
+        "due": "2027年Q4",
+        "status": "pending"
+      }
+    ],
     "riskTitle": "IPO风险评估",
     "riskSub": "上市前必须完成整改的关键风险因素",
     "riskCount": "3项活跃预警",
+    "riskCards": [
+      {
+        "severityClass": "high",
+        "severityColor": "#F04438",
+        "severity": "🔴 高风险",
+        "title": "Big4审计机构未到位",
+        "desc": "公开市场投资者要求至少2个完整财年的Big4审计报告，这是优车汇IPO的最大障碍，须立即启动洽谈。",
+        "action": "立即启动 — 2026年9月截止"
+      },
+      {
+        "severityClass": "high",
+        "severityColor": "#F04438",
+        "severity": "🔴 高风险",
+        "title": "独立董事席位严重不足",
+        "desc": "SEC / 港交所均要求审计委员会由多数独立董事组成，目前董事会独立成员数量不满足监管要求。",
+        "action": "2026年11月前增补2名独立董事"
+      },
+      {
+        "severityClass": "medium",
+        "severityColor": "#D97706",
+        "severity": "⚠ 中风险",
+        "title": "PIPL数据合规存在漏洞",
+        "desc": "平台积累车辆交易用户数据，《个人信息保护法》合规架构尚未完整建立，可能触发监管审查。",
+        "action": "启动数据合规专项整改计划"
+      },
+      {
+        "severityClass": "low",
+        "severityColor": "#16B364",
+        "severity": "✓ 低风险",
+        "title": "营收增长强劲",
+        "desc": "同比增长38%，显著优于二手车行业中位数（12%），B端SaaS化转型带来可预期的经常性收入，有利于估值定价。",
+        "action": "保持增长势头至上市窗口期"
+      }
+    ],
     "actionsTitle": "建议优先行动",
-    "actionsSub": "对IPO就绪度影响最高的关键举措"
+    "actionsSub": "对IPO就绪度影响最高的关键举措",
+    "actionCards": [
+      {
+        "title": "对接 Big4 审计机构",
+        "desc": "RVC将为优车汇提供首席审计合作伙伴的热线引荐——IPO关键路径，建议本周启动。",
+        "link": "预约引荐会议"
+      },
+      {
+        "title": "独立董事招募计划",
+        "desc": "物色并引进2名具备上市公司经验的独立董事，需在2026年11月前完成，以满足监管要求。",
+        "link": "查看候选人名单"
+      },
+      {
+        "title": "财务系统专业化升级",
+        "desc": "部署企业级财务管理系统（SAP / Oracle），建立完整审计轨迹，满足内部控制与SOX合规要求。",
+        "link": "查看财务优化模块"
+      }
+    ]
   }
 }
