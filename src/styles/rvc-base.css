@@ -156,11 +156,11 @@ button:focus-visible{
   border-radius:2px;border:none;background:transparent;transition:all .18s;}
 .btn-ghost:hover{background:var(--bg-elev-2);color:#e8edf5;}
 
-.btn-primary{font-size:13.5px;font-weight:600;color:var(--accent);
-  padding:8px 20px;border-radius:2px;border:1px solid var(--accent-border);
+.btn-primary{font-size:13.5px;font-weight:600;color:#e8edf5;
+  padding:8px 20px;border-radius:2px;border:1px solid rgba(232,237,245,0.28);
   background:transparent;position:relative;letter-spacing:.02em;
-  transition:background .35s ease,letter-spacing .35s ease,color .35s ease;}
-.btn-primary:hover{background:var(--accent-soft);letter-spacing:.06em;color:#e8edf5;}
+  transition:background .35s ease,letter-spacing .35s ease,border-color .18s;}
+.btn-primary:hover{background:rgba(232,237,245,0.07);border-color:rgba(232,237,245,0.55);letter-spacing:.06em;}
 
 /* ── Cards ── */
 .card{background:var(--bg-elev);border:1px solid var(--line);border-radius:2px;
@@ -173,10 +173,10 @@ button:focus-visible{
 
 /* ── Buttons ── */
 .btn-blue{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;
-  color:var(--accent);padding:13px 28px;border-radius:2px;
-  border:1px solid var(--accent-border);background:transparent;letter-spacing:.02em;
-  transition:background .35s ease,letter-spacing .35s ease,color .35s ease;}
-.btn-blue:hover{background:var(--accent-soft);letter-spacing:.06em;color:#e8edf5;}
+  color:#e8edf5;padding:13px 28px;border-radius:2px;
+  border:1px solid rgba(232,237,245,0.28);background:transparent;letter-spacing:.02em;
+  transition:background .35s ease,letter-spacing .35s ease,border-color .18s;}
+.btn-blue:hover{background:rgba(232,237,245,0.07);border-color:rgba(232,237,245,0.55);letter-spacing:.06em;}
 
 .btn-outline{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;
   color:var(--t2);padding:13px 26px;border-radius:2px;
@@ -328,15 +328,15 @@ button:focus-visible{
   border: 1px solid var(--line);
   color: var(--t2);
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .05em;
+  padding: 7px 13px;
   border-radius: 2px;
   cursor: pointer;
   transition: border-color .18s, color .18s;
 }
 .lang-toggle:hover {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: var(--accent-border);
+  color: #e8edf5;
 }

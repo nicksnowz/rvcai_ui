@@ -31,7 +31,6 @@ export default function Header({ mobileNavOpen, onHamburgerClick }) {
           ))}
         </nav>
         <div className="hdr-acts">
-          <button className="btn-ghost">{t('nav.login')}</button>
           <Link href="/intake" className="btn-primary">{t('nav.startDiagnosis')}</Link>
           <button
             className="lang-toggle"

@@ -16,20 +16,14 @@
   },
   "index": {
     "eyebrow": "AI驱动 · 资本智能",
-    "heroPrefixLines": [
-      "72小时内",
-      "精准解锁",
-      "企业"
-    ],
+    "heroPrefixLine1": "72小时内",
+    "heroPrefixLine2": "解锁企业",
     "heroWords": [
       "真实价值"
     ],
     "heroParagraph": "AI 驱动的企业资本化生命周期操作系统 —— 智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理等，加速企业升级与价值增长。",
     "heroBtn": "立即开始诊断",
     "heroBtn2": "查看示例报告 →",
-    "trust1": "72小时交付",
-    "trust2": "300+价值维度",
-    "trust3": "机构级AI分析",
     "footerTagline": "专为机构级资本智能而生",
     "svgI1Title": "战略规划",
     "svgI2Title": "财务质量",

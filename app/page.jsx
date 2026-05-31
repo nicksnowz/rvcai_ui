@@ -79,8 +79,6 @@ export default function Index() {
       es.forEach(e => {
         if (e.isIntersecting) {
           animCount(e.target);
-          const b = e.target.closest('.kpi-item')?.querySelector('.kpi-bfill');
-          if (b) setTimeout(() => b.style.width = b.dataset.w + '%', 200);
           ko.unobserve(e.target);
         }
       });
@@ -167,7 +165,7 @@ export default function Index() {
             <div>
               <h1 className="hero-h">
                 {t('index.heroPrefixLine1')}<br/>
-                {t('index.heroPrefixLine2')}{' '}<span ref={wordRef} className="accent"></span><span className="type-cursor">|</span>
+                <span className="hero-nowrap">{t('index.heroPrefixLine2')}{' '}<span ref={wordRef} className="accent"></span><span className="type-cursor">|</span></span>
               </h1>
               <p className="hero-p">{t('index.heroParagraph')}</p>
               <div className="hero-btns">
@@ -180,9 +178,46 @@ export default function Index() {
             </div>
           </div>
         </div>
+
+        {/* Glassmorphism partner strip — bottom of hero */}
+        <div className="hero-partners">
+          <div className="hp-track">
+            {[0, 1].map(setIdx => (
+              <Fragment key={setIdx}>
+                <span className="hp-logo" style={{ fontWeight: 900 }}>新东方</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ fontStyle: 'italic', letterSpacing: '-.01em' }}>intelliFusion</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">格灵深瞳</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">拉卡拉</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">一起作业</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ letterSpacing: '-.015em' }}>BaTeLab</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ letterSpacing: '.1em', fontSize: '11px' }}>CONTROLSYS</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ letterSpacing: '.14em', fontSize: '11px' }}>CFAR</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ letterSpacing: '.06em', fontSize: '11px' }}>MICROOS</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">全盛科技</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ fontWeight: 900, fontSize: '16px', letterSpacing: '-.02em' }}>Nums</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">Vfine Music</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo">帕皮科技</span>
+                <span className="hp-sep">·</span>
+                <span className="hp-logo" style={{ letterSpacing: '-.01em' }}>ETBcom</span>
+              </Fragment>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="engine-section">
+      <section className="engine-section eng-lt">
         <div className="wrap">
           <div className="chapter-head">
             <span className="chapter-num" aria-hidden>01</span>
@@ -200,53 +235,49 @@ export default function Index() {
 
                 <div className="eng-in-card">
                   <div className="eng-in-ico">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                       <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
                     </svg>
                   </div>
                   <div className="eng-in-body">
-                    <div className="eng-in-name">{t('index.svgI1Title')}</div>
-                    <div className="eng-in-sub">{t('index.svgI1Sub')}</div>
+                    <div className="eng-in-name">{t('index.svgI1Sub')}</div>
                     <div className="eng-in-tag">{t('index.svgI1Data')}</div>
                   </div>
                 </div>
 
                 <div className="eng-in-card">
                   <div className="eng-in-ico">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
                   </div>
                   <div className="eng-in-body">
-                    <div className="eng-in-name">{t('index.svgI2Title')}</div>
-                    <div className="eng-in-sub">{t('index.svgI2Sub')}</div>
+                    <div className="eng-in-name">{t('index.svgI2Sub')}</div>
                     <div className="eng-in-tag">{t('index.svgI2Data')}</div>
                   </div>
                 </div>
 
                 <div className="eng-in-card">
                   <div className="eng-in-ico">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                       <circle cx="12" cy="12" r="3"/>
                       <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
                     </svg>
                   </div>
                   <div className="eng-in-body">
-                    <div className="eng-in-name">{t('index.svgI3Title')}</div>
-                    <div className="eng-in-sub">{t('index.svgI3Sub')}</div>
+                    <div className="eng-in-name">{t('index.svgI3Sub')}</div>
                     <div className="eng-in-tag">{t('index.svgI3Data')}</div>
                   </div>
                 </div>
 
                 <div className="eng-in-card">
                   <div className="eng-in-ico">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                   </div>
                   <div className="eng-in-body">
-                    <div className="eng-in-name">{t('index.svgI4Title')}</div>
-                    <div className="eng-in-sub">{t('index.svgI4Sub')}</div>
+                    <div className="eng-in-name">{t('index.svgI4Sub')}</div>
                     <div className="eng-in-tag">{t('index.svgI4Data')}</div>
                   </div>
                 </div>
@@ -439,27 +470,22 @@ export default function Index() {
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="2486" data-suffix="+">0</div>
               <div className="kpi-lbl">{t('index.kpiLbls.0')}</div>
-              <div className="kpi-bar"><div className="kpi-bfill" data-w="88"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="186" data-suffix="+">0</div>
               <div className="kpi-lbl">{t('index.kpiLbls.1')}</div>
-              <div className="kpi-bar"><div className="kpi-bfill" data-w="72"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="320" data-suffix="+">0</div>
               <div className="kpi-lbl">{t('index.kpiLbls.2')}</div>
-              <div className="kpi-bar"><div className="kpi-bfill" data-w="80"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="68" data-suffix="%">0</div>
               <div className="kpi-lbl">{t('index.kpiLbls.3')}</div>
-              <div className="kpi-bar"><div className="kpi-bfill" data-w="68"></div></div>
             </div>
             <div className="kpi-item reveal">
               <div className="kpi-val" data-prefix="$" data-count="42" data-suffix="B+">0</div>
               <div className="kpi-lbl">{t('index.kpiLbls.4')}</div>
-              <div className="kpi-bar"><div className="kpi-bfill" data-w="95"></div></div>
             </div>
           </div>
         </div>
