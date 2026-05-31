@@ -9,5 +9,15 @@
     "startDiagnosis": "Start Diagnosis →",
     "logoSub": "Enterprise Value Platform"
   },
-  "langToggle": "中"
+  "langToggle": "中",
+  "index": {
+    "eyebrow": "AI-Powered · Capital Intelligence",
+    "heroParagraph": "AI-driven enterprise capitalization lifecycle OS — intelligent diagnostic engine scans 300+ value dimensions across strategy, finance, operations, and governance to accelerate growth.",
+    "heroBtn": "Start Diagnosis Now",
+    "heroBtn2": "View Sample Report →",
+    "trust1": "72-Hour Delivery",
+    "trust2": "300+ Value Dimensions",
+    "trust3": "Institutional-Grade AI",
+    "footerTagline": "Built for institutional-grade capital intelligence"
+  }
 }

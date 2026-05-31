@@ -9,5 +9,15 @@
     "startDiagnosis": "开始诊断 →",
     "logoSub": "企业价值诊断平台"
   },
-  "langToggle": "EN"
+  "langToggle": "EN",
+  "index": {
+    "eyebrow": "AI驱动 · 资本智能",
+    "heroParagraph": "AI 驱动的企业资本化生命周期操作系统 —— 智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理等，加速企业升级与价值增长。",
+    "heroBtn": "立即开始诊断",
+    "heroBtn2": "查看示例报告 →",
+    "trust1": "72小时交付",
+    "trust2": "300+价值维度",
+    "trust3": "机构级AI分析",
+    "footerTagline": "专为机构级资本智能而生"
+  }
 }
