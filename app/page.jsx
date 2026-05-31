@@ -223,221 +223,160 @@ export default function Index() {
               <p className="chapter-lead">{t('index.engineLead')}</p>
             </div>
           </div>
-            <div className="engine-wrap">
-              <div className="engine-card">
-                <svg viewBox="0 0 670 520" width="100%" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#2b62e3" stopOpacity="0.30"/><stop offset="100%" stopColor="#2b62e3" stopOpacity="0"/>
-                    </radialGradient>
-                    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                    <filter id="gs" x="-5%" y="-5%" width="110%" height="110%">
-                      <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                    <filter id="cardShadow" x="-5%" y="-5%" width="120%" height="130%">
-                      <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="rgba(0,0,0,0.45)"/>
-                    </filter>
-                    <linearGradient id="lightGlass" x1="0%" y1="0%" x2="60%" y2="100%">
-                      <stop offset="0%" stopColor="#151a24"/><stop offset="100%" stopColor="#0f1219"/>
-                    </linearGradient>
-                    <linearGradient id="glassShimmer" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="rgba(43,98,227,0.18)"/>
-                      <stop offset="38%" stopColor="rgba(43,98,227,0.06)"/>
-                      <stop offset="100%" stopColor="rgba(43,98,227,0.01)"/>
-                    </linearGradient>
-                  </defs>
-                  {/* Background */}
-                  <rect width="670" height="520" fill="#0b0d12" rx="18"/>
-                  <g stroke="rgba(139,149,171,0.07)" strokeWidth="1">
-                    <line x1="140" y1="0" x2="140" y2="520"/><line x1="206" y1="0" x2="206" y2="520"/>
-                    <line x1="354" y1="0" x2="354" y2="520"/><line x1="462" y1="0" x2="462" y2="520"/>
-                  </g>
+            <div className="eng-stage">
 
-                  {/* I1: 战略规划 */}
-                  <rect x="14" y="50" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="14" y="50" width="3.5" height="64" rx="2" fill="#2b62e3"/>
-                  <line x1="17.5" y1="50" x2="140" y2="50" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(24,62)" fill="none" stroke="#2b62e3" strokeWidth="1.35" strokeLinecap="round">
-                    <line x1="0" y1="12" x2="0" y2="7"/><line x1="4" y1="12" x2="4" y2="3"/>
-                    <line x1="8" y1="12" x2="8" y2="9"/><line x1="12" y1="12" x2="12" y2="1"/>
-                  </g>
-                  <text x="42" y="73" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI1Title')}</text>
-                  <text x="42" y="88" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI1Sub')}</text>
-                  <text x="42" y="105" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI1Data')}</text>
+              {/* ── Left: Analysis Inputs ── */}
+              <div className="eng-panel eng-panel--in">
+                <div className="eng-panel-lbl">{t('index.engineInputs')}</div>
 
-                  {/* I2: 财务质量 */}
-                  <rect x="14" y="162" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="14" y="162" width="3.5" height="64" rx="2" fill="#5b8aee"/>
-                  <line x1="17.5" y1="162" x2="140" y2="162" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(24,174)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="0,6 3,6 5,1 7,11 9,4 11,6 13,6"/>
-                  </g>
-                  <text x="42" y="185" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI2Title')}</text>
-                  <text x="42" y="200" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI2Sub')}</text>
-                  <text x="42" y="217" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI2Data')}</text>
+                <div className="eng-in-card">
+                  <div className="eng-in-bar"></div>
+                  <div className="eng-in-ico eng-ico--blue">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2b62e3" strokeWidth="1.8" strokeLinecap="round">
+                      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                  </div>
+                  <div className="eng-in-body">
+                    <div className="eng-in-name">{t('index.svgI1Title')}</div>
+                    <div className="eng-in-sub">{t('index.svgI1Sub')}</div>
+                    <div className="eng-in-tag">{t('index.svgI1Data')}</div>
+                  </div>
+                </div>
 
-                  {/* I3: 运营卓越 */}
-                  <rect x="14" y="274" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="14" y="274" width="3.5" height="64" rx="2" fill="#2b62e3"/>
-                  <line x1="17.5" y1="274" x2="140" y2="274" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(24,286)" fill="none" stroke="#2b62e3" strokeWidth="1.35" strokeLinecap="round">
-                    <circle cx="6" cy="6" r="5"/><circle cx="6" cy="6" r="2" fill="#2b62e3" stroke="none"/>
-                    <line x1="6" y1="0" x2="6" y2="-1.5"/><line x1="6" y1="12" x2="6" y2="13.5"/>
-                    <line x1="12" y1="6" x2="13.5" y2="6"/><line x1="0" y1="6" x2="-1.5" y2="6"/>
-                  </g>
-                  <text x="42" y="297" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI3Title')}</text>
-                  <text x="42" y="312" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI3Sub')}</text>
-                  <text x="42" y="329" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI3Data')}</text>
+                <div className="eng-in-card">
+                  <div className="eng-in-bar eng-in-bar--hot"></div>
+                  <div className="eng-in-ico eng-ico--hot">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5b8aee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                  </div>
+                  <div className="eng-in-body">
+                    <div className="eng-in-name">{t('index.svgI2Title')}</div>
+                    <div className="eng-in-sub">{t('index.svgI2Sub')}</div>
+                    <div className="eng-in-tag">{t('index.svgI2Data')}</div>
+                  </div>
+                </div>
 
-                  {/* I4: 公司治理 */}
-                  <rect x="14" y="386" width="126" height="64" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="14" y="386" width="3.5" height="64" rx="2" fill="#5b8aee"/>
-                  <line x1="17.5" y1="386" x2="140" y2="386" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(24,398)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M6,0 L12,2.5 L12,6 C12,9.5 9.5,11.5 6,13 C2.5,11.5 0,9.5 0,6 L0,2.5 Z"/>
-                    <polyline points="3.5,6.5 5.5,8.5 9,4"/>
-                  </g>
-                  <text x="42" y="409" fill="#e8edf5" fontSize="11.2" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgI4Title')}</text>
-                  <text x="42" y="424" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Sans',sans-serif" className="svg-subtle">{t('index.svgI4Sub')}</text>
-                  <text x="42" y="441" fill="#5b667d" fontSize="7" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgI4Data')}</text>
+                <div className="eng-in-card">
+                  <div className="eng-in-bar"></div>
+                  <div className="eng-in-ico eng-ico--blue">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2b62e3" strokeWidth="1.8" strokeLinecap="round">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
+                    </svg>
+                  </div>
+                  <div className="eng-in-body">
+                    <div className="eng-in-name">{t('index.svgI3Title')}</div>
+                    <div className="eng-in-sub">{t('index.svgI3Sub')}</div>
+                    <div className="eng-in-tag">{t('index.svgI3Data')}</div>
+                  </div>
+                </div>
 
-                  {/* Score glass card */}
-                  <rect x="220" y="132" width="120" height="44" rx="11" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#gs)"/>
-                  <line x1="238" y1="132" x2="322" y2="132" stroke="rgba(43,98,227,0.22)" strokeWidth="1"/>
-                  <text x="280" y="149" textAnchor="middle" fill="#5b667d" fontSize="7.2" fontWeight="600" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".1em">{t('index.svgScore')}</text>
-                  <text x="265" y="171" textAnchor="middle" fill="#2b62e3" fontSize="26" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num" id="svgScore" suppressHydrationWarning>68</text>
-                  <text x="290" y="169" fill="#5b667d" fontSize="8" fontFamily="'IBM Plex Mono',monospace" className="svg-unit">/100</text>
-
-                  {/* Light glass orbital card */}
-                  <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#lightGlass)" stroke="rgba(43,98,227,0.22)" strokeWidth="1.2"/>
-                  <rect x="206" y="182" width="148" height="158" rx="18" fill="url(#glassShimmer)" pointerEvents="none"/>
-                  <line x1="226" y1="183.5" x2="334" y2="183.5" stroke="rgba(43,98,227,0.28)" strokeWidth="1.5"/>
-                  <circle cx="280" cy="261" r="64" fill="url(#coreGlow)" opacity="0.40"/>
-                  <circle cx="280" cy="261" r="56" fill="none" stroke="rgba(43,98,227,0.30)" strokeWidth="1" strokeDasharray="3 5">
-                    <animateTransform attributeName="transform" type="rotate" from="360 280 261" to="0 280 261" dur="30s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="280" cy="261" r="40" fill="none" stroke="rgba(43,98,227,0.22)" strokeWidth="1" strokeDasharray="2 4">
-                    <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="18s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="280" cy="261" r="24" fill="none" stroke="rgba(43,98,227,0.18)" strokeWidth="1" strokeDasharray="2 3">
-                    <animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="10s" repeatCount="indefinite"/>
-                  </circle>
-                  <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="14s" repeatCount="indefinite"/>
-                    <circle cx="336" cy="261" r="5" fill="#2b62e3" filter="url(#glow)" opacity="0.82"/>
-                    <circle cx="224" cy="261" r="3.5" fill="#5b8aee" opacity="0.68"/>
-                  </g>
-                  <g><animateTransform attributeName="transform" type="rotate" from="110 280 261" to="-250 280 261" dur="10s" repeatCount="indefinite"/>
-                    <circle cx="320" cy="261" r="4" fill="#2b62e3" filter="url(#glow)" opacity="0.78"/>
-                    <circle cx="240" cy="261" r="3" fill="#5b8aee" opacity="0.72"/>
-                  </g>
-                  <g><animateTransform attributeName="transform" type="rotate" from="55 280 261" to="415 280 261" dur="6s" repeatCount="indefinite"/>
-                    <circle cx="304" cy="261" r="2.5" fill="#5b8aee" filter="url(#glow)" opacity="0.72"/>
-                  </g>
-                  <g><animateTransform attributeName="transform" type="rotate" from="0 280 261" to="360 280 261" dur="3.5s" repeatCount="indefinite"/>
-                    <path d="M280,261 L336,261 A56,56 0 0,1 308,309.5 Z" fill="rgba(43,98,227,0.08)"/>
-                    <line x1="280" y1="261" x2="336" y2="261" stroke="rgba(43,98,227,0.55)" strokeWidth="1.4" strokeLinecap="round"/>
-                  </g>
-                  <circle cx="280" cy="261" r="14" fill="rgba(43,98,227,0.18)" stroke="rgba(43,98,227,0.40)" strokeWidth="1.5"/>
-                  <circle cx="280" cy="261" r="8" fill="#2b62e3">
-                    <animate attributeName="r" values="8;10;8" dur="2.8s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="1;0.74;1" dur="2.8s" repeatCount="indefinite"/>
-                  </circle>
-                  <text x="280" y="206" textAnchor="middle" fill="rgba(43,98,227,0.55)" fontSize="6.8" fontWeight="700" fontFamily="'IBM Plex Sans',sans-serif" letterSpacing=".13em">AI ENGINE · RVC CORE</text>
-                  <rect x="238" y="316" width="84" height="22" rx="7" fill="rgba(74,222,128,0.10)" stroke="rgba(74,222,128,0.25)" strokeWidth="1"/>
-                  <circle cx="251" cy="327" r="3" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
-                  <text x="259" y="331" fill="#4ade80" fontSize="8.2" fontWeight="700" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgLive')}</text>
-
-                  {/* R1: IPO就绪度 */}
-                  <rect x="462" y="30" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="462" y="30" width="194" height="3" rx="1.5" fill="rgba(43,98,227,0.55)"/>
-                  <line x1="480" y1="30" x2="638" y2="30" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(468,41)" fill="none" stroke="#2b62e3" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="0,11 4,7 7,9 13,2"/><polyline points="9,2 13,2 13,6"/>
-                  </g>
-                  <text x="486" y="54" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR1Title')}</text>
-                  <text x="468" y="67" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR1Base')}</text>
-                  <text x="468" y="89" fill="#2b62e3" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" style={{fontVariantNumeric:'tabular-nums'}} className="svg-num" id="n1" suppressHydrationWarning>91</text>
-                  <text x="507" y="87" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">{t('index.svgR1Unit')}</text>
-                  <rect x="504" y="74" width="42" height="14" rx="7" fill="rgba(74,222,128,0.12)"/>
-                  <text x="525" y="84" textAnchor="middle" fill="#4ade80" fontSize="7.5" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">▲ 53 pts</text>
-                  <line x1="468" y1="92" x2="647" y2="92" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="110" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR1Footer')}</text>
-                  <text x="652" y="110" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR1Delta')}</text>
-
-                  {/* R2: 并购估值倍数 */}
-                  <rect x="462" y="144" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="462" y="144" width="194" height="3" rx="1.5" fill="rgba(91,138,238,0.55)"/>
-                  <line x1="480" y1="144" x2="638" y2="144" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(468,155)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round">
-                    <path d="M0,4.5 C5,4.5 8,0 13,0"/><path d="M0,7.5 C5,7.5 8,12 13,12"/>
-                    <polyline points="10,0 13,0 13,3.5"/><polyline points="10,12 13,12 13,8.5"/>
-                  </g>
-                  <text x="486" y="168" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR2Title')}</text>
-                  <text x="468" y="180" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Base')}</text>
-                  <text x="468" y="202" fill="#5b8aee" fontSize="28" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" style={{fontVariantNumeric:'tabular-nums'}} className="svg-num" id="n2" suppressHydrationWarning>9.6</text>
-                  <text x="518" y="200" fill="#5b667d" fontSize="7.2" fontFamily="'IBM Plex Sans',sans-serif" className="svg-unit">× EV/EBITDA</text>
-                  <line x1="468" y1="207" x2="647" y2="207" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="225" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR2Footer')}</text>
-                  <text x="652" y="225" textAnchor="end" fill="#5b8aee" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR2Delta')}</text>
-
-                  {/* R3: 投资人转化率 */}
-                  <rect x="462" y="258" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(43,98,227,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="462" y="258" width="194" height="3" rx="1.5" fill="rgba(43,98,227,0.55)"/>
-                  <line x1="480" y1="258" x2="638" y2="258" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(468,269)" fill="none" stroke="#2b62e3" strokeWidth="1.35" strokeLinecap="round">
-                    <circle cx="4.5" cy="3.5" r="2.5"/><path d="M0,12 C0,9 9,9 9,12"/>
-                    <circle cx="10.5" cy="3" r="2" strokeWidth="1.3" opacity="0.65"/>
-                    <path d="M8,12 C8.5,10 14,10 14,12" strokeWidth="1.3" opacity="0.65"/>
-                  </g>
-                  <text x="486" y="282" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR3Title')}</text>
-                  <text x="468" y="306" fill="#2b62e3" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n3" suppressHydrationWarning>58</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
-                  <text x="468" y="320" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Desc')}</text>
-                  <line x1="468" y1="330" x2="647" y2="330" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="346" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR3Footer')}</text>
-                  <text x="652" y="346" textAnchor="end" fill="#2b62e3" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">{t('index.svgR3Delta')}</text>
-
-                  {/* R4: 企业估值提升 */}
-                  <rect x="462" y="372" width="194" height="98" rx="13" fill="#0f1219" stroke="rgba(91,138,238,0.20)" strokeWidth="1" filter="url(#cardShadow)"/>
-                  <rect x="462" y="372" width="194" height="3" rx="1.5" fill="rgba(91,138,238,0.55)"/>
-                  <line x1="480" y1="372" x2="638" y2="372" stroke="rgba(43,98,227,0.18)" strokeWidth="1"/>
-                  <g transform="translate(468,383)" fill="none" stroke="#5b8aee" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="7,0 14,5 7,13 0,5"/><line x1="0" y1="5" x2="14" y2="5"/>
-                  </g>
-                  <text x="486" y="396" fill="#e8edf5" fontSize="11.5" fontWeight="800" fontFamily="'IBM Plex Sans',sans-serif" className="svg-title">{t('index.svgR4Title')}</text>
-                  <text x="468" y="420" fill="#5b8aee" fontSize="29" fontWeight="800" fontFamily="'IBM Plex Mono',monospace" className="svg-num">+<tspan id="n4" suppressHydrationWarning>34</tspan><tspan dx="1" fontSize="11" className="svg-unit">%</tspan></text>
-                  <text x="468" y="432" fill="#5b667d" fontSize="7.8" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">$24.2M → $32.4M</text>
-                  <line x1="468" y1="440" x2="647" y2="440" stroke="rgba(139,149,171,0.10)" strokeWidth="1"/>
-                  <text x="468" y="457" fill="#5b667d" fontSize="8.2" fontFamily="'IBM Plex Sans',sans-serif">{t('index.svgR4Footer')}</text>
-                  <text x="652" y="457" textAnchor="end" fill="#5b8aee" fontSize="8.8" fontWeight="700" fontFamily="'IBM Plex Mono',monospace" className="svg-delta">+$8.2M</text>
-
-                  {/* Flow paths */}
-                  <path id="p1" d="M 140,82 C 178,82 208,220 216,250" fill="none" stroke="rgba(43,98,227,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p2" d="M 140,194 C 188,194 214,234 218,252" fill="none" stroke="rgba(91,138,238,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p3" d="M 140,306 C 188,306 214,278 218,268" fill="none" stroke="rgba(43,98,227,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p4" d="M 140,418 C 178,418 210,302 218,272" fill="none" stroke="rgba(91,138,238,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p5" d="M 342,250 C 390,202 420,79 462,79" fill="none" stroke="rgba(43,98,227,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p6" d="M 342,252 C 392,240 420,193 462,193" fill="none" stroke="rgba(91,138,238,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p7" d="M 342,268 C 392,298 420,307 462,307" fill="none" stroke="rgba(43,98,227,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-                  <path id="p8" d="M 342,272 C 390,372 420,421 462,421" fill="none" stroke="rgba(91,138,238,0.18)" strokeWidth="1.35" strokeDasharray="4 5"/>
-
-                  {/* Animated dots */}
-                  <circle r="4" fill="#2b62e3" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
-                  <circle r="4" fill="#5b8aee" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.8s"><mpath href="#p2"/></animateMotion></circle>
-                  <circle r="4" fill="#2b62e3" filter="url(#glow)" opacity=".82"><animateMotion dur="3.2s" repeatCount="indefinite" begin="1.4s"><mpath href="#p3"/></animateMotion></circle>
-                  <circle r="4" fill="#5b8aee" filter="url(#glow)" opacity=".80"><animateMotion dur="3.8s" repeatCount="indefinite" begin="0.4s"><mpath href="#p4"/></animateMotion></circle>
-                  <circle r="4" fill="#2b62e3" filter="url(#glow)" opacity=".86"><animateMotion dur="3s" repeatCount="indefinite" begin="1.5s"><mpath href="#p5"/></animateMotion></circle>
-                  <circle r="4" fill="#5b8aee" filter="url(#glow)" opacity=".82"><animateMotion dur="3.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#p6"/></animateMotion></circle>
-                  <circle r="4" fill="#2b62e3" filter="url(#glow)" opacity=".82"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0.9s"><mpath href="#p7"/></animateMotion></circle>
-                  <circle r="4" fill="#5b8aee" filter="url(#glow)" opacity=".80"><animateMotion dur="3.2s" repeatCount="indefinite" begin="2s"><mpath href="#p8"/></animateMotion></circle>
-                </svg>
+                <div className="eng-in-card">
+                  <div className="eng-in-bar eng-in-bar--hot"></div>
+                  <div className="eng-in-ico eng-ico--hot">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5b8aee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <div className="eng-in-body">
+                    <div className="eng-in-name">{t('index.svgI4Title')}</div>
+                    <div className="eng-in-sub">{t('index.svgI4Sub')}</div>
+                    <div className="eng-in-tag">{t('index.svgI4Data')}</div>
+                  </div>
+                </div>
               </div>
+
+              {/* ── Center: AI Engine Core ── */}
+              <div className="eng-core">
+                <div className="eng-core-eyebrow">AI ENGINE · RVC CORE</div>
+                <div className="eng-orb-wrap">
+                  <div className="eng-orb-ring eng-orb-ring--3"></div>
+                  <div className="eng-orb-ring eng-orb-ring--2"></div>
+                  <div className="eng-orb-ring eng-orb-ring--1"></div>
+                  <div className="eng-orb-nucleus">
+                    <div className="eng-orb-lbl">{t('index.svgScore')}</div>
+                    <div className="eng-orb-score">
+                      <span id="svgScore" suppressHydrationWarning>68</span>
+                      <span className="eng-orb-denom">/100</span>
+                    </div>
+                    <div className="eng-orb-pulse"></div>
+                  </div>
+                </div>
+                <div className="eng-live">
+                  <span className="eng-live-dot"></span>
+                  {t('index.svgLive')}
+                </div>
+                <div className="eng-dims">300+ {t('index.engineDims')}</div>
+              </div>
+
+              {/* ── Right: Diagnostic Outputs ── */}
+              <div className="eng-panel eng-panel--out">
+                <div className="eng-panel-lbl">{t('index.engineOutputs')}</div>
+
+                <div className="eng-out-card">
+                  <div className="eng-out-topbar"></div>
+                  <div className="eng-out-head">
+                    <span className="eng-out-title">{t('index.svgR1Title')}</span>
+                    <span className="eng-delta eng-delta--pos">▲ 53 pts</span>
+                  </div>
+                  <div className="eng-out-row">
+                    <span className="eng-out-val" id="n1" suppressHydrationWarning>91</span>
+                    <span className="eng-out-unit"> {t('index.svgR1Unit')}</span>
+                  </div>
+                  <div className="eng-out-base">{t('index.svgR1Base')}</div>
+                  <div className="eng-out-foot">{t('index.svgR1Footer')} · {t('index.svgR1Delta')}</div>
+                </div>
+
+                <div className="eng-out-card">
+                  <div className="eng-out-topbar eng-out-topbar--hot"></div>
+                  <div className="eng-out-head">
+                    <span className="eng-out-title">{t('index.svgR2Title')}</span>
+                    <span className="eng-delta">{t('index.svgR2Delta')}</span>
+                  </div>
+                  <div className="eng-out-row">
+                    <span className="eng-out-val eng-out-val--hot" id="n2" suppressHydrationWarning>9.6</span>
+                    <span className="eng-out-unit"> × EV/EBITDA</span>
+                  </div>
+                  <div className="eng-out-base">{t('index.svgR2Base')}</div>
+                  <div className="eng-out-foot">{t('index.svgR2Footer')} · {t('index.svgR2Delta')}</div>
+                </div>
+
+                <div className="eng-out-card">
+                  <div className="eng-out-topbar"></div>
+                  <div className="eng-out-head">
+                    <span className="eng-out-title">{t('index.svgR3Title')}</span>
+                    <span className="eng-delta eng-delta--pos">{t('index.svgR3Delta')}</span>
+                  </div>
+                  <div className="eng-out-row">
+                    <span className="eng-out-pfx">+</span>
+                    <span className="eng-out-val" id="n3" suppressHydrationWarning>58</span>
+                    <span className="eng-out-unit">%</span>
+                  </div>
+                  <div className="eng-out-base">{t('index.svgR3Desc')}</div>
+                  <div className="eng-out-foot">{t('index.svgR3Footer')}</div>
+                </div>
+
+                <div className="eng-out-card">
+                  <div className="eng-out-topbar eng-out-topbar--hot"></div>
+                  <div className="eng-out-head">
+                    <span className="eng-out-title">{t('index.svgR4Title')}</span>
+                    <span className="eng-delta eng-delta--pos">+$8.2M</span>
+                  </div>
+                  <div className="eng-out-row">
+                    <span className="eng-out-pfx eng-out-pfx--hot">+</span>
+                    <span className="eng-out-val eng-out-val--hot" id="n4" suppressHydrationWarning>34</span>
+                    <span className="eng-out-unit">%</span>
+                  </div>
+                  <div className="eng-out-base">$24.2M → $32.4M</div>
+                  <div className="eng-out-foot">{t('index.svgR4Footer')}</div>
+                </div>
+              </div>
+
             </div>
-        </div>
-      </section>
+          </div>
+        </section>
+
 
       <section className="process">
         <div className="wrap">
@@ -468,10 +407,13 @@ export default function Index() {
 
       <section className="services light-theme">
         <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="sec-ey">{t('index.svcEy')}</div>
-            <h2 className="sec-ttl">{t('index.svcTitle')}</h2>
-            <p className="sec-sub">{t('index.svcSub')}</p>
+          <div className="chapter-head">
+            <span className="chapter-num" aria-hidden>03</span>
+            <div className="chapter-head-body">
+              <span className="chapter-kicker">// chapter 03 // capabilities</span>
+              <h2 className="chapter-title">{t('index.svcTitle')}<br /><span className="chapter-accent">{t('index.svcTitleAccent')}</span></h2>
+              <p className="chapter-lead">{t('index.svcSub')}</p>
+            </div>
           </div>
           <div className="bento">
             <div className="b-card wide accent reveal">
@@ -529,9 +471,9 @@ export default function Index() {
       <section className="kpi-strip">
         <div className="wrap">
           <div className="chapter-head">
-            <span className="chapter-num" aria-hidden>03</span>
+            <span className="chapter-num" aria-hidden>04</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 03 // proof</span>
+              <span className="chapter-kicker">// chapter 04 // proof</span>
               <h2 className="chapter-title">{t('index.kpiTitle')}<br /><span className="chapter-accent">{t('index.kpiTitleAccent')}</span></h2>
               <p className="chapter-lead">{t('index.kpiLead')}</p>
             </div>
