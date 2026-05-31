@@ -35,6 +35,10 @@
 
   --r:2px;
   --sh:0 1px 2px rgba(0,0,0,.35),0 18px 40px -24px rgba(0,0,0,.6);
+
+  /* Surface-adaptive tokens (override in light theme) */
+  --header-bg:rgba(8,9,12,0.88);
+  --mob-bg:rgba(8,9,12,0.92);
 }
 
 /* ── Reset ── */
@@ -78,7 +82,7 @@ svg{display:block;}
 
 /* ── Header ── */
 header{position:sticky;top:0;z-index:200;height:76px;
-  background:rgba(8,9,12,0.88);
+  background:var(--header-bg);
   border-bottom:1px solid var(--line);
   display:flex;align-items:center;}
 .hrow{display:flex;align-items:center;width:100%;}
@@ -95,8 +99,8 @@ header{position:sticky;top:0;z-index:200;height:76px;
 nav{display:flex;align-items:center;gap:2px;flex:1;}
 nav a{position:relative;font-size:13.5px;font-weight:500;color:var(--t2);
   padding:6px 14px;transition:color .18s;white-space:nowrap;}
-nav a:hover{color:#e8edf5;}
-nav a.active{color:#e8edf5;}
+nav a:hover{color:var(--t1);}
+nav a.active{color:var(--t1);}
 nav a.active::before{content:'';position:absolute;left:4px;top:50%;
   width:4px;height:4px;margin-top:-2px;background:var(--accent);
   box-shadow:0 0 8px var(--accent-glow-soft);}
@@ -126,7 +130,7 @@ button:focus-visible{
 .mob-nav{
   display:none;
   position:fixed;top:76px;left:0;right:0;
-  background:rgba(8,9,12,0.92);
+  background:var(--mob-bg);
   border-bottom:1px solid var(--line);
   padding:16px 24px 20px;
   flex-direction:column;gap:4px;z-index:199;
@@ -137,18 +141,18 @@ button:focus-visible{
   padding:10px 14px;border-radius:10px;
   transition:color .18s,background .18s,border-color .18s,box-shadow .18s,transform .18s;
 }
-.mob-nav a:hover{color:#e8edf5;background:var(--bg-elev-2);}
+.mob-nav a:hover{color:var(--t1);background:var(--bg-elev-2);}
 
 .hdr-acts{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .btn-ghost{font-size:13.5px;font-weight:500;color:var(--t2);padding:7px 15px;
   border-radius:9px;border:none;background:transparent;transition:all .18s;}
-.btn-ghost:hover{background:var(--bg-elev-2);color:#e8edf5;}
+.btn-ghost:hover{background:var(--bg-elev-2);color:var(--t1);}
 
 .btn-primary{font-size:13.5px;font-weight:600;color:var(--accent);
   padding:8px 20px;border-radius:2px;border:1px solid var(--accent-border);
   background:transparent;position:relative;letter-spacing:.02em;
   transition:background .35s ease,letter-spacing .35s ease,color .35s ease;}
-.btn-primary:hover{background:var(--accent-soft);letter-spacing:.06em;color:#e8edf5;}
+.btn-primary:hover{background:var(--accent-soft);letter-spacing:.06em;color:var(--t1);}
 
 /* ── Cards ── */
 .card{background:var(--bg-elev);border:1px solid var(--line);border-radius:2px;
@@ -164,17 +168,17 @@ button:focus-visible{
   color:var(--accent);padding:13px 28px;border-radius:2px;
   border:1px solid var(--accent-border);background:transparent;letter-spacing:.02em;
   transition:background .35s ease,letter-spacing .35s ease,color .35s ease;}
-.btn-blue:hover{background:var(--accent-soft);letter-spacing:.06em;color:#e8edf5;}
+.btn-blue:hover{background:var(--accent-soft);letter-spacing:.06em;color:var(--t1);}
 
 .btn-outline{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;
   color:var(--t2);padding:13px 26px;border-radius:2px;
   border:1px solid var(--line);background:transparent;
   transition:background .28s ease,color .28s ease,border-color .28s ease;}
-.btn-outline:hover{background:var(--bg-elev-2);color:#e8edf5;border-color:var(--accent-border);}
+.btn-outline:hover{background:var(--bg-elev-2);color:var(--t1);border-color:var(--accent-border);}
 
 .btn-sm{font-size:13px;font-weight:600;color:var(--accent);padding:7px 16px;border-radius:2px;
   border:1px solid var(--accent-border);background:transparent;transition:background .18s,color .18s;}
-.btn-sm:hover{background:var(--accent-soft);color:#e8edf5;}
+.btn-sm:hover{background:var(--accent-soft);color:var(--t1);}
 
 /* ── Tags & Badges ── */
 .tag{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);
@@ -218,8 +222,8 @@ button:focus-visible{
 .sb-link{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:2px;
   font-size:13px;font-weight:500;color:var(--t2);transition:color .18s,background .18s;
   border:none;background:none;width:100%;text-align:left;position:relative;}
-.sb-link:hover{color:#e8edf5;background:var(--bg-elev-2);}
-.sb-link.active{color:#e8edf5;background:var(--bg-elev-2);font-weight:600;}
+.sb-link:hover{color:var(--t1);background:var(--bg-elev-2);}
+.sb-link.active{color:var(--t1);background:var(--bg-elev-2);font-weight:600;}
 .sb-link.active::before{content:'';position:absolute;left:0;top:50%;width:2px;height:60%;
   transform:translateY(-50%);background:var(--accent);}
 .sb-link svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
@@ -228,7 +232,7 @@ button:focus-visible{
 .kpi-val{
   font-family:var(--font-mono);
   font-size:44px;font-weight:600;letter-spacing:-.04em;line-height:1;
-  color:#e8edf5;background:none;-webkit-text-fill-color:currentColor;
+  color:var(--t1);background:none;-webkit-text-fill-color:currentColor;
 }
 .kpi-lbl{font-size:13px;color:var(--t2);font-weight:500;margin-top:5px;}
 .kpi-sub{font-size:11px;color:var(--t4);margin-top:2px;}
@@ -268,7 +272,7 @@ button:focus-visible{
     overflow-x:auto;
     overscroll-behavior-x:contain;
     padding:10px 20px 12px;
-    background:rgba(8,9,12,0.92);
+    background:var(--mob-bg);
     border-bottom:1px solid var(--line);
     box-shadow:0 12px 30px rgba(0,0,0,0.25);
     scrollbar-width:none;
@@ -289,11 +293,11 @@ button:focus-visible{
     white-space:nowrap;
   }
   .mob-nav a:hover{
-    color:#e8edf5;
+    color:var(--t1);
     background:var(--bg-elev-2);
   }
   .mob-nav a.active{
-    color:#e8edf5;
+    color:var(--t1);
     border-color:var(--accent-border);
     background:var(--bg-elev-2);
     box-shadow:none;
@@ -309,4 +313,31 @@ button:focus-visible{
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1 !important;transform:none !important;}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+
+/* ── Light theme (inner pages) ── */
+html[data-theme="light"]{
+  /* Surface ladder */
+  --bg:#f5f7fc;
+  --bg-elev:#ffffff;
+  --bg-elev-2:#edf0f7;
+  --card:#ffffff;
+  --line:#d4d9e8;
+  --line-soft:#e8eaef;
+  --bl:rgba(43,98,227,0.09);
+  --bm:rgba(43,98,227,0.18);
+
+  /* Text — dark-on-light */
+  --navy:#1a2035;
+  --t1:#1a2035;
+  --t2:#4a5568;
+  --t3:#8b95ab;
+  --t4:#b0b8cc;
+
+  /* Shadows — lighter */
+  --sh:0 1px 3px rgba(0,0,0,.06),0 18px 40px -24px rgba(0,0,0,.10);
+
+  /* Header/nav backgrounds */
+  --header-bg:rgba(245,247,252,0.94);
+  --mob-bg:rgba(245,247,252,0.97);
 }

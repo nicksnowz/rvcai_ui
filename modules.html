@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,8 +37,8 @@
   font-size:12.5px;font-weight:600;cursor:pointer;
   transition:all .18s;color:var(--t2);background:transparent;
 }
-.filter-btn:hover{background:var(--bg-elev-2);color:#e8edf5;border-color:var(--accent-border);}
-.filter-btn.active{background:var(--bg-elev-2);color:#e8edf5;border:1px solid var(--accent-border);box-shadow:none;}
+.filter-btn:hover{background:var(--bg-elev-2);color:var(--t1);border-color:var(--accent-border);}
+.filter-btn.active{background:var(--bg-elev-2);color:var(--t1);border:1px solid var(--accent-border);box-shadow:none;}
 .filter-sep{width:1px;height:20px;background:var(--line);}
 .filter-search{
   display:flex;align-items:center;gap:8px;
@@ -154,7 +154,7 @@
   background:transparent;border:1px solid var(--accent-border);
   transition:all .18s;
 }
-.mod-launch:hover{background:var(--accent-soft);color:#e8edf5;border-color:var(--accent-border);}
+.mod-launch:hover{background:var(--accent-soft);color:var(--t1);border-color:var(--accent-border);}
 
 /* Module detail panel (slide-in) */
 .mod-detail{
@@ -183,9 +183,9 @@
   cursor:pointer;background:none;border:none;margin-bottom:12px;
   transition:color .18s;
 }
-.mdh-close:hover{color:#e8edf5;}
+.mdh-close:hover{color:var(--t1);}
 .mdh-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
-.mdh-title{font-size:20px;font-weight:800;color:#e8edf5;letter-spacing:-.02em;}
+.mdh-title{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.02em;}
 .mdh-sub{font-family:var(--font-mono);font-size:13px;color:var(--t2);margin-top:4px;}
 
 .mod-detail-body{padding:24px;}
