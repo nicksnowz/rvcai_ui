@@ -50,6 +50,15 @@
     "svgR3Delta": "3.2× 提速",
     "svgR4Title": "企业估值提升",
     "svgR4Footer": "EBITDA 增量",
+    "engineTitle": "一个引擎，",
+    "engineTitleAccent": "洞察每一个价值信号",
+    "engineLead": "多模型诊断内核实时扫描战略、财务、运营、治理四大板块的 300+ 价值维度。",
+    "procTitle": "从数据到资本路径，",
+    "procTitleAccent": "四个阶段",
+    "procLead": "统一标准、统一节奏、统一结果——从全维度数据采集到资本路径执行。",
+    "kpiTitle": "规模化验证，",
+    "kpiTitleAccent": "以结果衡量",
+    "kpiLead": "RVC 网络已服务的企业、覆盖行业与累计释放的价值。",
     "proc": [
       {
         "num": "01 — 数据采集",
@@ -127,7 +136,10 @@
     "svgI4Sub": "治理与合规",
     "svgI4Data": "合规 · 风控 · 信息披露",
     "svgR1Delta": "−6.2 月",
-    "svgR2Delta": "−38天 / −40%"
+    "svgR2Delta": "−38天 / −40%",
+    "engineInputs": "分析输入",
+    "engineOutputs": "诊断输出",
+    "engineDims": "个维度扫描"
   },
   "intake": {
     "eyebrow": "企业数据采集控制台",

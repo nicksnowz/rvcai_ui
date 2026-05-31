@@ -215,6 +215,14 @@ export default function Index() {
 
       <section className="engine-section">
         <div className="wrap">
+          <div className="chapter-head">
+            <span className="chapter-num" aria-hidden>01</span>
+            <div className="chapter-head-body">
+              <span className="chapter-kicker">// chapter 01 // engine</span>
+              <h2 className="chapter-title">{t('index.engineTitle')}<br /><span className="chapter-accent">{t('index.engineTitleAccent')}</span></h2>
+              <p className="chapter-lead">{t('index.engineLead')}</p>
+            </div>
+          </div>
             <div className="engine-wrap">
               <div className="engine-card">
                 <svg viewBox="0 0 670 520" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -433,6 +441,14 @@ export default function Index() {
 
       <section className="process">
         <div className="wrap">
+          <div className="chapter-head">
+            <span className="chapter-num" aria-hidden>02</span>
+            <div className="chapter-head-body">
+              <span className="chapter-kicker">// chapter 02 // flow</span>
+              <h2 className="chapter-title">{t('index.procTitle')}<br /><span className="chapter-accent">{t('index.procTitleAccent')}</span></h2>
+              <p className="chapter-lead">{t('index.procLead')}</p>
+            </div>
+          </div>
           <div ref={procWrapRef} className="proc-ladder-wrap">
             <ol ref={procLadderRef} className="proc-ladder">
               {(t('index.proc', { returnObjects: true })).map((p, i) => (
@@ -450,7 +466,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="services">
+      <section className="services light-theme">
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="sec-ey">{t('index.svcEy')}</div>
@@ -512,6 +528,14 @@ export default function Index() {
 
       <section className="kpi-strip">
         <div className="wrap">
+          <div className="chapter-head">
+            <span className="chapter-num" aria-hidden>03</span>
+            <div className="chapter-head-body">
+              <span className="chapter-kicker">// chapter 03 // proof</span>
+              <h2 className="chapter-title">{t('index.kpiTitle')}<br /><span className="chapter-accent">{t('index.kpiTitleAccent')}</span></h2>
+              <p className="chapter-lead">{t('index.kpiLead')}</p>
+            </div>
+          </div>
           <div className="kpi-grid">
             <div className="kpi-item reveal">
               <div className="kpi-val" data-count="2486" data-suffix="+">0</div>

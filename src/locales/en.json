@@ -50,6 +50,15 @@
     "svgR3Delta": "3.2× Faster",
     "svgR4Title": "Valuation Uplift",
     "svgR4Footer": "EBITDA Increment",
+    "engineTitle": "One engine,",
+    "engineTitleAccent": "every value signal",
+    "engineLead": "A multi-model diagnostic core scans 300+ value dimensions across strategy, finance, operations, and governance — in real time.",
+    "procTitle": "From data to capital path,",
+    "procTitleAccent": "in four stages",
+    "procLead": "One standard, one tempo, one outcome — from full-spectrum intake to capital-path execution.",
+    "kpiTitle": "Proven at scale,",
+    "kpiTitleAccent": "measured by outcomes",
+    "kpiLead": "Enterprises served, industries covered, and value unlocked across the RVC network.",
     "proc": [
       {
         "num": "01 — Data Collection",
@@ -73,7 +82,8 @@
       }
     ],
     "svcEy": "Core Capability Framework",
-    "svcTitle": "Six Pillars of Enterprise Value",
+    "svcTitle": "Enterprise value,",
+    "svcTitleAccent": "in six pillars",
     "svcSub": "Comprehensive diagnostic coverage, precisely identifying every key variable that drives institutional-grade value realization.",
     "svcs": [
       {
@@ -127,7 +137,10 @@
     "svgI4Sub": "Governance & Compliance",
     "svgI4Data": "Compliance · Risk · Disclosure",
     "svgR1Delta": "−6.2 Months",
-    "svgR2Delta": "−38 Days / −40%"
+    "svgR2Delta": "−38 Days / −40%",
+    "engineInputs": "Analysis Inputs",
+    "engineOutputs": "Diagnostic Outputs",
+    "engineDims": "Dimensions Scanned"
   },
   "intake": {
     "eyebrow": "Enterprise Data Intake Console",
