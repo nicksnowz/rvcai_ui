@@ -6,7 +6,7 @@
     "modules": "执行模块",
     "ipo": "IPO就绪",
     "login": "登录",
-    "startDiagnosis": "开始诊断 →",
+    "startDiagnosis": "开始诊断",
     "logoSub": "企业价值诊断平台"
   },
   "langToggle": "EN",
@@ -21,7 +21,7 @@
     "heroWords": [
       "真实价值"
     ],
-    "heroParagraph": "AI 驱动的企业资本化生命周期操作系统 —— 智能诊断引擎系统扫描300+价值维度，覆盖战略、财务、运营与治理等，加速企业升级与价值增长。",
+    "heroParagraph": "AI 资本智能扫描 300+ 价值信号，加速企业增长。",
     "heroBtn": "立即开始诊断",
     "heroBtn2": "查看示例报告 →",
     "footerTagline": "专为机构级资本智能而生",
@@ -53,6 +53,30 @@
     "kpiTitle": "规模化验证，",
     "kpiTitleAccent": "以结果衡量",
     "kpiLead": "RVC 网络已服务的企业、覆盖行业与累计释放的价值。",
+    "csKicker": "// 第 04 章 // 来自客户",
+    "csStories": [
+      {
+        "quote": "资本市场的演进速度前所未有，AI 级诊断已成为同步的必需。RVC 重塑了我们筹备上市的方式——以精度穿越复杂、捕捉真正的价值驱动因素，让我们把精力放在执行而非揣测之上。",
+        "name": "Dr. Claudia Junker",
+        "role": "首席战略官",
+        "company": "Pacific Rim Industrial Group",
+        "image": "/cstory-portrait.png"
+      },
+      {
+        "quote": "我们原本只想要一份估值报告，最终却拿到了一份 180 天的执行地图和一份真正懂我们行业的顾问短名单。诊断还揭示出审计多年未曾发现的两处治理缺口。",
+        "name": "Marcus Tanaka",
+        "role": "首席财务官",
+        "company": "Helix Bio Manufacturing",
+        "image": "/cstory-portrait-2.png"
+      },
+      {
+        "quote": "RVC 的对标分析让董事会有信心把上市窗口整整提前一个季度。股权故事中的每一个论点，都有可以在质疑者面前站得住脚的数据支撑。",
+        "name": "Isabela Moreira",
+        "role": "创始人兼首席执行官",
+        "company": "Atlas Renewable Holdings",
+        "image": "/cstory-portrait-3.png"
+      }
+    ],
     "proc": [
       {
         "num": "01 — 数据采集",

@@ -12,3 +12,4 @@ demo-video/
 *.docx
 *.pdf
 image*
+public/cstory-gen/
