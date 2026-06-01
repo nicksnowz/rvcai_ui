@@ -10,6 +10,29 @@
   --font-mono:'IBM Plex Mono','Noto Sans Mono','SF Mono','Roboto Mono',ui-monospace,monospace;
   --font-hero:'Spectral','Noto Sans SC','PingFang SC','Microsoft YaHei',ui-serif,Georgia,serif;
 
+  /* Type scale */
+  --text-2xs:8px;
+  --text-xs:10px;
+  --text-sm:11px;
+  --text-base:12px;
+  --text-md:13px;
+  --text-lg:14px;
+  --text-xl:16px;
+  --text-2xl:20px;
+  --text-3xl:24px;
+  --text-4xl:32px;
+  --text-5xl:44px;
+  --text-6xl:64px;
+  --text-fluid-xs:clamp(22px,2.4vw,32px);
+  --text-fluid-sm:clamp(26px,3vw,42px);
+  --text-fluid-sm-alt:clamp(26px,3.2vw,42px);
+  --text-fluid-md:clamp(34px,4.4vw,56px);
+  --text-fluid-md-alt:clamp(34px,4.8vw,60px);
+  --text-fluid-lg:clamp(68px,20vw,110px);
+  --text-fluid-xl:clamp(96px,16vw,180px);
+  --text-fluid-2xl:clamp(160px,12vw,210px);
+  --text-fluid-3xl:clamp(190px,13vw,240px);
+
   /* One accent + documented alphas (names kept so inline var() usage flips automatically) */
   --blue:#2b62e3; --accent:#2b62e3;
   --blue-d:#1a4bc7; --accent-deep:#1a4bc7;
