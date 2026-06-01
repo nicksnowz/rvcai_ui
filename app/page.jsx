@@ -166,7 +166,7 @@ export default function Index() {
             <div>
               <h1 className="hero-h">
                 {t('index.heroPrefixLine1')}<br/>
-                <span className="hero-nowrap">{t('index.heroPrefixLine2')}{' '}<span ref={wordRef} className="accent"></span><span className="type-cursor">|</span></span>
+                <span className="hero-nowrap"><span className="hero-line">{t('index.heroPrefixLine2')}</span>{' '}<span ref={wordRef} className="accent"></span><span className="type-cursor">|</span></span>
               </h1>
               <p className="hero-p">{t('index.heroParagraph')}</p>
               <div className="hero-btns">

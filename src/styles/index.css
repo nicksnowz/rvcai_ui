@@ -726,7 +726,9 @@ section.services.light-theme{min-height:0;}
   .hero{padding:40px 0;height:calc(100vh - 68px);}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:30px;}
   .hero-grid>*{min-width:0;}
-  .hero-h{font-size: var(--text-5xl);line-height:1.1;min-height:3.3em;margin-bottom:18px;}
+  .hero-h{font-size:clamp(32px,11vw,44px);line-height:1.1;min-height:3.3em;margin-bottom:18px;}
+  .hero-h .hero-nowrap{white-space:normal;}
+  .hero-h .hero-line,.hero-h .accent{white-space:nowrap;}
   .hero-p{font-size: var(--text-xl);line-height:1.7;margin-bottom:24px;}
   .hero-trust{margin-top:24px;gap:12px;}
   .engine-section{padding:48px 0;}
