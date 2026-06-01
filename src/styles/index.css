@@ -61,7 +61,7 @@
 }
 .hp-track{
   display:flex;align-items:center;width:max-content;will-change:transform;
-  animation:mq-left 52s linear infinite;
+  animation:mq-left 86s linear infinite;
 }
 .hp-brand{
   display:flex;align-items:center;flex-shrink:0;
@@ -634,20 +634,20 @@ section.services.light-theme{min-height:0;}
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
 }
-.kpi-strip .wrap{
-  width:100%;
-  max-width:none;
-  padding:0 clamp(32px,5vw,72px);
-}
 .kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);}
-.kpi-grid + .sw-row-label{margin-top:44px;}
+.kpi-strip section.cstory + .sw-row-label{margin-top:44px;}
+.kpi-strip .sw-row-label,
+.kpi-strip .marquee-wrap{
+  width:calc(100vw - clamp(64px,10vw,144px));
+  margin-left:50%;
+  transform:translateX(-50%);
+}
 .kpi-strip .marquee-wrap::before{background:linear-gradient(90deg,var(--bg-elev) 10%,transparent);}
 .kpi-strip .marquee-wrap::after{background:linear-gradient(270deg,var(--bg-elev) 10%,transparent);}
 .kpi-strip section.cstory{
-  margin-top:56px;
-  padding:64px 0 0;
+  margin:72px 0 64px;
+  padding:0;
   background:transparent;
-  border-top:1px solid var(--line);
 }
 .kpi-strip section.cstory .wrap{
   max-width:1360px;
@@ -687,8 +687,8 @@ section.services.light-theme{min-height:0;}
 .marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--bg) 10%,transparent);}
 .marquee-wrap::after{right:0;background:linear-gradient(270deg,var(--bg) 10%,transparent);}
 .marquee-track{display:flex;gap:24px;width:max-content;will-change:transform;}
-.marquee-track.go-left{animation:mq-left 42s linear infinite;}
-.marquee-track.go-right{animation:mq-right 54s linear infinite;}
+.marquee-track.go-left{animation:mq-left 76s linear infinite;}
+.marquee-track.go-right{animation:mq-right 88s linear infinite;}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
 @keyframes mq-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes mq-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
@@ -1357,7 +1357,7 @@ section.cstory{
   max-width:560px;
   overflow:hidden;
   background:var(--bg-elev-2);
-  border-radius:2px;
+  border-radius:6px;
   position:relative;
 }
 .cstory-portrait img{

@@ -266,7 +266,6 @@ export default function Index() {
           <div className="chapter-head">
             <span className="chapter-num" aria-hidden>01</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 01 // flow</span>
               <h2 className="chapter-title">{t('index.procTitle')}<br /><span className="chapter-accent">{t('index.procTitleAccent')}</span></h2>
               <p className="chapter-lead">{t('index.procLead')}</p>
             </div>
@@ -292,14 +291,12 @@ export default function Index() {
           <div className="chapter-head">
             <span className="chapter-num" aria-hidden>02</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 02 // capabilities</span>
               <h2 className="chapter-title">{t('index.svcTitle')}<br /><span className="chapter-accent">{t('index.svcTitleAccent')}</span></h2>
             </div>
           </div>
           <div className="bento">
             <div className="b-card wide accent reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">01</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
               <div className="svc-title">{t('index.svcs.0.title')}</div>
               <div className="svc-desc">{t('index.svcs.0.desc')}</div>
@@ -307,7 +304,6 @@ export default function Index() {
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">02</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
               <div className="svc-title">{t('index.svcs.1.title')}</div>
               <div className="svc-desc">{t('index.svcs.1.desc')}</div>
@@ -315,7 +311,6 @@ export default function Index() {
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">03</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
               <div className="svc-title">{t('index.svcs.2.title')}</div>
               <div className="svc-desc">{t('index.svcs.2.desc')}</div>
@@ -323,7 +318,6 @@ export default function Index() {
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">04</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
               <div className="svc-title">{t('index.svcs.3.title')}</div>
               <div className="svc-desc">{t('index.svcs.3.desc')}</div>
@@ -331,7 +325,6 @@ export default function Index() {
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">05</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
               <div className="svc-title">{t('index.svcs.4.title')}</div>
               <div className="svc-desc">{t('index.svcs.4.desc')}</div>
@@ -339,7 +332,6 @@ export default function Index() {
             </div>
             <div className="b-card reveal">
               <div className="b-card-glow"></div>
-              <div className="svc-num">06</div>
               <div className="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
               <div className="svc-title">{t('index.svcs.5.title')}</div>
               <div className="svc-desc">{t('index.svcs.5.desc')}</div>
@@ -354,7 +346,6 @@ export default function Index() {
           <div className="chapter-head">
             <span className="chapter-num" aria-hidden>03</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 03 // proof</span>
               <h2 className="chapter-title">{t('index.kpiTitle')}<br /><span className="chapter-accent">{t('index.kpiTitleAccent')}</span></h2>
               <p className="chapter-lead">{t('index.kpiLead')}</p>
             </div>
@@ -381,6 +372,8 @@ export default function Index() {
               <div className="kpi-lbl">{t('index.kpiLbls.4')}</div>
             </div>
           </div>
+
+          <CustomerStoryCarousel />
 
           {/* Row 1: IPO 成功上市 */}
           <div className="sw-row-label">{t('index.rowIpo')}</div>
@@ -539,7 +532,6 @@ export default function Index() {
           </div>
         </div>
 
-          <CustomerStoryCarousel />
         </div>
       </section>
 

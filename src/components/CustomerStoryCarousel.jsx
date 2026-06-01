@@ -27,6 +27,7 @@ export default function CustomerStoryCarousel() {
     const tick = (now) => {
       if (cancelled) return;
       if (paused) {
+        startRef.current = now - elapsedRef.current;
         rafRef.current = requestAnimationFrame(tick);
         return;
       }
@@ -68,7 +69,7 @@ export default function CustomerStoryCarousel() {
               <div className="cstory-slide" data-state={state} key={i} aria-hidden={state !== 'active'}>
                 <div className="cstory-grid">
                   <figure className="cstory-portrait">
-                    <img src={s.image} alt="" />
+                    <img src={s.image} alt="" draggable={false} />
                   </figure>
                   <div className="cstory-body">
                     <span className="cstory-kicker">{t('index.csKicker')}</span>
