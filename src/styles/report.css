@@ -64,8 +64,8 @@
 .report-content{display:flex;flex-direction:column;gap:18px;}
 .sec-card{background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
 .sec-card-head{padding:16px 22px;border-bottom:1px solid var(--bl);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
-.sch-title{font-size: var(--text-lg);font-weight:700;color:var(--t1);letter-spacing:-.02em;}
-.sch-sub{font-size: var(--text-sm);color:var(--t3);margin-top:2px;}
+.sch-title{font-size: var(--text-xl);font-weight:700;color:var(--t1);letter-spacing:-.02em;}
+.sch-sub{font-size: var(--text-base);color:var(--t3);margin-top:2px;}
 .sec-card-body{padding:20px;}
 
 /* Score boxes */
