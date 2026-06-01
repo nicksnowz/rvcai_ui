@@ -292,6 +292,7 @@ export default function Index() {
             <span className="chapter-num" aria-hidden>02</span>
             <div className="chapter-head-body">
               <h2 className="chapter-title">{t('index.svcTitle')}<br /><span className="chapter-accent">{t('index.svcTitleAccent')}</span></h2>
+              <p className="chapter-lead">{t('index.svcSub')}</p>
             </div>
           </div>
           <div className="bento">
