@@ -196,13 +196,13 @@ button:focus-visible{
 .card-inner-glow{display:none;}
 
 /* ── Buttons ── */
-.btn-blue{display:inline-flex;align-items:center;gap:7px;font-size: var(--text-lg);font-weight:600;
+.btn-blue{display:inline-flex;align-items:center;gap:7px;font-size: var(--text-md);font-weight:600;
   color:#e8edf5;padding:13px 28px;border-radius:2px;
   border:1px solid rgba(232,237,245,0.28);background:transparent;letter-spacing:.02em;
   transition:background .35s ease,letter-spacing .35s ease,border-color .18s;}
 .btn-blue:hover{background:rgba(232,237,245,0.07);border-color:rgba(232,237,245,0.55);letter-spacing:.06em;}
 
-.btn-outline{display:inline-flex;align-items:center;gap:7px;font-size: var(--text-lg);font-weight:500;
+.btn-outline{display:inline-flex;align-items:center;gap:7px;font-size: var(--text-md);font-weight:500;
   color:var(--t2);padding:13px 26px;border-radius:2px;
   border:1px solid var(--line);background:transparent;
   transition:background .28s ease,color .28s ease,border-color .28s ease;}
@@ -223,7 +223,7 @@ button:focus-visible{
 
 /* ── Section headers ── */
 .sec-head{margin-bottom:32px;}
-.sec-ey{font-family:var(--font-mono);font-size: var(--text-sm);font-weight:600;letter-spacing:.18em;
+.sec-ey{font-family:var(--font-mono);font-size: var(--text-xs);font-weight:600;letter-spacing:.18em;
   text-transform:uppercase;color:var(--accent-hot);margin-bottom:7px;}
 .sec-ttl{font-size: var(--text-4xl);font-weight:600;color:var(--t1);letter-spacing:-.02em;line-height:1.18;}
 .sec-sub{font-size: var(--text-xl);color:var(--t2);margin-top:8px;line-height:1.65;}
@@ -266,7 +266,7 @@ button:focus-visible{
   font-size: var(--text-5xl);font-weight:600;letter-spacing:-.04em;line-height:1;
   color:#e8edf5;background:none;-webkit-text-fill-color:currentColor;
 }
-.kpi-lbl{font-size: var(--text-md);color:var(--t2);font-weight:500;margin-top:5px;}
+.kpi-lbl{font-size: var(--text-sm);color:var(--t2);font-weight:500;margin-top:5px;}
 .kpi-sub{font-size: var(--text-sm);color:var(--t4);margin-top:2px;}
 
 /* ── Footer ── */
@@ -274,8 +274,8 @@ button:focus-visible{
   padding:28px 0;border-top:1px solid var(--line);display:flex;align-items:center;
   justify-content:space-between;flex-wrap:wrap;gap:12px;
 }
-.footer-l{font-size: var(--text-md);font-weight:500;color:var(--t3);}
-.footer-r{font-size: var(--text-base);color:var(--t4);}
+.footer-l{font-size: var(--text-sm);font-weight:500;color:var(--t3);}
+.footer-r{font-size: var(--text-sm);color:var(--t4);}
 
 /* ══════════════════════════════════════════════
    MOBILE — ≤768px
