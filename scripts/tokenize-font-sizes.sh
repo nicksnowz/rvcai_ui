@@ -2,8 +2,10 @@
 # Usage: ./scripts/tokenize-font-sizes.sh <path/to/file.css>
 # Replaces all mappable raw pixel font-size values with CSS custom property var() calls.
 # Edge cases (1-5px, 600px, 680px, .em values) are intentionally skipped.
+set -e
 FILE="$1"
 [[ -z "$FILE" ]] && { echo "Usage: $0 <file.css>"; exit 1; }
+[[ ! -f "$FILE" ]] && { echo "Error: file not found: $FILE"; exit 1; }
 
 perl -pi -e '
   # ── Interface tier ──────────────────────────────────
