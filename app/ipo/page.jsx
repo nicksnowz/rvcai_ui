@@ -247,6 +247,7 @@ export default function Ipo() {
                   </div>
                 </div>
                 <div className="sec-card-body" style={{ padding: 0 }}>
+                  <div className="table-scroll">
                   <table className="ck-table">
                     <thead>
                       <tr>
@@ -284,6 +285,7 @@ export default function Ipo() {
                       })}
                     </tbody>
                   </table>
+                  </div>
                 </div>
               </div>
 

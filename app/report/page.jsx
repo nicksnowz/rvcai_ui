@@ -295,6 +295,7 @@ export default function Report() {
                   <span className="tag tag-green">{t('report.opportunitiesCount')}</span>
                 </div>
                 <div className="sec-card-body" style={{ padding: 0 }}>
+                  <div className="table-scroll">
                   <table className="opp-table">
                     <thead>
                       <tr>
@@ -315,6 +316,7 @@ export default function Report() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </div>
               </div>
 
@@ -328,6 +330,7 @@ export default function Report() {
                   <span className="tag tag-orange">{t('report.risksCount')}</span>
                 </div>
                 <div className="sec-card-body" style={{ padding: 0 }}>
+                  <div className="table-scroll">
                   <table className="opp-table">
                     <thead>
                       <tr>
@@ -346,6 +349,7 @@ export default function Report() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </div>
               </div>
 

@@ -195,3 +195,6 @@
   .filter-bar{gap:4px;}
   .filter-btn{padding:7px 12px;font-size: var(--text-base);}
 }
+@media(max-width:480px){
+  .stats-strip{grid-template-columns:1fr;}
+}

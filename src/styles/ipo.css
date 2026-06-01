@@ -93,7 +93,7 @@
 .isb-dl-date{font-weight:600;color:var(--t1);}
 
 /* Content area */
-.ipo-content{display:flex;flex-direction:column;gap:20px;}
+.ipo-content{display:flex;flex-direction:column;gap:20px;min-width:0;}
 
 /* Section card base */
 .sec-card{background:var(--card);border:1px solid var(--bl);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;}
@@ -234,4 +234,10 @@
   .tl-phase,.tl-title,.tl-date{text-align:left;}
   .action-grid{grid-template-columns:1fr;}
   .prog-summary{grid-template-columns:repeat(3,1fr);}
+  .isb-link{min-height:44px;}
+}
+@media(max-width:480px){
+  .ipo-wrap{padding:0 16px;}
+  .ipo-top{padding:20px 16px;}
+  .prog-summary{grid-template-columns:1fr 1fr;}
 }
