@@ -40,68 +40,22 @@ function EngineV1({ t }) {
       <div className="eng-stage">
         <div className="eng-panel eng-panel--in">
           <div className="eng-panel-lbl">{t('index.engineInputs')}</div>
-
-          <div className="eng-in-card">
-            <div className="eng-in-ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-              </svg>
-            </div>
-            <div className="eng-in-body">
-              <div className="eng-in-name">{t('index.svgI1Sub')}</div>
-              <div className="eng-in-tag">{t('index.svgI1Data')}</div>
-            </div>
-          </div>
-
-          <div className="eng-in-card">
-            <div className="eng-in-ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <div className="eng-in-body">
-              <div className="eng-in-name">{t('index.svgI2Sub')}</div>
-              <div className="eng-in-tag">{t('index.svgI2Data')}</div>
-            </div>
-          </div>
-
-          <div className="eng-in-card">
-            <div className="eng-in-ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
-              </svg>
-            </div>
-            <div className="eng-in-body">
-              <div className="eng-in-name">{t('index.svgI3Sub')}</div>
-              <div className="eng-in-tag">{t('index.svgI3Data')}</div>
-            </div>
-          </div>
-
-          <div className="eng-in-card">
-            <div className="eng-in-ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div className="eng-in-body">
-              <div className="eng-in-name">{t('index.svgI4Sub')}</div>
-              <div className="eng-in-tag">{t('index.svgI4Data')}</div>
-            </div>
+          <div className="eng-card-rail">
+            {INPUTS.map((row) => (
+              <div className="eng-row eng-row--in" key={row.code}>
+                <span className="eng-row-code">{row.code}</span>
+                <span className="eng-row-name">{t(`index.${row.sub}`)}</span>
+                <span className="eng-row-meta">{t(`index.${row.data}`)}</span>
+              </div>
+            ))}
+            <span className="eng-flow eng-flow--in" aria-hidden>
+              <span className="eng-flow-line"><span className="eng-flow-pulse" /></span>
+              <span className="eng-flow-tip">›</span>
+            </span>
           </div>
         </div>
 
         <div className="eng-core">
-          <svg className="eng-flow eng-flow--in" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-            <line x1="0" y1="14" x2="100" y2="50" /><line x1="0" y1="38" x2="100" y2="50" />
-            <line x1="0" y1="62" x2="100" y2="50" /><line x1="0" y1="86" x2="100" y2="50" />
-          </svg>
-          <svg className="eng-flow eng-flow--out" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-            <line x1="0" y1="50" x2="100" y2="14" /><line x1="0" y1="50" x2="100" y2="38" />
-            <line x1="0" y1="50" x2="100" y2="62" /><line x1="0" y1="50" x2="100" y2="86" />
-          </svg>
-          <span className="eng-port eng-port--in" aria-hidden></span>
-          <span className="eng-port eng-port--out" aria-hidden></span>
           <div className="eng-panel-lbl">{t('index.engineCore')}</div>
           <div className="eng-gauge">
             <svg className="eng-gauge-svg" viewBox="0 0 200 200" aria-hidden>
@@ -125,59 +79,19 @@ function EngineV1({ t }) {
 
         <div className="eng-panel eng-panel--out">
           <div className="eng-panel-lbl">{t('index.engineOutputs')}</div>
-
-          <div className="eng-out-card">
-            <div className="eng-out-head">
-              <span className="eng-out-title">{t('index.svgR1Title')}</span>
-              <span className="eng-delta eng-delta--pos">▲ 53 pts</span>
-            </div>
-            <div className="eng-out-row">
-              <span className="eng-out-val" id="n1" suppressHydrationWarning>91</span>
-              <span className="eng-out-unit"> {t('index.svgR1Unit')}</span>
-            </div>
-            <div className="eng-out-base">{t('index.svgR1Base')}</div>
-            <div className="eng-out-foot">{t('index.svgR1Footer')} · {t('index.svgR1Delta')}</div>
-          </div>
-
-          <div className="eng-out-card">
-            <div className="eng-out-head">
-              <span className="eng-out-title">{t('index.svgR2Title')}</span>
-              <span className="eng-delta eng-delta--pos">{t('index.svgR2Delta')}</span>
-            </div>
-            <div className="eng-out-row">
-              <span className="eng-out-val" id="n2" suppressHydrationWarning>9.6</span>
-              <span className="eng-out-unit"> × EV/EBITDA</span>
-            </div>
-            <div className="eng-out-base">{t('index.svgR2Base')}</div>
-            <div className="eng-out-foot">{t('index.svgR2Footer')} · {t('index.svgR2Delta')}</div>
-          </div>
-
-          <div className="eng-out-card">
-            <div className="eng-out-head">
-              <span className="eng-out-title">{t('index.svgR3Title')}</span>
-              <span className="eng-delta eng-delta--pos">{t('index.svgR3Delta')}</span>
-            </div>
-            <div className="eng-out-row">
-              <span className="eng-out-pfx">+</span>
-              <span className="eng-out-val" id="n3" suppressHydrationWarning>58</span>
-              <span className="eng-out-unit">%</span>
-            </div>
-            <div className="eng-out-base">{t('index.svgR3Desc')}</div>
-            <div className="eng-out-foot">{t('index.svgR3Footer')}</div>
-          </div>
-
-          <div className="eng-out-card">
-            <div className="eng-out-head">
-              <span className="eng-out-title">{t('index.svgR4Title')}</span>
-              <span className="eng-delta eng-delta--pos">+$8.2M</span>
-            </div>
-            <div className="eng-out-row">
-              <span className="eng-out-pfx">+</span>
-              <span className="eng-out-val" id="n4" suppressHydrationWarning>34</span>
-              <span className="eng-out-unit">%</span>
-            </div>
-            <div className="eng-out-base">$24.2M → $32.4M</div>
-            <div className="eng-out-foot">{t('index.svgR4Footer')}</div>
+          <div className="eng-card-rail">
+            {OUTPUTS.map((row) => (
+              <div className="eng-row eng-row--out" key={row.code}>
+                <span className="eng-row-code">{row.code}</span>
+                <span className="eng-row-name">{t(`index.${row.titleKey}`)}</span>
+                <span className="eng-row-val">{row.value}<em>{row.unit}</em></span>
+                <span className="eng-row-delta">{row.delta}</span>
+              </div>
+            ))}
+            <span className="eng-flow eng-flow--out" aria-hidden>
+              <span className="eng-flow-line"><span className="eng-flow-pulse" /></span>
+              <span className="eng-flow-tip">›</span>
+            </span>
           </div>
         </div>
       </div>
@@ -187,20 +101,38 @@ function EngineV1({ t }) {
 
 // ── V2 — Diagnostic Schematic (engineering blueprint) ────────────────
 function EngineV2({ t }) {
+  const [activeIn, setActiveIn] = useState(1);
+  const [activeOut, setActiveOut] = useState(1);
+
   return (
     <>
       <ChapterHead t={t} />
       <div className="engb">
         <div className="engb-frame">
           <div className="engb-frame-meta">
-            <span>FIG.01 · DIAGNOSTIC_ENGINE / SIGNAL_FLOW</span>
+            <span>&nbsp;</span>
             <span>SCALE 1:1 · 300+ DIMS</span>
           </div>
 
           <div className="engb-board">
             <div className="engb-col engb-col--in">
               {INPUTS.map((row, i) => (
-                <div key={row.code} className={`engb-node engb-node--in${i === 1 ? ' is-active' : ''}`}>
+                <div
+                  key={row.code}
+                  className={`engb-node engb-node--in${i === activeIn ? ' is-active' : ''}`}
+                  onMouseEnter={() => setActiveIn(i)}
+                  onFocus={() => setActiveIn(i)}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={i === activeIn}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveIn(i);
+                    }
+                  }}
+                  style={{ animationDelay: `${i * 75}ms` }}
+                >
                   <span className="engb-node-port" aria-hidden />
                   <span className="engb-node-code">{row.code}</span>
                   <span className="engb-node-name">{t(`index.${row.sub}`)}</span>
@@ -209,16 +141,16 @@ function EngineV2({ t }) {
               ))}
             </div>
 
-            <svg className="engb-wires" viewBox="0 0 400 360" preserveAspectRatio="none" aria-hidden>
+            <svg className="engb-wires" viewBox="0 0 400 360" preserveAspectRatio="none" aria-hidden style={{ animationDelay: '150ms' }}>
               {[45, 135, 225, 315].map((y, i) => (
-                <path key={`in-${i}`} className={`engb-wire${i === 1 ? ' is-active' : ''}`} d={`M0 ${y} L120 ${y} L180 180`} />
+                <path key={`in-${i}`} className={`engb-wire${i === activeIn ? ' is-active' : ''}`} d={`M0 ${y} L80 ${y} L110 180`} />
               ))}
               {[45, 135, 225, 315].map((y, i) => (
-                <path key={`out-${i}`} className={`engb-wire${i === 1 ? ' is-active' : ''}`} d={`M220 180 L280 ${y} L400 ${y}`} />
+                <path key={`out-${i}`} className={`engb-wire${i === activeOut ? ' is-active' : ''}`} d={`M290 180 L320 ${y} L400 ${y}`} />
               ))}
             </svg>
 
-            <div className="engb-core">
+            <div className="engb-core" style={{ animationDelay: '220ms' }}>
               <div className="engb-core-frame">
                 <span className="engb-core-corner engb-core-corner--tl" aria-hidden />
                 <span className="engb-core-corner engb-core-corner--tr" aria-hidden />
@@ -235,7 +167,22 @@ function EngineV2({ t }) {
 
             <div className="engb-col engb-col--out">
               {OUTPUTS.map((row, i) => (
-                <div key={row.code} className={`engb-node engb-node--out${i === 1 ? ' is-active' : ''}`}>
+                <div
+                  key={row.code}
+                  className={`engb-node engb-node--out${i === activeOut ? ' is-active' : ''}`}
+                  onMouseEnter={() => setActiveOut(i)}
+                  onFocus={() => setActiveOut(i)}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={i === activeOut}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveOut(i);
+                    }
+                  }}
+                  style={{ animationDelay: `${i * 75}ms` }}
+                >
                   <span className="engb-node-port" aria-hidden />
                   <span className="engb-node-code">{row.code}</span>
                   <span className="engb-node-name">{t(`index.${row.titleKey}`)}</span>
@@ -248,7 +195,7 @@ function EngineV2({ t }) {
           </div>
 
           <div className="engb-frame-meta engb-frame-meta--foot">
-            <span>SIG[ACTIVE] · O-02 → R-02</span>
+            <span>&nbsp;</span>
             <span>REV 2026.06</span>
           </div>
         </div>
@@ -257,62 +204,116 @@ function EngineV2({ t }) {
   );
 }
 
-// ── V3 — Before / After Diptych ──────────────────────────────────────
+// ── V3 — Input / Process / Output ledger ─────────────────────────────
+const PROCESS_STEPS = [
+  { code: 'P-01', name: 'Normalize',       meta: 'Cross-source signal alignment' },
+  { code: 'P-02', name: 'Model ensemble',  meta: '300+ diagnostic dimensions' },
+  { code: 'P-03', name: 'Capital readout', meta: 'Score · multiple · readiness' },
+];
+
 function EngineV3({ t }) {
   return (
     <>
       <ChapterHead t={t} />
       <div className="engd">
-        <div className="engd-grid">
-          <div className="engd-col engd-col--before">
-            <div className="engd-col-head">
-              <span className="engd-col-tag">BASELINE</span>
-              <span className="engd-col-name">Pre-diagnostic portfolio</span>
+        <div className="engd-frame">
+          <div className="engd-frame-meta">
+            <span>RVC.ENGINE / DIAGNOSTIC_LEDGER</span>
+            <span>FLOW · IN → CORE → OUT</span>
+          </div>
+
+          <div className="engd-grid">
+            <div className="engd-col engd-col--in">
+              <div className="engd-col-head">
+                <span className="engd-col-step">01</span>
+                <div className="engd-col-headstack">
+                  <span className="engd-col-tag">INPUT</span>
+                  <span className="engd-col-name">{t('index.engineInputs')}</span>
+                </div>
+              </div>
+              <ul className="engd-rows">
+                {INPUTS.map((row) => (
+                  <li key={row.code} className="engd-row">
+                    <span className="engd-row-code">{row.code}</span>
+                    <span className="engd-row-name">{t(`index.${row.sub}`)}</span>
+                    <span className="engd-row-meta">{t(`index.${row.data}`)}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="engd-col-foot">
+                <span>04 SOURCES · LIVE FEED</span>
+              </div>
             </div>
-            <ul className="engd-metrics">
-              {OUTPUTS.map((row) => (
-                <li key={row.code} className="engd-metric">
-                  <span className="engd-metric-code">{row.code}</span>
-                  <span className="engd-metric-name">{t(`index.${row.titleKey}`)}</span>
-                  <span className="engd-metric-val">{row.before}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="engd-col-foot">
-              <span>Conventional advisory · static benchmarks</span>
+
+            <div className="engd-chev engd-chev--left" aria-hidden>
+              {[0, 1, 2, 3].map((i) => <span key={i}>▸</span>)}
+            </div>
+
+            <div className="engd-col engd-col--core">
+              <div className="engd-col-head">
+                <span className="engd-col-step engd-col-step--accent">02</span>
+                <div className="engd-col-headstack">
+                  <span className="engd-col-tag engd-col-tag--accent">PROCESS</span>
+                  <span className="engd-col-name">{t('index.engineCore')}</span>
+                </div>
+              </div>
+              <div className="engd-core-block">
+                <div className="engd-core-score">
+                  <span className="engd-core-num" suppressHydrationWarning>68</span>
+                  <span className="engd-core-denom">/100</span>
+                </div>
+                <div className="engd-core-progress" aria-hidden>
+                  <span className="engd-core-progress-fill" style={{ width: '68%' }} />
+                </div>
+                <div className="engd-core-label">{t('index.svgScore')}</div>
+              </div>
+              <ul className="engd-rows engd-rows--steps">
+                {PROCESS_STEPS.map((step) => (
+                  <li key={step.code} className="engd-row engd-row--step">
+                    <span className="engd-row-code engd-row-code--accent">{step.code}</span>
+                    <span className="engd-row-name">{step.name}</span>
+                    <span className="engd-row-meta">{step.meta}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="engd-col-foot">
+                <span>300+ {t('index.engineDims')}</span>
+              </div>
+            </div>
+
+            <div className="engd-chev engd-chev--right" aria-hidden>
+              {[0, 1, 2, 3].map((i) => <span key={i}>▸</span>)}
+            </div>
+
+            <div className="engd-col engd-col--out">
+              <div className="engd-col-head">
+                <span className="engd-col-step">03</span>
+                <div className="engd-col-headstack">
+                  <span className="engd-col-tag">OUTPUT</span>
+                  <span className="engd-col-name">{t('index.engineOutputs')}</span>
+                </div>
+              </div>
+              <ul className="engd-rows">
+                {OUTPUTS.map((row) => (
+                  <li key={row.code} className="engd-row engd-row--out">
+                    <span className="engd-row-code">{row.code}</span>
+                    <span className="engd-row-name">{t(`index.${row.titleKey}`)}</span>
+                    <span className="engd-row-val" suppressHydrationWarning>
+                      {row.value}<em>{row.unit}</em>
+                    </span>
+                    <span className="engd-row-delta">{row.delta}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="engd-col-foot">
+                <span>04 READOUTS · Δ vs baseline</span>
+              </div>
             </div>
           </div>
 
-          <div className="engd-pivot" aria-hidden>
-            <div className="engd-pivot-line" />
-            <div className="engd-pivot-mark">
-              <span className="engd-pivot-label">DIAGNOSTIC_ENGINE</span>
-              <span className="engd-pivot-num" suppressHydrationWarning>68<em>/100</em></span>
-              <span className="engd-pivot-meta">300+ {t('index.engineDims')}</span>
-            </div>
-            <div className="engd-pivot-arrow">→</div>
-          </div>
-
-          <div className="engd-col engd-col--after">
-            <div className="engd-col-head">
-              <span className="engd-col-tag">DIAGNOSED</span>
-              <span className="engd-col-name">Engine-rated portfolio</span>
-            </div>
-            <ul className="engd-metrics">
-              {OUTPUTS.map((row) => (
-                <li key={row.code} className="engd-metric is-after">
-                  <span className="engd-metric-code">{row.code}</span>
-                  <span className="engd-metric-name">{t(`index.${row.titleKey}`)}</span>
-                  <span className="engd-metric-val" suppressHydrationWarning>
-                    {row.value}<em>{row.unit}</em>
-                  </span>
-                  <span className="engd-metric-delta">{row.delta}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="engd-col-foot">
-              <span>Inputs · {INPUTS.map(i => i.code).join(' · ')}</span>
-            </div>
+          <div className="engd-frame-meta engd-frame-meta--foot">
+            <span>{INPUTS.map(i => i.code).join(' · ')}</span>
+            <span>{OUTPUTS.map(o => o.code).join(' · ')}</span>
           </div>
         </div>
       </div>
@@ -320,48 +321,92 @@ function EngineV3({ t }) {
   );
 }
 
-// ── V4 — Score Hero (editorial big-number) ───────────────────────────
+// ── V4 — Input / Process / Output operating view ─────────────────────
 function EngineV4({ t }) {
+  const processSteps = [
+    { id: '01', label: 'Normalize', detail: 'Map raw operating signals to RVC value taxonomy' },
+    { id: '02', label: 'Benchmark', detail: 'Compare against sector peers and capital-market thresholds' },
+    { id: '03', label: 'Prioritize', detail: 'Rank gaps by value impact, timing, and execution risk' },
+  ];
+
   return (
     <>
       <ChapterHead t={t} />
-      <div className="engh">
-        <div className="engh-eyebrow">
-          <span className="engh-eyebrow-lbl">INPUT_BUS</span>
-          {INPUTS.map((row) => (
-            <span key={row.code} className="engh-eyebrow-chip">
-              <span className="engh-eyebrow-code">{row.code}</span>
-              <span className="engh-eyebrow-name">{t(`index.${row.sub}`)}</span>
-            </span>
-          ))}
-          <span className="engh-eyebrow-dims">· 300+ {t('index.engineDims')}</span>
-        </div>
-
-        <div className="engh-figure">
-          <span className="engh-figure-num" suppressHydrationWarning>68</span>
-          <div className="engh-figure-side">
-            <span className="engh-figure-denom">/ 100</span>
-            <span className="engh-figure-label">{t('index.svgScore')}</span>
-            <span className="engh-figure-source">RVC · DIAGNOSTIC_ENGINE</span>
+      <div className="engh" aria-label="Input process output diagnostic view">
+        <div className="engh-shell">
+          <div className="engh-head">
+            <div>
+              <span className="engh-kicker">V4 · OPERATING MODEL</span>
+              <h3 className="engh-title">Input, process, output</h3>
+            </div>
+            <div className="engh-score">
+              <span className="engh-score-label">{t('index.svgScore')}</span>
+              <span className="engh-score-value" suppressHydrationWarning>68<em>/100</em></span>
+            </div>
           </div>
-        </div>
 
-        <div className="engh-outputs">
-          <div className="engh-outputs-head">
-            <span>OUTPUT_BUS / 04</span>
-            <span>Engine consequences</span>
-          </div>
-          <div className="engh-output-row">
-            {OUTPUTS.map((row) => (
-              <div key={row.code} className="engh-output-card">
-                <span className="engh-output-code">{row.code}</span>
-                <span className="engh-output-name">{t(`index.${row.titleKey}`)}</span>
-                <span className="engh-output-val" suppressHydrationWarning>
-                  {row.value}<em>{row.unit}</em>
-                </span>
-                <span className="engh-output-delta">{row.delta}</span>
+          <div className="engh-flow-grid">
+            <section className="engh-lane" aria-label="Diagnostic inputs">
+              <div className="engh-lane-head">
+                <span>INPUT</span>
+                <strong>Signal capture</strong>
               </div>
-            ))}
+              <div className="engh-input-list">
+                {INPUTS.map((row) => (
+                  <article key={row.code} className="engh-input-card">
+                    <span className="engh-node-code">{row.code}</span>
+                    <div>
+                      <h4>{t(`index.${row.sub}`)}</h4>
+                      <p>{t(`index.${row.data}`)}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="engh-process" aria-label="Diagnostic process">
+              <div className="engh-lane-head">
+                <span>PROCESS</span>
+                <strong>Diagnostic engine</strong>
+              </div>
+              <div className="engh-process-core">
+                <span className="engh-core-tag">300+ {t('index.engineDims')}</span>
+                <span className="engh-core-name">RVC Diagnostic Core</span>
+                <span className="engh-core-line" aria-hidden />
+              </div>
+              <ol className="engh-step-list">
+                {processSteps.map((step) => (
+                  <li key={step.id} className="engh-step">
+                    <span className="engh-step-id">{step.id}</span>
+                    <div>
+                      <h4>{step.label}</h4>
+                      <p>{step.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
+
+            <section className="engh-lane" aria-label="Diagnostic outputs">
+              <div className="engh-lane-head">
+                <span>OUTPUT</span>
+                <strong>Capital actions</strong>
+              </div>
+              <div className="engh-output-list">
+                {OUTPUTS.map((row) => (
+                  <article key={row.code} className="engh-output-card">
+                    <div className="engh-output-main">
+                      <span className="engh-node-code">{row.code}</span>
+                      <h4>{t(`index.${row.titleKey}`)}</h4>
+                    </div>
+                    <div className="engh-output-metric">
+                      <span suppressHydrationWarning>{row.value}<em>{row.unit}</em></span>
+                      <strong>{row.delta}</strong>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -373,7 +418,7 @@ const VERSIONS = [
   { id: 'v1', label: 'V1 · Tri-panel radar (live)', Render: EngineV1 },
   { id: 'v2', label: 'V2 · Diagnostic schematic',   Render: EngineV2 },
   { id: 'v3', label: 'V3 · Before / After diptych', Render: EngineV3 },
-  { id: 'v4', label: 'V4 · Score hero',             Render: EngineV4 },
+  { id: 'v4', label: 'V4 · Input / Process / Output', Render: EngineV4 },
 ];
 
 export default function EngineChapterCarousel() {

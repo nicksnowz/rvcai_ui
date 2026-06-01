@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import HeroVideoLoop from '../src/components/HeroVideoLoop';
-import EngineChapterCarousel from '../src/components/EngineChapterCarousel';
+import CustomerStoryCarousel from '../src/components/CustomerStoryCarousel';
 
 export default function Index() {
   const { t, i18n } = useTranslation();
@@ -261,15 +261,12 @@ export default function Index() {
         </div>
       </section>
 
-      <EngineChapterCarousel />
-
-
       <section className="process">
         <div className="wrap">
           <div className="chapter-head">
-            <span className="chapter-num" aria-hidden>02</span>
+            <span className="chapter-num" aria-hidden>01</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 02 // flow</span>
+              <span className="chapter-kicker">// chapter 01 // flow</span>
               <h2 className="chapter-title">{t('index.procTitle')}<br /><span className="chapter-accent">{t('index.procTitleAccent')}</span></h2>
               <p className="chapter-lead">{t('index.procLead')}</p>
             </div>
@@ -282,7 +279,6 @@ export default function Index() {
                   <div className="proc-rung-body">
                     <span className="proc-rung-eyebrow">{p.num.replace(/^\s*\d+\s*[—–-]\s*/, '')}</span>
                     <span className="proc-rung-title">{p.title}</span>
-                    <span className="proc-rung-desc">{p.desc}</span>
                   </div>
                 </li>
               ))}
@@ -294,11 +290,10 @@ export default function Index() {
       <section className="services light-theme">
         <div className="wrap">
           <div className="chapter-head">
-            <span className="chapter-num" aria-hidden>03</span>
+            <span className="chapter-num" aria-hidden>02</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 03 // capabilities</span>
+              <span className="chapter-kicker">// chapter 02 // capabilities</span>
               <h2 className="chapter-title">{t('index.svcTitle')}<br /><span className="chapter-accent">{t('index.svcTitleAccent')}</span></h2>
-              <p className="chapter-lead">{t('index.svcSub')}</p>
             </div>
           </div>
           <div className="bento">
@@ -357,9 +352,9 @@ export default function Index() {
       <section className="kpi-strip">
         <div className="wrap">
           <div className="chapter-head">
-            <span className="chapter-num" aria-hidden>04</span>
+            <span className="chapter-num" aria-hidden>03</span>
             <div className="chapter-head-body">
-              <span className="chapter-kicker">// chapter 04 // proof</span>
+              <span className="chapter-kicker">// chapter 03 // proof</span>
               <h2 className="chapter-title">{t('index.kpiTitle')}<br /><span className="chapter-accent">{t('index.kpiTitleAccent')}</span></h2>
               <p className="chapter-lead">{t('index.kpiLead')}</p>
             </div>
@@ -386,20 +381,11 @@ export default function Index() {
               <div className="kpi-lbl">{t('index.kpiLbls.4')}</div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Brand Cases / Success Wall */}
-      <section className="success-wall">
-        <div className="sw-head reveal">
-          <div className="sw-title">{t('index.swTitle')}</div>
-          <div className="sw-divider"></div>
-        </div>
-
-        {/* Row 1: IPO 成功上市 */}
-        <div className="sw-row-label">{t('index.rowIpo')}</div>
-        <div className="marquee-wrap">
-          <div className="marquee-track go-left">
+          {/* Row 1: IPO 成功上市 */}
+          <div className="sw-row-label">{t('index.rowIpo')}</div>
+          <div className="marquee-wrap">
+            <div className="marquee-track go-left">
             {[0, 1].map(setIdx => (
               <Fragment key={setIdx}>
                 <div className="ipo-card">
@@ -502,8 +488,8 @@ export default function Index() {
 
         {/* Row 2: 合作伙伴 */}
         <div className="sw-row-label" style={{ marginTop: '28px' }}>{t('index.rowPartner')}</div>
-        <div className="marquee-wrap">
-          <div className="marquee-track go-right">
+          <div className="marquee-wrap">
+            <div className="marquee-track go-right">
             {[0, 1].map(setIdx => (
               <Fragment key={setIdx}>
                 <div className="partner-pill">
@@ -551,6 +537,9 @@ export default function Index() {
               </Fragment>
             ))}
           </div>
+        </div>
+
+          <CustomerStoryCarousel />
         </div>
       </section>
 

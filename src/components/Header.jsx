@@ -18,10 +18,6 @@ export default function Header({ mobileNavOpen, onHamburgerClick }) {
       <div className="wrap hrow">
         <Link href="/" className="logo">
           <img src="/logo.png" alt="RVC" width="78" height="28" style={{ display: 'block' }} />
-          <div className="logo-t">
-            <span className="logo-n">RVC Capital</span>
-            <span className="logo-s">{t('nav.logoSub')}</span>
-          </div>
         </Link>
         <nav>
           {NAV_LINKS.map(({ to, key }) => (

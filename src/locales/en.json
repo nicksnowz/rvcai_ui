@@ -6,7 +6,7 @@
     "modules": "Modules",
     "ipo": "IPO Ready",
     "login": "Login",
-    "startDiagnosis": "Start Diagnosis →",
+    "startDiagnosis": "Start Diagnosis",
     "logoSub": "Enterprise Value Platform"
   },
   "langToggle": "中",
@@ -21,7 +21,7 @@
     "heroWords": [
       "Real Value"
     ],
-    "heroParagraph": "AI-driven enterprise capitalization lifecycle OS — intelligent diagnostic engine scans 300+ value dimensions across strategy, finance, operations, and governance to accelerate growth.",
+    "heroParagraph": "AI capital intelligence that scans 300+ value signals to accelerate enterprise growth.",
     "heroBtn": "Start Diagnosis Now",
     "heroBtn2": "View Sample Report →",
     "footerTagline": "Built for institutional-grade capital intelligence",
@@ -53,6 +53,31 @@
     "kpiTitle": "Proven at scale,",
     "kpiTitleAccent": "measured by outcomes",
     "kpiLead": "Enterprises served, industries covered, and value unlocked across the RVC network.",
+    "csKicker": "// chapter 04 // voice",
+    "csCta": "Customer Story",
+    "csStories": [
+      {
+        "quote": "The capital landscape is evolving faster than ever, and AI-grade diagnostics are essential to keep pace. RVC has transformed how we prepare for listing — enabling us to navigate complexity with precision, surface the value drivers that matter, and focus on execution rather than guesswork.",
+        "name": "Dr. Claudia Junker",
+        "role": "Chief Strategy Officer",
+        "company": "Pacific Rim Industrial Group",
+        "image": "/cstory-portrait.png"
+      },
+      {
+        "quote": "We came in expecting a valuation report. We left with a 180-day execution map and a shortlist of advisors who actually understood our category. The diagnostic surfaced two governance gaps our auditors had missed for years.",
+        "name": "Marcus Tanaka",
+        "role": "Chief Financial Officer",
+        "company": "Helix Bio Manufacturing",
+        "image": "/cstory-portrait-2.png"
+      },
+      {
+        "quote": "RVC's benchmarking gave our board the confidence to push the listing window forward by a full quarter. Every claim in the equity story was backed by a number we could defend in a room of skeptics.",
+        "name": "Isabela Moreira",
+        "role": "Founder & CEO",
+        "company": "Atlas Renewable Holdings",
+        "image": "/cstory-portrait-3.png"
+      }
+    ],
     "proc": [
       {
         "num": "01 — Data Collection",
