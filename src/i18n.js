@@ -3,9 +3,24 @@ import { initReactI18next } from 'react-i18next';
 import zh from './locales/zh.json';
 import en from './locales/en.json';
 
-const savedLang = typeof localStorage !== 'undefined'
-  ? localStorage.getItem('rvc-lang') || 'en'
-  : 'en';
+function getStorage() {
+  if (typeof window === 'undefined') return null;
+  const storage = window.localStorage;
+  if (!storage || typeof storage.getItem !== 'function' || typeof storage.setItem !== 'function') {
+    return null;
+  }
+  return storage;
+}
+
+function getSavedLang() {
+  try {
+    return getStorage()?.getItem('rvc-lang') || 'en';
+  } catch {
+    return 'en';
+  }
+}
+
+const savedLang = getSavedLang();
 
 i18n
   .use(initReactI18next)
@@ -17,8 +32,10 @@ i18n
   });
 
 i18n.on('languageChanged', (lng) => {
-  if (typeof localStorage !== 'undefined') {
-    localStorage.setItem('rvc-lang', lng);
+  try {
+    getStorage()?.setItem('rvc-lang', lng);
+  } catch {
+    // Ignore unavailable storage, such as SSR or restricted browser contexts.
   }
   if (typeof document !== 'undefined') {
     const htmlRoot = document.getElementById('html-root');

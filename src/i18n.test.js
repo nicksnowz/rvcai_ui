@@ -2,7 +2,9 @@ import i18n from './i18n';
 
 describe('i18n', () => {
   beforeEach(() => {
-    localStorage.clear();
+    if (typeof window.localStorage?.clear === 'function') {
+      window.localStorage.clear();
+    }
   });
 
   it('initialises with en as default language', () => {
